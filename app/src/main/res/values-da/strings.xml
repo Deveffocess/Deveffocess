@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Livo</string>
 
     <string name="noConnection">Intet internet</string>
@@ -67,7 +67,7 @@
     <string name="enter_here">Gå ind her</string>
     <string name="about_referral_and_earn_program">OM HENVISNINGS- OG OPTJENINGSPROGRAM</string>
     <string name="india">Indien</string>
-    <string name="show_all">VIS ALT</string>
+
     <string name="terms_amp_conditions"><![CDATA[Vilkår og Betingelser]]></string>
     <string name="privacy_policy">Fortrolighedspolitik</string>
     <string name="refunds">Refusioner</string>
@@ -95,29 +95,30 @@
     <string name="upload_vehicle_nphoto">Upload Vehicle \nPhoto</string>
     <string name="hatchback_car">HatchBack Car</string>
     <string name="_0_500">0/500</string>
-    <string name="product_details">Product Details</string>
-    <string name="product_title">Product Title</string>
-    <string name="height">Height</string>
-    <string name="depth">Depth</string>
-    <string name="width">Width</string>
-    <string name="weight">Weight</string>
-    <string name="pickup_location">Pickup Location</string>
-    <string name="address_note">Address Note</string>
-    <string name="pickup_date">Pickup Date</string>
-    <string name="api_key">AIzaSyBsWh4C2AF5Ns7EW_yLBYZI1g7fCU--2DU</string>
-    <string name="next">Next</string>
-    <string name="pickup_address">Pickup Address</string>
-    <string name="drop_off_address">Drop-Off Address</string>
-    <string name="drop_off_location">Drop-Off Location</string>
-    <string name="drop_off_date">Drop-Off date</string>
+    <string name="product_details">Produktdetaljer</string>
+    <string name="product_title">Produkttitel</string>
+    <string name="height">Højde</string>
+    <string name="depth">Dybde</string>
+    <string name="width">Bredde</string>
+    <string name="weight">Vægt</string>
+    <string name="pickup_location">Opsamlingssted</string>
+    <string name="address_note">Adressebemærkning</string>
+    <string name="pickup_date">Afhentningsdato</string>
+    <string name="api_key">AIzaSyB-DBP30hMj70drMPSiJOGIwFHVZYmjFLo</string>
+    <string name="next">Næste</string>
+    <string name="pickup_address">Afhentningsadresse</string>
+    <string name="drop_off_address">Afleveringsadresse</string>
+    <string name="drop_off_location">Afleveringssted</string>
+    <string name="drop_off_date">Afleveringsdato</string>
     <string name="amount">Amount</string>
+    <string name="amount_capital">BELØB</string>
     <string name="tax1">Tax 1</string>
     <string name="coupon_discount">Coupon Discount</string>
     <string name="referral_code_is_invalid">Referral code is invalid</string>
     <string name="skip">Skip</string>
     <string name="listing_published_successfully">Listing published \nsuccessfully</string>
-    <string name="product_images">Product Images</string>
-    <string name="publish_listing">Publish Listing</string>
+    <string name="product_images">Produktbilleder</string>
+    <string name="publish_listing">Udgiv fortegnelse</string>
     <string name="select">Select</string>
     <string name="selected">Selected</string>
     <string name="no_listing_found">Ingen fortegnelse fundet</string>
@@ -140,6 +141,17 @@
     <string name="phone">telefon</string>
     <string name="youve_recieved">Du har modtaget</string>
     <string name="offers">tilbud</string>
+    <string name="new_version_of_application_is_available_on_app_store_update_now">Ny version af applikationen er tilgængelig på App Store. Opdatere nu!</string>
+    <string name="contact_admin">Kontakt Admin</string>
+    <string name="update_now">Opdatere nu</string>
+    <string name="update_later">Opdater senere</string>
+    <string name="new_update_available">Ny opdatering er tilgængelig</string>
+    <string name="please_turn_on_permisssion">Slå venligst tilladelser til</string>
+    <string name="our_application_needs_few_system_level_permissions_for_crucial_functioning_of_the_application.">Vores applikation har brug for få tilladelser på systemniveau for, at applikationen fungerer afgørende.</string>
+    <string name="listing_has_been_suspended">Fortegnelsen er blevet suspenderet</string>
+    <string name="Your_listing_was_suspended_by_Livo_admin_Please_contact_admin_to_know_further_details">Din fortegnelse blev suspenderet af Livo-administratoren. Kontakt venligst admin for at få flere detaljer</string>
+
+
 
     <!-- MyListing Filter -->
     <string name="data_modified">Data ændret</string>
@@ -150,7 +162,7 @@
     <string name="suspended">Suspenderet</string>
     <string name="expired">Udløbet</string>
     <string name="sender">Afsender</string>
-    <string name="transpoter">Transportør</string>
+    <string name="transpoter">transportør</string>
     <string name="show_only_my_offers">Vis kun mine tilbud</string>
     <string name="reset_all">Genstart alt</string>
     <string name="SORT_BY">SORTER EFTER</string>
@@ -163,11 +175,152 @@
     <string name="latest">Seneste</string>
     <string name="oldest">Ældste</string>
     <string name="FILTERS">FILTRE</string>
+    <string name="Offer_Sent_Successfully">Tilbud sendt \n Succesfuldt</string>
+    <string name="remove">Fjerne</string>
 
     <!-- Product Detail -->
-    <string name="send_request">Send anmodning</string>
+    <string name="send_offer">Send tilbud</string>
+    <string name="delete">Slet</string>
+    <string name="edit">Redigere</string>
+    <string name="delete_listing">Slet fortegnelse</string>
+    <string name="are_you_sure_you_want_to_delete_this_listing">Er du sikker på, at du vil slette denne fortegnelse?</string>
+    <string name="cancel">Afbestille</string>
+    <string name="update_offer">Opdater tilbud</string>
+    <string name="delete_now">Slet nu</string>
+    <string name="a_notification_will_also_be_sent_out_to_sender_to_inform_listing_price_has_been_updated">En meddelelse vil også blive sendt ud til afsender for at informere om, at noteringsprisen er blevet opdateret</string>
+
+    <!-- Report -->
+    <string name="farudulent_item">Farudulent Genstand</string>
+    <string name="spam">Spam</string>
+    <string name="against_policy">Mod politik</string>
+    <string name="suspicious_user">Mistænkelig bruger</string>
+    <string name="item_doesnt_match_description">Varen matcher ikke beskrivelsen</string>
+    <string name="help_community_keep_safe_for_everyone">Hjælp fællesskabet med at holde \nsikkert for alle</string>
+    <string name="Select_one_or_more_reason_below_for_marking_this_listing_inappropriate">Vælg en eller flere årsager nedenfor til at markere denne fortegnelse upassende</string>
+
+
+    <!-- Search -->
+    <string name="my_listing">Mine opslag</string>
+    <string name="other_listings">Andre opslag</string>
+    <string name="show_all">Vis alt</string>
 
     <string name="notifications">Meddelelser</string>
     <string name="process">Behandle</string>
+
+    <!-- Profile Fragment -->
+    <string name="submit_request">Indsend anmodning</string>
+    <string name="stripe_setup">Stripe opsætning</string>
+    <string name="shareapp">Del app</string>
+    <string name="listing_successfully_deleted">Fortegnelsen blev slettet</string>
+    <string name="close">Tæt</string>
+    <string name="error">Error</string>
+    <string name="applang">Change Language / skift sprog / Ändra språk </string>
+    <string name="total_amount">Total beløb</string>
+    <string name="save">Gemme</string>
+    <string name="adjust_price">Juster pris</string>
+
+    <!-- Add Image Fragment -->
+    <string name="discard_image">Vil du kassere billedet?</string>
+    <string name="are_you_sure_you_want_to_discard_this_item">Er du sikker på, at du vil kassere dette billede?</string>
+    <string name="okay">Okay</string>
+    <string name="note">Bemærk : </string>
+    <string name="recommended_amount_is_calculated_based_on_your_listing_size_not_travel_distance">Det anbefalede beløb er beregnet ud fra din fortegnelsesstørrelse og ikke rejseafstand</string>
+    <string name="listing_amount">Noteringsbeløb</string>
+    <string name="livo_fee">Livo Gebyr</string>
+    <string name="total_amount_payable">Samlet beløb, der skal betales</string>
+    <string name="kindly_wait_while_we_create_listing">Vent venligst, mens vi opretter fortegnelse. . .</string>
+
+
+    <!--Profile / Transporter Appliction -->
+    <string name="upload_address_proof">Upload adressebevis</string>
+    <string name="address_proof">Adressebevis</string>
+    <string name="identity_proof">Identitetsbevis</string>
+    <string name="postal_code">postnummer</string>
+    <string name="country">Land</string>
+    <string name="state">Stat</string>
+    <string name="city">By</string>
+    <string name="submit_otp">INDSEND OTP</string>
+    <string name="update_number">Opdater nummer</string>
+    <string name="address_line_2">Adresselinje 2</string>
+    <string name="address_line_1">Adresselinje 1</string>
+
+
+    <!-- Sender Activity -->
+    <string name="approve_transporter">Approve</string>
+    <string name="make_payment">Foretag betaling</string>
+    <string name="waiting_Transporter_approval">Venter på transportørgodkendelse</string>
+    <string name="not_interested">Ikke interesseret</string>
+    <string name="listing_completed_successfully">Fortegnelse afsluttet \n Succesfuldt!</string>
+    <string name="message_sender">Message Sender</string>
+    <string name="pickup_message">Message Transporter</string>
+
+
+    <!-- Transporter Listing Data   -->
+
+    <string name="accept_sender">Accept</string>
+    <string name="decline">Nedgang</string>
+    <string name="delete_offer">Slet tilbud</string>
+    <string name="change_price">Skift pris</string>
+    <string name="waiting_sender_payment">Venter på, at afsender foretager betaling</string>
+    <string name="open_map">Open Map</string>
+    <string name="waiting_payment_approval">Venter på betalingsgodkendelse</string>
+    <string name="message_transpoter">Besked Transportør</string>
+    <string name="payment_method">Betalingsmetode</string>
+    <string name="payment_method_capital">BETALINGSMETODE</string>
+    <string name="complete_transaction">Fuldfør transaktion</string>
+    <string name="take_picture">Take Picture</string>
+    <string name="offer_price">Tilbudspris</string>
+    <string name="take_pic">Tag billede</string>
+    <string name="take__a_picture_of_your_item">Tag et billede af din vare</string>
+    <string name="upload">Upload</string>
+    <string name="view_all">se alt  </string>
+    <string name="listing_picked_up">Fortegnelse afhentet</string>
+    <string name="listing_delivered">Fortegnelse leveret</string>
+
+
+    <!-- Days -->
+    <string name="sun">Sol</string>
+    <string name="mon">man</string>
+    <string name="tue">tir</string>
+    <string name="wed">ons</string>
+    <string name="thu">tor</string>
+    <string name="fri">fre</string>
+    <string name="sat">Lør</string>
+
+    <!-- Help And Support -->
+    <string name="describe_your_concern">Beskriv din bekymring</string>
+    <string name="select_product">Vælg produkt</string>
+    <string name="issues_with_listing">Problemer med notering</string>
+    <string name="select_category">Vælg Kategori</string>
+    <string name="having_trouble_with_your_listing_or_just_have_a_query_for_us_let_s_chat">Har du problemer med din fortegnelse eller har du bare en forespørgsel til os? Lad os snakke!</string>
+
+    <!-- Referral And CashBack -->
+    <string name="testdata" >Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat. Lorem ipsum dolor sit amet, consetetur sadipscing elitr.
+        Invidunt ut labore et dolore magna aliquyam erat. Lorem ipsum dolor sit amet, consetetur sadipscing.</string>
+
+    <!-- Application Setting -->
+    <string name="enable_notification_sounds">Aktiver meddelelseslyde</string>
+    <string name="sound">Lyde</string>
+    <string name="item_dropped_of">Genstand afleveret</string>
+    <string name="item_picked_up">Genstand afhentet</string>
+    <string name="message_from_livo_support">Besked fra Livo Support</string>
+    <string name="message_from_transporter">Besked fra Transportør</string>
+    <string name="new_offers_on_my_listing">Nye tilbud på min fortegnelse</string>
+    <string name="app">App</string>
+    <string name="notifications_">MEDDELELSER</string>
+
+
+
+    <string name="enter_pickup_address">Indtast afhentningsadresse</string>
+    <string name="enter_dropoff_address">Indtast afleveringsadresse</string>
+    <string name="recommended_amount">Anbefalet mængde</string>
+
+    <string name="shot_angle_1">Skud \nVinkel 1</string>
+    <string name="shot_angle_2">Skud \nVinkel 2</string>
+    <string name="shot_angle_3">Skud \nVinkel 3</string>
+    <string name="charaters">0/60 tegn</string>
+    <string name="count_characters">/60 tegn</string>
+    <string name="charaters120">0/120 tegn</string>
+    <string name="count_characters120">/120 tegn</string>
 
 </resources>

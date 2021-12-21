@@ -1,11 +1,579 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/livo_blue"
-    tools:context=".view.home.homefragments.ProfileFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/livo_bg_color">
+
+
+        <RelativeLayout
+            android:id="@+id/rlTopView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/bottom_round_top_square_blue_shape"
+            android:padding="18dp">
+
+
+            <RelativeLayout
+                android:id="@+id/rlDataMain"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp">
+
+
+                <RelativeLayout
+                    android:id="@+id/rlUserName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_toEndOf="@+id/rlUserImage">
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvUserName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/barlow_bold"
+                        android:text="Morten Skovgaard"
+                        android:textColor="@color/white"
+                        android:textSize="16dp"
+                        android:visibility="visible" />
+
+                    <com.facebook.shimmer.ShimmerFrameLayout
+                        android:id="@+id/tvShimmerName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone">
+
+                        <View
+                            android:id="@+id/tvTitlex"
+                            android:layout_width="match_parent"
+                            android:layout_height="15dp"
+                            android:alpha="0.2"
+                            android:background="@color/input_grey" />
+
+
+                    </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/rlUsersAge"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rlUserName"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_toEndOf="@+id/rlUserImage">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvUserAge"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/barlow_semibold"
+                        android:text="@string/years_old"
+                        android:textColor="@color/livo_white_50_opacity"
+                        android:textSize="14dp" />
+
+                    <com.facebook.shimmer.ShimmerFrameLayout
+                        android:id="@+id/tvShimmerAge"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone">
+
+                        <View
+                            android:id="@+id/tvTitlexx"
+                            android:layout_width="match_parent"
+                            android:layout_height="15dp"
+                            android:layout_toEndOf="@+id/imgProductImagex"
+                            android:alpha="0.2"
+                            android:background="@color/input_grey" />
+
+
+                    </com.facebook.shimmer.ShimmerFrameLayout>
+
+                </RelativeLayout>
+
+
+                <com.google.android.material.card.MaterialCardView
+
+                    android:id="@+id/rlUserImage"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="8dp"
+                    app:strokeColor="@color/white"
+                    app:strokeWidth="3dp">
+
+                    <ImageView
+                        android:id="@+id/imgUser"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/grey_round_shape"
+                        android:scaleType="centerCrop"
+                        android:visibility="visible"
+                        app:riv_border_color="@color/white"
+                        app:riv_border_width="1dp"
+                        app:riv_corner_radius="15dp" />
+
+                    <com.facebook.shimmer.ShimmerFrameLayout
+                        android:id="@+id/tvShimmerImage"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:visibility="gone">
+
+                        <com.livo.nuo.lib.roundImageView.RoundedImageView
+                            android:id="@+id/tvImage"
+                            android:layout_width="90dp"
+                            android:layout_height="90dp"
+                            android:background="@drawable/edit_box_background_shape"
+                            android:scaleType="centerCrop"
+                            app:riv_border_color="@color/white"
+                            app:riv_border_width="8dp"
+                            app:riv_corner_radius="10dp" />
+
+
+                    </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.livo.nuo.lib.rating_bar.ScaleRatingBar
+                    android:id="@+id/ratingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rlUsersAge"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_toEndOf="@+id/rlUserImage"
+                    app:srb_clearRatingEnabled="true"
+                    app:srb_clickable="true"
+                    app:srb_drawableEmpty="@drawable/star_empty"
+                    app:srb_drawableFilled="@drawable/star_filled"
+                    app:srb_isIndicator="false"
+                    app:srb_numStars="5"
+                    app:srb_scrollable="true"
+                    app:srb_starHeight="15dp"
+                    app:srb_starPadding="5dp"
+                    app:srb_starWidth="15dp"
+                    app:srb_stepSize="1" />
+
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rlTopView"
+            >
+
+            <RelativeLayout
+                android:id="@+id/rlInternal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlTopView">
 
 
 
-</FrameLayout>
+                <RelativeLayout
+                    android:id="@+id/rlTransporter"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:padding="15dp"
+                    android:background="@drawable/white_round_shape"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvTransporterApplication"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/barlow_bold"
+                        android:text="@string/transporter_application"
+                        android:textColor="@color/black"
+                        android:textSize="20dp" />
+
+                    <com.facebook.shimmer.ShimmerFrameLayout
+                        android:id="@+id/shTransporterApplication"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="9dp"
+                        android:visibility="gone">
+
+                        <View
+                            android:id="@+id/shTitlex"
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"
+                            android:alpha="0.2"
+                            android:background="@color/input_grey" />
+
+                    </com.facebook.shimmer.ShimmerFrameLayout>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvTransporterApplicationLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tvTransporterApplication"
+                        android:layout_marginTop="9dp"
+                        android:fontFamily="@font/barlow_semibold"
+                        android:text="@string/you_can_also_join_our_transporter_force_and_earn_with_livo_before_you_submit_your_application_make"
+                        android:textColor="@color/livo_black_30_opacity"
+                        android:textSize="14dp" />
+
+                    <com.facebook.shimmer.ShimmerFrameLayout
+                        android:id="@+id/shTransporterApplicationLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="9dp"
+                        android:visibility="gone">
+
+                        <View
+                            android:id="@+id/shTitlex1"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:alpha="0.2"
+                            android:background="@color/input_grey" />
+
+                    </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+                    <com.facebook.shimmer.ShimmerFrameLayout
+                        android:id="@+id/tvShimmerTransporterStatus"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        android:layout_below="@+id/tvTransporterApplicationLabel"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/black_round_shape"/>
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvSubmit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tvTransporterApplicationLabel"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/black_round_shape"
+                        android:fontFamily="@font/barlow_bold"
+                        android:padding="10dp"
+                        android:text="@string/submit_request"
+                        android:textAlignment="center"
+                        android:textColor="@color/livo_lightish_white"
+                        android:textSize="16dp"
+                        android:visibility="visible" />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rlProfileOptions"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_below="@+id/rlTransporter"
+                    android:layout_marginTop="7dp"
+                    android:background="@drawable/white_bottom_square_shape"
+                    android:padding="15dp">
+
+
+                    <RelativeLayout
+                        android:id="@+id/rlProfile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/imgProfile"
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:src="@drawable/settings_profile" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvProfile"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="20dp"
+                            android:layout_toEndOf="@+id/imgProfile"
+                            android:fontFamily="@font/barlow_semibold"
+                            android:text="@string/profile_settings"
+                            android:textColor="@color/black"
+                            android:textSize="16dp" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rlApplicationSettings"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/rlProfile"
+                        android:layout_marginTop="25dp">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/imgApplication"
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:src="@drawable/application_settings" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvApplicationSettings"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="20dp"
+                            android:layout_toEndOf="@+id/imgApplication"
+                            android:fontFamily="@font/barlow_semibold"
+                            android:text="@string/application_settings"
+                            android:textColor="@color/black"
+                            android:textSize="16dp" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rlFAQ"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/rlApplicationSettings"
+                        android:layout_marginTop="25dp">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/imgFAQ"
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:src="@drawable/faq" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvFAQ"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="20dp"
+                            android:layout_toEndOf="@+id/imgFAQ"
+                            android:fontFamily="@font/barlow_semibold"
+                            android:text="@string/faqs"
+                            android:textColor="@color/black"
+                            android:textSize="16dp" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rlHelpnSupport"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/rlFAQ"
+                        android:layout_marginTop="25dp">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/imgHelpnSupport"
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:src="@drawable/help_support" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvHelpnSupport"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="20dp"
+                            android:layout_toEndOf="@+id/imgHelpnSupport"
+                            android:fontFamily="@font/barlow_semibold"
+                            android:text="@string/help_amp_support"
+                            android:textColor="@color/black"
+                            android:textSize="16dp" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rlPayment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/rlHelpnSupport"
+                        android:layout_marginTop="25dp">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/imgPayment"
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:src="@drawable/payment" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvPayment"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="20dp"
+                            android:layout_toEndOf="@+id/imgPayment"
+                            android:fontFamily="@font/barlow_semibold"
+                            android:text="@string/payment_amp_cashbacks"
+                            android:textColor="@color/black"
+                            android:textSize="16dp" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rlStripeSetup"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/rlPayment"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="25dp"
+                        android:visibility="gone">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/imgStripeSetup"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/payment" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvStripeSetup"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="20dp"
+                            android:layout_toEndOf="@+id/imgStripeSetup"
+                            android:fontFamily="@font/barlow_medium"
+                            android:text="@string/stripe_setup"
+                            android:textColor="@color/black"
+                            android:textSize="16dp" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rlRefer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/rlStripeSetup"
+                        android:visibility="gone"
+                        android:layout_marginTop="25dp">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/imgRefer"
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:src="@drawable/refer_earn" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvRefer"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="20dp"
+                            android:layout_toEndOf="@+id/imgRefer"
+                            android:fontFamily="@font/barlow_semibold"
+                            android:text="@string/refer_amp_earn"
+                            android:textColor="@color/black"
+                            android:textSize="16dp" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rlShare"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/rlRefer"
+                        android:layout_marginTop="25dp">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/imgShare"
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:src="@drawable/share" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvShare"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="20dp"
+                            android:layout_toEndOf="@+id/imgShare"
+                            android:fontFamily="@font/barlow_semibold"
+                            android:text="@string/shareapp"
+                            android:textColor="@color/black"
+                            android:textSize="16dp" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rllanguage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/rlShare"
+                        android:layout_marginTop="25dp">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/imglanguage"
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:src="@drawable/icon_language" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvlanguage"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="20dp"
+                            android:layout_toEndOf="@+id/imglanguage"
+                            android:fontFamily="@font/barlow_semibold"
+                            android:text="@string/applang"
+                            android:textColor="@color/black"
+                            android:textSize="16dp" />
+
+                    </RelativeLayout>
+
+
+
+                    <RelativeLayout
+                        android:id="@+id/rlLogout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/rllanguage"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginBottom="30dp">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/imgLogout"
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:src="@drawable/settings_profile" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvLogout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="20dp"
+                            android:layout_toEndOf="@+id/imgLogout"
+                            android:fontFamily="@font/barlow_semibold"
+                            android:text="@string/logout"
+                            android:textColor="@color/black"
+                            android:textSize="16dp" />
+
+                    </RelativeLayout>
+
+
+                </RelativeLayout>
+            </RelativeLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

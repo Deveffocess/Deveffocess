@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.google.gson.JsonObject
 import com.livo.nu.models.*
 import com.livo.nuo.models.ListingAllModel
+import com.livo.nuo.models.LoginModel
 import com.livo.nuo.models.ProductListModel
 import com.livo.nuo.netUtils.response.ErrorResponse
 import com.livo.nuo.repository.product.ProductRepository
@@ -16,6 +17,8 @@ import com.livo.nuo.utility.AppUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.HttpException
 import java.lang.Exception
 
@@ -33,16 +36,23 @@ import java.lang.Exception
     private var mutableLiveDataOwnProducts : MutableLiveData<ProductListModel> = MutableLiveData()
     private var mutableLiveDataProductsData : MutableLiveData<ProductListModel> = MutableLiveData()
     private var mutableLiveDataAllListings : MutableLiveData<ListingAllModel> = MutableLiveData()
-   /* private var mutableLiveDataOwnProductDetail : MutableLiveData<ProductDetailObjectModel> = MutableLiveData()
-    private var mutableLiveDataApproveTransporterAdmin : MutableLiveData<ImageModel> = MutableLiveData()
-    private var mutableLiveDataApplyFromTransporter : MutableLiveData<ImageModel> = MutableLiveData()
-    private var mutableLiveDataRemoveTransporter : MutableLiveData<ImageModel> = MutableLiveData()
-    private var mutableLiveDataApproveTransporterSender : MutableLiveData<ImageModel> = MutableLiveData()
-    private var mutableLiveDataReportProduct : MutableLiveData<ImageModel> = MutableLiveData()
-    private var mutableLiveDataGetTransporterList : MutableLiveData<TransporterListModel> = MutableLiveData()
-    private var mutableLiveDataProductOngoingStates : MutableLiveData<ProductOngoingStateObjects> = MutableLiveData()
-    private var mutableLiveDataPostOngoingStates : MutableLiveData<ImageModel> = MutableLiveData()
-    private var mutableLiveDataPostRating : MutableLiveData<ImageModel> = MutableLiveData()*/
+    private var mutableLiveDataProductOngoingStates : MutableLiveData<LoginModel> = MutableLiveData()
+    private var mutableLiveDataDeleteProduct : MutableLiveData<LoginModel> = MutableLiveData()
+    private var mutableLiveDataCreateListing : MutableLiveData<LoginModel> = MutableLiveData()
+    private var mutableLiveDataPlacebid : MutableLiveData<LoginModel> = MutableLiveData()
+    private var mutableLiveTranspoterListForProduct : MutableLiveData<LoginModel> = MutableLiveData()
+    private var mutableLiveTransportersListRemoveBid : MutableLiveData<LoginModel> = MutableLiveData()
+
+     /* private var mutableLiveDataOwnProductDetail : MutableLiveData<ProductDetailObjectModel> = MutableLiveData()
+      private var mutableLiveDataApproveTransporterAdmin : MutableLiveData<ImageModel> = MutableLiveData()
+      private var mutableLiveDataApplyFromTransporter : MutableLiveData<ImageModel> = MutableLiveData()
+      private var mutableLiveDataRemoveTransporter : MutableLiveData<ImageModel> = MutableLiveData()
+      private var mutableLiveDataApproveTransporterSender : MutableLiveData<ImageModel> = MutableLiveData()
+      private var mutableLiveDataReportProduct : MutableLiveData<ImageModel> = MutableLiveData()
+      private var mutableLiveDataGetTransporterList : MutableLiveData<TransporterListModel> = MutableLiveData()
+
+      private var mutableLiveDataPostOngoingStates : MutableLiveData<ImageModel> = MutableLiveData()
+      private var mutableLiveDataPostRating : MutableLiveData<ImageModel> = MutableLiveData()*/
 
 
 
@@ -63,11 +73,11 @@ import java.lang.Exception
             mutableLiveDataPostOngoingStates
 
     fun getMutableLiveDataBanners(): MutableLiveData<BannerListModel> =
-        mutableLiveDataBanners
+        mutableLiveDataBanners*/
 
-    fun getMutableLiveDataProductOngoingStates(): MutableLiveData<ProductOngoingStateObjects> =
+    fun getMutableLiveDataProductDetail(): MutableLiveData<LoginModel> =
             mutableLiveDataProductOngoingStates
-*/
+
     fun getMutableLiveDataOwnProducts(): MutableLiveData<ProductListModel> =
         mutableLiveDataOwnProducts
 
@@ -77,11 +87,22 @@ import java.lang.Exception
     fun getMutableLiveDataAllListings(): MutableLiveData<ListingAllModel> =
         mutableLiveDataAllListings
 
-   /* fun getMutableLiveDataProductDetail(): MutableLiveData<ProductDetailObjectModel> =
-        mutableLiveDataOwnProductDetail
+     fun getMutableLiveDataDeleteData(): MutableLiveData<LoginModel> =
+         mutableLiveDataDeleteProduct
 
-    fun getMutableLiveDataPickUpAmount(): MutableLiveData<DiscountModel> =
-            mutableLiveDataGetPickUpAmount
+    fun getMutableLiveDataCreateListing(): MutableLiveData<LoginModel> =
+        mutableLiveDataCreateListing
+
+     fun getMutableLiveDataPlacebid(): MutableLiveData<LoginModel> =
+         mutableLiveDataPlacebid
+
+     fun getMutableLiveTranspoterListForProduct(): MutableLiveData<LoginModel> =
+         mutableLiveTranspoterListForProduct
+
+     fun getMutableLiveDataTransportersListRemoveBid(): MutableLiveData<LoginModel> =
+         mutableLiveTransportersListRemoveBid
+
+   /*
 
     fun getMutableLiveDataApplyCoupon(): MutableLiveData<ImageModel> =
             mutableLiveDataApplyCoupon
@@ -146,41 +167,7 @@ import java.lang.Exception
             }
         }
     }
-    fun getMonthDatesList() {
-        viewModelScope.launch {
-            withContext(Dispatchers.IO){
-                try {
-                    val userImage  = productRepository?.getMonthDatesList()
-                    userImage?.let {
-                        mutableLiveDataMonthDateList.postValue(it)
-                    }
 
-                }catch (httpException : HttpException){
-                    try {
-                        val errorResponse =
-                                AppUtils.getErrorResponse(httpException.response()?.errorBody()?.string())
-                        errorResponse?.let {
-                            getErrorMutableLiveData().postValue(it)
-                        }
-                    }catch (e : Exception){
-                        val errorResponse = ErrorResponse("",0,"Please try again later , our server is having some problem",
-                                "Please try again later , our server is having some problem","")
-                        errorResponse?.let {
-                            getErrorMutableLiveData().postValue(it)
-                        }
-                    }
-
-                } catch (e : Exception){
-                    val errorResponse = ErrorResponse("",0,e.message,e.message!!,"")
-                    errorResponse.let {
-                        getErrorMutableLiveData().postValue(it)
-                    }
-                    Log.d("TAG", " monthDate list Exception : $e")
-
-                }
-            }
-        }
-    }
     fun getEstimatedPrice(weight : Int) {
         viewModelScope.launch {
             withContext(Dispatchers.IO){
@@ -391,41 +378,86 @@ import java.lang.Exception
             }
         }
     }
-    fun getOwnProducts() {
-        viewModelScope.launch {
-            withContext(Dispatchers.IO){
-                try {
-                    val userImage  = productRepository?.getOwnProducts()
-                    userImage?.let {
-                        mutableLiveDataOwnProducts.postValue(it)
-                    }
+  */
 
-                }catch (httpException : HttpException){
-                    try {
-                        val errorResponse =
-                                AppUtils.getErrorResponse(httpException.response()?.errorBody()?.string())
-                        errorResponse?.let {
-                            getErrorMutableLiveData().postValue(it)
-                        }
-                    }catch (e : Exception){
-                        val errorResponse = ErrorResponse("",0,"Please try again later , our server is having some problem",
-                                "Please try again later , our server is having some problem","")
-                        errorResponse?.let {
-                            getErrorMutableLiveData().postValue(it)
-                        }
-                    }
 
-                } catch (e : Exception){
-                    val errorResponse = ErrorResponse("",0,e.message,e.message!!,"")
-                    errorResponse.let {
-                        getErrorMutableLiveData().postValue(it)
-                    }
-                    Log.d("TAG", " get own products Exception : $e")
+     fun getTransportersListForProduct(jsonObject: JsonObject) {
+         viewModelScope.launch {
+             withContext(Dispatchers.IO){
+                 try {
 
-                }
-            }
-        }
-    }*/
+                     val userIma  = productRepository?.getTransportersListForProduct(jsonObject)
+                     userIma?.let {
+                         mutableLiveTranspoterListForProduct.postValue(it)
+                     }
+
+                 }catch (httpException : HttpException){
+                     try {
+                         val errorResponse =
+                             AppUtils.getErrorResponse(httpException.response()?.errorBody()?.string())
+                         errorResponse?.let {
+                             getErrorMutableLiveData().postValue(it)
+                         }
+                     }catch (e : Exception){
+                         val errorResponse = ErrorResponse("",0,"Please try again later , our server is having some problem",
+                             "Please try again later , our server is having some problem","")
+                         errorResponse?.let {
+                             getErrorMutableLiveData().postValue(it)
+                         }
+                     }
+
+                 } catch (e : Exception){
+                     val errorResponse = ErrorResponse("",0,e.message,e.message!!,"")
+                     errorResponse.let {
+                         getErrorMutableLiveData().postValue(it)
+                     }
+                     Log.d("TAG", " get own products Exception : $e")
+
+                 }
+             }
+         }
+     }
+
+     fun getTransportersListRemoveBid(jsonObject: JsonObject) {
+         viewModelScope.launch {
+             withContext(Dispatchers.IO){
+                 try {
+
+                     val userIma  = productRepository?.getTransportersListRemoveBid(jsonObject)
+                     userIma?.let {
+                         mutableLiveTransportersListRemoveBid.postValue(it)
+                     }
+
+                 }catch (httpException : HttpException){
+                     try {
+                         val errorResponse =
+                             AppUtils.getErrorResponse(httpException.response()?.errorBody()?.string())
+                         errorResponse?.let {
+                             getErrorMutableLiveData().postValue(it)
+                         }
+                     }catch (e : Exception){
+                         val errorResponse = ErrorResponse("",0,"Please try again later , our server is having some problem",
+                             "Please try again later , our server is having some problem","")
+                         errorResponse?.let {
+                             getErrorMutableLiveData().postValue(it)
+                         }
+                     }
+
+                 } catch (e : Exception){
+                     val errorResponse = ErrorResponse("",0,e.message,e.message!!,"")
+                     errorResponse.let {
+                         getErrorMutableLiveData().postValue(it)
+                     }
+                     Log.d("TAG", " get own products Exception : $e")
+
+                 }
+             }
+         }
+     }
+
+
+
+
     fun getUserListings(jsonObject: JsonObject) {
         viewModelScope.launch {
             withContext(Dispatchers.IO){
@@ -462,13 +494,62 @@ import java.lang.Exception
             }
         }
     }
-    /*fun getSearchedOwnProducts(search : String) {
+
+
+     fun getPlacebid(jsonObject: JsonObject) {
+         viewModelScope.launch {
+             withContext(Dispatchers.IO){
+                 try {
+
+                     val userIma  = productRepository?.getPlacebid(jsonObject)
+                     userIma?.let {
+                         mutableLiveDataPlacebid.postValue(it)
+                     }
+
+                 }catch (httpException : HttpException){
+                     try {
+                         val errorResponse =
+                             AppUtils.getErrorResponse(httpException.response()?.errorBody()?.string())
+                         errorResponse?.let {
+                             getErrorMutableLiveData().postValue(it)
+                         }
+                     }catch (e : Exception){
+                         val errorResponse = ErrorResponse("",0,"Please try again later , our server is having some problem",
+                             "Please try again later , our server is having some problem","")
+                         errorResponse?.let {
+                             getErrorMutableLiveData().postValue(it)
+                         }
+                     }
+
+                 } catch (e : Exception){
+                     val errorResponse = ErrorResponse("",0,e.message,e.message!!,"")
+                     errorResponse.let {
+                         getErrorMutableLiveData().postValue(it)
+                     }
+                     Log.d("TAG", " get own products Exception : $e")
+
+                 }
+             }
+         }
+     }
+
+
+
+
+
+    fun createListing(title: RequestBody, height: RequestBody, width: RequestBody, depth: RequestBody, weight: RequestBody, price: RequestBody,
+                      more_people_needed: RequestBody, pickup_date: RequestBody, dropoff_date: RequestBody, pickup_latitude: RequestBody,
+                      pickup_longitude: RequestBody, pickup_address: RequestBody, pickup_address_note: RequestBody, dropoff_latitude: RequestBody,
+                      dropoff_longitude: RequestBody, dropoff_address: RequestBody, dropoff_address_note: RequestBody, distance: RequestBody,
+                      image1 : MultipartBody.Part, image2 : MultipartBody.Part, image3 : MultipartBody.Part) {
         viewModelScope.launch {
             withContext(Dispatchers.IO){
                 try {
-                    val userImage  = productRepository?.getSearchedOwnProducts(search)
+                    val userImage  = productRepository?.createListing(title,height,width,depth,weight,price,more_people_needed,pickup_date,dropoff_date,
+                        pickup_latitude,pickup_longitude,pickup_address,pickup_address_note,dropoff_latitude,dropoff_longitude,dropoff_address,
+                        dropoff_address_note,distance,image1,image2,image3)
                     userImage?.let {
-                        mutableLiveDataOwnProducts.postValue(it)
+                        mutableLiveDataCreateListing.postValue(it)
                     }
 
                 }catch (httpException : HttpException){
@@ -496,7 +577,9 @@ import java.lang.Exception
                 }
             }
         }
-    }*/
+    }
+
+
     fun getAllListings(jsonObject: JsonObject) {
         viewModelScope.launch {
             withContext(Dispatchers.IO){
@@ -532,6 +615,44 @@ import java.lang.Exception
             }
         }
     }
+
+
+     fun getDeleteProduct(jsonObject: JsonObject) {
+         viewModelScope.launch {
+             withContext(Dispatchers.IO){
+                 try {
+                     val userImage  = productRepository?.getDeleteProduct(jsonObject)
+                     userImage?.let {
+                         mutableLiveDataDeleteProduct.postValue(it)
+                     }
+
+                 }catch (httpException : HttpException){
+                     try {
+                         val errorResponse =
+                             AppUtils.getErrorResponse(httpException.response()?.errorBody()?.string())
+                         errorResponse?.let {
+                             getErrorMutableLiveData().postValue(it)
+                         }
+                     }catch (e : Exception){
+                         val errorResponse = ErrorResponse("",0,"Please try again later , our server is having some problem",
+                             "Please try again later , our server is having some problem","")
+                         errorResponse?.let {
+                             getErrorMutableLiveData().postValue(it)
+                         }
+                     }
+
+                 } catch (e : Exception){
+                     val errorResponse = ErrorResponse("",0,e.message,e.message!!,"")
+                     errorResponse.let {
+                         getErrorMutableLiveData().postValue(it)
+                     }
+                     Log.d("TAG", " get all listings Exception : $e")
+
+                 }
+             }
+         }
+     }
+
      /*
     fun getSearchedAllProducts(search: String) {
         viewModelScope.launch {
@@ -918,12 +1039,12 @@ import java.lang.Exception
                 }
             }
         }
-    }
-    fun getOngoingListingStates(productId: Int) {
+    }*/
+    fun getSingleListingData(productId: JsonObject) {
         viewModelScope.launch {
             withContext(Dispatchers.IO){
                 try {
-                    val userImage  = productRepository?.getOngoingListingStates(productId)
+                    val userImage  = productRepository?.getSingleListingData(productId)
                     userImage?.let {
                         mutableLiveDataProductOngoingStates.postValue(it)
                     }
@@ -953,5 +1074,5 @@ import java.lang.Exception
                 }
             }
         }
-    }*/
+    }
 }

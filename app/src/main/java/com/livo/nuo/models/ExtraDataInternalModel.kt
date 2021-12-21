@@ -6,10 +6,24 @@ import java.io.Serializable
 
 class ExtraDataInternalModel : Serializable {
 
+    @SerializedName("transporter_commission")
+    @Expose
+    var transporter_commission = ""
+
+    @SerializedName("sender_commission")
+    @Expose
+    var sender_commission = ""
+
+    @SerializedName("minimum_listing_price")
+    @Expose
+    var minimum_listing_price = ""
+
     @SerializedName("colors")
     @Expose
-    var colors = ColorModel()
-    @SerializedName("banners")
+    var colors = ArrayList<ColorModel>()
+
+
+    @SerializedName("recommended_price")
     @Expose
-    var banners = ArrayList<BannerModel>()
+    var recommended_price = ArrayList<ExtraDataRecommendedPriceModel>()
 }

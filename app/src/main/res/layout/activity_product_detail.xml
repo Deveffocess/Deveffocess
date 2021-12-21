@@ -7,10 +7,217 @@
     android:layout_height="match_parent">
 
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:background="@color/white">
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmerImagex"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:visibility="gone"
+            android:layout_marginTop="40dp">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <View
+                    android:id="@+id/tvTitlex"
+                    android:layout_width="90dp"
+                    android:layout_height="35dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="3dp"
+                    android:alpha="0.2"
+                    android:background="@drawable/white_round_shape"
+                    android:backgroundTint="@android:color/darker_gray" />
+
+                <View
+                    android:id="@+id/tvTitlexq"
+                    android:layout_width="90dp"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_toStartOf="@+id/tvTitlex"
+                    android:alpha="0.2"
+                    android:background="@drawable/white_round_shape"
+                    android:backgroundTint="@android:color/darker_gray" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgBack1"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="10dp"
+                    android:foregroundGravity="center"
+                    android:src="@drawable/grey_round_shape" />
+
+            </RelativeLayout>
+
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmerImagex1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/shimmerImagex"
+            android:visibility="gone"
+            android:layout_marginTop="10dp">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp">
+
+                <View
+                    android:id="@+id/tvTitlexqimg"
+                    android:layout_width="match_parent"
+                    android:layout_height="400dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="3dp"
+                    android:alpha="0.2"
+                    android:background="@drawable/white_round_shape"
+                    android:backgroundTint="@android:color/darker_gray" />
+
+                <View
+                    android:id="@+id/tvTitlexqtit"
+                    android:layout_width="150dp"
+                    android:layout_height="20dp"
+                    android:layout_below="@+id/tvTitlexqimg"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="35dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="3dp"
+                    android:alpha="0.2"
+                    android:background="@drawable/white_round_shape"
+                    android:backgroundTint="@android:color/darker_gray" />
+
+                <LinearLayout
+                    android:id="@+id/llshim"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:layout_below="@+id/tvTitlexqtit"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="3dp"
+                        android:layout_weight="1"
+                        android:alpha="0.2"
+                        android:background="@drawable/white_round_shape"
+                        android:backgroundTint="@android:color/darker_gray" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="3dp"
+                        android:layout_weight="1"
+                        android:alpha="0.2"
+                        android:background="@drawable/white_round_shape"
+                        android:backgroundTint="@android:color/darker_gray" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:layout_marginBottom="3dp"
+                        android:layout_weight="1"
+                        android:alpha="0.2"
+
+                        android:background="@drawable/white_round_shape"
+                        android:backgroundTint="@android:color/darker_gray" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginBottom="3dp"
+                        android:layout_weight="1"
+                        android:alpha="0.2"
+                        android:background="@drawable/white_round_shape"
+                        android:backgroundTint="@android:color/darker_gray" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llshim1"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:layout_below="@+id/llshim"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="3dp"
+                        android:layout_weight="1"
+                        android:alpha="0.2"
+                        android:background="@drawable/white_round_shape"
+                        android:backgroundTint="@android:color/darker_gray" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="3dp"
+                        android:layout_weight="1"
+                        android:alpha="0.2"
+                        android:background="@drawable/white_round_shape"
+                        android:backgroundTint="@android:color/darker_gray" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:layout_marginBottom="3dp"
+                        android:layout_weight="1"
+                        android:alpha="0.2"
+                        android:background="@drawable/white_round_shape"
+                        android:backgroundTint="@android:color/darker_gray" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginBottom="3dp"
+                        android:layout_weight="1"
+                        android:alpha="0.2"
+                        android:background="@drawable/white_round_shape"
+                        android:backgroundTint="@android:color/darker_gray" />
+
+                </LinearLayout>
+
+                <com.livo.nuo.lib.roundImageView.RoundedImageView
+                    android:id="@+id/imgshimmerImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/llshim1"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="20dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/grey_round_shape"
+                    app:riv_corner_radius="13dp" />
+
+            </RelativeLayout>
+        </com.facebook.shimmer.ShimmerFrameLayout>
 
 
         <RelativeLayout
@@ -65,6 +272,78 @@
                     android:textSize="16dp" />
             </RelativeLayout>
 
+
+            <RelativeLayout
+                android:id="@+id/rlEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_toStartOf="@+id/rlDelete"
+                android:background="@drawable/white_fill_black_10_border"
+                android:padding="7dp"
+                android:visibility="gone">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgEdit"
+                    android:layout_width="23dp"
+                    android:layout_height="23dp"
+                    android:layout_centerVertical="true"
+                    android:paddingStart="2dp"
+                    android:src="@drawable/ic_baseline_edit_24" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_toEndOf="@+id/imgEdit"
+                    android:fontFamily="@font/barlow_bold"
+                    android:letterSpacing="0.01"
+                    android:paddingEnd="5dp"
+                    android:text="@string/edit"
+                    android:textColor="@color/livo_black_30_opacity"
+                    android:textSize="16dp" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/rlDelete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_toStartOf="@+id/rlShare"
+                android:background="@drawable/white_fill_black_10_border"
+                android:padding="7dp"
+                android:visibility="gone">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgDelete"
+                    android:layout_width="23dp"
+                    android:layout_height="23dp"
+                    android:layout_centerVertical="true"
+                    android:paddingStart="2dp"
+                    android:src="@drawable/ic_baseline_delete_24" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvDelete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_toEndOf="@+id/imgDelete"
+                    android:fontFamily="@font/barlow_bold"
+                    android:letterSpacing="0.01"
+                    android:paddingEnd="5dp"
+                    android:text="@string/delete"
+                    android:textColor="@color/livo_black_30_opacity"
+                    android:textSize="16dp" />
+            </RelativeLayout>
+
             <RelativeLayout
                 android:id="@+id/rlShare"
                 android:layout_width="wrap_content"
@@ -105,8 +384,7 @@
         <androidx.core.widget.NestedScrollView
             android:id="@+id/nestedScroll"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/rlTopMain">
+            android:layout_height="wrap_content">
 
 
             <RelativeLayout
@@ -119,24 +397,23 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginTop="10dp">
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="20dp">
 
 
                     <androidx.viewpager.widget.ViewPager
                         android:id="@+id/vpImages"
                         android:layout_width="match_parent"
-                        android:background="@drawable/test_imgsinglelisting"
-                        android:layout_height="350dp" />
-
+                        android:layout_height="400dp" />
 
                     <com.google.android.material.tabs.TabLayout
                         android:id="@+id/tabsLayout"
                         android:layout_width="50dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="20dp"
                         android:layout_below="@+id/vpImages"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
                         app:tabBackground="@drawable/tab_selector"
                         app:tabGravity="center"
                         app:tabIndicatorHeight="0dp" />
@@ -147,12 +424,12 @@
 
                 <RelativeLayout
                     android:id="@+id/rlProductDescription"
-                    android:layout_below="@+id/rlProductImages"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/rlProductImages"
                     android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginTop="10dp">
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="20dp">
 
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -165,14 +442,13 @@
                         android:textSize="20dp" />
 
 
-
                     <RelativeLayout
                         android:id="@+id/rlHWWDTitle"
-                        android:layout_below="@+id/tvProductTitle"
-                        android:layout_marginTop="10dp"
-                        android:layout_centerHorizontal="true"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tvProductTitle"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp">
 
 
                         <LinearLayout
@@ -226,9 +502,6 @@
                                     android:textAlignment="center"
                                     android:textColor="@color/livo_black_30_opacity"
                                     android:textSize="14dp" />
-
-
-
 
 
                             </RelativeLayout>
@@ -292,15 +565,16 @@
 
                     <RelativeLayout
                         android:id="@+id/rlHWWDValue"
-                        android:layout_below="@+id/rlHWWDTitle"
-                        android:layout_marginTop="5dp"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/rlHWWDTitle"
+                        android:layout_marginTop="5dp">
 
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:gravity="center"
                             android:weightSum="4">
 
 
@@ -313,41 +587,40 @@
                                     android:id="@+id/tvHeightValue"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:fontFamily="@font/barlow_semibold"
-                                    android:maxLength="3"
+                                    android:fontFamily="@font/barlow_bold"
                                     android:text="00"
                                     android:textAlignment="viewStart"
                                     android:textColor="@color/black"
-                                    android:textSize="14dp" />
+                                    android:textSize="16dp" />
 
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:id="@+id/tvHeightParam"
-                                    android:layout_toEndOf="@+id/tvHeightValue"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Cm"
                                     android:layout_marginStart="7dp"
-                                    android:textSize="14dp"
+                                    android:layout_toEndOf="@+id/tvHeightValue"
                                     android:fontFamily="@font/barlow_semibold"
-                                    android:textColor="@color/livo_black_30_opacity" />
+                                    android:text="cm"
+                                    android:textColor="@color/livo_black_30_opacity"
+                                    android:textSize="14dp" />
 
                             </RelativeLayout>
+
                             <RelativeLayout
                                 android:layout_width="0dp"
-                                android:layout_gravity="center_horizontal"
-                                android:gravity="center_horizontal"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1.1">
+                                android:layout_gravity="center_horizontal"
+                                android:layout_weight="1.1"
+                                android:gravity="center_horizontal">
 
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:id="@+id/tvWidthValue"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:fontFamily="@font/barlow_semibold"
-                                    android:maxLength="3"
+                                    android:fontFamily="@font/barlow_bold"
                                     android:text="00"
                                     android:textColor="@color/black"
-                                    android:textSize="14dp" />
+                                    android:textSize="16dp" />
 
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:id="@+id/tvWidthParam"
@@ -356,7 +629,7 @@
                                     android:layout_marginStart="7dp"
                                     android:layout_toEndOf="@+id/tvWidthValue"
                                     android:fontFamily="@font/barlow_semibold"
-                                    android:text="Cm"
+                                    android:text="cm"
                                     android:textColor="@color/livo_black_30_opacity"
                                     android:textSize="14dp" />
                             </RelativeLayout>
@@ -365,18 +638,17 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
-                                android:gravity="center"
-                                android:layout_weight="1">
+                                android:layout_weight="1"
+                                android:gravity="center">
 
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:id="@+id/tvDepthValue"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:fontFamily="@font/barlow_semibold"
-                                    android:maxLength="3"
+                                    android:fontFamily="@font/barlow_bold"
                                     android:text="00"
                                     android:textColor="@color/black"
-                                    android:textSize="14dp" />
+                                    android:textSize="16dp" />
 
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:id="@+id/tvDepthParam"
@@ -385,27 +657,27 @@
                                     android:layout_marginStart="7dp"
                                     android:layout_toEndOf="@+id/tvDepthValue"
                                     android:fontFamily="@font/barlow_semibold"
-                                    android:text="Cm"
+                                    android:text="cm"
                                     android:textColor="@color/livo_black_30_opacity"
                                     android:textSize="14dp" />
 
                             </RelativeLayout>
+
                             <RelativeLayout
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:gravity="end"
-                                android:layout_weight="1.0">
+                                android:layout_weight="1.0"
+                                android:gravity="end">
 
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:id="@+id/tvWeightValue"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/barlow_semibold"
-                                    android:maxLength="3"
                                     android:text="00"
                                     android:textAlignment="viewStart"
                                     android:textColor="@color/black"
-                                    android:textSize="14dp" />
+                                    android:textSize="16dp" />
 
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:id="@+id/tvWeightParam"
@@ -413,11 +685,10 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="7dp"
                                     android:layout_toEndOf="@+id/tvWeightValue"
-                                    android:fontFamily="@font/barlow_semibold"
-                                    android:text="Kgs"
+                                    android:fontFamily="@font/barlow_bold"
+                                    android:text="kgs"
                                     android:textColor="@color/livo_black_30_opacity"
                                     android:textSize="14dp" />
-
 
 
                             </RelativeLayout>
@@ -429,10 +700,10 @@
 
                     <RelativeLayout
                         android:id="@+id/rl2PeopleInternal"
-                        android:layout_below="@+id/rlHWWDValue"
-                        android:layout_marginTop="15dp"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/rlHWWDValue"
+                        android:layout_marginTop="15dp">
 
 
                         <androidx.appcompat.widget.AppCompatTextView
@@ -464,19 +735,19 @@
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/rlMainMap"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_below="@+id/rl2PeopleInternal"
                         android:layout_marginTop="20dp"
                         android:elevation="2dp"
-                        app:cardCornerRadius="10dp"
                         android:saveEnabled="false"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        app:cardCornerRadius="10dp">
 
                         <fragment
                             android:id="@+id/fmap"
                             android:name="com.google.android.gms.maps.SupportMapFragment"
                             android:layout_width="match_parent"
-                            android:layout_height="200dp"
+                            android:layout_height="230dp"
                             map:uiScrollGestures="false" />
 
                     </androidx.cardview.widget.CardView>
@@ -493,9 +764,9 @@
                             android:id="@+id/tvPickupLabel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:fontFamily="@font/barlow_bold"
                             android:text="@string/pick_up_from"
-                            android:layout_weight="1"
                             android:textColor="@color/livo_black_30_opacity"
                             android:textSize="14dp" />
 
@@ -503,10 +774,10 @@
                             android:id="@+id/tvDropOffLabel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/barlow_bold"
-                            android:text="@string/drop_off_at"
                             android:layout_weight="1"
+                            android:fontFamily="@font/barlow_bold"
                             android:gravity="end"
+                            android:text="@string/drop_off_at"
                             android:textColor="@color/livo_black_30_opacity"
                             android:textSize="14dp" />
 
@@ -523,24 +794,26 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/tvPickupValue"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginEnd="5dp"
+                            android:layout_weight="1"
                             android:fontFamily="@font/barlow_bold"
                             android:text="Dyssegård Danmark"
-                            android:layout_weight="1"
                             android:textColor="@color/black"
-                            android:textSize="15dp" />
+                            android:textSize="16dp" />
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/tvDropOffValue"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:layout_weight="1"
                             android:fontFamily="@font/barlow_bold"
+                            android:gravity="end"
                             android:text="Dyssegård Danmark"
                             android:textColor="@color/black"
-                            android:gravity="end"
-                            android:layout_weight="1"
-                            android:textSize="15dp" />
+                            android:textSize="16dp" />
 
 
                     </LinearLayout>
@@ -556,10 +829,10 @@
 
 
                         <RelativeLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:layout_marginEnd="10dp"
+                            android:layout_weight="1"
                             android:background="@drawable/grey_round_shape_with_less_corners"
                             android:padding="10dp">
 
@@ -587,10 +860,10 @@
                         </RelativeLayout>
 
                         <RelativeLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:layout_marginStart="10dp"
+                            android:layout_weight="1"
                             android:background="@drawable/grey_round_shape_with_less_corners"
                             android:padding="10dp">
 
@@ -625,22 +898,22 @@
 
                 <View
                     android:id="@+id/vv8"
-                    android:layout_below="@+id/rlProductDescription"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/livo_black_5_opacity"/>
+                    android:layout_below="@+id/rlProductDescription"
+                    android:background="@color/livo_black_5_opacity" />
 
                 <RelativeLayout
                     android:id="@+id/rlTransporter"
-                    android:layout_below="@+id/vv8"
-                    android:visibility="visible"
-                    android:layout_marginBottom="15dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/white_round_shape"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/vv8"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="15dp"
+                    android:background="@drawable/white_round_shape"
+                    android:visibility="visible">
 
 
                     <com.livo.nuo.lib.roundImageView.RoundedImageView
@@ -689,7 +962,7 @@
                             app:srb_starWidth="17dp" /> -->
 
                         <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/tvSendRequest"
+                            android:id="@+id/tvSendOffer"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/tvTitle"
@@ -698,8 +971,8 @@
                             android:backgroundTint="@color/colorPrimary"
                             android:fontFamily="@font/barlow_semibold"
                             android:letterSpacing="0.02"
-                            android:padding="8dp"
-                            android:text="@string/send_request"
+                            android:padding="10dp"
+                            android:text="@string/send_offer"
                             android:textAlignment="center"
                             android:textColor="@color/white"
                             android:textSize="15dp"
@@ -707,7 +980,6 @@
 
 
                     </RelativeLayout>
-
 
 
                 </RelativeLayout>
@@ -718,6 +990,6 @@
         </androidx.core.widget.NestedScrollView>
 
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </RelativeLayout>

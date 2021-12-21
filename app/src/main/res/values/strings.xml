@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Livo</string>
 
     <string name="noConnection">No Internet</string>
@@ -29,8 +29,18 @@
     <string name="chat">Chat</string>
     <string name="message">Message</string>
     <string name="phone">Phone</string>
+    <string name="contact_admin">Contact Admin</string>
     <string name="offers">offers</string>
+    <string name="new_update_available">New update is available</string>
+    <string name="new_version_of_application_is_available_on_app_store_update_now">New version of application is available on App Store. Update Now!</string>
     <string name="youve_recieved">You\'ve recieved</string>
+    <string name="update_now">Update Now</string>
+    <string name="update_later">Update Later</string>
+    <string name="please_turn_on_permisssion">Please Turn on permissions</string>
+    <string name="our_application_needs_few_system_level_permissions_for_crucial_functioning_of_the_application.">Our application needs few system level permissions for crucial functioning of the application.</string>
+    <string name="listing_has_been_suspended">Listing has been suspended</string>
+    <string name="Your_listing_was_suspended_by_Livo_admin_Please_contact_admin_to_know_further_details">Your listing was suspended by Livo admin. Please contact admin to know further details</string>
+
 
     <!-- MyListing Filter -->
     <string name="data_modified">Data Modified</string>
@@ -41,7 +51,7 @@
     <string name="suspended">Suspended</string>
     <string name="expired">Expired</string>
     <string name="sender">Sender</string>
-    <string name="transpoter">Transpoter</string>
+    <string name="transpoter">Transporter</string>
     <string name="show_only_my_offers">Show only my offers</string>
     <string name="reset_all">Reset all</string>
     <string name="SORT_BY">SORT BY</string>
@@ -54,13 +64,150 @@
     <string name="latest">Latest</string>
     <string name="oldest">Oldest</string>
     <string name="FILTERS">FILTERS</string>
+    <string name="Offer_Sent_Successfully">Offer Sent \n Successfully</string>
+    <string name="remove">Remove</string>
 
 
     <!-- Product Detail -->
-    <string name="send_request">Send Request</string>
+    <string name="send_offer">Send Offer</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
+    <string name="delete_listing">Delete Listing</string>
+    <string name="are_you_sure_you_want_to_delete_this_listing">Are you sure you want to delete this listing?</string>
+    <string name="cancel">Cancel</string>
+    <string name="update_offer">Update Offer</string>
+    <string name="delete_now">Delete Now</string>
+    <string name="a_notification_will_also_be_sent_out_to_sender_to_inform_listing_price_has_been_updated">A notification will also be sent out to sender to inform listing price has been updated</string>
+
+    <!-- Report -->
+    <string name="farudulent_item">Farudulent Item</string>
+    <string name="spam">Spam</string>
+    <string name="against_policy">Against Policy</string>
+    <string name="suspicious_user">Suspicious User</string>
+    <string name="item_doesnt_match_description">Item doesn\'t match description</string>
+    <string name="help_community_keep_safe_for_everyone">Help community keep \nsafe for everyone</string>
+    <string name="Select_one_or_more_reason_below_for_marking_this_listing_inappropriate">Select one or more reason below for marking this listing inappropriate</string>
+
+    <!-- Search -->
+    <string name="my_listing">My Listings</string>
+    <string name="other_listings">Other Listings</string>
+    <string name="show_all">Show all</string>
 
     <string name="notifications">Notifications</string>
     <string name="process">Process</string>
+
+    <!-- Profile Fragment -->
+    <string name="submit_request">Submit Request</string>
+    <string name="stripe_setup">Stripe Setup</string>
+    <string name="shareapp">share App </string>
+    <string name="listing_successfully_deleted">Listing Successfully Deleted</string>
+    <string name="close">Close</string>
+    <string name="error">Error</string>
+    <string name="applang">Change Language / skift sprog / Ändra språk </string>
+    <string name="total_amount">Total Amount</string>
+    <string name="adjust_price">Adjust Price</string>
+
+
+    <!-- Add Image Fragment -->
+    <string name="discard_image">Discard Image?</string>
+    <string name="are_you_sure_you_want_to_discard_this_item">Are you sure you want to discard this image?</string>
+    <string name="okay">Ok</string>
+    <string name="note">Note : </string>
+    <string name="recommended_amount_is_calculated_based_on_your_listing_size_not_travel_distance">Recommended amount is calculated based on your listing size not travel distance</string>
+    <string name="listing_amount">Listing Amount</string>
+    <string name="livo_fee">Livo Fee</string>
+    <string name="total_amount_payable">Total Amount Payable</string>
+    <string name="kindly_wait_while_we_create_listing">Kindly wait while we create listing . . .</string>
+
+    <!-- Profile -->
+    <!--Profile / Transporter Appliction -->
+    <string name="upload_address_proof">Upload Address Proof</string>
+    <string name="address_proof">Address Proof</string>
+    <string name="identity_proof">Identity Proof</string>
+    <string name="postal_code"></string>
+    <string name="country">Country</string>
+    <string name="state">State</string>
+    <string name="city">City</string>
+    <string name="save">Save</string>
+    <string name="submit_otp">SUBMIT OTP</string>
+    <string name="update_number">Update Number</string>
+    <string name="address_line_2">Address Line 2</string>
+    <string name="address_line_1">Address Line 1</string>
+
+
+    <!-- Sender Listing  Activity -->
+    <string name="approve_transporter">Approve</string>
+    <string name="make_payment">Make Payment</string>
+    <string name="waiting_Transporter_approval"> Waiting For Transporter Approval</string>
+    <string name="not_interested">Not Interested</string>
+    <string name="message_sender">Message Sender</string>
+    <string name="pickup_message">Message Transporter</string>
+
+    <string name="listing_completed_successfully">Listing Completed \n Successfully!</string>
+
+    <!-- Transporter Listing Data   -->
+
+    <string name="accept_sender">Accept</string>
+    <string name="decline">Decline</string>
+    <string name="delete_offer">Delete Offer</string>
+    <string name="change_price">Change Price</string>
+    <string name="waiting_payment_approval">Waiting for payment approval</string>
+    <string name="waiting_sender_payment">Waiting for sender to make payment</string>
+    <string name="open_map">Open Map</string>
+    <string name="message_transpoter">Message Transpoter</string>
+    <string name="payment_method">Payment Method</string>
+    <string name="payment_method_capital">PAYMENT METHOD</string>
+    <string name="complete_transaction">Complete Transaction</string>
+    <string name="take_picture">Take Picture</string>
+    <string name="offer_price">Offer Price</string>
+    <string name="take_pic">Take pic</string>
+    <string name="take__a_picture_of_your_item">Take a picture of your item</string>
+    <string name="upload">Upload</string>
+    <string name="view_all">view all</string>
+    <string name="listing_picked_up">Listing Picked Up</string>
+    <string name="listing_delivered">Listing Delivered</string>
+
+    <!-- Days -->
+    <string name="sun">Sun</string>
+    <string name="mon">Mon</string>
+    <string name="tue">Tue</string>
+    <string name="wed">Wed</string>
+    <string name="thu">Thu</string>
+    <string name="fri">Fri</string>
+    <string name="sat">Sat</string>
+
+    <!-- Help And Support -->
+    <string name="describe_your_concern">Describe Your Concern</string>
+    <string name="select_product">Select Product</string>
+    <string name="issues_with_listing">Issues With Listing</string>
+    <string name="select_category">Select Category</string>
+    <string name="having_trouble_with_your_listing_or_just_have_a_query_for_us_let_s_chat">Having trouble with your listing or just have a query for us? Let\'s Chat!</string>
+
+    <!-- Referral And CashBack -->
+    <string name="testdata">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat. Lorem ipsum dolor sit amet, consetetur sadipscing elitr.
+     Invidunt ut labore et dolore magna aliquyam erat. Lorem ipsum dolor sit amet, consetetur sadipscing.</string>
+
+    <!-- Application Setting -->
+    <string name="enable_notification_sounds">Enable Notification Sounds</string>
+    <string name="sound">Sounds</string>
+    <string name="item_dropped_of">Item Dropped Off</string>
+    <string name="item_picked_up">Item Picked Up</string>
+    <string name="message_from_livo_support">Message From Livo Support</string>
+    <string name="message_from_transporter">Message From Transporter</string>
+    <string name="new_offers_on_my_listing">New Offers On My Listing</string>
+    <string name="app">App</string>
+    <string name="notifications_">NOTIFICATIONS</string>
+
+    <string name="enter_pickup_address">Enter pick-up address</string>
+    <string name="enter_dropoff_address">Enter drop-off address</string>
+    <string name="recommended_amount">Recommended Amount</string>
+    <string name="shot_angle_1">Shot \nAngle 1</string>
+    <string name="shot_angle_2">Shot \nAngle 2</string>
+    <string name="shot_angle_3">Shot \nAngle 3</string>
+    <string name="charaters">0/60 characters</string>
+    <string name="count_characters">/60 characters</string>
+    <string name="charaters120">0/120 characters</string>
+    <string name="count_characters120">/120 characters</string>
 
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -109,7 +256,6 @@
     <string name="enter_here">Enter Here</string>
     <string name="about_referral_and_earn_program">ABOUT REFERRAL AND EARN PROGRAM</string>
     <string name="india">India</string>
-    <string name="show_all">SHOW ALL</string>
     <string name="general_issues">General Issues</string>
     <string name="terms_amp_conditions"><![CDATA[Terms & Conditions]]></string>
     <string name="privacy_policy">Privacy Policy</string>
@@ -144,13 +290,14 @@
     <string name="pickup_location">Pickup Location</string>
     <string name="address_note">Address Note</string>
     <string name="pickup_date">Pickup Date</string>
-    <string name="api_key">AIzaSyBsWh4C2AF5Ns7EW_yLBYZI1g7fCU--2DU</string>
+    <string name="api_key">AIzaSyB-DBP30hMj70drMPSiJOGIwFHVZYmjFLo</string>
     <string name="next">Next</string>
     <string name="pickup_address">Pickup Address</string>
     <string name="drop_off_address">Drop-Off Address</string>
     <string name="drop_off_location">Drop-Off Location</string>
     <string name="drop_off_date">Drop-Off date</string>
     <string name="amount">Amount</string>
+    <string name="amount_capital">AMOUNT</string>
     <string name="tax1">Tax 1</string>
     <string name="coupon_discount">Coupon Discount</string>
     <string name="referral_code_is_invalid">Referral code is invalid</string>
@@ -169,6 +316,14 @@
     <string name="_2_people_needed">2 PEOPLE NEEDED</string>
     <string name="pick_up_from">Pick-Up From</string>
     <string name="drop_off_at">Drop-Off At</string>
+    <string name="title_activity_new_listing">NewListingActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <!--
     <string name="remove">Remove</string>
     <string name="send_request">Send Request</string>
@@ -211,7 +366,7 @@
     <string name="call">Call</string>
     <string name="are_you_sure_you_want_to_discard_this_item">Are you sure you want to discard this image?</string>
     <string name="okay">Ok</string>
-    <string name="cancel">Cancel</string>
+
     <string name="my_listings">My Listings</string>
     <string name="user">User</string>
     <string name="dd_mm_yy">dd/mm/yy</string>

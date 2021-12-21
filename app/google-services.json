@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "68367650086",
+    "project_id": "livo-966cf",
+    "storage_bucket": "livo-966cf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:68367650086:android:c425fc3f08f6a9632b05e7",
+        "android_client_info": {
+          "package_name": "com.livo.nuo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "68367650086-8hvulcviqgda1fpc2ej2usk0bmbbqrvr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBiS4AW3q6YMn79wn2Fk6-FmNma02rlUe8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "68367650086-8hvulcviqgda1fpc2ej2usk0bmbbqrvr.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "68367650086-3csbrsm2ml55ic262oqk0c70eoalab41.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.effocess.ios.Livo"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

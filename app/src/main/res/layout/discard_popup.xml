@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:id="@+id/rlMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/rlMainInternal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:background="@drawable/white_round_shape">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/discard_image"
+                android:textAlignment="viewStart"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/barlow_bold"
+                android:letterSpacing="0.03"
+                android:textSize="18sp"/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvDesc1"
+                android:layout_below="@+id/tvLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/are_you_sure_you_want_to_discard_this_item"
+                android:textAlignment="viewStart"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:textColor="@color/black_40_opacity"
+                android:fontFamily="@font/barlow_bold"
+                android:letterSpacing="0.03"
+                android:textSize="14sp"/>
+
+
+            <RelativeLayout
+                android:id="@+id/rlOkayCancel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvDesc1"
+                android:layout_marginBottom="20dp"
+                android:layout_alignParentEnd="true"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="2">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvCancel"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cancel"
+                        android:layout_marginEnd="15dp"
+                        android:background="@drawable/red_round_shap"
+                        android:backgroundTint="@color/livo_grey"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="20dp"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/barlow_bold"
+                        android:letterSpacing="0.03"
+                        android:textSize="14sp"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvOkay"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/okay"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="15dp"
+                        android:background="@drawable/red_round_shap"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="20dp"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/barlow_bold"
+                        android:letterSpacing="0.03"
+                        android:textSize="14sp"/>
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+</layout>

@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <RelativeLayout
+            android:id="@+id/rlHeader"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="35dp"
+            android:animateLayoutChanges="true"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp">
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgBack"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/backward" />
+
+            <RelativeLayout
+                android:id="@+id/rlCenterLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="20dp"
+                android:animateLayoutChanges="true"
+                android:layout_toStartOf="@+id/imgCross">
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvProductDetail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:animateLayoutChanges="true"
+                    android:background="@drawable/black_extra_round_shape"
+                    android:fontFamily="@font/barlow_bold"
+                    android:gravity="end"
+                    android:paddingStart="10dp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="8dp"
+                    android:text="@string/product_details"
+                    android:textColor="@color/white"
+                    android:textSize="15dp" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgCircle1"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@+id/tvProductDetail"
+                    android:src="@drawable/grey_circle_shape" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgCircle2"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="5dp"
+                    android:layout_toEndOf="@+id/imgCircle1"
+                    android:src="@drawable/grey_circle_shape"
+                    android:tint="@color/livo_light_grey" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgCircle3"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="5dp"
+                    android:layout_toEndOf="@+id/imgCircle2"
+                    android:src="@drawable/grey_circle_shape"
+                    android:tint="@color/livo_light_grey" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgCircle4"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_toEndOf="@+id/imgCircle3"
+                    android:src="@drawable/grey_circle_shape"
+                    android:tint="@color/livo_light_grey" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlCenterLayoutImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="20dp"
+                android:animateLayoutChanges="true"
+                android:layout_toStartOf="@+id/imgCross"
+                android:visibility="gone">
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgCircle1Image"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/green_circle_shape"
+                    android:tint="@color/livo_light_grey" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvProductDetailImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_toEndOf="@+id/imgCircle1Image"
+                    android:background="@drawable/black_extra_round_shape"
+                    android:fontFamily="@font/barlow_bold"
+                    android:gravity="end"
+                    android:lineHeight="15dp"
+                    android:animateLayoutChanges="true"
+                    android:paddingStart="10sp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="10sp"
+                    android:paddingBottom="8dp"
+                    android:text="@string/product_images"
+                    android:textColor="@color/white"
+                    android:textSize="15dp" />
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgCircle2Image"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="5dp"
+                    android:layout_toEndOf="@+id/tvProductDetailImage"
+                    android:src="@drawable/grey_circle_shape"
+                    android:tint="@color/livo_light_grey" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgCircle3Image"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="5dp"
+                    android:layout_toEndOf="@+id/imgCircle2Image"
+                    android:src="@drawable/grey_circle_shape"
+                    android:tint="@color/livo_light_grey" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgCircle4Image"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_toEndOf="@+id/imgCircle3Image"
+                    android:src="@drawable/grey_circle_shape"
+                    android:tint="@color/livo_light_grey" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlCenterLayoutPickup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="20dp"
+                android:animateLayoutChanges="true"
+                android:layout_toStartOf="@+id/imgCross"
+                android:visibility="gone">
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgCircle1Pickup"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/green_circle_shape" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgCircle2Pickup"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="5dp"
+                    android:layout_toEndOf="@+id/imgCircle1Pickup"
+                    android:src="@drawable/green_circle_shape" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvProductDetailPickup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_toEndOf="@+id/imgCircle2Pickup"
+                    android:background="@drawable/black_extra_round_shape"
+                    android:fontFamily="@font/barlow_bold"
+                    android:gravity="end"
+                    android:lineHeight="15dp"
+                    android:paddingStart="10sp"
+                    android:paddingTop="8dp"
+                    android:animateLayoutChanges="true"
+                    android:paddingEnd="10sp"
+                    android:paddingBottom="8dp"
+                    android:text="@string/pickup_address"
+                    android:textColor="@color/white"
+                    android:textSize="15dp" />
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgCircle3Pickup"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="5dp"
+                    android:layout_toEndOf="@+id/tvProductDetailPickup"
+                    android:src="@drawable/grey_circle_shape" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgCircle4Pickup"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_toEndOf="@+id/imgCircle3Pickup"
+                    android:src="@drawable/grey_circle_shape" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlCenterLayoutDropOff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="20dp"
+                android:animateLayoutChanges="true"
+                android:layout_toStartOf="@+id/imgCross"
+                android:visibility="gone">
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgCircle1DropOff"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/green_circle_shape" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgCircle2DropOff"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="5dp"
+                    android:layout_toEndOf="@+id/imgCircle1DropOff"
+                    android:src="@drawable/green_circle_shape" />
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgCircle3DropOff"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="5dp"
+                    android:layout_toEndOf="@+id/imgCircle2DropOff"
+                    android:src="@drawable/green_circle_shape" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvProductDetailDropOff"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_toEndOf="@+id/imgCircle3DropOff"
+                    android:background="@drawable/black_extra_round_shape"
+                    android:fontFamily="@font/barlow_bold"
+                    android:gravity="end"
+                    android:lineHeight="15dp"
+                    android:paddingStart="10sp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="10sp"
+                    android:paddingBottom="8dp"
+                    android:text="@string/drop_off_address"
+                    android:textColor="@color/white"
+                    android:textSize="15dp" />
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgCircle4DropOff"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_toEndOf="@+id/tvProductDetailDropOff"
+                    android:src="@drawable/grey_circle_shape" />
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/rlCenterLayoutPublish"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="20dp"
+                android:animateLayoutChanges="true"
+                android:layout_toStartOf="@+id/imgCross"
+                android:visibility="gone">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgCircle1Publish"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/green_circle_shape"
+                    android:tint="@color/livo_light_grey" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgCircle2Publish"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="5dp"
+                    android:layout_toEndOf="@+id/imgCircle1Publish"
+                    android:src="@drawable/green_circle_shape"
+                    android:tint="@color/livo_light_grey" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgCircle3Publish"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="5dp"
+                    android:layout_toEndOf="@+id/imgCircle2Publish"
+                    android:src="@drawable/green_circle_shape"
+                    android:tint="@color/livo_light_grey" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgCircle4Publish"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="5dp"
+                    android:layout_toEndOf="@+id/imgCircle3Publish"
+                    android:src="@drawable/green_circle_shape"
+                    android:tint="@color/livo_light_grey" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvProductDetailPublish"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_toEndOf="@+id/imgCircle4Publish"
+                    android:background="@drawable/black_extra_round_shape"
+                    android:fontFamily="@font/barlow_bold"
+                    android:gravity="end"
+                    android:paddingStart="10sp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="10sp"
+                    android:paddingBottom="8dp"
+                    android:text="@string/publish_listing"
+                    android:textColor="@color/white"
+                    android:textSize="15dp" />
+
+
+            </RelativeLayout>
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgCross"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/closen" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/rlInternal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/tvNext"
+            android:layout_below="@+id/rlHeader">
+
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewPagerSubscription"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </RelativeLayout>
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvNext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/black_round_shape_more_less_corners"
+            android:fontFamily="@font/barlow_semibold"
+            android:lineHeight="20dp"
+            android:padding="10dp"
+            android:text="@string/next"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="16dp" />
+
+
+    </RelativeLayout>
+
+</layout>

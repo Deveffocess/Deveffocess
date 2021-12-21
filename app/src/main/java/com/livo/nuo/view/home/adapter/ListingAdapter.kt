@@ -19,7 +19,7 @@ import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.card.MaterialCardView
 import com.livo.nuo.R
 import com.livo.nuo.models.ProductDataModel
-import com.livo.nuo.view.home.product.ProductDetailActivity
+import com.livo.nuo.view.product.ProductDetailActivity
 
 class ListingAdapter (
     private var currAtivity: Activity,
@@ -81,6 +81,7 @@ class ListingAdapter (
         holder.tvTitlex.text=model.title
         holder.tvPricex.text=model.price.toString()+" Kr"
 
+
         Glide.with(currAtivity).addDefaultRequestListener(object : RequestListener<Any>{
             override fun onLoadFailed(
                 e: GlideException?,
@@ -110,14 +111,15 @@ class ListingAdapter (
             }
 
         })
-            .load(model.listing_images).placeholder(currAtivity.getDrawable(R.drawable.grey_round_shape)).
+            .load(model.listing_image).placeholder(currAtivity.getDrawable(R.drawable.grey_round_shape)).
             error(currAtivity.getDrawable(R.drawable.grey_round_shape)).
             into(holder.imgProductImagex)
 
         holder.rlrowlisting.setOnClickListener({
-            var i=Intent(currAtivity,ProductDetailActivity::class.java)
+            var i=Intent(currAtivity, ProductDetailActivity::class.java)
             i.putExtra("id",model.id.toString())
             currAtivity.startActivity(i)
+            Log.e("id",model.id.toString())
         })
     }
 

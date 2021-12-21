@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:id="@+id/rlMain"
+        android:background="@color/livo_bg_color"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/rlHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:background="@drawable/top_square_bottom_round_white_shape">
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgBack"
+                android:layout_marginStart="15dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/backward"
+                android:layout_width="20dp"
+                android:layout_height="20dp"/>
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvLabel"
+                android:layout_centerVertical="true"
+                android:text="@string/application_settings"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="5dp"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                android:fontFamily="@font/barlow_bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+
+        </RelativeLayout>
+
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rlHeader"
+            android:layout_marginTop="10dp">
+
+
+            <RelativeLayout
+                android:id="@+id/rlMainInternal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <RelativeLayout
+                    android:id="@+id/rlFaqs"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/white_round_shape"
+                    android:layout_height="wrap_content"
+                    android:padding="20dp">
+
+
+                    <RelativeLayout
+                        android:id="@+id/rlFirstHeader"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        >
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvLegalFAQ"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:text="@string/notifications_"
+                            android:textAlignment="viewStart"
+                            android:fontFamily="@font/barlow_bold"
+                            android:textColor="@color/livo_black_20_opacity"
+                            android:letterSpacing="0.02"
+                            android:textSize="16dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvAppLabel"
+                            android:layout_alignParentEnd="true"
+                            android:text="@string/app"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:textAlignment="viewStart"
+                            android:fontFamily="@font/barlow_bold"
+                            android:textColor="@color/livo_black_20_opacity"
+                            android:letterSpacing="0.02"
+                            android:textSize="16dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/imgForward"
+                            android:visibility="gone"
+                            android:layout_alignParentEnd="true"
+                            android:src="@drawable/forward"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_width="12dp"
+                            android:layout_height="12dp"/>
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvGeneralIssues"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tvLegalFAQ"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="5dp"
+                            android:fontFamily="@font/barlow_semibold"
+                            android:text="@string/new_offers_on_my_listing"
+                            android:textAlignment="viewStart"
+                            android:textColor="@color/black"
+                            android:textSize="14dp" />
+
+
+                        <androidx.appcompat.widget.AppCompatCheckBox
+                            android:layout_width="25dp"
+                            android:layout_height="24dp"
+                            android:layout_alignParentEnd="true"
+                            android:button="@drawable/checkbox_selector"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginEnd="5dp"
+                            android:layout_below="@+id/tvLegalFAQ"
+                            />
+
+                    </RelativeLayout>
+
+
+
+
+                    <RelativeLayout
+                        android:id="@+id/rlSecondHeader"
+                        android:layout_below="@+id/rlFirstHeader"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvTerms"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginStart="10dp"
+                            android:text="@string/message_from_transporter"
+                            android:textAlignment="viewStart"
+                            android:fontFamily="@font/barlow_semibold"
+                            android:textColor="@color/black"
+                            android:textSize="14dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+
+
+                        <androidx.appcompat.widget.AppCompatCheckBox
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentEnd="true"
+                            android:button="@drawable/checkbox_selector"
+                            />
+
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:id="@+id/rlThirdHeader"
+                        android:layout_below="@+id/rlSecondHeader"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvPrivacyPolicy"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginStart="10dp"
+                            android:text="@string/message_from_livo_support"
+                            android:textAlignment="viewStart"
+                            android:fontFamily="@font/barlow_semibold"
+                            android:textColor="@color/black"
+                            android:textSize="14dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+
+                        <androidx.appcompat.widget.AppCompatCheckBox
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentEnd="true"
+                            android:button="@drawable/checkbox_selector"
+                            />
+
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:id="@+id/rlFourthHeader"
+                        android:layout_below="@+id/rlThirdHeader"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvCancellation"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginStart="10dp"
+                            android:text="@string/item_picked_up"
+                            android:textAlignment="viewStart"
+                            android:fontFamily="@font/barlow_semibold"
+                            android:textColor="@color/black"
+                            android:textSize="14dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+
+                        <androidx.appcompat.widget.AppCompatCheckBox
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentEnd="true"
+                            android:button="@drawable/checkbox_selector"
+                            />
+
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:id="@+id/rlFifthHeader"
+                        android:layout_below="@+id/rlFourthHeader"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvRefunds"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginStart="10dp"
+                            android:text="@string/item_dropped_of"
+                            android:textAlignment="viewStart"
+                            android:fontFamily="@font/barlow_semibold"
+                            android:textColor="@color/black"
+                            android:textSize="14dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                        <androidx.appcompat.widget.AppCompatCheckBox
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentEnd="true"
+                            android:button="@drawable/checkbox_selector"
+                            />
+
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/rlSound"
+                    android:layout_below="@+id/rlFaqs"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/white_round_shape"
+                    android:layout_height="wrap_content">
+
+
+                    <RelativeLayout
+                        android:id="@+id/rlFirstHeader1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvLegalFAQ1"
+                            android:layout_marginStart="10dp"
+                            android:text="@string/sound"
+                            android:layout_marginTop="10dp"
+                            android:textAlignment="viewStart"
+                            android:fontFamily="@font/barlow_bold"
+                            android:textColor="@color/livo_black_20_opacity"
+                            android:letterSpacing="0.02"
+                            android:textSize="16dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+
+
+
+
+
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvGeneralIssues1"
+                            android:layout_marginBottom="10dp"
+                            android:layout_below="@+id/tvLegalFAQ1"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginStart="10dp"
+                            android:text="@string/enable_notification_sounds"
+                            android:textAlignment="viewStart"
+                            android:fontFamily="@font/barlow_semibold"
+                            android:textColor="@color/black"
+                            android:textSize="14dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+
+                        <Switch
+                            android:id="@+id/customSwitch"
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginEnd="5dp"
+                            android:checked="false"
+                            android:scaleX="1.3"
+                            android:scaleY="1.3"
+                            android:thumb="@drawable/thumb_blue"
+                            app:switchPadding="10dp"
+                            app:track="@drawable/track_grey" />
+
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+
+        </androidx.core.widget.NestedScrollView>
+    </RelativeLayout>
+
+</layout>

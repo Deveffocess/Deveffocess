@@ -65,11 +65,11 @@ object CheckPermission {
             ContextCompat.checkSelfPermission(mContext, Manifest.permission.WRITE_EXTERNAL_STORAGE)
         val result1 = ContextCompat.checkSelfPermission(mContext, Manifest.permission.CAMERA)
         val result2 = ContextCompat.checkSelfPermission(mContext, Manifest.permission.READ_EXTERNAL_STORAGE)
-//        val result3 = ContextCompat.checkSelfPermission(mContext, Manifest.permission.RECORD_AUDIO)
+        val result3 = ContextCompat.checkSelfPermission(mContext, Manifest.permission.CALL_PHONE)
         return result ==
                 PackageManager.PERMISSION_GRANTED && result1 ==
                 PackageManager.PERMISSION_GRANTED && result2 ==
-//                PackageManager.PERMISSION_GRANTED && result3 ==
+                PackageManager.PERMISSION_GRANTED && result3 ==
                 PackageManager.PERMISSION_GRANTED
 
     }
@@ -90,13 +90,17 @@ object CheckPermission {
             ) || ActivityCompat.shouldShowRequestPermissionRationale(
                 activity,
                 Manifest.permission.READ_EXTERNAL_STORAGE
+            )|| ActivityCompat.shouldShowRequestPermissionRationale(
+                activity,
+                Manifest.permission.CALL_PHONE
             )
         ) {
             ActivityCompat.requestPermissions(
                 activity,
                 arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE,
                     Manifest.permission.CAMERA,
-                    Manifest.permission.READ_EXTERNAL_STORAGE),
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.CALL_PHONE),
                 REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS
             )
         } else {
@@ -104,7 +108,8 @@ object CheckPermission {
                 activity,
                 arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE,
                     Manifest.permission.CAMERA,
-                    Manifest.permission.READ_EXTERNAL_STORAGE),
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.CALL_PHONE),
                 REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS
             )
 

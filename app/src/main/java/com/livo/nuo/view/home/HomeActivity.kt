@@ -1,6 +1,8 @@
 package com.livo.nuo.view.home
 
 import android.app.Activity
+import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.animation.AnimationUtils
@@ -14,14 +16,22 @@ import androidx.viewpager.widget.ViewPager
 import com.jaeger.library.StatusBarUtil
 import com.livo.nuo.R
 import com.livo.nuo.commonadapter.AdapterCommonViewPager
+import com.livo.nuo.utility.AppUtils
 import com.livo.nuo.utility.CheckPermission
 import com.livo.nuo.utility.LocalizeActivity
 import com.livo.nuo.view.home.homefragments.ListingFragment
 import com.livo.nuo.view.home.homefragments.MessageFragment
 import com.livo.nuo.view.home.homefragments.MyListingFragment
 import com.livo.nuo.view.home.homefragments.ProfileFragment
+import com.livo.nuo.view.listing.NewListingActivity
 
 class HomeActivity : LocalizeActivity(), View.OnClickListener {
+
+    companion object {
+        lateinit var fa: HomeActivity
+    }
+
+    private lateinit var dialog: Dialog
 
     private var currActivity : Activity = this
     private var isFifth = false
@@ -42,10 +52,13 @@ class HomeActivity : LocalizeActivity(), View.OnClickListener {
     lateinit var rlCreateListing:RelativeLayout
     lateinit var rlMessages:LinearLayout
     lateinit var rlProfile:LinearLayout
+    lateinit var imgCreateListing:ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+
+        fa=this
 
         vv=findViewById(R.id.vv)
         imgHome=findViewById(R.id.imgHome)
@@ -62,6 +75,7 @@ class HomeActivity : LocalizeActivity(), View.OnClickListener {
         rlCreateListing=findViewById(R.id.rlCreateListing)
         rlMessages=findViewById(R.id.rlMessages)
         rlProfile=findViewById(R.id.rlProfile)
+        imgCreateListing=findViewById(R.id.imgCreateListing)
 
         initViews()
     }
@@ -71,6 +85,14 @@ class HomeActivity : LocalizeActivity(), View.OnClickListener {
         if(intent.getStringExtra("from") != null){
             from = intent.getStringExtra("from")!!
         }
+
+        imgCreateListing.setOnClickListener({
+            showProgressBar()
+            var i=Intent(applicationContext,NewListingActivity::class.java)
+            startActivity(i)
+            hideProgressBar()
+        })
+
         setUpViewPager()
         setListner()
         requestPermission()
@@ -242,6 +264,15 @@ class HomeActivity : LocalizeActivity(), View.OnClickListener {
         })
     }
 
+    fun showProgressBar(){
+        dialog =  AppUtils.showProgress(this)
+    }
+
+    fun hideProgressBar(){
+        AppUtils.hideProgress(dialog)
+    }
+
+
     private fun setListner(){
 
        rlHome.setOnClickListener(this)
@@ -289,6 +320,10 @@ class HomeActivity : LocalizeActivity(), View.OnClickListener {
 
         val mColor = resources.getColor(R.color.colorPrimary)
         StatusBarUtil.setLightMode(currActivity)
+    }
 
+    fun loadAgain(){
+        setUpViewPager()
+        setListner()
     }
 }

@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.koushikcse:SimplePlaceSearch:V1.1@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/51424dc62b55f36af63d1ed0d14ff95b/transformed/jetified-SimplePlaceSearch-V1.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/51424dc62b55f36af63d1ed0d14ff95b/transformed/jetified-SimplePlaceSearch-V1.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/51424dc62b55f36af63d1ed0d14ff95b/transformed/jetified-SimplePlaceSearch-V1.1/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.koushikcse/SimplePlaceSearch/V1.1/c91811ae23110a8c86c94a0f763ab9838b271348/SimplePlaceSearch-V1.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

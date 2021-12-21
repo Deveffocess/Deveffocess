@@ -1,50 +1,53 @@
 package com.livo.nuoo.view.home.adapter
 
 import android.app.Activity
-import android.content.ClipData
 import android.content.Intent
-import android.graphics.drawable.Drawable
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
-import com.facebook.shimmer.Shimmer
-import com.facebook.shimmer.ShimmerDrawable
 import com.livo.nuo.R
-import com.livo.nuo.manager.SessionManager
-import com.livo.nuo.models.DateModel
 import com.livo.nuo.models.ProductModel
-import com.livo.nuo.utility.AppUtils
-import com.livo.nuo.utility.MyAppSession
 
-import android.graphics.Movie
-import android.media.Image
+import android.os.Build
 import android.util.Log
+import android.view.Window
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
-import androidx.cardview.widget.CardView
+import androidx.annotation.RequiresApi
+import androidx.databinding.DataBindingUtil
 import com.facebook.shimmer.ShimmerFrameLayout
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.card.MaterialCardView
+import com.google.gson.JsonObject
+import com.livo.nuo.databinding.BottomSheetListingOngoingStatePaymentDetailBinding
+import com.livo.nuo.databinding.BottomSheetListingSuspendedBinding
+import com.livo.nuo.utility.AndroidUtil
+import com.livo.nuo.view.ongoing.ListingOngoingStateActivity
+import com.livo.nuo.view.ongoing.TransporterOffersActivity
+import com.livo.nuo.view.product.ProductDetailActivity
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class MyListingAdapter(
     private var currAtivity: Activity,
-    private var list: ArrayList<ProductModel>, private var from: Int
+    private var list: ArrayList<ProductModel>, private var from: Int, private var userType:String,private var user_type:String
 ) :
     RecyclerView.Adapter<MyListingAdapter.ViewHolder>() {
 
     private val LOADING = 0
     private val ITEM = 1
     private var isLoadingAdded = false
+
+    private var bottomSheetApplicationDialog: BottomSheetDialog?=null
 
     companion object {
         var pagenuomber = 0
@@ -86,6 +89,7 @@ fun clear() {
 }
 
 
+@RequiresApi(Build.VERSION_CODES.M)
 override fun onBindViewHolder(holder: ViewHolder, position: Int) {
     val model = list[position]
 
@@ -94,8 +98,8 @@ override fun onBindViewHolder(holder: ViewHolder, position: Int) {
        holder.rlBottomLayout.visibility=View.GONE
 
        holder.tvRecievedOffer
-       if(model.status.equals("Suspended"))
-           holder.mcvOfferCell.strokeColor =currAtivity.resources.getColor(R.color.danger)
+       if(model.status.equals("Suspended")){
+           holder.mcvOfferCell.strokeColor =currAtivity.resources.getColor(R.color.danger)}
        else if(model.status.equals("Expired"))
            holder.mcvOfferCell.strokeColor =currAtivity.resources.getColor(R.color.black_20_opacity)
 
@@ -110,7 +114,7 @@ override fun onBindViewHolder(holder: ViewHolder, position: Int) {
            holder.imgTransporterImage.visibility=View.GONE
            holder.tvTransporterStatus.visibility=View.GONE
            holder.tvTransporterName.visibility=View.GONE
-
+           holder.imgForward.visibility=View.GONE
            holder.tvRecievedOffer.text=model.biddings.toString()
 
        }
@@ -122,6 +126,8 @@ override fun onBindViewHolder(holder: ViewHolder, position: Int) {
            holder.imgTransporterImage.visibility=View.VISIBLE
            holder.tvTransporterStatus.visibility=View.VISIBLE
            holder.tvTransporterName.visibility=View.VISIBLE
+
+           holder.imgForward.visibility=View.GONE
 
            holder.tvTransporterName.text=model.user_details.first_name+" "+model.user_details.last_name
            holder.tvTransporterStatus.text=model.user_details.status_text
@@ -182,20 +188,122 @@ override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
    else if(model.status.equals("Published"))
    {
+       holder.rlBottomLayout.visibility = View.GONE
+
+       holder.imgTransporterImage.visibility = View.GONE
+       holder.tvTransporterStatus.visibility = View.GONE
+       holder.tvTransporterName.visibility = View.GONE
+
+       var colo=model.color_status
+
+       if (userType.equals("transporter"))
+       {
+           if(user_type.equals("sender"))
+           {
+               holder.mcvOfferCell.strokeColor =
+                   currAtivity.resources.getColor(R.color.black_40_opacity)
+
+               holder.tvRecievedOfferlabel.visibility = View.VISIBLE
+               holder.tvRecievedOffer.visibility = View.VISIBLE
+               holder.tvRecievedOfferRecievedLabel.visibility = View.VISIBLE
+
+               holder.tvRecievedOffer.text = model.biddings.toString()
+           }
+           else {
+
+               holder.tvRecievedOfferlabel.text = model.bidding_status.title
+               holder.tvRecievedOfferRecievedLabel.text = " " + model.bidding_status.sub_title
+               holder.tvRecievedOffer.visibility = View.GONE
+               if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                   holder.tvRecievedOfferRecievedLabel.typeface = currAtivity.resources.getFont(R.font.barlow_regular)
+               }
+
+               if (colo.equals("Black : 100%"))
+                   holder.mcvOfferCell.strokeColor = currAtivity.resources.getColor(R.color.black)
+
+           }
+       }
+       else {
+
+
+           holder.mcvOfferCell.strokeColor =
+               currAtivity.resources.getColor(R.color.black_40_opacity)
+
+           holder.tvRecievedOfferlabel.visibility = View.VISIBLE
+           holder.tvRecievedOffer.visibility = View.VISIBLE
+           holder.tvRecievedOfferRecievedLabel.visibility = View.VISIBLE
+
+           holder.tvRecievedOffer.text = model.biddings.toString()
+       }
+   }
+
+   else if(model.status.equals("Closed"))
+   {
 
        holder.rlBottomLayout.visibility=View.GONE
        holder.mcvOfferCell.strokeColor =currAtivity.resources.getColor(R.color.black_40_opacity)
+       holder.tvRecievedOffer.visibility=View.GONE
 
-           holder.tvRecievedOfferlabel.visibility=View.VISIBLE
-           holder.tvRecievedOffer.visibility=View.VISIBLE
-           holder.tvRecievedOfferRecievedLabel.visibility=View.VISIBLE
 
-           holder.imgTransporterImage.visibility=View.GONE
-           holder.tvTransporterStatus.visibility=View.GONE
-           holder.tvTransporterName.visibility=View.GONE
+       holder.tvRecievedOfferlabel.visibility=View.VISIBLE
+       holder.tvRecievedOfferlabel.text=model.bidding_status.title
 
-           holder.tvRecievedOffer.text=model.biddings.toString()
+       holder.tvRecievedOfferRecievedLabel.visibility=View.VISIBLE
+       holder.tvRecievedOfferRecievedLabel.text=" "+model.bidding_status.sub_title
+       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+           holder.tvRecievedOfferRecievedLabel.typeface = currAtivity.resources.getFont(R.font.barlow_regular)
+       }
+
+       holder.imgTransporterImage.visibility=View.GONE
+       holder.tvTransporterStatus.visibility=View.GONE
+       holder.tvTransporterName.visibility=View.GONE
+       holder.imgForward.visibility=View.GONE
+       holder.rlTransporter.isEnabled=false
+
+       holder.tvRecievedOffer.text=model.biddings.toString()
    }
+
+
+    holder.rlProcess.setOnClickListener({
+        var i = Intent(currAtivity, ListingOngoingStateActivity::class.java)
+        i.putExtra("id", model.approved_bid_id)
+        currAtivity.startActivity(i)
+    })
+
+
+    holder.mcvOfferCell.setOnClickListener({
+        if(model.status.equals("Published"))
+        {
+            if(userType.equals("sender")) {
+                if (model.biddings.toString().equals("0")) {
+                    var i = Intent(currAtivity, ProductDetailActivity::class.java)
+                    i.putExtra("id", model.id.toString())
+                    currAtivity.startActivity(i)
+                } else {
+                    var i = Intent(currAtivity, TransporterOffersActivity::class.java)
+                    i.putExtra("id", model.id)
+                    currAtivity.startActivity(i)
+                }
+            }
+            else{
+                var i = Intent(currAtivity, ListingOngoingStateActivity::class.java)
+                i.putExtra("id", model.offer_id)
+                currAtivity.startActivity(i)
+            }
+        }
+
+        if(model.status.equals("Ongoing"))
+        {
+            var i = Intent(currAtivity, ListingOngoingStateActivity::class.java)
+            i.putExtra("id", model.approved_bid_id)
+            currAtivity.startActivity(i)
+        }
+        if(model.status.equals("Suspended"))
+        {
+            openBottomListingSuspended()
+        }
+
+    })
 
 
 
@@ -243,9 +351,19 @@ override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         }
 
     })
-        .load(model.listing_images).placeholder(currAtivity.getDrawable(R.drawable.grey_round_shape)).
+        .load(model.listing_image).placeholder(currAtivity.getDrawable(R.drawable.grey_round_shape)).
         error(currAtivity.getDrawable(R.drawable.grey_round_shape)).
         into(holder.imgProductImage)
+
+    holder.rlBottomLayout.setOnClickListener({
+
+    })
+
+    holder.rlTransporter.setOnClickListener({
+        var i=Intent(currAtivity, ProductDetailActivity::class.java)
+        i.putExtra("id",model.id.toString())
+        currAtivity.startActivity(i)
+    })
 
 
 }
@@ -268,7 +386,8 @@ inner class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
     var tvRecievedOfferlabel: TextView
     var imgshimmerImage:ImageView
     var tvRecievedOfferRecievedLabel: TextView
-
+    var rlTransporter:RelativeLayout
+    var rlProcess:LinearLayout
     var mcvOfferCell:MaterialCardView
 
     init {
@@ -287,15 +406,37 @@ inner class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
         imgshimmerImage=ItemView.findViewById(R.id.imgshimmerImage)
         tvRecievedOfferRecievedLabel = ItemView.findViewById(R.id.tvRecievedOfferRecievedLabel)
         mcvOfferCell=ItemView.findViewById(R.id.mcvOfferCell)
+        rlTransporter=ItemView.findViewById(R.id.rlTransporter)
+        rlProcess=ItemView.findViewById(R.id.rlProcess)
 
     }
 }
 
-inner class ProgressViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
+    private fun openBottomListingSuspended(){
 
-    init {
+        bottomSheetApplicationDialog = BottomSheetDialog(currAtivity)
+        var bottomSheetDashboardFilterBinding = DataBindingUtil.inflate<BottomSheetListingSuspendedBinding>(
+            LayoutInflater.from(currAtivity),
+            R.layout.bottom_sheet_listing_suspended, null, false)
+
+        bottomSheetApplicationDialog?.setContentView(bottomSheetDashboardFilterBinding!!.root)
+        Objects.requireNonNull<Window>(bottomSheetApplicationDialog?.window)
+            .setBackgroundDrawableResource(android.R.color.transparent)
+
+        var llCancel=bottomSheetApplicationDialog!!.findViewById<LinearLayout>(R.id.llCancel)
+        var llContactAdmin=bottomSheetApplicationDialog!!.findViewById<LinearLayout>(R.id.llContactAdmin)
+
+        llCancel?.setOnClickListener({
+            bottomSheetApplicationDialog?.dismiss()
+        })
+
+        llContactAdmin?.setOnClickListener({
+
+        })
+
+
+        bottomSheetApplicationDialog?.show()
 
     }
-}
 
 }

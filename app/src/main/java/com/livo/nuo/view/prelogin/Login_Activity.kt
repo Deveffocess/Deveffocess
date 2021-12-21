@@ -40,6 +40,8 @@ import kotlin.collections.ArrayList
 
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.*
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.JsonObject
 import com.jaeger.library.StatusBarUtil
 import com.livo.nuo.manager.SessionManager
@@ -130,6 +132,23 @@ class Login_Activity : LocalizeActivity(){
             }
         }
 
+
+        var refreshedToken = ""
+
+
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w("tag", "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+
+            // Get new FCM registration token
+            refreshedToken = task.result
+            PrefManager.getInstance(applicationContext).savePreference(MyAppSession.FCM_TOKEN, refreshedToken)
+
+        })
+
+        Log.e("token",refreshedToken)
 
        /* val path = "android.resource://" + packageName + "/" + R.raw.app_bg
         vv.setVideoURI(Uri.parse(path))
@@ -313,13 +332,15 @@ class Login_Activity : LocalizeActivity(){
                     loginViewModel?.let {
                         if (this.let { ctx -> AndroidUtil.isInternetAvailable(ctx) }) {
                             showProgressBar()
+                            val device_token = PrefManager.getInstance(this@Login_Activity).getPreference(MyAppSession.FCM_TOKEN,"abc123")
+
                             val jsonObject = JsonObject()
                             jsonObject.addProperty("country_code", countryCode)
                             jsonObject.addProperty("phone_number", phone)
                             jsonObject.addProperty("lang", langCode)
                             jsonObject.addProperty("otp", etOTP.text.toString())
                             jsonObject.addProperty("os","android")
-                            jsonObject.addProperty("device_token", "abc123")
+                            jsonObject.addProperty("device_token", device_token)
                             it.createSession(jsonObject)
                         }
                     }

@@ -1,0 +1,977 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/livo_bg_color">
+
+            <RelativeLayout
+                android:id="@+id/rlTopMain"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/shimmerImagex"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp">
+
+                    <com.livo.nuo.lib.roundImageView.RoundedImageView
+                        android:id="@+id/imgshimmerImagex"
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        app:riv_corner_radius_bottom_left="20dp"
+                        app:riv_corner_radius_bottom_right="20dp"
+                        android:scaleType="centerCrop"
+                        android:alpha="0.2"
+                        android:src="@android:color/darker_gray"/>
+
+                </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+                <com.livo.nuo.lib.roundImageView.RoundedImageView
+                    android:id="@+id/imgUser"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:scaleType="centerCrop"
+                    android:visibility="visible"
+                    app:riv_corner_radius_bottom_left="20dp"
+                    app:riv_corner_radius_bottom_right="20dp" />
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgBack"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginStart="15dp"
+                    android:visibility="visible"
+                    android:background="@drawable/grey_round_shape"
+                    android:padding="10dp"
+                    android:tint="@color/white"
+                    android:src="@drawable/backward"/>
+
+
+            </RelativeLayout>
+
+
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlTopMain">
+
+
+                <RelativeLayout
+                    android:id="@+id/rlBottomMain"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:id="@+id/rlUserDataMain"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.facebook.shimmer.ShimmerFrameLayout
+                            android:id="@+id/shimmerUserData"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone"
+                            android:layout_marginTop="5dp"
+                            android:background="@drawable/white_round_shape"
+                            android:padding="10dp">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="15dp"
+                                android:layout_marginEnd="15dp"
+                                android:layout_marginTop="15dp">
+
+                                <com.livo.nuo.lib.roundImageView.RoundedImageView
+                                    android:id="@+id/imgProductImage1"
+                                    android:alpha="0.2"
+                                    android:src="@android:color/darker_gray"
+                                    app:riv_corner_radius="5dp"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"/>
+
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/tvUserName"
+                                    android:layout_toEndOf="@+id/imgProductImage1"
+                                    android:text="                           "
+                                    android:layout_marginTop="3dp"
+                                    android:fontFamily="@font/barlow_bold"
+                                    android:textSize="16dp"
+                                    android:layout_marginStart="10dp"
+                                    android:alpha="0.2"
+                                    android:backgroundTint="@android:color/darker_gray"
+                                    android:background="@drawable/white_round_shape"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="15dp"/>
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/tvTime"
+                                    android:text="            "
+                                    android:layout_marginTop="3dp"
+                                    android:layout_alignParentEnd="true"
+                                    android:fontFamily="@font/barlow_bold"
+                                    android:textSize="13sp"
+                                    android:alpha="0.2"
+                                    android:backgroundTint="@android:color/darker_gray"
+                                    android:background="@drawable/white_round_shape"
+                                    android:layout_marginStart="10dp"
+                                    android:textColor="@color/livo_black_45_opacity"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="15dp"/>
+
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/tvLastMessage"
+                                    android:layout_below="@+id/tvUserName"
+                                    android:layout_toEndOf="@+id/imgProductImage1"
+                                    android:text=""
+                                    android:layout_marginTop="10dp"
+                                    android:fontFamily="@font/barlow_medium"
+                                    android:textStyle="normal"
+                                    android:textSize="14dp"
+                                    android:layout_marginStart="15dp"
+                                    android:textColor="@color/livo_black_40_opacity"
+                                    android:layout_width="match_parent"
+                                    android:alpha="0.2"
+                                    android:backgroundTint="@android:color/darker_gray"
+                                    android:background="@drawable/white_round_shape"
+                                    android:layout_height="15dp"/>
+
+                            </RelativeLayout>
+
+                        </com.facebook.shimmer.ShimmerFrameLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/rltransporter"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/white_round_shape"
+                            android:paddingStart="15dp"
+                            android:paddingTop="15dp"
+                            android:paddingEnd="15dp"
+                            android:paddingBottom="15dp"
+                            android:visibility="visible">
+
+                            <RelativeLayout
+                                android:id="@+id/rlUserData"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:visibility="visible">
+
+                                <RelativeLayout
+                                    android:id="@+id/rlTitleStar"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_toEndOf="@+id/imgProductImage">
+
+                                    <androidx.appcompat.widget.AppCompatImageView
+                                        android:id="@+id/imgCall"
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:layout_alignParentEnd="true"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginEnd="60dp"
+                                        android:src="@drawable/icon_phone_call" />
+
+                                    <TextView
+                                        android:id="@+id/textView28"
+                                        android:layout_width="1dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_toStartOf="@+id/imgMessage"
+                                        android:layout_marginEnd="18dp"
+                                        android:layout_marginTop="13dp"
+                                        android:foregroundGravity="center"
+                                        android:background="@color/black_20_opacity"/>
+
+                                    <androidx.appcompat.widget.AppCompatImageView
+                                        android:id="@+id/imgMessage"
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:layout_alignParentEnd="true"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginEnd="5dp"
+                                        android:src="@drawable/icon_messagegreen" />
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/tvProposedAmount"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@+id/tvTitle"
+                                        android:layout_marginStart="5dp"
+                                        android:layout_marginTop="5dp"
+                                        android:fontFamily="@font/barlow_semibold"
+                                        android:letterSpacing="0.01"
+                                        android:text="Offer Price : 300 KR"
+                                        android:textColor="@color/livo_black_40_opacity"
+                                        android:textSize="14dp" />
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/tvTitle"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="5dp"
+                                        android:fontFamily="@font/barlow_bold"
+                                        android:letterSpacing="0.02"
+                                        android:text="Evan Quitzon"
+                                        android:textColor="@color/black"
+                                        android:textFontWeight="700"
+                                        android:textSize="16dp" />
+                                </RelativeLayout>
+
+                                <com.livo.nuo.lib.roundImageView.RoundedImageView
+                                    android:id="@+id/imgProductImage"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_centerVertical="true"
+                                    android:scaleType="centerCrop"
+                                    app:riv_corner_radius="25dp" />
+
+                            </RelativeLayout>
+
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rlStepsMain"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/rlUserDataMain"
+                        android:background="@color/white"
+                        android:layout_marginTop="8dp">
+
+                        <com.facebook.shimmer.ShimmerFrameLayout
+                            android:id="@+id/shimmerSteps"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <com.livo.nuo.lib.roundImageView.RoundedImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:alpha="0.2"
+                                android:scaleType="centerCrop"
+                                android:src="@android:color/darker_gray" />
+
+                        </com.facebook.shimmer.ShimmerFrameLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/rlSteps"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="90dp"
+                            android:background="@drawable/white_bottom_square_shape"
+                            android:padding="10dp"
+                            android:paddingTop="30dp"
+                            android:visibility="visible">
+
+                            <ViewFlipper
+                                android:id="@+id/viewFlipper"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/stepper_2"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginTop="7dp"
+                                android:visibility="gone">
+
+                                <RelativeLayout
+                                    android:id="@+id/rlMainRating"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content">
+
+                                    <ImageView
+                                        android:layout_width="35dp"
+                                        android:layout_height="35dp"
+                                        android:layout_gravity="center"
+                                        android:adjustViewBounds="true"
+                                        android:background="@drawable/star_filled"
+                                        android:scaleType="centerCrop" />
+
+                                    <TextView
+                                        android:id="@+id/tvRating"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerInParent="true"
+                                        android:fontFamily="@font/barlow_bold"
+                                        android:gravity="center"
+                                        android:text="0"
+                                        android:textColor="@color/black"
+                                        android:textSize="16dp" />
+
+                                </RelativeLayout>
+
+                            </ViewFlipper>
+
+                            <com.livo.nuo.lib.stepperview.VerticalStepperItemView
+                                android:id="@+id/stepper_2"
+                                style="@style/TextAppearance.AppCompat.Body1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/stepper_1"
+                                android:layout_marginTop="0dp"
+                                app:step_state="normal"
+                                app:step_summary="@string/pending"
+                                app:step_title="Drop-Off Listing">
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:id="@+id/llMessageTransporterdrop"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@+id/imgDropoff"
+                                        android:layout_marginTop="10dp"
+                                        android:orientation="vertical"
+                                        android:visibility="gone">
+
+                                        <com.loopeer.shadow.ShadowView
+                                            android:id="@+id/svMessageTransporterdrop"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="10dp"
+                                            android:layout_weight="1"
+                                            app:cornerRadius="5dp"
+                                            app:shadowColor="@color/livo_light_green"
+                                            app:shadowDx="4"
+                                            app:shadowDy="4"
+                                            app:shadowMargin="3dp"
+                                            app:shadowRadius="20dp">
+
+                                            <androidx.appcompat.widget.AppCompatTextView
+                                                android:id="@+id/tvMessageTransporterdrop"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:background="@drawable/red_round_shap"
+                                                android:backgroundTint="@color/livo_green"
+                                                android:fontFamily="@font/barlow_bold"
+                                                android:padding="10dp"
+                                                android:text="@string/message_transpoter"
+                                                android:textAlignment="center"
+                                                android:textColor="@android:color/white"
+                                                android:textSize="16dp" />
+
+                                        </com.loopeer.shadow.ShadowView>
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:id="@+id/llOpenMapTakePicturedrop"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@+id/imgDropoff"
+                                        android:layout_marginTop="10dp"
+                                        android:orientation="horizontal"
+                                        android:weightSum="2">
+
+                                        <com.loopeer.shadow.ShadowView
+                                            android:id="@+id/svOpenMapdrop"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="10dp"
+                                            android:layout_weight="1"
+                                            app:cornerRadius="5dp"
+                                            app:shadowColor="@color/livo_light_green"
+                                            app:shadowDx="4"
+                                            app:shadowDy="4"
+                                            app:shadowMargin="3dp"
+                                            app:shadowRadius="20dp">
+
+                                            <androidx.appcompat.widget.AppCompatTextView
+                                                android:id="@+id/tvOpenMapdrop"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:background="@drawable/red_round_shap"
+                                                android:backgroundTint="@color/livo_green"
+                                                android:fontFamily="@font/barlow_bold"
+                                                android:padding="10dp"
+                                                android:text="@string/open_map"
+                                                android:textAlignment="center"
+                                                android:textColor="@android:color/white"
+                                                android:textSize="16dp" />
+
+                                        </com.loopeer.shadow.ShadowView>
+
+                                        <com.loopeer.shadow.ShadowView
+                                            android:id="@+id/svTakePicturedrop"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginStart="8dp"
+                                            android:layout_marginTop="10dp"
+                                            android:layout_weight="1"
+                                            app:cornerRadius="5dp"
+                                            app:shadowColor="@color/livo_light_green"
+                                            app:shadowDx="4"
+                                            app:shadowDy="4"
+                                            app:shadowMargin="3dp"
+                                            app:shadowRadius="20dp">
+
+                                            <androidx.appcompat.widget.AppCompatTextView
+                                                android:id="@+id/tvTakePicturedrop"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:background="@drawable/red_round_shap"
+                                                android:backgroundTint="@color/livo_green"
+                                                android:fontFamily="@font/barlow_bold"
+                                                android:padding="10dp"
+                                                android:text="@string/take_picture"
+                                                android:textAlignment="center"
+                                                android:textColor="@android:color/white"
+                                                android:textSize="16dp" />
+
+                                        </com.loopeer.shadow.ShadowView>
+
+                                    </LinearLayout>
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/tvStatusDrop"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="5dp"
+                                        android:fontFamily="@font/barlow_semibold"
+                                        android:text="@string/pending"
+                                        android:textColor="@color/livo_black_45_opacity"
+                                        android:textSize="14dp" />
+
+                                    <com.livo.nuo.lib.roundImageView.RoundedImageView
+                                        android:id="@+id/imgDropoff"
+                                        android:layout_width="70dp"
+                                        android:layout_height="70dp"
+                                        android:layout_alignParentEnd="true"
+                                        android:background="@drawable/giftbox"
+                                        android:src="@drawable/grey_round_shape"
+                                        app:riv_corner_radius="5dp" />
+
+                                </RelativeLayout>
+
+                            </com.livo.nuo.lib.stepperview.VerticalStepperItemView>
+
+                            <com.livo.nuo.lib.stepperview.VerticalStepperItemView
+                                android:id="@+id/stepper_3"
+                                style="@style/TextAppearance.AppCompat.Body1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/stepper_2"
+                                android:layout_marginTop="0dp"
+                                app:step_is_last="true"
+                                app:step_state="normal"
+                                app:step_summary="@string/pending"
+                                app:step_title="Complete Listing">
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/tvStatusCompleted"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="5dp"
+                                        android:fontFamily="@font/barlow_semibold"
+                                        android:text="@string/pending"
+                                        android:textColor="@color/livo_black_45_opacity"
+                                        android:textSize="14dp" />
+
+                                </RelativeLayout>
+
+                            </com.livo.nuo.lib.stepperview.VerticalStepperItemView>
+
+
+                            <com.livo.nuo.lib.stepperview.VerticalStepperItemView
+                                android:id="@+id/stepper_0"
+                                style="@style/TextAppearance.AppCompat.Body1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                app:step_state="selected"
+                                app:step_title="@string/approve_transporter">
+
+                                <LinearLayout
+                                    android:id="@+id/lltransporter_Acceptdecline"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="30dp"
+                                    android:orientation="horizontal">
+
+                                    <com.loopeer.shadow.ShadowView
+                                        android:id="@+id/svNotIntrested"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="15dp"
+                                        android:layout_weight="1"
+                                        app:cornerRadius="5dp"
+                                        app:shadowColor="@color/livo_light_grey"
+                                        app:shadowDx="4"
+                                        app:shadowDy="4"
+                                        app:shadowMargin="3dp"
+                                        app:shadowRadius="20dp">
+
+                                        <androidx.appcompat.widget.AppCompatTextView
+
+                                            android:id="@+id/tvNotIntrested"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:background="@drawable/red_round_shap"
+                                            android:backgroundTint="@color/livo_black_45_opacity"
+                                            android:fontFamily="@font/barlow_bold"
+                                            android:padding="12dp"
+                                            android:text="@string/not_interested"
+                                            android:textAlignment="center"
+                                            android:textColor="@android:color/white"
+                                            android:textSize="16dp" />
+
+                                    </com.loopeer.shadow.ShadowView>
+
+                                    <com.loopeer.shadow.ShadowView
+                                        android:id="@+id/svAccept"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="8dp"
+                                        android:layout_marginTop="15dp"
+                                        android:layout_weight="1"
+                                        app:cornerRadius="5dp"
+                                        app:shadowColor="@color/livo_light_green"
+                                        app:shadowDx="4"
+                                        app:shadowDy="4"
+                                        app:shadowMargin="3dp"
+                                        app:shadowRadius="20dp">
+
+                                        <androidx.appcompat.widget.AppCompatTextView
+                                            android:id="@+id/btnApprove"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:background="@drawable/red_round_shap"
+                                            android:backgroundTint="@color/livo_green"
+                                            android:fontFamily="@font/barlow_bold"
+                                            android:padding="12dp"
+                                            android:text="@string/accept_sender"
+                                            android:textAlignment="center"
+                                            android:textColor="@android:color/white"
+                                            android:textSize="16dp" />
+
+                                    </com.loopeer.shadow.ShadowView>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/lltransporter_Approval"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="45dp"
+                                    android:background="@drawable/red_round_shap"
+                                    android:backgroundTint="@color/livo_black_15_opacity"
+                                    android:gravity="center"
+                                    android:orientation="horizontal"
+                                    android:padding="10dp"
+                                    android:visibility="gone">
+
+                                    <ImageView
+                                        android:id="@+id/imageView4"
+                                        android:layout_width="22dp"
+                                        android:layout_height="22dp"
+                                        android:layout_gravity="center"
+                                        android:layout_weight="1"
+                                        app:srcCompat="@drawable/icon_time" />
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/btntransporter_Approval"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="5dp"
+                                        android:layout_marginTop="5dp"
+                                        android:layout_marginBottom="5dp"
+                                        android:layout_weight="1"
+                                        android:fontFamily="@font/barlow_regular"
+                                        android:text="@string/waiting_Transporter_approval"
+                                        android:textColor="@color/livo_grey_border_color"
+                                        android:textSize="15dp" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/llMake_payment"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="30dp"
+                                    android:orientation="horizontal"
+                                    android:visibility="gone">
+
+                                    <com.loopeer.shadow.ShadowView
+                                        android:id="@+id/svMakePayment"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="15dp"
+                                        android:layout_weight="1"
+                                        app:cornerRadius="5dp"
+                                        app:shadowColor="@color/livo_light_green"
+                                        app:shadowDx="4"
+                                        app:shadowDy="4"
+                                        app:shadowMargin="3dp"
+                                        app:shadowRadius="20dp">
+
+                                        <androidx.appcompat.widget.AppCompatTextView
+
+                                            android:id="@+id/btnMakePayment"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:background="@drawable/red_round_shap"
+                                            android:backgroundTint="@color/livo_green"
+                                            android:fontFamily="@font/barlow_bold"
+                                            android:padding="10dp"
+                                            android:text="@string/make_payment"
+                                            android:textAlignment="center"
+                                            android:textColor="@android:color/white"
+                                            android:textSize="16dp" />
+
+                                    </com.loopeer.shadow.ShadowView>
+                                </LinearLayout>
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/tvStatusApprove"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:fontFamily="@font/barlow_semibold"
+                                    android:text="@string/pending"
+                                    android:textColor="@color/livo_black_45_opacity"
+                                    android:textSize="14dp" />
+
+
+                            </com.livo.nuo.lib.stepperview.VerticalStepperItemView>
+
+
+                            <com.livo.nuo.lib.stepperview.VerticalStepperItemView
+                                android:id="@+id/stepper_1"
+                                style="@style/TextAppearance.AppCompat.Body1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/stepper_0"
+                                android:layout_marginTop="0dp"
+                                app:step_state="normal"
+                                app:step_summary="@string/pending"
+                                app:step_title="Pick-Up Listing">
+
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:id="@+id/llMessageTransporter"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@+id/imgPickup"
+                                        android:layout_marginTop="10dp"
+                                        android:orientation="vertical"
+                                        android:visibility="gone">
+
+                                        <com.loopeer.shadow.ShadowView
+                                            android:id="@+id/svMessageTransporter"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="10dp"
+                                            android:layout_weight="1"
+                                            app:cornerRadius="5dp"
+                                            app:shadowColor="@color/livo_light_green"
+                                            app:shadowDx="4"
+                                            app:shadowDy="4"
+                                            app:shadowMargin="3dp"
+                                            app:shadowRadius="20dp">
+
+                                            <androidx.appcompat.widget.AppCompatTextView
+                                                android:id="@+id/tvMessageTransporter"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:background="@drawable/red_round_shap"
+                                                android:backgroundTint="@color/livo_green"
+                                                android:fontFamily="@font/barlow_bold"
+                                                android:padding="10dp"
+                                                android:text="@string/message_transpoter"
+                                                android:textAlignment="center"
+                                                android:textColor="@android:color/white"
+                                                android:textSize="16dp" />
+
+                                        </com.loopeer.shadow.ShadowView>
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:id="@+id/llOpenMapTakePicture"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@+id/imgPickup"
+                                        android:layout_marginTop="10dp"
+                                        android:orientation="horizontal"
+                                        android:weightSum="2">
+
+                                        <com.loopeer.shadow.ShadowView
+                                            android:id="@+id/svOpenMap"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="10dp"
+                                            android:layout_weight="1"
+                                            app:cornerRadius="5dp"
+                                            app:shadowColor="@color/livo_light_green"
+                                            app:shadowDx="4"
+                                            app:shadowDy="4"
+                                            app:shadowMargin="3dp"
+                                            app:shadowRadius="20dp">
+
+                                            <androidx.appcompat.widget.AppCompatTextView
+                                                android:id="@+id/tvOpenMap"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:background="@drawable/red_round_shap"
+                                                android:backgroundTint="@color/livo_green"
+                                                android:fontFamily="@font/barlow_bold"
+                                                android:padding="10dp"
+                                                android:text="@string/open_map"
+                                                android:textAlignment="center"
+                                                android:textColor="@android:color/white"
+                                                android:textSize="16dp" />
+
+                                        </com.loopeer.shadow.ShadowView>
+
+                                        <com.loopeer.shadow.ShadowView
+                                            android:id="@+id/svTakePicture"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginStart="8dp"
+                                            android:layout_marginTop="10dp"
+                                            android:layout_weight="1"
+                                            app:cornerRadius="5dp"
+                                            app:shadowColor="@color/livo_light_green"
+                                            app:shadowDx="4"
+                                            app:shadowDy="4"
+                                            app:shadowMargin="3dp"
+                                            app:shadowRadius="20dp">
+
+
+                                            <androidx.appcompat.widget.AppCompatTextView
+                                                android:id="@+id/tvTakePicture"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:background="@drawable/red_round_shap"
+                                                android:backgroundTint="@color/livo_green"
+                                                android:fontFamily="@font/barlow_bold"
+                                                android:padding="10dp"
+                                                android:text="@string/take_picture"
+                                                android:textAlignment="center"
+                                                android:textColor="@android:color/white"
+                                                android:textSize="16dp" />
+
+
+                                        </com.loopeer.shadow.ShadowView>
+                                    </LinearLayout>
+
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/tvStatus"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="5dp"
+                                        android:layout_marginEnd="70dp"
+                                        android:fontFamily="@font/barlow_semibold"
+                                        android:text="@string/pending"
+                                        android:textColor="@color/livo_black_45_opacity"
+                                        android:textSize="14dp" />
+
+
+                                    <com.livo.nuo.lib.roundImageView.RoundedImageView
+                                        android:id="@+id/imgPickup"
+                                        android:layout_width="70dp"
+                                        android:layout_height="70dp"
+                                        android:layout_alignParentEnd="true"
+                                        android:background="@drawable/giftbox"
+                                        android:src="@drawable/grey_round_shape"
+                                        app:riv_corner_radius="5dp" />
+
+                                </RelativeLayout>
+
+                            </com.livo.nuo.lib.stepperview.VerticalStepperItemView>
+
+
+                        </RelativeLayout>
+
+
+                    </RelativeLayout>
+
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@+id/rlStepsMain"
+                        android:visibility="visible"
+                        android:padding="20dp">
+
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:id="@+id/rlRatingHelp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/rlStepsMain"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/bottom_square_white_round_shape"
+                        android:padding="15dp"
+                        android:visibility="gone">
+
+
+                        <!--    <RelativeLayout
+                               android:id="@+id/rlRating"
+                               android:layout_width="match_parent"
+                               android:layout_height="wrap_content"
+                               android:layout_marginBottom="10dp"
+                               android:visibility="gone">
+
+
+                              <androidx.appcompat.widget.AppCompatTextView
+                                   android:id="@+id/tvRate"
+                                   android:layout_width="wrap_content"
+                                   android:layout_height="wrap_content"
+                                   android:layout_marginStart="10dp"
+                                   android:layout_marginTop="10dp"
+                                   android:fontFamily="@font/barlow_bold"
+                                   android:letterSpacing="0.02"
+                                   android:text="Rate Transporter"
+                                   android:textColor="@color/black"
+                                   android:textSize="16dp" />
+
+
+                               <androidx.appcompat.widget.AppCompatTextView
+                                   android:id="@+id/btnSubmitRating"
+                                   android:layout_width="wrap_content"
+                                   android:layout_height="wrap_content"
+                                   android:layout_alignParentEnd="true"
+                                   android:layout_centerVertical="true"
+                                   android:background="@drawable/red_round_shap"
+                                   android:backgroundTint="@color/livo_green"
+                                   android:fontFamily="@font/barlow_bold"
+                                   android:paddingStart="15dp"
+                                   android:paddingTop="10dp"
+                                   android:paddingEnd="15dp"
+                                   android:paddingBottom="10dp"
+                                   android:text="@string/submit"
+                                   android:textAlignment="center"
+                                   android:textColor="@android:color/white"
+                                   android:textSize="16dp" />
+
+
+                               <com.livo.nuo.lib.rating_bar.ScaleRatingBar
+                                   android:id="@+id/ratingBar"
+                                   android:layout_width="wrap_content"
+                                   android:layout_height="wrap_content"
+                                   android:layout_below="@+id/tvRate"
+                                   android:layout_marginStart="10dp"
+                                   android:layout_marginTop="10dp"
+                                   android:layout_marginEnd="15dp"
+                                   android:layout_marginBottom="10dp"
+                                   app:srb_clearRatingEnabled="true"
+                                   app:srb_clickable="true"
+                                   app:srb_drawableEmpty="@drawable/star_empty"
+                                   app:srb_drawableFilled="@drawable/star_filled"
+                                   app:srb_isIndicator="false"
+                                   app:srb_minimumStars="1"
+                                   app:srb_numStars="5"
+                                   app:srb_rating="3"
+                                   app:srb_scrollable="true"
+                                   app:srb_starHeight="25dp"
+                                   app:srb_starPadding="6dp"
+                                   app:srb_starWidth="25dp"
+                                   app:srb_stepSize="1" />
+
+
+                           </RelativeLayout>-->
+
+
+                           <RelativeLayout
+                               android:id="@+id/rlHelp"
+                               android:layout_width="match_parent"
+                               android:layout_height="wrap_content"
+                               android:layout_margin="10dp"
+                               android:background="@drawable/red_round_shap"
+                               android:backgroundTint="@color/livo_blue"
+                               android:padding="12dp"
+                               android:visibility="gone">
+
+
+                               <androidx.appcompat.widget.AppCompatImageView
+                                   android:id="@+id/imgArrow"
+                                   android:layout_width="20dp"
+                                   android:layout_height="20dp"
+                                   android:layout_alignParentEnd="true"
+                                   android:layout_marginEnd="15dp"
+                                   android:src="@drawable/arrow_right" />
+
+
+                               <androidx.appcompat.widget.AppCompatTextView
+                                   android:id="@+id/tvNeedHelp"
+                                   android:layout_width="match_parent"
+                                   android:layout_height="wrap_content"
+                                   android:layout_marginStart="15dp"
+                                   android:fontFamily="@font/barlow_bold"
+                                   android:text="I Need Help With This Listing"
+                                   android:textColor="@color/white"
+                                   android:textSize="16dp" />
+
+                           </RelativeLayout>
+
+                       </RelativeLayout>
+
+                   </RelativeLayout>
+
+               </androidx.core.widget.NestedScrollView>
+
+           </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/emptyspace"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/white"
+            android:padding="15dp"
+            android:visibility="visible"
+            >
+
+            <com.livo.nuo.lib.slidetoact.SlideToActView
+                android:id="@+id/slideView"
+                style="@style/SlideToActView.Example"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="15dp"
+                android:visibility="gone"
+                app:border_radius="15dp"
+                app:slider_height="55dp"
+                app:slider_icon="@drawable/arrow_right"
+                app:slider_icon_color="@color/white"
+                app:text="Swipe to send complete request"
+                app:text_appearance="@style/TextAppearance.MaterialCompat.Body3" />
+
+        </RelativeLayout>
+
+       </RelativeLayout>
+
+   </layout>

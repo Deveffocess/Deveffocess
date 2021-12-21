@@ -168,10 +168,10 @@
                         <RelativeLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
-                            android:layout_marginTop="1dp"
-                            android:layout_marginEnd="5dp"
-                            android:layout_marginBottom="1dp">
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="2dp">
 
                             <TextView
                                 android:id="@+id/tvSender"
@@ -187,9 +187,9 @@
                         <RelativeLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="1dp"
-                            android:layout_marginEnd="5dp"
-                            android:layout_marginBottom="1dp">
+                            android:layout_marginTop="2dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="2dp">
 
                             <TextView
                                 android:id="@+id/tvTranspoter"
@@ -214,6 +214,7 @@
                 android:layout_marginTop="25dp">
 
                 <LinearLayout
+                    android:id="@+id/llsenderrow1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:weightSum="3">
@@ -264,6 +265,62 @@
                         android:textSize="16dp" />
 
                 </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/lltransporterrow1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:weightSum="3">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvOngoing_transpoter"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/grey_round_shape_45_opacity"
+                        android:fontFamily="@font/barlow_bold"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:text="@string/ongoing"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="16dp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvCompleted_transporter"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/grey_round_shape_45_opacity"
+                        android:fontFamily="@font/barlow_bold"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:text="@string/completed"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="16dp" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvSuspended_transporter"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/grey_round_shape_45_opacity"
+                        android:fontFamily="@font/barlow_bold"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:text="@string/suspended"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="16dp" />
+
+                </LinearLayout>
+
 
 
             </RelativeLayout>

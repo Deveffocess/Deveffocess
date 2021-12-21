@@ -24,6 +24,7 @@
     <color name="livo_black_40_opacity">#66000000</color>
     <color name="livo_black_45_opacity">#73000000</color>
     <color name="livo_black_20_opacity">#33000000</color>
+    <color name="livo_black_15_opacity">#22000000</color>
     <color name="livo_black_10_opacity">#1A000000</color>
     <color name="livo_black_5_opacity">#0D000000</color>
     <color name="livo_lightish_white">#F6FAFC</color>
@@ -37,6 +38,7 @@
     <color name="success">#00c853</color>
     <color name="black_20_opacity">#33000000</color>
     <color name="black_40_opacity">#66000000</color>
+    <color name="black_60_opacity">#99000000</color>
     <color name="livo_blue">#380E79</color>
 
     <color name="colorBgError">#ed1b45</color>
@@ -105,7 +107,7 @@
     <color name="colorDivider">#B6B6B6</color>
     <color name="livo_light_red">#61F21C47</color>
     <color name="livo_disable_grey">#CBCCCB</color>
-
+    <color name="transparant">#00000000</color>
 
     <color name="proswipebtn_translucent_white">#33ffffff</color>
     <color name="proswipebtn_red">#F15824</color>
@@ -113,4 +115,5 @@
 
     <color name="slidetoact_white">#FFFFFF</color>
     <color name="slidetoact_defaultAccent">#FF4081</color>
+    <color name="error_red_delete">#EE2737</color>
 </resources>

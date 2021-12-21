@@ -80,11 +80,11 @@
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="25dp"
             android:layout_toEndOf="@+id/imgProductImage"
+            android:elevation="0dp"
             android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar"
             app:cardCornerRadius="8dp"
-            app:strokeColor="#888"
-            android:elevation="0dp"
             app:cardElevation="0dp"
+            app:strokeColor="#888"
             app:strokeWidth="2dp">
 
             <RelativeLayout
@@ -359,7 +359,7 @@
                     android:text="@string/details"
                     android:textAlignment="center"
                     android:textColor="@color/livo_black_30_opacity"
-                    android:textSize="11sp" />
+                    android:textSize="12dp" />
 
 
             </LinearLayout>

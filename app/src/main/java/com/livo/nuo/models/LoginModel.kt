@@ -8,7 +8,7 @@ class  LoginModel : Serializable{
 
     @SerializedName("code")
     @Expose
-    var code = ""
+    var code = 0
     @SerializedName("is_login")
     @Expose
     var is_login = 0
@@ -18,6 +18,11 @@ class  LoginModel : Serializable{
     @SerializedName("token")
     @Expose
     var token = ""
+
+    @SerializedName("status")
+    @Expose
+    var status = false
+
     @SerializedName("data",alternate = ["data_detail"])
     @Expose
     var data = DataModel()

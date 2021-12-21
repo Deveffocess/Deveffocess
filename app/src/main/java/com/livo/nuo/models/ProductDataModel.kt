@@ -21,6 +21,9 @@ class ProductDataModel : Serializable {
     @SerializedName("user_type")
     @Expose
     var user_type = ""
+    @SerializedName("has_next")
+    @Expose
+    var has_next = false
     @SerializedName("list_data")
     @Expose
     var list_data = ArrayList<ProductModel>()
@@ -35,7 +38,7 @@ class ProductDataModel : Serializable {
     var title = ""
     @SerializedName("price")
     @Expose
-    var price = 0
+    var price = ""
     @SerializedName("pickup_date")
     @Expose
     var pickup_date = ""
@@ -44,13 +47,13 @@ class ProductDataModel : Serializable {
     var created_at = ""
     @SerializedName("user_distance")
     @Expose
-    var user_distance = 0.0
-    @SerializedName("listing_images")
+    var user_distance = ""
+    @SerializedName("listing_image")
     @Expose
-    var listing_images = ""
+    var listing_image = ""
     @SerializedName("days")
     @Expose
-    var days = ""
+    var days = 0
 
 
 }

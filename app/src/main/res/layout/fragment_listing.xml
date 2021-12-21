@@ -26,7 +26,8 @@
                 android:layout_marginTop="10dp"
                 android:layout_toStartOf="@+id/imgNotification"
                 android:background="@drawable/white_fill_black_10_border"
-                android:padding="10dp">
+                android:padding="10dp"
+                android:transitionName="shared_element_container">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/imgSearch"
@@ -45,8 +46,8 @@
                     android:background="@null"
                     android:fontFamily="@font/barlow_regular"
                     android:hint="@string/search"
-                    android:textColorHint="@color/black_40_opacity"
                     android:textColor="@color/black"
+                    android:textColorHint="@color/black_40_opacity"
                     android:textSize="14dp" />
 
             </RelativeLayout>

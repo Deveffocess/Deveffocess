@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+    <LinearLayout
+        android:id="@+id/rlMain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp">
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvProductNameLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/barlow_bold"
+                android:maxLength="60"
+                android:text="@string/product_title"
+                android:textColor="@color/livo_black_30_opacity"
+                android:textSize="14dp" />
+
+            <TextView
+                android:id="@+id/tvProductNameCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/barlow_medium"
+                android:gravity="end"
+                android:text="@string/charaters"
+                android:textColor="@color/livo_black_30_opacity"
+                android:textSize="14dp" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/etProductName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:ems="10"
+            android:fontFamily="@font/barlow_bold"
+            android:hint=""
+            android:inputType="textCapWords"
+            android:maxLength="60"
+            android:maxLines="1"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            app:backgroundTint="@color/grey_300"
+            android:textCursorDrawable="@drawable/cursor_drawable"
+            android:textSize="18dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvProductHeight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/barlow_bold"
+                    android:text="@string/height"
+                    android:textColor="@color/livo_black_30_opacity"
+                    android:textSize="14dp" />
+
+                <RelativeLayout
+                    android:id="@+id/rlProductHeight"
+                    android:layout_width="match_parent"
+                    android:gravity="bottom"
+                    android:layout_height="35dp">
+
+                <EditText
+                    android:id="@+id/etHeight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:fontFamily="@font/barlow_bold"
+                    android:hint="      "
+                    android:inputType="phone"
+                    android:maxLength="5"
+                    android:maxLines="1"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="18dp" />
+
+
+                    <TextView
+                        android:id="@+id/tvHeightUnit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="5dp"
+                        android:layout_toEndOf="@+id/etHeight"
+                        android:fontFamily="@font/barlow_bold"
+                        android:text="cm"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="5dp"
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/livo_black_20_opacity"
+                        android:textSize="14dp" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/etWeight"
+                    android:layout_marginTop="2dp"
+                    android:background="@color/livo_light_grey" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvProductDepth"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/barlow_bold"
+                    android:text="@string/depth"
+                    android:textColor="@color/livo_black_30_opacity"
+                    android:textSize="14dp"/>
+
+                <RelativeLayout
+                    android:id="@+id/rlProductDepth"
+                    android:layout_width="match_parent"
+                    android:gravity="bottom"
+                    android:layout_height="35dp">
+
+                    <EditText
+                        android:id="@+id/etDepth"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:fontFamily="@font/barlow_bold"
+                        android:hint="      "
+                        android:inputType="phone"
+                        android:maxLength="5"
+                        android:maxLines="1"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
+                        android:textSize="18dp" />
+
+
+                    <TextView
+                        android:id="@+id/tvDepthUnit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="5dp"
+                        android:layout_toEndOf="@+id/etDepth"
+                        android:fontFamily="@font/barlow_bold"
+                        android:text="cm"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="5dp"
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/livo_black_20_opacity"
+                        android:textSize="14dp" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/etWeight"
+                    android:layout_marginTop="2dp"
+                    android:background="@color/livo_light_grey" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvProductWidth"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/barlow_bold"
+                    android:text="@string/width"
+                    android:textColor="@color/livo_black_30_opacity"
+                    android:textSize="14dp" />
+
+                <RelativeLayout
+                    android:id="@+id/rlProductWidth"
+                    android:layout_width="match_parent"
+                    android:gravity="bottom"
+                    android:layout_height="35dp">
+
+                    <EditText
+                        android:id="@+id/etWidth"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:fontFamily="@font/barlow_bold"
+                        android:hint="      "
+                        android:inputType="phone"
+                        android:maxLength="5"
+                        android:maxLines="1"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
+                        android:textSize="18dp" />
+
+
+                    <TextView
+                        android:id="@+id/tvWidthUnit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="5dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="5dp"
+                        android:layout_toEndOf="@+id/etWidth"
+                        android:fontFamily="@font/barlow_bold"
+                        android:text="cm"
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/livo_black_20_opacity"
+                        android:textSize="14dp" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/etWeight"
+                    android:layout_marginTop="2dp"
+                    android:background="@color/livo_light_grey" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvProductWeight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/barlow_bold"
+                    android:text="@string/weight"
+                    android:textColor="@color/livo_black_30_opacity"
+                    android:textSize="14dp" />
+
+                <RelativeLayout
+                    android:id="@+id/rlProductWeight"
+                    android:layout_width="match_parent"
+                    android:gravity="bottom"
+                    android:layout_height="35dp">
+
+                    <EditText
+                        android:id="@+id/etWeight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:fontFamily="@font/barlow_bold"
+                        android:hint="      "
+                        android:inputType="phone"
+                        android:maxLength="5"
+                        android:maxLines="1"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
+                        android:textSize="18dp" />
+
+
+                    <TextView
+                        android:id="@+id/tvWeightUnit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="5dp"
+                        android:layout_toEndOf="@+id/etWeight"
+                        android:fontFamily="@font/barlow_bold"
+                        android:text="kg"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="5dp"
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/livo_black_20_opacity"
+                        android:textSize="14dp" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/etWeight"
+                    android:layout_marginTop="2dp"
+                    android:background="@color/livo_light_grey" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlTwoPeople"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rlWidthWeight"
+            android:layout_marginTop="40dp">
+
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:layout_centerHorizontal="true"
+                android:elevation="1dp"
+                android:src="@drawable/two_people_image" />
+
+
+            <RelativeLayout
+                android:id="@+id/rl2PeopleInternal"
+                android:layout_width="match_parent"
+                android:layout_height="145dp"
+                android:layout_marginTop="95dp"
+                android:background="@drawable/grey_round_shape_with_less_corners"
+                android:padding="15dp">
+
+
+                <TextView
+                    android:id="@+id/tvTwoPeopleLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:fontFamily="@font/barlow_bold"
+                    android:text="@string/_2_people_needed"
+                    android:textColor="@color/black"
+                    android:textSize="18dp" />
+
+                <Switch
+                    android:id="@+id/customSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginEnd="5dp"
+                    android:checked="false"
+                    android:scaleX="1.3"
+                    android:scaleY="1.3"
+                    android:thumb="@drawable/thumb_blue"
+                    app:switchPadding="10dp"
+                    app:track="@drawable/track_grey" />
+
+
+            </RelativeLayout>
+        </RelativeLayout>
+    </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>

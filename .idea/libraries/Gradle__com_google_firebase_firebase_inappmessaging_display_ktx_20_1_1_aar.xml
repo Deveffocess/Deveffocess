@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="Gradle: com.google.firebase:firebase-inappmessaging-display-ktx:20.1.1@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/4ffef6cc50b4a589e350e532c43adaa3/transformed/jetified-firebase-inappmessaging-display-ktx-20.1.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/a742efa4dbaa862e2342397f11ee4d69/transformed/jetified-firebase-inappmessaging-display-ktx-20.1.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/a742efa4dbaa862e2342397f11ee4d69/transformed/jetified-firebase-inappmessaging-display-ktx-20.1.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/a742efa4dbaa862e2342397f11ee4d69/transformed/jetified-firebase-inappmessaging-display-ktx-20.1.1/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.firebase/firebase-inappmessaging-display-ktx/20.1.1/3f0a211fe2ebdeaf1e0ccdc284deb37131d1c526/firebase-inappmessaging-display-ktx-20.1.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.firebase/firebase-inappmessaging-display-ktx/20.1.1/94d889451aed2392b6d79728965ea50de997907c/firebase-inappmessaging-display-ktx-20.1.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

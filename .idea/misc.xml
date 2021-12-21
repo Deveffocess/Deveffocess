@@ -3,82 +3,172 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Livo/app/src/main/res/drawable-v24/application_settings.xml" value="0.1703125" />
         <entry key="..\:/Livo/app/src/main/res/drawable-v24/black_20_round_shape_5.xml" value="0.1925925925925926" />
+        <entry key="..\:/Livo/app/src/main/res/drawable-v24/black_40_round_shape_5.xml" value="0.1703125" />
+        <entry key="..\:/Livo/app/src/main/res/drawable-v24/bottom_round_top_square_blue_shape.xml" value="0.262037037037037" />
         <entry key="..\:/Livo/app/src/main/res/drawable-v24/chat_inactive.xml" value="0.15" />
+        <entry key="..\:/Livo/app/src/main/res/drawable-v24/edit_box_background_shape.xml" value="0.262037037037037" />
+        <entry key="..\:/Livo/app/src/main/res/drawable-v24/faq.xml" value="0.262037037037037" />
+        <entry key="..\:/Livo/app/src/main/res/drawable-v24/grey_date_shape.xml" value="0.18125" />
+        <entry key="..\:/Livo/app/src/main/res/drawable-v24/grey_f2f2f2_round_shape.xml" value="0.21203703703703702" />
         <entry key="..\:/Livo/app/src/main/res/drawable-v24/grey_round_shape.xml" value="0.1925925925925926" />
         <entry key="..\:/Livo/app/src/main/res/drawable-v24/grey_round_shape_45_opacity.xml" value="0.1925925925925926" />
         <entry key="..\:/Livo/app/src/main/res/drawable-v24/grey_square_shape.xml" value="0.14635416666666667" />
+        <entry key="..\:/Livo/app/src/main/res/drawable-v24/help_support.xml" value="0.262037037037037" />
         <entry key="..\:/Livo/app/src/main/res/drawable-v24/home_inactive.xml" value="0.15" />
+        <entry key="..\:/Livo/app/src/main/res/drawable-v24/ic_done_white_16dp.xml" value="0.2222222222222222" />
         <entry key="..\:/Livo/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2212962962962963" />
         <entry key="..\:/Livo/app/src/main/res/drawable-v24/input_round_shape.xml" value="0.15677083333333333" />
         <entry key="..\:/Livo/app/src/main/res/drawable-v24/listings_inactive.xml" value="0.15" />
+        <entry key="..\:/Livo/app/src/main/res/drawable-v24/payment.xml" value="0.262037037037037" />
         <entry key="..\:/Livo/app/src/main/res/drawable-v24/phone.xml" value="0.14635416666666667" />
         <entry key="..\:/Livo/app/src/main/res/drawable-v24/profile_inactive.xml" value="0.15" />
         <entry key="..\:/Livo/app/src/main/res/drawable-v24/red_circle_border_shape.xml" value="0.2712820512820513" />
+        <entry key="..\:/Livo/app/src/main/res/drawable-v24/red_date_shape.xml" value="0.16302083333333334" />
         <entry key="..\:/Livo/app/src/main/res/drawable-v24/red_right_round_shape.xml" value="0.14635416666666667" />
+        <entry key="..\:/Livo/app/src/main/res/drawable-v24/red_round_shap.xml" value="0.2" />
+        <entry key="..\:/Livo/app/src/main/res/drawable-v24/refer_earn.xml" value="0.262037037037037" />
+        <entry key="..\:/Livo/app/src/main/res/drawable-v24/selected_date_shape.xml" value="0.16302083333333334" />
+        <entry key="..\:/Livo/app/src/main/res/drawable-v24/settings_profile.xml" value="0.262037037037037" />
+        <entry key="..\:/Livo/app/src/main/res/drawable-v24/share.xml" value="0.262037037037037" />
         <entry key="..\:/Livo/app/src/main/res/drawable-v24/white_circular_shape.xml" value="0.2712820512820513" />
         <entry key="..\:/Livo/app/src/main/res/drawable-v24/white_fill_black_10_stroke_lesser_round.xml" value="0.14635416666666667" />
+        <entry key="..\:/Livo/app/src/main/res/drawable-v24/white_fill_black_stroke_shape.xml" value="0.21203703703703702" />
         <entry key="..\:/Livo/app/src/main/res/drawable-v24/white_round_shape.xml" value="0.2712820512820513" />
-        <entry key="..\:/Livo/app/src/main/res/drawable-v24/white_round_shape_bottom_square.xml" value="0.14635416666666667" />
+        <entry key="..\:/Livo/app/src/main/res/drawable-v24/white_round_shape_bottom_square.xml" value="0.264" />
         <entry key="..\:/Livo/app/src/main/res/drawable-v24/white_square_shape.xml" value="0.1953125" />
+        <entry key="..\:/Livo/app/src/main/res/drawable/arrow_right.xml" value="0.1703125" />
         <entry key="..\:/Livo/app/src/main/res/drawable/backward.xml" value="0.225" />
+        <entry key="..\:/Livo/app/src/main/res/drawable/black_extra_round_shape.xml" value="0.1703125" />
+        <entry key="..\:/Livo/app/src/main/res/drawable/black_round_6.xml" value="0.1703125" />
+        <entry key="..\:/Livo/app/src/main/res/drawable/black_round_shape.xml" value="0.1703125" />
+        <entry key="..\:/Livo/app/src/main/res/drawable/black_round_shape_less_corners.xml" value="0.23796296296296296" />
         <entry key="..\:/Livo/app/src/main/res/drawable/black_round_shape_more_less_corners.xml" value="0.16875" />
+        <entry key="..\:/Livo/app/src/main/res/drawable/blue_gradient.xml" value="0.1703125" />
+        <entry key="..\:/Livo/app/src/main/res/drawable/blue_round_shape.xml" value="0.1703125" />
         <entry key="..\:/Livo/app/src/main/res/drawable/blue_round_shape_45_opacity.xml" value="0.14635416666666667" />
+        <entry key="..\:/Livo/app/src/main/res/drawable/bottom_square_white_round_shape.xml" value="0.16927083333333334" />
         <entry key="..\:/Livo/app/src/main/res/drawable/button_grey_ripple_effect.xml" value="0.14322916666666666" />
         <entry key="..\:/Livo/app/src/main/res/drawable/button_red_rippel_effect.xml" value="0.2015625" />
         <entry key="..\:/Livo/app/src/main/res/drawable/circle_blue.xml" value="0.16875" />
         <entry key="..\:/Livo/app/src/main/res/drawable/circle_green.xml" value="0.165625" />
+        <entry key="..\:/Livo/app/src/main/res/drawable/cursor_drawable.xml" value="0.2755208333333333" />
         <entry key="..\:/Livo/app/src/main/res/drawable/default_dot.xml" value="0.24074074074074073" />
         <entry key="..\:/Livo/app/src/main/res/drawable/filter.xml" value="0.24074074074074073" />
+        <entry key="..\:/Livo/app/src/main/res/drawable/flag.xml" value="0.23796296296296296" />
+        <entry key="..\:/Livo/app/src/main/res/drawable/forward.xml" value="0.23333333333333334" />
+        <entry key="..\:/Livo/app/src/main/res/drawable/green_circle_shape.xml" value="0.2755208333333333" />
+        <entry key="..\:/Livo/app/src/main/res/drawable/green_round_shape.xml" value="0.23796296296296296" />
+        <entry key="..\:/Livo/app/src/main/res/drawable/grey_circle_shape.xml" value="0.1703125" />
+        <entry key="..\:/Livo/app/src/main/res/drawable/grey_image_shape.xml" value="0.1703125" />
         <entry key="..\:/Livo/app/src/main/res/drawable/grey_round_shape_more_less_corners.xml" value="0.16875" />
-        <entry key="..\:/Livo/app/src/main/res/drawable/grey_round_shape_with_less_corners.xml" value="0.16875" />
+        <entry key="..\:/Livo/app/src/main/res/drawable/grey_round_shape_with_less_corners.xml" value="0.264" />
         <entry key="..\:/Livo/app/src/main/res/drawable/grey_square_stroke.xml" value="0.2015625" />
         <entry key="..\:/Livo/app/src/main/res/drawable/ic_baseline_arrow_upward_24.xml" value="0.12552083333333333" />
+        <entry key="..\:/Livo/app/src/main/res/drawable/ic_baseline_delete_24.xml" value="0.2712820512820513" />
+        <entry key="..\:/Livo/app/src/main/res/drawable/ic_dot.xml" value="0.24537037037037038" />
         <entry key="..\:/Livo/app/src/main/res/drawable/ic_launcher_background.xml" value="0.15677083333333333" />
         <entry key="..\:/Livo/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.2212962962962963" />
         <entry key="..\:/Livo/app/src/main/res/drawable/ic_logosvg.xml" value="0.22685185185185186" />
         <entry key="..\:/Livo/app/src/main/res/drawable/ic_no_listing.xml" value="0.24074074074074073" />
+        <entry key="..\:/Livo/app/src/main/res/drawable/icon_time.xml" value="0.1625" />
+        <entry key="..\:/Livo/app/src/main/res/drawable/line_strock.xml" value="0.23148148148148148" />
+        <entry key="..\:/Livo/app/src/main/res/drawable/logo_dim.xml" value="0.1703125" />
         <entry key="..\:/Livo/app/src/main/res/drawable/pickup_dropoff_listing_bg.xml" value="0.1859375" />
         <entry key="..\:/Livo/app/src/main/res/drawable/red_circle_border_shape.xml" value="0.152" />
+        <entry key="..\:/Livo/app/src/main/res/drawable/red_image_shape.xml" value="0.2712820512820513" />
+        <entry key="..\:/Livo/app/src/main/res/drawable/referral_bg.xml" value="0.18854166666666666" />
+        <entry key="..\:/Livo/app/src/main/res/drawable/rotate.xml" value="0.23148148148148148" />
         <entry key="..\:/Livo/app/src/main/res/drawable/selected_dot.xml" value="0.8800000000000001" />
+        <entry key="..\:/Livo/app/src/main/res/drawable/slidetoact_animated_ic_check.xml" value="0.1703125" />
+        <entry key="..\:/Livo/app/src/main/res/drawable/slidetoact_ic_arrow.xml" value="0.1703125" />
         <entry key="..\:/Livo/app/src/main/res/drawable/tab_selector.xml" value="0.136" />
         <entry key="..\:/Livo/app/src/main/res/drawable/thumb_blue.xml" value="0.16875" />
         <entry key="..\:/Livo/app/src/main/res/drawable/thumb_green.xml" value="0.165625" />
+        <entry key="..\:/Livo/app/src/main/res/drawable/top_square_bottom_round_white_shape.xml" value="0.23333333333333334" />
         <entry key="..\:/Livo/app/src/main/res/drawable/track_green.xml" value="0.165625" />
         <entry key="..\:/Livo/app/src/main/res/drawable/track_grey.xml" value="0.16875" />
         <entry key="..\:/Livo/app/src/main/res/drawable/whit_round_shape_top_square.xml" value="0.24074074074074073" />
         <entry key="..\:/Livo/app/src/main/res/drawable/white_bottom_square_shape.xml" value="0.24074074074074073" />
+        <entry key="..\:/Livo/app/src/main/res/drawable/white_circular_shape.xml" value="0.146875" />
+        <entry key="..\:/Livo/app/src/main/res/drawable/white_date_shape.xml" value="0.1296875" />
         <entry key="..\:/Livo/app/src/main/res/drawable/white_fill_black_10_border.xml" value="0.24074074074074073" />
+        <entry key="..\:/Livo/app/src/main/res/drawable/white_fill_with_black_border.xml" value="0.146875" />
+        <entry key="..\:/Livo/app/src/main/res/drawable/white_less_round_shape.xml" value="0.1703125" />
+        <entry key="..\:/Livo/app/src/main/res/drawable/white_round_less_opacity.xml" value="0.18854166666666666" />
         <entry key="..\:/Livo/app/src/main/res/drawable/white_round_shape.xml" value="0.15677083333333333" />
-        <entry key="..\:/Livo/app/src/main/res/drawable/white_round_shape_5.xml" value="0.15" />
+        <entry key="..\:/Livo/app/src/main/res/drawable/white_round_shape_5.xml" value="0.264" />
         <entry key="..\:/Livo/app/src/main/res/drawable/white_square_shape.xml" value="0.2212962962962963" />
+        <entry key="..\:/Livo/app/src/main/res/layout/activity_application_settings.xml" value="0.259375" />
+        <entry key="..\:/Livo/app/src/main/res/layout/activity_faqactivity.xml" value="0.2552083333333333" />
+        <entry key="..\:/Livo/app/src/main/res/layout/activity_help_and_support.xml" value="0.2552083333333333" />
         <entry key="..\:/Livo/app/src/main/res/layout/activity_home.xml" value="0.4" />
+        <entry key="..\:/Livo/app/src/main/res/layout/activity_listing_ongoing_state.xml" value="0.2" />
         <entry key="..\:/Livo/app/src/main/res/layout/activity_login.xml" value="0.18957771787960467" />
         <entry key="..\:/Livo/app/src/main/res/layout/activity_main.xml" value="0.259375" />
+        <entry key="..\:/Livo/app/src/main/res/layout/activity_new_listing.xml" value="0.24544110399211433" />
         <entry key="..\:/Livo/app/src/main/res/layout/activity_notifications.xml" value="0.264" />
         <entry key="..\:/Livo/app/src/main/res/layout/activity_product_detail.xml" value="0.2" />
+        <entry key="..\:/Livo/app/src/main/res/layout/activity_profile_setting.xml" value="0.264" />
+        <entry key="..\:/Livo/app/src/main/res/layout/activity_referral.xml" value="0.264" />
+        <entry key="..\:/Livo/app/src/main/res/layout/activity_search.xml" value="0.264" />
         <entry key="..\:/Livo/app/src/main/res/layout/activity_splash_screen.xml" value="0.152" />
-        <entry key="..\:/Livo/app/src/main/res/layout/bottom_sheet_dashboard_filter.xml" value="0.4" />
+        <entry key="..\:/Livo/app/src/main/res/layout/activity_transporter_offers.xml" value="0.2" />
+        <entry key="..\:/Livo/app/src/main/res/layout/bottom_dailog_sheet_singlelisting_price.xml" value="0.259375" />
+        <entry key="..\:/Livo/app/src/main/res/layout/bottom_dailog_sheet_singlelisting_sendoffer.xml" value="0.264" />
+        <entry key="..\:/Livo/app/src/main/res/layout/bottom_sheet_dashboard_filter.xml" value="0.2" />
         <entry key="..\:/Livo/app/src/main/res/layout/bottom_sheet_listing_filter.xml" value="0.2" />
+        <entry key="..\:/Livo/app/src/main/res/layout/bottom_sheet_listing_ongoing_state_payment_detail.xml" value="0.259375" />
+        <entry key="..\:/Livo/app/src/main/res/layout/bottom_sheet_listing_suspended.xml" value="0.2" />
+        <entry key="..\:/Livo/app/src/main/res/layout/bottom_sheet_otp_code_profile.xml" value="0.259375" />
+        <entry key="..\:/Livo/app/src/main/res/layout/bottom_sheet_peoduct_delete_confirmation.xml" value="0.264" />
+        <entry key="..\:/Livo/app/src/main/res/layout/bottom_sheet_peoduct_delete_error.xml" value="0.4" />
+        <entry key="..\:/Livo/app/src/main/res/layout/bottom_sheet_peoduct_delete_successfully.xml" value="0.4" />
+        <entry key="..\:/Livo/app/src/main/res/layout/bottom_sheet_take_permission.xml" value="0.264" />
+        <entry key="..\:/Livo/app/src/main/res/layout/bottom_sheet_update_available.xml" value="0.2" />
+        <entry key="..\:/Livo/app/src/main/res/layout/bottom_sheetlanguagecode.xml" value="0.264" />
         <entry key="..\:/Livo/app/src/main/res/layout/dialog_country_code_selection.xml" value="0.264" />
         <entry key="..\:/Livo/app/src/main/res/layout/dialog_language.xml" value="0.259375" />
         <entry key="..\:/Livo/app/src/main/res/layout/dialog_progress.xml" value="0.1421875" />
+        <entry key="..\:/Livo/app/src/main/res/layout/dialog_report.xml" value="0.4" />
+        <entry key="..\:/Livo/app/src/main/res/layout/discard_popup.xml" value="0.16510416666666666" />
         <entry key="..\:/Livo/app/src/main/res/layout/flag.xml" value="0.15260416666666668" />
+        <entry key="..\:/Livo/app/src/main/res/layout/fragment_add_images.xml" value="0.264" />
+        <entry key="..\:/Livo/app/src/main/res/layout/fragment_add_info.xml" value="0.264" />
         <entry key="..\:/Livo/app/src/main/res/layout/fragment_common.xml" value="0.13722826086956522" />
+        <entry key="..\:/Livo/app/src/main/res/layout/fragment_drop_off.xml" value="0.264" />
         <entry key="..\:/Livo/app/src/main/res/layout/fragment_listing.xml" value="0.3261205564142195" />
         <entry key="..\:/Livo/app/src/main/res/layout/fragment_message.xml" value="0.18541666666666667" />
-        <entry key="..\:/Livo/app/src/main/res/layout/fragment_my_listing.xml" value="0.4" />
-        <entry key="..\:/Livo/app/src/main/res/layout/fragment_profile.xml" value="0.17135416666666667" />
+        <entry key="..\:/Livo/app/src/main/res/layout/fragment_my_listing.xml" value="0.2" />
+        <entry key="..\:/Livo/app/src/main/res/layout/fragment_pickup.xml" value="0.176" />
+        <entry key="..\:/Livo/app/src/main/res/layout/fragment_product_images.xml" value="0.14947916666666666" />
+        <entry key="..\:/Livo/app/src/main/res/layout/fragment_profile.xml" value="0.2" />
+        <entry key="..\:/Livo/app/src/main/res/layout/fragment_publish.xml" value="0.2" />
+        <entry key="..\:/Livo/app/src/main/res/layout/fragment_second.xml" value="0.259375" />
+        <entry key="..\:/Livo/app/src/main/res/layout/green_round_shape.xml" value="0.259375" />
+        <entry key="..\:/Livo/app/src/main/res/layout/info_window_layout.xml" value="0.176" />
         <entry key="..\:/Livo/app/src/main/res/layout/item_loading.xml" value="0.13020833333333334" />
+        <entry key="..\:/Livo/app/src/main/res/layout/listing_data_uploading_popup.xml" value="0.264" />
+        <entry key="..\:/Livo/app/src/main/res/layout/listing_success_popup.xml" value="0.2" />
+        <entry key="..\:/Livo/app/src/main/res/layout/offer_sent_successfully_popup.xml" value="0.14635416666666667" />
+        <entry key="..\:/Livo/app/src/main/res/layout/pop_up_camera_view.xml" value="0.264" />
+        <entry key="..\:/Livo/app/src/main/res/layout/pop_up_pickup_dropoff_image.xml" value="0.264" />
         <entry key="..\:/Livo/app/src/main/res/layout/row_country_code.xml" value="0.4144736842105263" />
+        <entry key="..\:/Livo/app/src/main/res/layout/row_date.xml" value="0.264" />
         <entry key="..\:/Livo/app/src/main/res/layout/row_language_options.xml" value="0.259375" />
         <entry key="..\:/Livo/app/src/main/res/layout/row_listing.xml" value="0.2" />
         <entry key="..\:/Livo/app/src/main/res/layout/row_my_listing_search.xml" value="0.4" />
         <entry key="..\:/Livo/app/src/main/res/layout/row_mylisting_new.xml" value="0.4" />
         <entry key="..\:/Livo/app/src/main/res/layout/row_notifications.xml" value="0.3698630136986301" />
         <entry key="..\:/Livo/app/src/main/res/layout/row_toast.xml" value="0.4" />
+        <entry key="..\:/Livo/app/src/main/res/layout/row_transporter_offers.xml" value="0.264" />
         <entry key="..\:/Livo/app/src/main/res/layout/shimmer_chats_layout.xml" value="0.259375" />
+        <entry key="..\:/Livo/app/src/main/res/layout/shimmer_faq.xml" value="0.2552083333333333" />
         <entry key="..\:/Livo/app/src/main/res/layout/shimmer_my_listing_layout.xml" value="0.259375" />
+        <entry key="..\:/Livo/app/src/main/res/layout/thankyou_popup.xml" value="0.15416666666666667" />
+        <entry key="..\:/Livo/app/src/main/res/layout/vertical_stepper_item_view_layout.xml" value="0.264" />
+        <entry key="..\:/Livo/app/src/main/res/layout/view_proswipebtn.xml" value="0.15416666666666667" />
         <entry key="..\:/Livo/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.24074074074074073" />
       </map>
     </option>

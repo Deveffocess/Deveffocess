@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
 }
 
 android {
@@ -10,8 +12,8 @@ android {
         applicationId "com.livo.nuo"
         minSdk 21
         targetSdk 31
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.0.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -34,6 +36,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
@@ -43,6 +48,11 @@ dependencies {
     implementation 'com.google.android.material:material:1.4.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.1'
     implementation 'com.android.support:cardview-v7:28.0.0'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
+    implementation 'com.google.firebase:firebase-crashlytics-ktx:18.2.4'
+    implementation 'com.google.firebase:firebase-analytics-ktx:20.0.0'
+    implementation 'com.google.firebase:firebase-inappmessaging-display-ktx:20.1.1'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
@@ -112,25 +122,31 @@ dependencies {
     implementation 'io.reactivex:rxandroid:1.2.1'
     implementation 'io.reactivex:rxjava:1.2.1'
 
-
     implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
 
     //custom camera
     implementation 'com.github.duanhong169:picker-view:1.0.0'
     implementation 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.5@aar'
 
-  /*  implementation 'com.google.android.gms:play-services-auth:19.0.0'
+
+    implementation 'com.google.android.gms:play-services-auth:19.0.0'
     implementation 'com.google.firebase:firebase-auth:21.0.1'
     implementation 'com.google.firebase:firebase-core:19.0.0'
     implementation platform('com.google.firebase:firebase-bom:26.1.1')
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-crashlytics'
+    implementation 'com.google.firebase:firebase-messaging:22.0.0'
 
-    implementation 'com.google.firebase:firebase-messaging:22.0.0'*/
 
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
+    implementation 'com.github.koushikcse:SimplePlaceSearch:V1.1'
 
+    // Stripe Android SDK
+    implementation 'com.stripe:stripe-android:19.0.0'
+
+    implementation 'com.pubnub:pubnub-kotlin:6.3.0'
 
     androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.1', {
         exclude group: 'com.android.support', module: 'support-annotations'

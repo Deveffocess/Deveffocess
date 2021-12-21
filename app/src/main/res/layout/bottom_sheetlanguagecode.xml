@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <RelativeLayout
+        android:id="@+id/rlMain"
+        android:layout_width="match_parent"
+        android:background="@drawable/white_round_shape"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/rlMainInternal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/rlView"
+                    android:layout_width="60dp"
+                    android:layout_height="5dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/grey_round_shape_45_opacity" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="30dp"
+                    android:gravity="center"
+                    android:layout_marginEnd="20dp">
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:layout_marginEnd="10dp"
+                        android:orientation="vertical">
+
+                       <!-- <com.google.android.material.card.MaterialCardView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:cardCornerRadius="10dp"
+                            android:id="@+id/cvEnglish"
+                            app:cardElevation="0dp">
+
+                            </com.google.android.material.card.MaterialCardView> -->
+
+                            <com.livo.nuo.lib.roundImageView.RoundedImageView
+                                android:id="@+id/imgEnglishLang"
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:src="@drawable/flag_eng"
+                                app:riv_corner_radius="12dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:layout_marginEnd="10dp"
+                        android:orientation="vertical">
+
+                        <com.livo.nuo.lib.roundImageView.RoundedImageView
+                            android:id="@+id/imgDanishLang"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:src="@drawable/flag_dn"
+                            app:riv_corner_radius="12dp" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <com.livo.nuo.lib.roundImageView.RoundedImageView
+                            android:id="@+id/imgDenmarkLang"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/flag_sv"
+                            app:riv_corner_radius="12dp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="horizontal">
+
+
+                        <TextView
+                            android:id="@+id/tvEnglishLang"
+                            android:layout_width="90dp"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/barlow_bold"
+                            android:text="English(UK)"
+                            android:layout_weight="1"
+                            android:textAlignment="center" />
+
+                        <TextView
+                            android:id="@+id/tvDanishLang"
+                            android:layout_width="90dp"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/barlow_bold"
+                            android:text="Danish"
+                            android:layout_weight="1"
+                            android:textAlignment="center"
+                            app:riv_corner_radius="10dp" />
+
+                    <TextView
+                        android:id="@+id/tvDenmarkLang"
+                        android:layout_width="90dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/barlow_bold"
+                        android:text="Denmark"
+                        android:textAlignment="center"
+                        app:riv_corner_radius="10dp" />
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:padding="20dp">
+
+                    <LinearLayout
+                        android:id="@+id/llCancel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/grey_round_shape_45_opacity"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="15dp">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="1dp"
+                            android:layout_marginBottom="1dp"
+                            android:fontFamily="@font/barlow_bold"
+                            android:text="@string/cancel"
+                            android:textAlignment="center"
+                            android:textColor="@color/white"
+                            android:textSize="16dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llConfirmChange"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/blue_round_shape"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="15dp">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="1dp"
+                            android:layout_marginBottom="1dp"
+                            android:fontFamily="@font/barlow_bold"
+                            android:text="Confirm Change"
+                            android:textAlignment="center"
+                            android:textColor="@color/white"
+                            android:textSize="16dp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+</layout>

@@ -18,11 +18,11 @@
 
             <com.livo.nuo.lib.roundImageView.RoundedImageView
                 android:id="@+id/imgProductImage"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:alpha="0.2"
                 android:src="@android:color/darker_gray"
-                app:riv_corner_radius="5dp"
-                android:layout_width="50dp"
-                android:layout_height="50dp"/>
+                app:riv_corner_radius="5dp" />
 
 
             <com.livo.nuo.lib.roundImageView.RoundedImageView

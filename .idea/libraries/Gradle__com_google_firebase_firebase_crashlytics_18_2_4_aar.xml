@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="Gradle: com.google.firebase:firebase-crashlytics:18.2.4@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/0c1edb30fe5a89a81d2f551c1cda37d5/transformed/jetified-firebase-crashlytics-18.2.4/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/62593582015f57db6a8710a47dbaa885/transformed/jetified-firebase-crashlytics-18.2.4/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/0772dc76b629e6e4096557441595a35b/transformed/jetified-firebase-crashlytics-18.2.4/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/e38931703b2261853ed22d0cc5d4b74c/transformed/jetified-firebase-crashlytics-18.2.4/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/e38931703b2261853ed22d0cc5d4b74c/transformed/jetified-firebase-crashlytics-18.2.4/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/e38931703b2261853ed22d0cc5d4b74c/transformed/jetified-firebase-crashlytics-18.2.4/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.firebase/firebase-crashlytics/18.2.4/34cd657d1e971cc208df413dc2e677aeb061f243/firebase-crashlytics-18.2.4-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES />
+  </library>
+</component>

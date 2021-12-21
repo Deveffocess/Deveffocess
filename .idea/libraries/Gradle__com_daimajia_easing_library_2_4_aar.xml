@@ -1,9 +1,14 @@
 <component name="libraryTable">
   <library name="Gradle: com.daimajia.easing:library:2.4@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/cc2067bc53a46e1efe367e9c56e7b5b0/transformed/jetified-library-2.4/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/cc2067bc53a46e1efe367e9c56e7b5b0/transformed/jetified-library-2.4/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/cc2067bc53a46e1efe367e9c56e7b5b0/transformed/jetified-library-2.4/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/7c223432b48dfc66320fc45126d57e44/transformed/jetified-library-2.4/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/d92f2e573d0e6de3c91ca71ffe58438c/transformed/jetified-library-2.4/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/a4c981c035376b945c2f36a35c9986f7/transformed/jetified-library-2.4/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/7b99dd92f8828d5b74aecd583cd6006e/transformed/jetified-library-2.4/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/3a2700ff1d2aec2fd6ca51cb9d103796/transformed/jetified-library-2.4/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/3a2700ff1d2aec2fd6ca51cb9d103796/transformed/jetified-library-2.4/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/3a2700ff1d2aec2fd6ca51cb9d103796/transformed/jetified-library-2.4/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.daimajia.easing/library/2.4/a344bf18448152d814ba2eb0fb55d70addb04b2d/library-2.4-javadoc.jar!/" />

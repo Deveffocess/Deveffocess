@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <fragment android:id="@+id/autocomplete_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+        />
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rl4Main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+
+        <RelativeLayout
+            android:id="@+id/rlMainMap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/white_less_round_shape"
+            android:elevation="10dp">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/fmMap1"
+                android:layout_width="match_parent"
+                android:layout_height="260dp"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="@null">
+
+                <fragment
+                    android:id="@+id/map1"
+                    class="com.google.android.gms.maps.SupportMapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="260dp" />
+
+            </androidx.cardview.widget.CardView>
+
+            <!--                <androidx.appcompat.widget.AppCompatImageView-->
+            <!--                    android:id="@+id/imgGoogleMap"-->
+            <!--                    android:layout_width="300dp"-->
+            <!--                    android:layout_height="200dp"-->
+            <!--                    android:layout_margin="10dp"/>-->
+
+            <RelativeLayout
+                android:id="@+id/rlSearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/fmMap1"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgSearch"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/search_add_product"
+                    android:tint="@color/colorPrimaryDark" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/tvEnterPickUpAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="15dp"
+                    android:layout_toEndOf="@+id/imgSearch"
+                    android:background="@null"
+                    android:focusable="false"
+                    android:fontFamily="@font/barlow_semibold"
+                    android:gravity="center_vertical"
+                    android:hint="Enter drop-off address"
+                    android:letterSpacing="0.02"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/livo_black_40_opacity"
+                    android:textSize="14dp" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvSubmit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/red_round_shap"
+                    android:fontFamily="@font/barlow_semibold"
+                    android:paddingStart="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="5dp"
+                    android:text="@string/select"
+                    android:textColor="@color/white"
+                    android:textSize="14dp"
+                    android:visibility="visible" />
+
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/nestedScroll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rlMainMap">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvProductNameLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/barlow_bold"
+                        android:text="@string/drop_off_location"
+                        android:textColor="@color/livo_black_30_opacity"
+                        android:textSize="15dp" />
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/etPickupLocation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:background="@null"
+                        android:fontFamily="@font/barlow_medium"
+                        android:hint="- -"
+                        android:enabled="false"
+                        android:inputType="textEmailAddress"
+                        android:maxLines="3"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
+                        android:textSize="14dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvAddressNoteLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/barlow_bold"
+                            android:text="@string/address_note"
+                            android:textColor="@color/livo_black_30_opacity"
+                            android:textSize="15dp" />
+
+                        <TextView
+                            android:id="@+id/tvCharacterCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/barlow_regular"
+                            android:textColor="@color/livo_black_30_opacity"
+                            android:gravity="end"
+                            android:textSize="15dp"
+                            android:text="@string/charaters120" />
+                    </LinearLayout>
+
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/etAddressNote"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:background="@null"
+                        android:fontFamily="@font/barlow_medium"
+                        android:hint="- -"
+                        android:inputType="textCapWords"
+                        android:maxLines="1"
+                        android:paddingBottom="5dp"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
+                        android:textSize="14dp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_below="@+id/etAddressNote"
+                        android:layout_marginTop="2dp"
+                        android:background="@color/livo_black_10_opacity" />
+
+
+                    <TextView
+                        android:id="@+id/tvPickUpDateLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/barlow_bold"
+                        android:letterSpacing="0.03"
+                        android:text="@string/drop_off_date"
+                        android:textColor="@color/livo_black_30_opacity"
+                        android:textSize="15dp" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvDateList"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp" />
+
+                </LinearLayout>
+
+
+
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+
+
+
+    </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>

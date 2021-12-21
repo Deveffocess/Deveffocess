@@ -1,13 +1,10 @@
 package com.livo.nuo.view.home.homefragments
 
 import android.app.Activity
-import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
-import android.graphics.Point
-import android.graphics.Rect
 import android.os.Bundle
 import android.transition.Fade
 import android.util.Log
@@ -58,8 +55,17 @@ import com.livo.nuo.view.notifications.NotificationsActivity
 import androidx.core.app.ActivityOptionsCompat
 
 import androidx.core.view.ViewCompat
+import androidx.core.widget.NestedScrollView
 
-import com.livo.nuo.MainActivity
+import com.livo.nuo.view.home.search.SearchActivity
+import com.livo.nuo.view.listing.NewListingActivity
+import android.view.MotionEvent
+
+import android.view.View.OnTouchListener
+import android.widget.Toast
+import android.view.ViewTreeObserver.OnScrollChangedListener
+
+
 
 
 class MyListingFragment : Fragment() {
@@ -67,11 +73,11 @@ class MyListingFragment : Fragment() {
     private var bannerList = ArrayList<BannerModel>()
     private var productList = ArrayList<ProductModel>()
     private var productViewModel : ProductViewModel? = null
-    var currentPage: Int = PAGE_START
+    var currentPage: Int = 1
     var totalPage = 0
     var layoutManager : LinearLayoutManager? = null
     lateinit var adapter : MyListingAdapter
-    private var loading = true
+    private var loading = false
 
     lateinit var shimmerViewbanner:ShimmerFrameLayout
     lateinit var shimmerViewContainer:ShimmerFrameLayout
@@ -80,14 +86,22 @@ class MyListingFragment : Fragment() {
     lateinit var refreshLayout:RecyclerRefreshLayout
     lateinit var tabsLayout:TabLayout
     lateinit var imgFilter:ImageView
-    lateinit var rlNoDataFound:RelativeLayout
+    lateinit var rlNoDataFound:LinearLayout
     lateinit var rlBottomMain:RelativeLayout
     lateinit var imgNotification:ImageView
+    lateinit var tvMakeListing:TextView
+    lateinit var progressbar:ProgressBar
+
+    lateinit var nsMainScroll:NestedScrollView
+    lateinit var rlMM:RelativeLayout
+    lateinit var rlSearch:RelativeLayout
 
     var userType=""
     var pageNumber=0
     var height=0
     var width=0
+    var has_next=false
+    var numberingpage=0
 
     var MyListingFragment="MyListingFragment"
 
@@ -119,8 +133,12 @@ class MyListingFragment : Fragment() {
         rlNoDataFound=root.findViewById(R.id.rlNoDataFound)
         rlBottomMain=root.findViewById(R.id.rlBottomMain)
         imgNotification=root.findViewById(R.id.imgNotification)
+        rlSearch=root.findViewById(R.id.rlSearch)
+        tvMakeListing=root.findViewById(R.id.tvMakeListing)
+        nsMainScroll=root.findViewById(R.id.nsMainScroll)
+        rlMM=root.findViewById(R.id.rlMM)
+        progressbar=root.findViewById(R.id.progressbar)
         rlNoDataFound.visibility = View.GONE
-
 
         initViews()
 
@@ -173,6 +191,55 @@ class MyListingFragment : Fragment() {
         fillViewPager()
         initImageLoader()
 
+     /*   nsMainScroll.setOnTouchListener(OnTouchListener { v, event ->
+            if (event.action == MotionEvent.ACTION_UP) {
+                val view: View = nsMainScroll.getChildAt(nsMainScroll.getChildCount() - 1)
+                val topDetector: Int = nsMainScroll.getScrollY()
+                val bottomDetector: Int =
+                    view.bottom - (nsMainScroll.getHeight() + nsMainScroll.getScrollY())
+                if (bottomDetector == 0) {
+                    Toast.makeText(
+                        currActivity!!,
+                        "Scroll View bottom reached",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                else if (topDetector <= 0) {
+                    Toast.makeText(currActivity!!, "Scroll View top reached", Toast.LENGTH_SHORT)
+                        .show()
+                }
+                true
+            } else false
+        })*/
+
+
+        nsMainScroll.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+            if (scrollY > oldScrollY) {
+                val view = nsMainScroll.getChildAt(nsMainScroll.getChildCount() - 1) as View
+
+                val diff: Int = view.bottom - (nsMainScroll.getHeight() + nsMainScroll
+                    .getScrollY())
+
+                if (diff == 0) {
+
+                    if (has_next) {
+                        currentPage++
+                        doApiCall()
+                    }  else{}
+                }
+                Log.i("TAG", "Scroll DOWN")
+            }
+            if (scrollY < oldScrollY) {
+                Log.i("TAG", "Scroll UP")
+            }
+            if (scrollY == 0) {
+                Log.i("TAG", "TOP SCROLL")
+            }
+            if (scrollY == v.measuredHeight - v.getChildAt(0).measuredHeight) {
+                Log.i("TAG", "BOTTOM SCROLL")
+            }
+        })
+
         refreshLayout.setRefreshStyle(RecyclerRefreshLayout.RefreshStyle.FLOAT)
         val layoutParams = ViewGroup.LayoutParams(
             DensityUtil.dip2px(activity, 40f).toInt(),
@@ -181,7 +248,7 @@ class MyListingFragment : Fragment() {
         refreshLayout.setRefreshView(MaterialRefreshView(activity), layoutParams)
 
         refreshLayout.setOnRefreshListener {
-            doApiCall()
+            //doApiCall()
             refreshLayout.setRefreshing(false)
         }
 
@@ -211,6 +278,41 @@ class MyListingFragment : Fragment() {
             startActivity(intent, options.toBundle())
 
         })
+
+        rlSearch.setOnClickListener({
+
+            val intent = Intent(currActivity!!, SearchActivity::class.java)
+            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                currActivity!!, rlSearch, ViewCompat.getTransitionName(rlSearch)!!
+            )
+            startActivity(intent, options.toBundle())
+        })
+
+
+      /*  rvListing.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                lastCompletelyVisibleItemPosition =layoutManager!!.findLastVisibleItemPosition()
+                try {
+                    if (dy > 10) {
+                        Toast.makeText(currActivity,lastCompletelyVisibleItemPosition.toString(),Toast.LENGTH_SHORT).show()
+                    }
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }
+                try {
+                    if (lastCompletelyVisibleItemPosition == adapter.itemCount - 1) {
+                        pageNumber++
+                        Toast.makeText(currActivity,lastCompletelyVisibleItemPosition.toString(),Toast.LENGTH_SHORT).show()
+                        //doApiCall()
+                    }
+                }
+             catch (e: JSONException)
+            {
+                e.printStackTrace()
+            }
+          }
+        })*/
 
 
 
@@ -244,18 +346,20 @@ class MyListingFragment : Fragment() {
             editor.commit()
         }
 
+        tvMakeListing.setOnClickListener({
+            var i=Intent(currActivity,NewListingActivity::class.java)
+            startActivity(i)
+        })
 
-//        shimmerViewbanner.visibility = View.VISIBLE
-//        viewpager1.visibility = View.GONE
-//        shimmerViewbanner.startShimmer()
-        //setListener()
-        //setAdapter()
+
         observers()
 
     }
 
     override fun onResume() {
         super.onResume()
+        numberingpage=1
+        currentPage=1
         doApiCall()
     }
 
@@ -268,18 +372,18 @@ class MyListingFragment : Fragment() {
                 var sort_by=pref.getString("sort_by","")
                 var sort_type=pref.getString("sort_type","")
                 var my_bids=pref.getString("my_bids","")
+                var user_type=pref.getString("user_type","")
                 var filter_pref =pref.getString("filter","")
 
-
-                var jsonObject =  JsonObject();
+                var jsonObject =  JsonObject()
                 jsonObject.addProperty("page", currentPage)
                 jsonObject.addProperty("sort_by", sort_by)
                 jsonObject.addProperty("sort_type", sort_type)
-                jsonObject.addProperty("user_type", "sender")
+                jsonObject.addProperty("user_type", user_type)
                 jsonObject.add("filter", filterarray)
                 jsonObject.addProperty("my_bids", my_bids)
 
-                //Log.e("api",jsonObject.toString())
+                Log.e("api",jsonObject.toString())
 
                 it.getUserListings(jsonObject)
 
@@ -453,6 +557,8 @@ class MyListingFragment : Fragment() {
         var sort_by=pref.getString("sort_by","")
         var sort_type=pref.getString("sort_type","")
         var filter_pref =pref.getString("filter","")
+        var user_type=pref.getString("user_type","")
+        var my_bids=pref.getString("my_bids","")
         val editor = pref.edit()
 
 
@@ -464,15 +570,75 @@ class MyListingFragment : Fragment() {
             bottomSheetDashboardFilterBinding.tvExpired.setBackground(currActivity!!.getDrawable(R.drawable.blue_round_shape_45_opacity))
         }
         if (filter_pref?.contains("Completed")== true) {
+            bottomSheetDashboardFilterBinding.tvCompletedTransporter.setBackground(currActivity!!.getDrawable(R.drawable.blue_round_shape_45_opacity))
             bottomSheetDashboardFilterBinding.tvCompleted.setBackground(currActivity!!.getDrawable(R.drawable.blue_round_shape_45_opacity))
         }
         if (filter_pref?.contains("Suspended")== true){
+            bottomSheetDashboardFilterBinding.tvSuspendedTransporter.setBackground(currActivity!!.getDrawable(R.drawable.blue_round_shape_45_opacity))
             bottomSheetDashboardFilterBinding.tvSuspended.setBackground(currActivity!!.getDrawable(R.drawable.blue_round_shape_45_opacity))
         }
         if (filter_pref?.contains("Ongoing")== true) {
+            bottomSheetDashboardFilterBinding.tvOngoingTranspoter.setBackground(currActivity!!.getDrawable(R.drawable.blue_round_shape_45_opacity))
             bottomSheetDashboardFilterBinding.tvOngoing.setBackground(currActivity!!.getDrawable(R.drawable.blue_round_shape_45_opacity))
         }
-        Log.e("kk", filterarray.toString())
+
+
+        if(userType.equals("sender"))
+        {
+            bottomSheetDashboardFilterBinding.cvUsertypeSelection.visibility=View.GONE
+            bottomSheetDashboardFilterBinding.tvSender.setTextColor(Color.BLACK)
+            bottomSheetDashboardFilterBinding.tvSender.setBackground(currActivity!!.getDrawable(R.drawable.white_round_shape_5))
+            bottomSheetDashboardFilterBinding.tvTranspoter.setTextColor(Color.parseColor("#888888"))
+            bottomSheetDashboardFilterBinding.tvTranspoter.setBackground(currActivity!!.getDrawable( R.drawable.black_20_round_shape_5))
+
+            bottomSheetDashboardFilterBinding.rlFirstRow2.visibility=View.VISIBLE
+            bottomSheetDashboardFilterBinding.rlFirstRow3.visibility=View.GONE
+
+            bottomSheetDashboardFilterBinding.lltransporterrow1.visibility=View.GONE
+            bottomSheetDashboardFilterBinding.llsenderrow1.visibility=View.VISIBLE
+        }
+        else{
+
+            if(user_type.equals("sender"))
+            {
+                bottomSheetDashboardFilterBinding.cvUsertypeSelection.visibility=View.VISIBLE
+
+                bottomSheetDashboardFilterBinding.tvSender.setTextColor(Color.BLACK)
+                bottomSheetDashboardFilterBinding.tvSender.setBackground(currActivity!!.getDrawable(R.drawable.white_round_shape_5))
+                bottomSheetDashboardFilterBinding.tvTranspoter.setTextColor(Color.parseColor("#888888"))
+                bottomSheetDashboardFilterBinding.tvTranspoter.setBackground(currActivity!!.getDrawable( R.drawable.black_20_round_shape_5))
+
+                bottomSheetDashboardFilterBinding.rlFirstRow2.visibility=View.VISIBLE
+                bottomSheetDashboardFilterBinding.rlFirstRow3.visibility=View.GONE
+
+                bottomSheetDashboardFilterBinding.lltransporterrow1.visibility=View.GONE
+                bottomSheetDashboardFilterBinding.llsenderrow1.visibility=View.VISIBLE
+            }
+            else{
+                bottomSheetDashboardFilterBinding.cvUsertypeSelection.visibility=View.VISIBLE
+
+                bottomSheetDashboardFilterBinding.tvTranspoter.setTextColor(Color.BLACK)
+                bottomSheetDashboardFilterBinding.tvTranspoter.setBackground(currActivity!!.getDrawable(R.drawable.white_round_shape_5))
+                bottomSheetDashboardFilterBinding.tvSender.setTextColor(Color.parseColor("#888888"))
+                bottomSheetDashboardFilterBinding.tvSender.setBackground(currActivity!!.getDrawable( R.drawable.black_20_round_shape_5))
+
+                bottomSheetDashboardFilterBinding.rlFirstRow2.visibility=View.GONE
+                bottomSheetDashboardFilterBinding.rlFirstRow3.visibility=View.VISIBLE
+
+                bottomSheetDashboardFilterBinding.lltransporterrow1.visibility=View.VISIBLE
+                bottomSheetDashboardFilterBinding.llsenderrow1.visibility=View.GONE
+            }
+
+        }
+
+        if (my_bids.equals("true"))
+        {
+            bottomSheetDashboardFilterBinding.tvPublished.setBackground(currActivity!!.getDrawable( R.drawable.grey_round_shape_45_opacity))
+            bottomSheetDashboardFilterBinding.tvOngoing.setBackground(currActivity!!.getDrawable( R.drawable.grey_round_shape_45_opacity))
+            bottomSheetDashboardFilterBinding.tvCompleted.setBackground(currActivity!!.getDrawable( R.drawable.grey_round_shape_45_opacity))
+            bottomSheetDashboardFilterBinding.tvShowonlyMyoffer.setBackground(currActivity!!.getDrawable( R.drawable.blue_round_shape_45_opacity))
+        }
+
 
         if (sort_by.equals("date"))
         {
@@ -601,6 +767,30 @@ class MyListingFragment : Fragment() {
 
             doApiCall()
         })
+
+        bottomSheetDashboardFilterBinding.tvOngoingTranspoter.setOnClickListener({
+            bottomSheetDashboardFilterBinding.tvShowonlyMyoffer.setBackground(currActivity!!.getDrawable( R.drawable.grey_round_shape_45_opacity))
+
+            var filter_pref =pref.getString("filter","")
+
+            if(filter_pref?.contains("Ongoing")==true) {
+                filterarray.remove(JsonPrimitive("Ongoing"))
+                bottomSheetDashboardFilterBinding.tvOngoingTranspoter.setBackground(currActivity!!.getDrawable(R.drawable.grey_round_shape_45_opacity))
+            }
+            else{
+                filterarray.add("Ongoing")
+                bottomSheetDashboardFilterBinding.tvOngoingTranspoter.setBackground(currActivity!!.getDrawable(R.drawable.blue_round_shape_45_opacity))
+            }
+
+            editor.putString("filter",filterarray.toString())
+            editor.putString("my_bids", "false")
+            editor.commit()
+            Log.e("arr",filterarray.toString())
+
+            doApiCall()
+        })
+
+
         bottomSheetDashboardFilterBinding.tvCompleted.setOnClickListener({
             bottomSheetDashboardFilterBinding.tvShowonlyMyoffer.setBackground(currActivity!!.getDrawable( R.drawable.grey_round_shape_45_opacity))
 
@@ -621,6 +811,28 @@ class MyListingFragment : Fragment() {
 
             doApiCall()
         })
+        bottomSheetDashboardFilterBinding.tvCompletedTransporter.setOnClickListener({
+            bottomSheetDashboardFilterBinding.tvShowonlyMyoffer.setBackground(currActivity!!.getDrawable( R.drawable.grey_round_shape_45_opacity))
+
+            var filter_pref =pref.getString("filter","")
+
+            if(filter_pref?.contains("Completed")==true) {
+                filterarray.remove(JsonPrimitive("Completed"))
+                bottomSheetDashboardFilterBinding.tvCompletedTransporter.setBackground(currActivity!!.getDrawable(R.drawable.grey_round_shape_45_opacity))
+            }
+            else{
+                filterarray.add("Completed")
+                bottomSheetDashboardFilterBinding.tvCompletedTransporter.setBackground(currActivity!!.getDrawable(R.drawable.blue_round_shape_45_opacity))
+            }
+            editor.putString("filter",filterarray.toString())
+            editor.putString("my_bids", "false")
+            editor.commit()
+            Log.e("arr",filterarray.toString())
+
+            doApiCall()
+        })
+
+
         bottomSheetDashboardFilterBinding.tvSuspended.setOnClickListener({
 
             var filter_pref =pref.getString("filter","")
@@ -640,6 +852,29 @@ class MyListingFragment : Fragment() {
 
             doApiCall()
         })
+        bottomSheetDashboardFilterBinding.tvSuspendedTransporter.setOnClickListener({
+            bottomSheetDashboardFilterBinding.tvShowonlyMyoffer.setBackground(currActivity!!.getDrawable( R.drawable.grey_round_shape_45_opacity))
+
+            var filter_pref =pref.getString("filter","")
+
+            if(filter_pref?.contains("Suspended")==true) {
+                filterarray.remove(JsonPrimitive("Suspended"))
+                bottomSheetDashboardFilterBinding.tvSuspendedTransporter.setBackground(currActivity!!.getDrawable(R.drawable.grey_round_shape_45_opacity))
+            }
+            else{
+                filterarray.add("Suspended")
+                bottomSheetDashboardFilterBinding.tvSuspendedTransporter.setBackground(currActivity!!.getDrawable(R.drawable.blue_round_shape_45_opacity))
+            }
+
+            editor.putString("filter",filterarray.toString())
+            editor.putString("my_bids", "false")
+            editor.commit()
+            Log.e("arr",filterarray.toString())
+
+            doApiCall()
+        })
+
+
         bottomSheetDashboardFilterBinding.tvExpired.setOnClickListener({
 
             var filter_pref =pref.getString("filter","")
@@ -667,8 +902,38 @@ class MyListingFragment : Fragment() {
 
             bottomSheetDashboardFilterBinding.rlFirstRow2.visibility=View.VISIBLE
             bottomSheetDashboardFilterBinding.rlFirstRow3.visibility=View.GONE
+
+            bottomSheetDashboardFilterBinding.lltransporterrow1.visibility=View.GONE
+            bottomSheetDashboardFilterBinding.llsenderrow1.visibility=View.VISIBLE
+
+            var filter_pref =pref.getString("filter","")
+
+            if(filter_pref?.contains("Published") == true) {
+                bottomSheetDashboardFilterBinding.tvPublished.setBackground(currActivity!!.getDrawable(R.drawable.blue_round_shape_45_opacity))
+            }
+            if (filter_pref?.contains("Expired")== true) {
+                bottomSheetDashboardFilterBinding.tvExpired.setBackground(currActivity!!.getDrawable(R.drawable.blue_round_shape_45_opacity))
+            }
+            if (filter_pref?.contains("Completed")== true) {
+                bottomSheetDashboardFilterBinding.tvCompleted.setBackground(currActivity!!.getDrawable(R.drawable.blue_round_shape_45_opacity))
+            }
+            if (filter_pref?.contains("Suspended")== true){
+                bottomSheetDashboardFilterBinding.tvSuspended.setBackground(currActivity!!.getDrawable(R.drawable.blue_round_shape_45_opacity))
+            }
+            if (filter_pref?.contains("Ongoing")== true) {
+                bottomSheetDashboardFilterBinding.tvOngoing.setBackground(currActivity!!.getDrawable(R.drawable.blue_round_shape_45_opacity))
+            }
+
+
+
+            editor.putString("user_type","sender")
+            editor.putString("my_bids", "false")
+            editor.commit()
+
+            doApiCall()
         })
         bottomSheetDashboardFilterBinding.tvTranspoter.setOnClickListener({
+
             bottomSheetDashboardFilterBinding.tvTranspoter.setTextColor(Color.BLACK)
             bottomSheetDashboardFilterBinding.tvTranspoter.setBackground(currActivity!!.getDrawable(R.drawable.white_round_shape_5))
             bottomSheetDashboardFilterBinding.tvSender.setTextColor(Color.parseColor("#888888"))
@@ -676,12 +941,48 @@ class MyListingFragment : Fragment() {
 
             bottomSheetDashboardFilterBinding.rlFirstRow2.visibility=View.GONE
             bottomSheetDashboardFilterBinding.rlFirstRow3.visibility=View.VISIBLE
+
+            bottomSheetDashboardFilterBinding.lltransporterrow1.visibility=View.VISIBLE
+            bottomSheetDashboardFilterBinding.llsenderrow1.visibility=View.GONE
+
+            var filter_pref =pref.getString("filter","")
+            var my_bids=pref.getString("my_bids","")
+
+            if(my_bids.equals("true"))
+                bottomSheetDashboardFilterBinding.tvShowonlyMyoffer.setBackground(currActivity!!.getDrawable( R.drawable.blue_round_shape_45_opacity))
+            else
+                bottomSheetDashboardFilterBinding.tvShowonlyMyoffer.setBackground(currActivity!!.getDrawable( R.drawable.grey_round_shape_45_opacity))
+
+
+            if (filter_pref?.contains("Completed")== true) {
+                bottomSheetDashboardFilterBinding.tvCompletedTransporter.setBackground(currActivity!!.getDrawable(R.drawable.blue_round_shape_45_opacity))
+            }
+            if (filter_pref?.contains("Suspended")== true){
+                bottomSheetDashboardFilterBinding.tvSuspendedTransporter.setBackground(currActivity!!.getDrawable(R.drawable.blue_round_shape_45_opacity))
+            }
+            if (filter_pref?.contains("Ongoing")== true) {
+                bottomSheetDashboardFilterBinding.tvOngoingTranspoter.setBackground(currActivity!!.getDrawable(R.drawable.blue_round_shape_45_opacity))
+            }
+
+
+
+            if(filter_pref?.contains("Published") == true)
+                filterarray.remove(JsonPrimitive("Published"))
+            if (filter_pref?.contains("Expired")== true)
+                filterarray.remove(JsonPrimitive("Expired"))
+
+            editor.putString("filter",filterarray.toString())
+            editor.putString("user_type","transporter")
+            editor.commit()
+
+            doApiCall()
         })
 
         bottomSheetDashboardFilterBinding.tvShowonlyMyoffer.setOnClickListener({
-            bottomSheetDashboardFilterBinding.tvPublished.setBackground(currActivity!!.getDrawable( R.drawable.grey_round_shape_45_opacity))
-            bottomSheetDashboardFilterBinding.tvOngoing.setBackground(currActivity!!.getDrawable( R.drawable.grey_round_shape_45_opacity))
-            bottomSheetDashboardFilterBinding.tvCompleted.setBackground(currActivity!!.getDrawable( R.drawable.grey_round_shape_45_opacity))
+            bottomSheetDashboardFilterBinding.tvOngoingTranspoter.setBackground(currActivity!!.getDrawable( R.drawable.grey_round_shape_45_opacity))
+            bottomSheetDashboardFilterBinding.tvCompletedTransporter.setBackground(currActivity!!.getDrawable( R.drawable.grey_round_shape_45_opacity))
+            bottomSheetDashboardFilterBinding.tvSuspendedTransporter.setBackground(currActivity!!.getDrawable( R.drawable.grey_round_shape_45_opacity))
+
             bottomSheetDashboardFilterBinding.tvShowonlyMyoffer.setBackground(currActivity!!.getDrawable( R.drawable.blue_round_shape_45_opacity))
 
             filterarray=JsonArray()
@@ -689,9 +990,10 @@ class MyListingFragment : Fragment() {
             editor.putString("my_bids", "true")
             editor.commit()
 
+            doApiCall()
         })
 
-        if (userType.equals("transporter")){
+       /* if (userType.equals("transporter")){
             bottomSheetDashboardFilterBinding.cvUsertypeSelection.visibility=View.VISIBLE
             bottomSheetDashboardFilterBinding.tvSender.setTextColor(Color.BLACK)
             bottomSheetDashboardFilterBinding.tvSender.setBackground(currActivity!!.getDrawable(R.drawable.white_round_shape_5))
@@ -704,7 +1006,7 @@ class MyListingFragment : Fragment() {
         else{
             bottomSheetDashboardFilterBinding.cvUsertypeSelection.visibility=View.GONE
 
-        }
+        }*/
 
         bottomSheetApplicationDialog?.show()
 
@@ -714,26 +1016,24 @@ class MyListingFragment : Fragment() {
         rvListing.setHasFixedSize(true)
         layoutManager = LinearLayoutManager(currActivity, LinearLayoutManager.VERTICAL,false)
         rvListing.layoutManager = layoutManager
-        adapter = MyListingAdapter(currActivity!!,productList,1)
+        if (userType.equals("sender"))
+        adapter = MyListingAdapter(currActivity!!,productList,1,userType,userType)
+        else{
+            var user_type=pref.getString("user_type","")
+            adapter = MyListingAdapter(currActivity!!,productList,1,userType,user_type.toString())
+        }
         rvListing.adapter = adapter
+
+        if (numberingpage==1)
+        {
+            adapter.notifyDataSetChanged()
+            numberingpage=0
+        }
         rvListing.addOnScrollListener(recyclerScrollListener)
 
     }
 
     private fun observers() {
-//        productViewModel?.getMutableLiveDataBanners()?.observe(currActivity as LifecycleOwner, androidx.lifecycle.Observer {
-//            hideProgressBar()
-//            bannerList.clear()
-//            bannerList.addAll(it.banners)
-//
-//            shimmerViewbanner.visibility = View.GONE
-//            viewpager1.visibility = View.VISIBLE
-//            shimmerViewbanner.stopShimmer()
-//
-//            fillViewPager()
-//            initImageLoader()
-//
-//        })
 
         productViewModel?.getMutableLiveDataProductsData()
             ?.observe(currActivity as LifecycleOwner, androidx.lifecycle.Observer {
@@ -741,16 +1041,19 @@ class MyListingFragment : Fragment() {
                 shimmerViewContainer.stopShimmer()
                 rvListing.visibility = View.VISIBLE
 
-
-               // Log.e("err",it.data.list_data[0].status)
-
-                currentPage = it.data.current_page
+                has_next=it.data.has_next
+                if(has_next)
+                progressbar.visibility=View.VISIBLE
+                else
+                    progressbar.visibility=View.GONE
+                Log.e("ha",has_next.toString())
+               // currentPage = it.data.current_page
                 totalPage = it.data.current_page
 
                 if (currentPage == 1) {
                     productList.clear()
                     productList.addAll(it.data.list_data)
-                    rvListing.scrollToPosition(0)
+                    rvListing.smoothScrollToPosition(0)
                 } else {
                     productList.addAll(it.data.list_data)
                 }
@@ -769,6 +1072,7 @@ class MyListingFragment : Fragment() {
                 }
 
               userType=it.data.user_type
+
                 setAdapter()
                 adapter.notifyDataSetChanged()
             })
@@ -818,6 +1122,7 @@ class MyListingFragment : Fragment() {
                     }
                 }
             }
+
         }
 
 

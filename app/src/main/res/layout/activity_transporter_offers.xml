@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:shimmer="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/livo_bg_color">
+
+        <RelativeLayout
+            android:id="@+id/rlTopMain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/tvShimmerImage"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                >
+
+                <com.livo.nuo.lib.roundImageView.RoundedImageView
+                    android:id="@+id/tvImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:scaleType="centerCrop"
+                    android:visibility="visible"
+                    app:riv_corner_radius_bottom_left="15dp"
+                    app:riv_corner_radius_bottom_right="15dp"/>
+
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+            <com.livo.nuo.lib.roundImageView.RoundedImageView
+                android:id="@+id/imgUser"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:src="@color/livo_bg_color"
+                android:scaleType="centerCrop"
+                android:visibility="gone"
+                app:riv_corner_radius_bottom_left="20dp"
+                app:riv_corner_radius_bottom_right="20dp"/>
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgBack"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="60dp"
+                android:layout_marginStart="20dp"
+                android:src="@drawable/backword_black"/>
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/rlBottomMain"
+            android:layout_below="@+id/rlTopMain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmerViewContainer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:visibility="visible"
+                shimmer:duration="800">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <include
+                        android:id="@+id/v1"
+                        layout="@layout/shimmer_chats_layout"/>
+                    <include
+                        layout="@layout/shimmer_chats_layout"/>
+                    <include
+                        layout="@layout/shimmer_chats_layout"/>
+                    <include
+                        layout="@layout/shimmer_chats_layout"/>
+                    <include
+                        layout="@layout/shimmer_chats_layout"/>
+                    <include
+                        layout="@layout/shimmer_chats_layout"/>
+                    <include
+                        layout="@layout/shimmer_chats_layout"/>
+                    <include
+                        layout="@layout/shimmer_chats_layout"/>
+
+                </LinearLayout>
+
+
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvTransporters"
+                android:layout_width="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content"/>
+
+            <RelativeLayout
+                android:id="@+id/rlNoDataFound"
+                android:visibility="visible"
+                android:layout_centerVertical="true"
+                android:layout_centerInParent="true"
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgNoDataFound"
+                    android:visibility="gone"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_centerVertical="false"
+                    android:src="@drawable/ic_no_listing"
+                    android:tint="@color/livo_bg_color"
+                    android:layout_marginTop="10dp"
+                    android:layout_centerHorizontal="true"/>
+
+
+              <!--  <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvNoDataFound"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/no_offers_found"
+                    android:textAlignment="center"
+                    android:textSize="18sp"
+                    android:layout_below="@+id/imgNoDataFound"
+                    android:textColor="@color/livo_black_10_opacity"
+                    android:fontFamily="@font/barlow_bold" /> -->
+
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

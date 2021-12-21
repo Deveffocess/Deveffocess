@@ -37,12 +37,29 @@ class ProductRepository : BaseRepository() {
 */
     suspend fun getUserListings(jsonObject: JsonObject) = apiInterface?.getUserListings(service.headers(),jsonObject)
 
-    suspend fun getAllListings(jsonObject: JsonObject) = apiInterface?.getAllListings(service.headers(),jsonObject)
+    suspend fun getTransportersListForProduct(jsonObject: JsonObject) = apiInterface?.getTransportersListForProduct(service.headers(),jsonObject)
+    suspend fun getTransportersListRemoveBid(jsonObject: JsonObject) = apiInterface?.getTransportersListRemoveBid(service.headers(),jsonObject)
 
-    /*suspend fun getSearchedOwnProducts(search : String) = apiInterface?.getSearchedOwnProducts(service.headers(),search)
+
+    suspend fun getPlacebid(jsonObject: JsonObject) = apiInterface?.getPlacebid(service.headers(),jsonObject)
+
+    suspend fun getAllListings(jsonObject: JsonObject) = apiInterface?.getAllListings(service.headers(),jsonObject)
+    suspend fun getDeleteProduct(jsonObject: JsonObject) = apiInterface?.getDeleteProduct(service.headers(),jsonObject)
+    suspend fun getSingleListingData(jsonObject: JsonObject) = apiInterface?.getSingleListingData(service.headers(),jsonObject)
+
+    suspend fun createListing(title:RequestBody,height:RequestBody,width:RequestBody,depth:RequestBody,weight:RequestBody,price:RequestBody,
+                              more_people_needed:RequestBody,pickup_date:RequestBody,dropoff_date:RequestBody,pickup_latitude:RequestBody,
+                              pickup_longitude:RequestBody,pickup_address:RequestBody,pickup_address_note:RequestBody,dropoff_latitude:RequestBody,
+                              dropoff_longitude:RequestBody,dropoff_address:RequestBody,dropoff_address_note:RequestBody,distance:RequestBody,
+                              image1 :MultipartBody.Part,image2 :MultipartBody.Part,image3 :MultipartBody.Part) =
+        apiInterface?.createListing(service.headers(),title,height,width,depth,weight,price,more_people_needed,pickup_date,dropoff_date,
+                pickup_latitude,pickup_longitude,pickup_address,pickup_address_note,dropoff_latitude,dropoff_longitude,dropoff_address,
+            dropoff_address_note,distance,image1,image2,image3)
+
+    /*
     suspend fun getSearchedAllProducts(search : String) = apiInterface?.getSearchedAllProducts(service.headers(),search)
 
-    suspend fun getProductDetail(id : Int) = apiInterface?.getProductDetail(service.headers(),id)
+
 
     suspend fun approve_transporter_admin(userId : Int) = apiInterface?.approve_transporter_admin(service.headers(),userId)
 

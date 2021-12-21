@@ -46,6 +46,16 @@ class Splash_Screen : LocalizeActivity() {
            editor.clear()
            editor.apply()
 
+            pref = getSharedPreferences("PickUp", Context.MODE_PRIVATE)
+            val editor1 = pref.edit()
+            editor1.clear()
+            editor1.apply()
+
+            pref = getSharedPreferences("DropOff", Context.MODE_PRIVATE)
+            val editor2 = pref.edit()
+            editor2.clear()
+            editor2.apply()
+
 
            if (SessionManager.getLoginModel() != null) {
                var i=Intent(applicationContext,HomeActivity::class.java)

@@ -1,9 +1,14 @@
 <component name="libraryTable">
   <library name="Gradle: com.google.android.gms:play-services-cloud-messaging:16.0.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/d7f247c95a715df96850fe62946bfd22/transformed/jetified-play-services-cloud-messaging-16.0.0/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/d7f247c95a715df96850fe62946bfd22/transformed/jetified-play-services-cloud-messaging-16.0.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/d7f247c95a715df96850fe62946bfd22/transformed/jetified-play-services-cloud-messaging-16.0.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/bcfaeb3a5133f9bc7b7d1fc4ce2389a4/transformed/jetified-play-services-cloud-messaging-16.0.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/fe5794ed4aced73c4f0a85c54c29e0c7/transformed/jetified-play-services-cloud-messaging-16.0.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/b2c57be4c38c96d12fd32b74a3b6c67b/transformed/jetified-play-services-cloud-messaging-16.0.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/738dd0489f2fabcf8b83be112931737f/transformed/jetified-play-services-cloud-messaging-16.0.0/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/807e230fff90f5957a66e44cdda1735b/transformed/jetified-play-services-cloud-messaging-16.0.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/807e230fff90f5957a66e44cdda1735b/transformed/jetified-play-services-cloud-messaging-16.0.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/807e230fff90f5957a66e44cdda1735b/transformed/jetified-play-services-cloud-messaging-16.0.0/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.android.gms/play-services-cloud-messaging/16.0.0/66bcaa7ea2458690135561b6053cc71210dbd9dd/play-services-cloud-messaging-16.0.0-javadoc.jar!/" />

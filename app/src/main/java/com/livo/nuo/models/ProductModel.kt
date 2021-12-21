@@ -18,6 +18,14 @@ class ProductModel : Serializable {
     @Expose
     var price = ""
 
+    @SerializedName("offer_id")
+    @Expose
+    var offer_id = 0
+
+    @SerializedName("my_offer")
+    @Expose
+    var my_offer = ""
+
     @SerializedName("approved_transporter")
     @Expose
     var approved_transporter = 0
@@ -25,17 +33,26 @@ class ProductModel : Serializable {
     @SerializedName("color_status")
     @Expose
     var color_status = ""
-    @SerializedName("listing_images")
+    @SerializedName("listing_image")
     @Expose
-    var listing_images = ""
+    var listing_image = ""
 
     @SerializedName("status")
     @Expose
     var status = ""
 
+    @SerializedName("bidding_status")
+    @Expose
+    var bidding_status = MainLevelDetailsModel()
+
     @SerializedName("biddings")
     @Expose
     var biddings = 0
+
+    @SerializedName("approved_bid_id")
+    @Expose
+    var approved_bid_id = 0
+
     @SerializedName("user_details")
     @Expose
     var user_details = UserModel()

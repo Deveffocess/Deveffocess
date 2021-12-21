@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.romainpiel.shimmer:library:1.4.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/e9886df0e94d1dd9f6bec175bd1c564c/transformed/jetified-library-1.4.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/e9886df0e94d1dd9f6bec175bd1c564c/transformed/jetified-library-1.4.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/e9886df0e94d1dd9f6bec175bd1c564c/transformed/jetified-library-1.4.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/cca6f7e050c0c8a2335cbe6d7f5c608d/transformed/jetified-library-1.4.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/cca6f7e050c0c8a2335cbe6d7f5c608d/transformed/jetified-library-1.4.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/cca6f7e050c0c8a2335cbe6d7f5c608d/transformed/jetified-library-1.4.0/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.romainpiel.shimmer/library/1.4.0/b61b9d837ed761fbaaaf2373caf47a860e9019de/library-1.4.0-javadoc.jar!/" />

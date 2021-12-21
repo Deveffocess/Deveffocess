@@ -126,4 +126,5 @@ class  UserModel : Serializable{
     @SerializedName("bank_account_number")
     @Expose
     var bank_account_number = ""
+
 }

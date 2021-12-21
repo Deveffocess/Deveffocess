@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <RelativeLayout
+        android:id="@+id/rlTransporter"
+        android:layout_marginTop="5dp"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:background="@drawable/white_round_shape"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmerImage"
+            android:layout_width="88dp"
+            android:layout_height="88dp"
+            android:layout_centerVertical="true"
+            >
+
+            <com.livo.nuo.lib.roundImageView.RoundedImageView
+                android:id="@+id/imgshimmerImage"
+                android:layout_width="88dp"
+                android:layout_height="88dp"
+                app:riv_corner_radius="8dp"
+                android:src="@drawable/grey_round_shape"/>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+
+        <com.livo.nuo.lib.roundImageView.RoundedImageView
+            android:id="@+id/imgProductImage"
+            android:layout_width="88dp"
+            android:layout_centerVertical="true"
+            android:layout_height="88dp"
+            app:riv_corner_radius="8dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/grey_round_shape"/>
+
+
+        <RelativeLayout
+            android:id="@+id/rlTitleStar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/imgProductImage"
+            android:layout_marginStart="10dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:fontFamily="@font/barlow_bold"
+                android:letterSpacing="0.02"
+                android:maxLength="9"
+                android:text="Title"
+                android:textColor="@color/black"
+                android:textSize="16dp" />
+
+
+           <!-- <com.livo.nuo.lib.rating_bar.ScaleRatingBar
+                android:id="@+id/rbRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvTitle"
+                android:layout_marginTop="5dp"
+                app:srb_clickable="false"
+                app:srb_drawableEmpty="@drawable/star_empty"
+                app:srb_drawableFilled="@drawable/star_filled"
+                app:srb_starHeight="13dp"
+                app:srb_starPadding="4dp"
+                app:srb_starWidth="13dp" /> -->
+
+        </RelativeLayout>
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/white_fill_black_stroke_shape"
+            android:fontFamily="@font/barlow_regular"
+            android:maxLength="10"
+            android:maxLines="1"
+            android:paddingStart="10dp"
+            android:paddingTop="7dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="7dp"
+            android:text="00 KR"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="14dp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rlTitleStar"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="4dp"
+            android:layout_toEndOf="@+id/imgProductImage"
+            android:layout_marginTop="35dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2">
+
+                <RelativeLayout
+                    android:id="@+id/rlMessage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/grey_f2f2f2_round_shape"
+                    android:paddingStart="10dp"
+                    android:paddingTop="6dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="6dp">
+
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imgChat"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="1dp"
+                        android:src="@drawable/chat_grey" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvSelectTransporter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="5dp"
+                        android:layout_toEndOf="@+id/imgChat"
+                        android:fontFamily="@font/barlow_bold"
+                        android:text="@string/message"
+                        android:textColor="@color/livo_black_40_opacity"
+                        android:textSize="14dp" />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rlRemove"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/grey_f2f2f2_round_shape"
+                    android:paddingStart="10dp"
+                    android:paddingTop="6dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="6dp">
+
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imgRemove"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/delete" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvRemove"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginStart="5dp"
+                        android:layout_toEndOf="@+id/imgRemove"
+                        android:fontFamily="@font/barlow_bold"
+                        android:text="@string/remove"
+                        android:textColor="@color/livo_black_40_opacity"
+                        android:textSize="14dp" />
+
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</layout>

@@ -45,4 +45,103 @@
 
     </style>
 
+    <style name="dialog_animation">
+        <item name="android:windowEnterAnimation">@anim/slide_in_left_dialog</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_right_dialog</item>
+
+
+    </style>
+    <style name="Theme.Livo.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="Theme.Livo.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.Livo.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
+    <style name="SlideToActView">
+        <item name="text">SlideToActView</item>
+        <item name="text_sizee">14dp</item>
+        <item name="textColor">@color/livo_black_45_opacity</item>
+        <item name="text_colorr">@color/livo_black_45_opacity</item>
+        <item name="area_margin">5dp</item>
+        <item name="inner_color">@color/livo_green</item>
+        <item name="outer_color">@color/livo_black_5_opacity</item>
+        <item name="slider_locked">false</item>
+    </style>
+
+    <style name="SlideToActView2">
+        <item name="text">SlideToActView</item>
+        <item name="text_sizee">14dp</item>
+        <item name="textColor">@color/livo_black_45_opacity</item>
+        <item name="text_colorr">@color/livo_black_45_opacity</item>
+        <item name="area_margin">7dp</item>
+        <item name="inner_color">@color/black</item>
+        <item name="outer_color">@color/livo_black_5_opacity</item>
+        <item name="slider_locked">false</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:fontFamily">@font/barlow_semibold</item>
+        <item name="android:textColor">@color/livo_black_45_opacity</item>
+    </style>
+
+    <style name="SlideToActView.Example">
+        <item name="android:layout_height">35dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_margin">8dp</item>
+    </style>
+
+    <style name="SlideToActView2.Example2">
+        <item name="android:layout_height">25dp</item>
+        <item name="android:layout_width">match_parent</item>
+    </style>
+
+    <style name="animationdialog">
+        <item name="android:windowEnterAnimation">@anim/dialog_in</item>
+    </style>
+
+
+    <style name="TextAppearance.Widget.Stepper.Done" parent="TextAppearance.MaterialCompat.Body1">
+
+    </style>
+
+    <style name="TextAppearance.Widget.Stepper.Selected" parent="TextAppearance.MaterialCompat.Body2">
+
+    </style>
+
+    <style name="TextAppearance.Widget.Stepper.Normal" parent="TextAppearance.MaterialCompat.Body1">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="TextAppearance"/>
+
+    <style name="TextAppearance.MaterialCompat"/>
+
+    <style name="TextAppearance.MaterialCompat.Body1">
+        <item name="android:textSize">14dp</item>
+        <item name="android:fontFamily">@font/barlow_bold</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="TextAppearance.MaterialCompat.Body2">
+        <item name="android:textSize">14dp</item>
+        <item name="android:fontFamily">@font/barlow_bold</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="TextAppearance.MaterialCompat.Body3">
+        <item name="android:textSize">14dp</item>
+        <item name="android:fontFamily">@font/barlow_bold</item>
+        <item name="android:textColor">@color/livo_black_45_opacity</item>
+    </style>
+
+    <style name="Widget.Stepper" parent="">
+        <item name="step_normal_color">@color/livo_grey</item>
+        <item name="step_activated_color">@color/livo_blue</item>
+        <item name="step_done_icon">@drawable/ic_done_white_16dp</item>
+        <item name="step_animation_duration">@android:integer/config_shortAnimTime</item>
+        <item name="step_line_color">@color/livo_grey_transporter_shape</item>
+        <item name="step_error_highlight_color">@color/red_800</item>
+    </style>
+
 </resources>
