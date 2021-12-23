@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content" android:layout_width="match_parent">
+
+
+    <RelativeLayout
+        android:id="@+id/rlTransporter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/white_round_shape">
+
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmerImage"
+            android:layout_width="95dp"
+            android:layout_height="95dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="10dp">
+
+            <com.livo.nuo.lib.roundImageView.RoundedImageView
+                android:id="@+id/imgshimmerImage"
+                android:layout_width="95dp"
+                android:layout_height="95dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/grey_round_shape"
+                android:visibility="gone"
+                app:riv_corner_radius="8dp" />
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+        <com.livo.nuo.lib.roundImageView.RoundedImageView
+            android:id="@+id/imgProductImage"
+            android:layout_width="95dp"
+            android:layout_height="95dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="10dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/grey_round_shape"
+            android:visibility="visible"
+            app:riv_corner_radius="8dp" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="13dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:layout_toEndOf="@+id/imgProductImage"
+            android:fontFamily="@font/barlow_bold"
+            android:text="Title"
+            android:textColor="@color/black"
+            android:textSize="16dp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvPrice1x"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvTitle"
+            android:layout_marginStart="13dp"
+            android:layout_toEndOf="@+id/imgProductImage"
+            android:fontFamily="@font/barlow_semibold"
+            android:text="00 Kr"
+            android:textAlignment="viewStart"
+            android:textColor="@color/livo_black_45_opacity"
+            android:textSize="12dp" />
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/mcvOfferCell"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="13dp"
+            android:layout_marginTop="52dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="10dp"
+            android:layout_toEndOf="@+id/imgProductImage"
+            android:elevation="0dp"
+            android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="0dp"
+            app:strokeColor="#888"
+            app:strokeWidth="2dp">
+
+            <RelativeLayout
+                android:id="@+id/rlReievedOffer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvPrice1x"
+                android:background="#fff"
+                android:padding="5dp">
+
+                <com.livo.nuo.lib.roundImageView.RoundedImageView
+                    android:id="@+id/imgTransporterImage"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:src="@drawable/grey_round_shape"
+                    android:visibility="gone"
+                    app:riv_corner_radius="18dp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvTransporterName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@+id/imgTransporterImage"
+                    android:fontFamily="@font/barlow_bold"
+                    android:text="Robin hood"
+                    android:textColor="@color/black"
+                    android:textSize="16dp"
+                    android:visibility="gone" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvTransporterStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvTransporterName"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_toEndOf="@+id/imgTransporterImage"
+                    android:fontFamily="@font/barlow_semibold"
+                    android:text="Driver Selected"
+                    android:textColor="@color/livo_black_45_opacity"
+                    android:textSize="12.8dp"
+                    android:visibility="gone" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvRecievedOfferlabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="3dp"
+                    android:fontFamily="@font/barlow_bold"
+                    android:text="@string/youve_recieved"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/livo_black_45_opacity"
+                    android:textSize="14dp"
+                    android:visibility="visible" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvRecievedOffer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvRecievedOfferlabel"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/barlow_extrabold"
+                    android:text="0"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/black"
+                    android:textSize="14dp"
+                    android:visibility="visible" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvRecievedOfferRecievedLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvRecievedOfferlabel"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginBottom="6dp"
+                    android:layout_toEndOf="@+id/tvRecievedOffer"
+                    android:fontFamily="@font/barlow_bold"
+                    android:text="@string/offers"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/livo_black_45_opacity"
+                    android:textSize="14dp"
+                    android:visibility="visible" />
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgForward"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/forward_grey" />
+
+            </RelativeLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <RelativeLayout
+            android:id="@+id/rlBottomLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imgProductImage"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="5dp"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:id="@+id/llChatCall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                android:weightSum="3">
+
+
+                <LinearLayout
+                    android:id="@+id/rlProcess"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/white_fill_black_10_border"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingStart="10dp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="15dp"
+                    android:paddingBottom="8dp"
+                    android:visibility="visible">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imgProcess"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/info"
+                        android:tint="@color/livo_black_45_opacity" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvProcess"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:fontFamily="@font/barlow_bold"
+                        android:text="@string/process"
+                        android:textAlignment="center"
+                        android:textColor="@color/livo_black_30_opacity"
+                        android:textSize="12.8dp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/rlChat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/white_fill_black_10_border"
+                    android:paddingStart="10dp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="6dp"
+                    android:paddingBottom="8dp"
+                    android:visibility="visible">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imgChat"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/chat_grey" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvChat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_toEndOf="@+id/imgChat"
+                        android:fontFamily="@font/barlow_bold"
+                        android:text="@string/message"
+                        android:textAlignment="center"
+                        android:textColor="@color/livo_black_30_opacity"
+                        android:textSize="12.8dp" />
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/rlCall"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/white_fill_black_10_border"
+                    android:paddingStart="10dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:visibility="visible">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imgCall"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/phone_grey"
+                        android:tint="@color/livo_black_45_opacity" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvCall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="8dp"
+                        android:layout_toEndOf="@+id/imgCall"
+                        android:fontFamily="@font/barlow_bold"
+                        android:text="@string/phone"
+                        android:textAlignment="center"
+                        android:textColor="@color/livo_black_30_opacity"
+                        android:textSize="12.8dp" />
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llSelect"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:weightSum="2">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvSelectTransporter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.8"
+                    android:background="@drawable/white_fill_black_10_border"
+                    android:fontFamily="@font/barlow_bold"
+                    android:lineHeight="15dp"
+                    android:paddingStart="10dp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="Select Transporter"
+                    android:textAlignment="center"
+                    android:textColor="@color/livo_black_30_opacity"
+                    android:textSize="12sp"
+                    android:visibility="visible" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvDetails1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1.2"
+                    android:background="@drawable/white_fill_black_10_border"
+                    android:fontFamily="@font/barlow_bold"
+                    android:lineHeight="15dp"
+                    android:paddingStart="10dp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="@string/details"
+                    android:textAlignment="center"
+                    android:textColor="@color/livo_black_30_opacity"
+                    android:textSize="12dp" />
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

@@ -480,7 +480,7 @@ class ProfileSettingActivity : LocalizeActivity() {
         profileViewModel?.getMutableLiveDataViewEditOwnProfile()
             ?.observe(currActivity as LifecycleOwner, androidx.lifecycle.Observer {
                hideProgressBar()
-                Toast.makeText(currActivity,it.message,Toast.LENGTH_SHORT).show()
+                finish()
               // AppUtils.showToast(currActivity!!,R.drawable.arrow_right,it.message,R.color.livo_green,R.color.white,R.color.white)
 
             })

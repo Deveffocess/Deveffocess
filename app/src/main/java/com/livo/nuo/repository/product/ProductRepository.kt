@@ -40,6 +40,7 @@ class ProductRepository : BaseRepository() {
     suspend fun getTransportersListForProduct(jsonObject: JsonObject) = apiInterface?.getTransportersListForProduct(service.headers(),jsonObject)
     suspend fun getTransportersListRemoveBid(jsonObject: JsonObject) = apiInterface?.getTransportersListRemoveBid(service.headers(),jsonObject)
 
+    suspend fun getSearch(jsonObject: JsonObject) = apiInterface?.getSearch(service.headers(),jsonObject)
 
     suspend fun getPlacebid(jsonObject: JsonObject) = apiInterface?.getPlacebid(service.headers(),jsonObject)
 

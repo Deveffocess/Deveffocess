@@ -227,4 +227,29 @@ class DataModel :Serializable{
     @SerializedName("transporter_application")
     @Expose
     var transporter_application = ProfileTransporterModel()
+
+    //search
+    @SerializedName("my_listings_count")
+    @Expose
+    var my_listings_count = 0
+
+    @SerializedName("my_biddings_count")
+    @Expose
+    var my_biddings_count = 0
+
+    @SerializedName("others_listings_count")
+    @Expose
+    var others_listings_count = 0
+
+    @SerializedName("my_listings")
+    @Expose
+    var my_listings = ArrayList<ProductModel>()
+
+    @SerializedName("my_biddings")
+    @Expose
+    var my_biddings = ArrayList<ProductModel>()
+
+    @SerializedName("others_listings")
+    @Expose
+    var others_listings = ArrayList<ProductDataModel>()
 }

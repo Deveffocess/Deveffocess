@@ -1757,8 +1757,8 @@ class ListingOngoingStateActivity : LocalizeActivity() {
         var a = amount
         var b = a * (tax.toDouble() / 100)
         tvLivoFee?.text = String.format("%.2f", b) + " kr"
-        tvTotalAmount?.text = String.format("%.2f", a-b) + " kr"
-        tvAmount?.text = amount.toString()+" kr"
+        tvAmount?.text = String.format("%.2f", a) + " kr"
+        tvTotalAmount?.text = String.format("%.2f", a+b)+" kr"
 
         btnCompleteTransaction?.setOnClickListener({
 

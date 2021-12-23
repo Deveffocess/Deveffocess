@@ -57,7 +57,7 @@ import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.ViewCompat
 import androidx.core.widget.NestedScrollView
 
-import com.livo.nuo.view.home.search.SearchActivity
+import com.livo.nuo.view.search.SearchActivity
 import com.livo.nuo.view.listing.NewListingActivity
 import android.view.MotionEvent
 

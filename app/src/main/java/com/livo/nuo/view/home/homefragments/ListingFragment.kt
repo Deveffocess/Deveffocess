@@ -33,7 +33,7 @@ import com.livo.nuo.models.ProductDataModel
 import com.livo.nuo.utility.AndroidUtil
 import com.livo.nuo.utility.AppUtils
 import com.livo.nuo.view.home.adapter.ListingAdapter
-import com.livo.nuo.view.home.search.SearchActivity
+import com.livo.nuo.view.search.SearchActivity
 import com.livo.nuo.view.notifications.NotificationsActivity
 import com.livo.nuo.viewModel.ViewModelFactory
 import com.livo.nuo.viewModel.products.ProductViewModel

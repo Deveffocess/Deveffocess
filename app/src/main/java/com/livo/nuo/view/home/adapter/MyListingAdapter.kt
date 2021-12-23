@@ -49,10 +49,7 @@ class MyListingAdapter(
 
     private var bottomSheetApplicationDialog: BottomSheetDialog?=null
 
-    companion object {
-        var pagenuomber = 0
-        var lastPagenuomber = 0
-    }
+
 
 
     private var isSelected = -1
@@ -307,8 +304,8 @@ override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
 
 
-    if(model.title.length > 35){
-        holder.tvTitle.text = model.title.substring(0,34)+"..."
+    if(model.title.length > 28){
+        holder.tvTitle.text = model.title.substring(0,28)+"..."
 
     }else{
         holder.tvTitle.text = model.title

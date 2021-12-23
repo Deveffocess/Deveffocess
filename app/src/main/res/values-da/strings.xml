@@ -201,9 +201,9 @@
 
     <!-- Search -->
     <string name="my_listing">Mine opslag</string>
-    <string name="other_listings">Andre opslag</string>
+    <string name="my_offers">Mine tilbud</string>
     <string name="show_all">Vis alt</string>
-
+    <string name="other_listings">Andre opslag</string>
     <string name="notifications">Meddelelser</string>
     <string name="process">Behandle</string>
 

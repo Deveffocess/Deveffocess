@@ -229,7 +229,7 @@ class PublishFragment : Fragment() {
                      var  rweight = RequestBody.create("multipart/form-data".toMediaTypeOrNull(),(currActivity as NewListingActivity).weight)
                      var  rwidth = RequestBody.create("multipart/form-data".toMediaTypeOrNull(),(currActivity as NewListingActivity).width)
                      var  rdepth = RequestBody.create("multipart/form-data".toMediaTypeOrNull(),(currActivity as NewListingActivity).depth)
-                     var  rprice = RequestBody.create("multipart/form-data".toMediaTypeOrNull(),final_tot.toString())
+                     var  rprice = RequestBody.create("multipart/form-data".toMediaTypeOrNull(),etEnterPrice.text.toString())
                      var  rmorePeople = RequestBody.create("multipart/form-data".toMediaTypeOrNull(),(currActivity as NewListingActivity).isTwoPeople.toString())
 
                      pref = currActivity!!.getSharedPreferences("PickUp", Context.MODE_PRIVATE)

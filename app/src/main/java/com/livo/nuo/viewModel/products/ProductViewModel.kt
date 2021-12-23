@@ -42,6 +42,8 @@ import java.lang.Exception
     private var mutableLiveDataPlacebid : MutableLiveData<LoginModel> = MutableLiveData()
     private var mutableLiveTranspoterListForProduct : MutableLiveData<LoginModel> = MutableLiveData()
     private var mutableLiveTransportersListRemoveBid : MutableLiveData<LoginModel> = MutableLiveData()
+    private var mutableLiveDataSearch : MutableLiveData<LoginModel> = MutableLiveData()
+
 
      /* private var mutableLiveDataOwnProductDetail : MutableLiveData<ProductDetailObjectModel> = MutableLiveData()
       private var mutableLiveDataApproveTransporterAdmin : MutableLiveData<ImageModel> = MutableLiveData()
@@ -72,8 +74,10 @@ import java.lang.Exception
     fun getMutableLiveDataPostOngoingStates(): MutableLiveData<ImageModel> =
             mutableLiveDataPostOngoingStates
 
-    fun getMutableLiveDataBanners(): MutableLiveData<BannerListModel> =
-        mutableLiveDataBanners*/
+    */
+
+     fun getMutableLiveDataSearch(): MutableLiveData<LoginModel> =
+         mutableLiveDataSearch
 
     fun getMutableLiveDataProductDetail(): MutableLiveData<LoginModel> =
             mutableLiveDataProductOngoingStates
@@ -343,13 +347,16 @@ import java.lang.Exception
             }
         }
     }
-    fun getBanners() {
+
+
+     */
+    fun getSearch(jsonObject: JsonObject) {
         viewModelScope.launch {
             withContext(Dispatchers.IO){
                 try {
-                    val userImage  = productRepository?.getBanners()
+                    val userImage  = productRepository?.getSearch(jsonObject)
                     userImage?.let {
-                        mutableLiveDataBanners.postValue(it)
+                        mutableLiveDataSearch.postValue(it)
                     }
 
                 }catch (httpException : HttpException){
@@ -378,7 +385,7 @@ import java.lang.Exception
             }
         }
     }
-  */
+
 
 
      fun getTransportersListForProduct(jsonObject: JsonObject) {

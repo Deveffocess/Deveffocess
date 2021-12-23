@@ -31,13 +31,7 @@ class ListingAdapter (
     private val ITEM = 1
     private var isLoadingAdded = false
 
-    companion object {
-        var pagenuomber = 0
-        var lastPagenuomber = 0
-    }
 
-
-    private var isSelected = -1
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
         val view = LayoutInflater.from(parent.context)

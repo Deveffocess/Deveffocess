@@ -58,6 +58,12 @@ interface ApiInterface {
     @Body jsonObject: JsonObject
   ): LoginModel?
 
+  @POST("search")
+  suspend fun getSearch(
+    @HeaderMap headers: Map<String, String>,
+    @Body jsonObject: JsonObject
+  ): LoginModel?
+
   @POST("change_bid_price")
   suspend fun getChangeBidPrice(
     @HeaderMap headers: Map<String, String>,

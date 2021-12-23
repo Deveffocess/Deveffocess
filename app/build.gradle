@@ -18,6 +18,10 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    lintOptions {
+        checkReleaseBuilds false
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -146,7 +150,7 @@ dependencies {
     // Stripe Android SDK
     implementation 'com.stripe:stripe-android:19.0.0'
 
-    implementation 'com.pubnub:pubnub-kotlin:6.3.0'
+   // implementation 'com.pubnub:pubnub-kotlin:6.3.0'
 
     androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.1', {
         exclude group: 'com.android.support', module: 'support-annotations'
