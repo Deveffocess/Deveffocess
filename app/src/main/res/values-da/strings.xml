@@ -206,6 +206,7 @@
     <string name="other_listings">Andre opslag</string>
     <string name="notifications">Meddelelser</string>
     <string name="process">Behandle</string>
+    <string name="show_less">Vis mindre</string>
 
     <!-- Profile Fragment -->
     <string name="submit_request">Indsend anmodning</string>

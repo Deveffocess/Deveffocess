@@ -93,6 +93,7 @@
     <string name="my_offers">My Offers</string>
     <string name="other_listings">Other Listings</string>
     <string name="show_all">Show all</string>
+    <string name="show_less">Show less</string>
 
     <string name="notifications">Notifications</string>
     <string name="process">Process</string>

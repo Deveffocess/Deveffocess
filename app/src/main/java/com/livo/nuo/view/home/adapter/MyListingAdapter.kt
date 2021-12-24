@@ -283,9 +283,21 @@ override fun onBindViewHolder(holder: ViewHolder, position: Int) {
                 }
             }
             else{
+                if(user_type.equals("sender")) {
+                    if (model.biddings.toString().equals("0")) {
+                        var i = Intent(currAtivity, ProductDetailActivity::class.java)
+                        i.putExtra("id", model.id.toString())
+                        currAtivity.startActivity(i)
+                    } else {
+                        var i = Intent(currAtivity, TransporterOffersActivity::class.java)
+                        i.putExtra("id", model.id)
+                        currAtivity.startActivity(i)
+                    }
+                }
+                else{
                 var i = Intent(currAtivity, ListingOngoingStateActivity::class.java)
                 i.putExtra("id", model.offer_id)
-                currAtivity.startActivity(i)
+                currAtivity.startActivity(i)}
             }
         }
 

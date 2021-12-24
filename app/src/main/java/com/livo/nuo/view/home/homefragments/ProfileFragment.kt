@@ -1,7 +1,9 @@
 package com.livo.nuo.view.home.homefragments
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
@@ -77,6 +79,8 @@ class ProfileFragment : Fragment() {
     var dn_height=0
     var sv_width=0
     var sv_height=0
+
+    lateinit var pref:SharedPreferences
 
     lateinit var tvFAQ : TextView
     var statustransport = 1.0 // transporter View
@@ -192,6 +196,23 @@ class ProfileFragment : Fragment() {
 
         rlLogout.setOnClickListener({
             SessionManager.clear()
+
+            var ListingFragment="ListingFragment"
+            pref = currActivity!!.getSharedPreferences(ListingFragment, Context.MODE_PRIVATE)
+            val editor = pref.edit()
+            editor.clear()
+            editor.apply()
+
+            pref = currActivity!!.getSharedPreferences("PickUp", Context.MODE_PRIVATE)
+            val editor1 = pref.edit()
+            editor1.clear()
+            editor1.apply()
+
+            pref = currActivity!!.getSharedPreferences("DropOff", Context.MODE_PRIVATE)
+            val editor2 = pref.edit()
+            editor2.clear()
+            editor2.apply()
+
             var i=Intent(currActivity,Splash_Screen::class.java)
             startActivity(i)
             currActivity!!.finish()
