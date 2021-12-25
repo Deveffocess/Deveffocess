@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:shimmer="http://schemas.android.com/tools"
+    android:layout_height="match_parent">
 
     <RelativeLayout
         android:id="@+id/rlMain"
@@ -72,276 +73,197 @@
             android:layout_marginBottom="20dp"
             android:padding="20dp">
 
-
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/shimmerViewContainer"
+                    shimmer:duration="800"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="visible">
+
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:id="@+id/llk"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <com.livo.nuo.lib.roundImageView.RoundedImageView
+                                android:layout_width="120dp"
+                                android:layout_height="120dp"
+                                android:background="@drawable/edit_box_background_shape"
+                                android:scaleType="centerCrop"
+                                app:riv_border_color="@color/white"
+                                app:riv_border_width="1dp"
+                                app:riv_corner_radius="10dp" />
+
+                        </LinearLayout>
+
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="130dp"
+                        android:orientation="vertical">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_below="@+id/rlHeader"
+                            android:background="@color/livo_black_10_opacity" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_below="@+id/rlHeader"
+                            android:background="@color/livo_black_10_opacity" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="140dp"
+                        android:orientation="vertical">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_below="@+id/rlHeader"
+                            android:background="@color/livo_black_10_opacity" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_below="@+id/rlHeader"
+                            android:background="@color/livo_black_10_opacity" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_below="@+id/rlHeader"
+                            android:background="@color/livo_black_10_opacity" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_below="@+id/rlHeader"
+                            android:background="@color/livo_black_10_opacity" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_below="@+id/rlHeader"
+                            android:background="@color/livo_black_10_opacity" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_below="@+id/rlHeader"
+                            android:background="@color/livo_black_10_opacity" />
+
+                    </LinearLayout>
+
+
+
+                </com.facebook.shimmer.ShimmerFrameLayout>
 
                 <RelativeLayout
-                    android:id="@+id/rlImage"
-                    android:layout_width="130dp"
-                    android:layout_height="120dp">
+                    android:layout_width="match_parent"
+                    android:id="@+id/rlMainLayout"
+                    android:layout_height="wrap_content">
 
-                    <com.facebook.shimmer.ShimmerFrameLayout
-                        android:id="@+id/tvShimmerImage"
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
-                        >
+
+                    <RelativeLayout
+                        android:id="@+id/rlImage"
+                        android:layout_width="130dp"
+                        android:layout_height="120dp">
+
+                        <com.facebook.shimmer.ShimmerFrameLayout
+                            android:id="@+id/tvShimmerImage"
+                            android:layout_width="120dp"
+                            android:layout_height="120dp">
+
+                            <com.livo.nuo.lib.roundImageView.RoundedImageView
+                                android:id="@+id/tvImage"
+                                android:layout_width="120dp"
+                                android:layout_height="120dp"
+                                android:background="@drawable/edit_box_background_shape"
+                                android:scaleType="centerCrop"
+                                app:riv_border_color="@color/white"
+                                app:riv_border_width="1dp"
+                                app:riv_corner_radius="10dp" />
+
+
+                        </com.facebook.shimmer.ShimmerFrameLayout>
 
                         <com.livo.nuo.lib.roundImageView.RoundedImageView
-                            android:id="@+id/tvImage"
+                            android:id="@+id/imgUser"
                             android:layout_width="120dp"
                             android:layout_height="120dp"
-                            android:background="@drawable/edit_box_background_shape"
+                            android:background="@drawable/grey_round_shape"
                             android:scaleType="centerCrop"
-                            app:riv_border_color="@color/white"
-                            app:riv_border_width="1dp"
-                            app:riv_corner_radius="10dp" />
-
-
-                    </com.facebook.shimmer.ShimmerFrameLayout>
-
-                    <com.livo.nuo.lib.roundImageView.RoundedImageView
-                        android:id="@+id/imgUser"
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
-                        android:background="@drawable/grey_round_shape"
-                        android:scaleType="centerCrop"
-                        app:riv_corner_radius="15dp" />
-
-                </RelativeLayout>
-
-
-                <RelativeLayout
-                    android:id="@+id/rlFirstName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_toEndOf="@+id/rlImage">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/tvFirstName">
-
-
-                        <RelativeLayout
-                            android:id="@+id/rlFirstName1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            >
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:layout_below="@+id/etFirstName"
-                                android:layout_marginTop="2dp"
-                                android:background="@color/livo_light_grey" />
-
-                            <androidx.appcompat.widget.AppCompatEditText
-                                android:id="@+id/etFirstName"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:background="@null"
-                                android:fontFamily="@font/barlow_semibold"
-                                android:hint=""
-                                android:inputType="textCapWords"
-                                android:maxLines="1"
-                                android:paddingTop="5dp"
-                                android:paddingBottom="5dp"
-                                android:text="Morten"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/black"
-                                android:textSize="16dp" />
-
-                        </RelativeLayout>
-
+                            app:riv_corner_radius="15dp" />
 
                     </RelativeLayout>
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvFirstName"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/barlow_bold"
-                        android:text="@string/first_name"
-                        android:textColor="@color/livo_black_45_opacity"
-                        android:textSize="14dp" />
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/rlLastName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/rlFirstName"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="17dp"
-                    android:layout_toEndOf="@+id/rlImage">
 
                     <RelativeLayout
+                        android:id="@+id/rlFirstName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/tvLastName">
-
-
-                        <RelativeLayout
-                            android:id="@+id/rlLastName1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            >
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:layout_below="@+id/etLastName"
-                                android:layout_marginTop="2dp"
-                                android:layout_marginEnd="15dp"
-                                android:background="@color/livo_light_grey" />
-
-                            <androidx.appcompat.widget.AppCompatEditText
-                                android:id="@+id/etLastName"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:background="@null"
-                                android:fontFamily="@font/barlow_semibold"
-                                android:hint=""
-                                android:inputType="textCapWords"
-                                android:maxLines="1"
-                                android:paddingTop="5dp"
-                                android:paddingBottom="5dp"
-                                android:text="Skovgaard"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/black"
-                                android:textSize="16dp" />
-
-                        </RelativeLayout>
-
-
-                    </RelativeLayout>
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvLastName"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/barlow_bold"
-                        android:text="@string/last_name"
-                        android:textColor="@color/livo_black_45_opacity"
-                        android:textSize="14dp" />
-
-                </RelativeLayout>
-
-
-                <RelativeLayout
-                    android:id="@+id/rlEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/rlImage"
-                    android:layout_marginTop="20dp"
-                    >
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/tvEmail">
-
-
-                        <RelativeLayout
-                            android:id="@+id/rlEmail1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:layout_below="@+id/etEmail"
-                                android:layout_marginTop="2dp"
-                                android:background="@color/livo_light_grey" />
-
-                            <androidx.appcompat.widget.AppCompatEditText
-                                android:id="@+id/etEmail"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:background="@null"
-                                android:fontFamily="@font/barlow_semibold"
-                                android:hint=""
-                                android:inputType="textEmailAddress"
-                                android:maxLines="1"
-                                android:paddingTop="5dp"
-                                android:paddingBottom="5dp"
-                                android:text="morten@livo.nu"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/black"
-                                android:textSize="16dp" />
-
-                        </RelativeLayout>
-
-
-                    </RelativeLayout>
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvEmail"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/barlow_bold"
-                        android:text="@string/email"
-                        android:textColor="@color/livo_black_45_opacity"
-                        android:textSize="14dp" />
-
-                </RelativeLayout>
-
-
-                <RelativeLayout
-                    android:id="@+id/rlDatePhone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/rlEmail"
-                    android:layout_marginTop="20dp"
-                    >
-
-
-                    <!--                <LinearLayout-->
-                    <!--                    android:layout_width="match_parent"-->
-                    <!--                    android:layout_height="wrap_content"-->
-                    <!--                    android:weightSum="2">-->
-
-                    <RelativeLayout
-                        android:id="@+id/rlDate"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_marginStart="5dp"
+                        android:layout_toEndOf="@+id/rlImage">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/tvDate">
+                            android:layout_below="@+id/tvFirstName">
 
 
                             <RelativeLayout
-                                android:id="@+id/rlDate1"
+                                android:id="@+id/rlFirstName1"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content">
 
                                 <View
                                     android:layout_width="match_parent"
                                     android:layout_height="1dp"
-                                    android:layout_below="@+id/etDate"
+                                    android:layout_below="@+id/etFirstName"
                                     android:layout_marginTop="2dp"
                                     android:background="@color/livo_light_grey" />
 
                                 <androidx.appcompat.widget.AppCompatEditText
-                                    android:id="@+id/etDate"
+                                    android:id="@+id/etFirstName"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:background="@null"
                                     android:fontFamily="@font/barlow_semibold"
                                     android:hint=""
-                                    android:inputType="text"
+                                    android:inputType="textCapWords"
                                     android:maxLines="1"
                                     android:paddingTop="5dp"
                                     android:paddingBottom="5dp"
-                                    android:text="01/01/1990"
-                                    android:focusable="false"
+                                    android:text="Morten"
                                     android:textColor="@color/black"
                                     android:textColorHint="@color/black"
                                     android:textSize="16dp" />
@@ -352,284 +274,472 @@
                         </RelativeLayout>
 
                         <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/tvDate"
+                            android:id="@+id/tvFirstName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/barlow_bold"
-                            android:text="@string/date_of_birth_dd_mm_yy"
+                            android:text="@string/first_name"
+                            android:textColor="@color/livo_black_45_opacity"
+                            android:textSize="14dp" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rlLastName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/rlFirstName"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="17dp"
+                        android:layout_toEndOf="@+id/rlImage">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tvLastName">
+
+
+                            <RelativeLayout
+                                android:id="@+id/rlLastName1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:layout_below="@+id/etLastName"
+                                    android:layout_marginTop="2dp"
+                                    android:layout_marginEnd="15dp"
+                                    android:background="@color/livo_light_grey" />
+
+                                <androidx.appcompat.widget.AppCompatEditText
+                                    android:id="@+id/etLastName"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@null"
+                                    android:fontFamily="@font/barlow_semibold"
+                                    android:hint=""
+                                    android:inputType="textCapWords"
+                                    android:maxLines="1"
+                                    android:paddingTop="5dp"
+                                    android:paddingBottom="5dp"
+                                    android:text="Skovgaard"
+                                    android:textColor="@color/black"
+                                    android:textColorHint="@color/black"
+                                    android:textSize="16dp" />
+
+                            </RelativeLayout>
+
+
+                        </RelativeLayout>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvLastName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/barlow_bold"
+                            android:text="@string/last_name"
                             android:textColor="@color/livo_black_45_opacity"
                             android:textSize="14dp" />
 
                     </RelativeLayout>
 
 
-                    <!--                </LinearLayout>-->
-
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/rlPhone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/rlDatePhone"
-                    android:layout_marginTop="20dp"
-                    >
-
                     <RelativeLayout
+                        android:id="@+id/rlEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/tvEnterPhone">
+                        android:layout_below="@+id/rlImage"
+                        android:layout_marginTop="20dp">
 
                         <RelativeLayout
-                            android:id="@+id/rlDialCode"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tvEmail">
 
 
-                            <View
-                                android:layout_width="30dp"
-                                android:layout_height="1dp"
-                                android:layout_below="@+id/tvDialCode"
-                                android:layout_marginTop="2dp"
-                                android:background="@color/livo_light_grey" />
+                            <RelativeLayout
+                                android:id="@+id/rlEmail1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
 
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tvDialCode"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:background="@null"
-                                android:fontFamily="@font/barlow_semibold"
-                                android:hint="+45"
-                                android:inputType="phone"
-                                android:maxLines="1"
-                                android:paddingTop="5dp"
-                                android:paddingBottom="5dp"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/black"
-                                android:textSize="16dp" />
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:layout_below="@+id/etEmail"
+                                    android:layout_marginTop="2dp"
+                                    android:background="@color/livo_light_grey" />
+
+                                <androidx.appcompat.widget.AppCompatEditText
+                                    android:id="@+id/etEmail"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@null"
+                                    android:fontFamily="@font/barlow_semibold"
+                                    android:hint=""
+                                    android:inputType="textEmailAddress"
+                                    android:maxLines="1"
+                                    android:paddingTop="5dp"
+                                    android:paddingBottom="5dp"
+                                    android:text="morten@livo.nu"
+                                    android:textColor="@color/black"
+                                    android:textColorHint="@color/black"
+                                    android:textSize="16dp" />
+
+                            </RelativeLayout>
 
 
                         </RelativeLayout>
 
-
-                        <RelativeLayout
-                            android:id="@+id/rlPhoneNumber"
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvEmail"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_toEndOf="@+id/rlDialCode">
+                            android:fontFamily="@font/barlow_bold"
+                            android:text="@string/email"
+                            android:textColor="@color/livo_black_45_opacity"
+                            android:textSize="14dp" />
 
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:layout_below="@+id/etPhone"
-                                android:layout_marginTop="2dp"
-                                android:layout_marginEnd="100dp"
-                                android:background="@color/livo_light_grey" />
+                    </RelativeLayout>
 
 
-                            <androidx.appcompat.widget.AppCompatEditText
-                                android:id="@+id/etPhone"
+                    <RelativeLayout
+                        android:id="@+id/rlDatePhone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/rlEmail"
+                        android:layout_marginTop="20dp">
+
+
+                        <!--                <LinearLayout-->
+                        <!--                    android:layout_width="match_parent"-->
+                        <!--                    android:layout_height="wrap_content"-->
+                        <!--                    android:weightSum="2">-->
+
+                        <RelativeLayout
+                            android:id="@+id/rlDate"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <RelativeLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:background="@null"
-                                android:fontFamily="@font/barlow_semibold"
-                                android:hint=""
-                                android:inputType="phone"
-                                android:maxLines="1"
-                                android:paddingTop="5dp"
-                                android:paddingBottom="5dp"
-                                android:text="1234 123 432"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/black"
-                                android:textSize="16dp" />
+                                android:layout_below="@+id/tvDate">
+
+
+                                <RelativeLayout
+                                    android:id="@+id/rlDate1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+
+                                    <View
+                                        android:layout_width="match_parent"
+                                        android:layout_height="1dp"
+                                        android:layout_below="@+id/etDate"
+                                        android:layout_marginTop="2dp"
+                                        android:background="@color/livo_light_grey" />
+
+                                    <androidx.appcompat.widget.AppCompatEditText
+                                        android:id="@+id/etDate"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:background="@null"
+                                        android:focusable="false"
+                                        android:fontFamily="@font/barlow_semibold"
+                                        android:hint=""
+                                        android:inputType="text"
+                                        android:maxLines="1"
+                                        android:paddingTop="5dp"
+                                        android:paddingBottom="5dp"
+                                        android:text="01/01/1990"
+                                        android:textColor="@color/black"
+                                        android:textColorHint="@color/black"
+                                        android:textSize="16dp" />
+
+                                </RelativeLayout>
+
+
+                            </RelativeLayout>
 
                             <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tvChange"
-                                android:layout_width="wrap_content"
+                                android:id="@+id/tvDate"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_alignParentEnd="true"
-                                android:background="@drawable/red_round_shap"
-                                android:backgroundTint="@color/livo_black_10_opacity"
-                                android:fontFamily="@font/barlow_semibold"
-                                android:paddingStart="15dp"
-                                android:paddingTop="7dp"
-                                android:paddingEnd="15dp"
-                                android:paddingBottom="8dp"
-                                android:text="@string/change"
-                                android:textColor="@color/black"
+                                android:fontFamily="@font/barlow_bold"
+                                android:text="@string/date_of_birth_dd_mm_yy"
+                                android:textColor="@color/livo_black_45_opacity"
                                 android:textSize="14dp" />
 
                         </RelativeLayout>
 
 
+                        <!--                </LinearLayout>-->
+
+
                     </RelativeLayout>
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvEnterPhone"
+                    <RelativeLayout
+                        android:id="@+id/rlPhone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/barlow_bold"
-                        android:text="@string/phone_number"
-                        android:textColor="@color/livo_black_45_opacity"
-                        android:textSize="14dp" />
+                        android:layout_below="@+id/rlDatePhone"
+                        android:layout_marginTop="20dp">
 
-                </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tvEnterPhone">
+
+                            <RelativeLayout
+                                android:id="@+id/rlDialCode"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
 
 
-                <RelativeLayout
-                    android:id="@+id/rlIam"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/rlPhone"
-                    android:layout_marginTop="20dp"
-                    >
+                                <View
+                                    android:layout_width="30dp"
+                                    android:layout_height="1dp"
+                                    android:layout_below="@+id/tvDialCode"
+                                    android:layout_marginTop="2dp"
+                                    android:background="@color/livo_light_grey" />
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/tvDialCode"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@null"
+                                    android:fontFamily="@font/barlow_semibold"
+                                    android:hint="+45"
+                                    android:inputType="phone"
+                                    android:maxLines="1"
+                                    android:paddingTop="5dp"
+                                    android:paddingBottom="5dp"
+                                    android:textColor="@color/black"
+                                    android:textColorHint="@color/black"
+                                    android:textSize="16dp" />
+
+
+                            </RelativeLayout>
+
+
+                            <RelativeLayout
+                                android:id="@+id/rlPhoneNumber"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:layout_toEndOf="@+id/rlDialCode">
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:layout_below="@+id/etPhone"
+                                    android:layout_marginTop="2dp"
+                                    android:layout_marginEnd="100dp"
+                                    android:background="@color/livo_light_grey" />
+
+
+                                <androidx.appcompat.widget.AppCompatEditText
+                                    android:id="@+id/etPhone"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@null"
+                                    android:fontFamily="@font/barlow_semibold"
+                                    android:hint=""
+                                    android:inputType="phone"
+                                    android:maxLines="1"
+                                    android:paddingTop="5dp"
+                                    android:paddingBottom="5dp"
+                                    android:text="1234 123 432"
+                                    android:textColor="@color/black"
+                                    android:textColorHint="@color/black"
+                                    android:textSize="16dp" />
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/tvChange"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentEnd="true"
+                                    android:background="@drawable/red_round_shap"
+                                    android:backgroundTint="@color/livo_black_10_opacity"
+                                    android:fontFamily="@font/barlow_semibold"
+                                    android:paddingStart="15dp"
+                                    android:paddingTop="7dp"
+                                    android:paddingEnd="15dp"
+                                    android:paddingBottom="8dp"
+                                    android:text="@string/change"
+                                    android:textColor="@color/black"
+                                    android:textSize="14dp" />
+
+                            </RelativeLayout>
+
+
+                        </RelativeLayout>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvEnterPhone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/barlow_bold"
+                            android:text="@string/phone_number"
+                            android:textColor="@color/livo_black_45_opacity"
+                            android:textSize="14dp" />
+
+                    </RelativeLayout>
 
 
                     <RelativeLayout
-                        android:id="@+id/rlOptions"
+                        android:id="@+id/rlIam"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/tvIam"
-                        android:layout_marginTop="15dp">
+                        android:layout_below="@+id/rlPhone"
+                        android:layout_marginTop="20dp">
 
 
-                        <LinearLayout
+                        <RelativeLayout
+                            android:id="@+id/rlOptions"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:weightSum="3">
+                            android:layout_below="@+id/tvIam"
+                            android:layout_marginTop="15dp">
 
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tvFemale"
-                                android:layout_width="0dp"
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:background="@drawable/white_fill_black_10_border"
-                                android:fontFamily="@font/barlow_semibold"
-                                android:padding="8dp"
-                                android:text="@string/female"
-                                android:textAlignment="center"
-                                android:textColor="@color/livo_black_45_opacity"
-                                android:textSize="16dp" />
+                                android:orientation="horizontal"
+                                android:weightSum="3">
 
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tvMale"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="15dp"
-                                android:layout_weight="1"
-                                android:background="@drawable/black_round_shape"
-                                android:fontFamily="@font/barlow_semibold"
-                                android:padding="8dp"
-                                android:text="@string/male"
-                                android:textAlignment="center"
-                                android:textColor="@color/white"
-                                android:textSize="16dp" />
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/tvFemale"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/white_fill_black_10_border"
+                                    android:fontFamily="@font/barlow_semibold"
+                                    android:padding="8dp"
+                                    android:text="@string/female"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/livo_black_45_opacity"
+                                    android:textSize="16dp" />
 
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tvOther"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="15dp"
-                                android:layout_weight="1"
-                                android:background="@drawable/white_fill_black_10_border"
-                                android:fontFamily="@font/barlow_semibold"
-                                android:padding="8dp"
-                                android:text="@string/other"
-                                android:textAlignment="center"
-                                android:textColor="@color/livo_black_45_opacity"
-                                android:textSize="16dp" />
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/tvMale"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="15dp"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/black_round_shape"
+                                    android:fontFamily="@font/barlow_semibold"
+                                    android:padding="8dp"
+                                    android:text="@string/male"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/white"
+                                    android:textSize="16dp" />
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/tvOther"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="15dp"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/white_fill_black_10_border"
+                                    android:fontFamily="@font/barlow_semibold"
+                                    android:padding="8dp"
+                                    android:text="@string/other"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/livo_black_45_opacity"
+                                    android:textSize="16dp" />
 
 
-                        </LinearLayout>
+                            </LinearLayout>
 
+
+                        </RelativeLayout>
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvIam"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/barlow_bold"
+                            android:text="@string/i_am"
+                            android:textColor="@color/livo_black_45_opacity"
+                            android:textSize="14dp" />
 
                     </RelativeLayout>
-
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvIam"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/barlow_bold"
-                        android:text="@string/i_am"
-                        android:textColor="@color/livo_black_45_opacity"
-                        android:textSize="14dp" />
-
-                </RelativeLayout>
-
-
-                <RelativeLayout
-                    android:id="@+id/rlAccountType"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/rlIam"
-                    android:layout_marginTop="20dp"
-                    >
 
 
                     <RelativeLayout
-                        android:id="@+id/rlOptions1"
+                        android:id="@+id/rlAccountType"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/tvAccountType"
-                        android:layout_marginTop="15dp">
+                        android:layout_below="@+id/rlIam"
+                        android:layout_marginTop="20dp">
 
 
-                        <LinearLayout
+                        <RelativeLayout
+                            android:id="@+id/rlOptions1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:weightSum="2">
+                            android:layout_below="@+id/tvAccountType"
+                            android:layout_marginTop="15dp">
 
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tvBusiness"
-                                android:layout_width="0dp"
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:background="@drawable/white_fill_black_10_border"
-                                android:fontFamily="@font/barlow_semibold"
-                                android:padding="8dp"
-                                android:text="@string/business"
-                                android:textAlignment="center"
-                                android:textColor="@color/livo_black_45_opacity"
-                                android:textSize="16dp" />
+                                android:orientation="horizontal"
+                                android:weightSum="2">
 
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tvIndividual"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="15dp"
-                                android:layout_weight="1"
-                                android:background="@drawable/black_round_shape"
-                                android:fontFamily="@font/barlow_semibold"
-                                android:padding="8dp"
-                                android:text="@string/individual"
-                                android:textAlignment="center"
-                                android:textColor="@color/white"
-                                android:textSize="16dp" />
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/tvBusiness"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/white_fill_black_10_border"
+                                    android:fontFamily="@font/barlow_semibold"
+                                    android:padding="8dp"
+                                    android:text="@string/business"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/livo_black_45_opacity"
+                                    android:textSize="16dp" />
 
-                        </LinearLayout>
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/tvIndividual"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="15dp"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/black_round_shape"
+                                    android:fontFamily="@font/barlow_semibold"
+                                    android:padding="8dp"
+                                    android:text="@string/individual"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/white"
+                                    android:textSize="16dp" />
 
+                            </LinearLayout>
+
+
+                        </RelativeLayout>
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvAccountType"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/barlow_bold"
+                            android:text="@string/user_type"
+                            android:textColor="@color/livo_black_45_opacity"
+                            android:textSize="14dp" />
 
                     </RelativeLayout>
 
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvAccountType"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/barlow_bold"
-                        android:text="@string/user_type"
-                        android:textColor="@color/livo_black_45_opacity"
-                        android:textSize="14dp" />
-
                 </RelativeLayout>
-
 
             </RelativeLayout>
+
 
         </androidx.core.widget.NestedScrollView>
     </RelativeLayout>

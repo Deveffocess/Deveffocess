@@ -154,6 +154,12 @@ interface ApiInterface {
     @Body jsonObject: JsonObject
   ): LoginModel?
 
+  @POST("change_lang")
+  suspend fun getChangeLang(
+    @HeaderMap headers: Map<String, String>,
+    @Body jsonObject: JsonObject
+  ): LoginModel?
+
   @POST("change_num_change_number")
   suspend fun getChangeNumChangeNumber(
     @HeaderMap headers: Map<String, String>,

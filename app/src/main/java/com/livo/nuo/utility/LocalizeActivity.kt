@@ -60,6 +60,11 @@ open class LocalizeActivity : AppCompatActivity() {
                     MyAppSession.locale = "da"
                     MyAppSession.isLocaleEnglish = false
                 }
+                "sv" -> {
+                    conf.setLocale(Locale("sv"))
+                    MyAppSession.locale = "sv"
+                    MyAppSession.isLocaleEnglish = false
+                }
                 else -> {
                     conf.setLocale(Locale("en"))
                     MyAppSession.locale = "en"

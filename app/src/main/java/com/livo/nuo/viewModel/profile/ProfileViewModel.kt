@@ -28,6 +28,7 @@ class ProfileViewModel(application: Application) :  BaseViewModel(application) {
     private var mutableLiveDataViewChangeNumSendOtp : MutableLiveData<LoginModel> = MutableLiveData()
     private var mutableLiveDataViewChangeNumChangeNumber : MutableLiveData<LoginModel> = MutableLiveData()
     private var mutableLiveDataViewEditOwnProfile : MutableLiveData<LoginModel> = MutableLiveData()
+    private var mutableLiveDataViewChangeLang : MutableLiveData<LoginModel> = MutableLiveData()
 
 
     init {
@@ -48,6 +49,9 @@ class ProfileViewModel(application: Application) :  BaseViewModel(application) {
 
     fun getMutableLiveDataViewEditOwnProfile(): MutableLiveData<LoginModel> =
         mutableLiveDataViewEditOwnProfile
+
+    fun getMutableLiveDataViewChangeLang(): MutableLiveData<LoginModel> =
+        mutableLiveDataViewChangeLang
 
 
     fun getUserSettings() {
@@ -136,6 +140,43 @@ class ProfileViewModel(application: Application) :  BaseViewModel(application) {
                     val userIma  = profileRepository?.getchangeNumSendOtp(jsonObject)
                     userIma?.let {
                         mutableLiveDataViewChangeNumSendOtp.postValue(it)
+                    }
+
+                }catch (httpException : HttpException){
+                    try {
+                        val errorResponse =
+                            AppUtils.getErrorResponse(httpException.response()?.errorBody()?.string())
+                        errorResponse?.let {
+                            getErrorMutableLiveData().postValue(it)
+                        }
+                    }catch (e : Exception){
+                        val errorResponse = ErrorResponse("",0,"Please try again later , our server is having some problem",
+                            "Please try again later , our server is having some problem","")
+                        errorResponse?.let {
+                            getErrorMutableLiveData().postValue(it)
+                        }
+                    }
+
+                } catch (e : Exception){
+                    val errorResponse = ErrorResponse("",0,e.message,e.message!!,"")
+                    errorResponse.let {
+                        getErrorMutableLiveData().postValue(it)
+                    }
+                    Log.d("TAG", " get own products Exception : $e")
+
+                }
+            }
+        }
+    }
+
+    fun getChangeLang(jsonObject: JsonObject) {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO){
+                try {
+
+                    val userIma  = profileRepository?.getChangeLang(jsonObject)
+                    userIma?.let {
+                        mutableLiveDataViewChangeLang.postValue(it)
                     }
 
                 }catch (httpException : HttpException){

@@ -282,6 +282,13 @@ class SearchMyListingAdapter(
                     openBottomListingSuspended()
                 }
 
+                if(model.status.equals("Completed"))
+                {
+                    var i = Intent(currAtivity, ListingOngoingStateActivity::class.java)
+                    i.putExtra("id", model.approved_bid_id)
+                    currAtivity.startActivity(i)
+                }
+
             })
 
 

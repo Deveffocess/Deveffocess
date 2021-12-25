@@ -23,6 +23,8 @@ class ProfileRepository : BaseRepository() {
 
     suspend fun getchangeNumSendOtp(jsonObject: JsonObject) = apiInterface?.getchangeNumSendOtp(service.headers(),jsonObject)
 
+    suspend fun getChangeLang(jsonObject: JsonObject) = apiInterface?.getChangeLang(service.headers(),jsonObject)
+
     suspend fun getChangeNumChangeNumber(jsonObject: JsonObject) = apiInterface?.getChangeNumChangeNumber(service.headers(),jsonObject)
 
     suspend fun setEditOwnProfile(first_name: RequestBody, last_name: RequestBody,email: RequestBody

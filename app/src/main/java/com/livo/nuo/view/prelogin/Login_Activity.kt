@@ -14,11 +14,13 @@ import android.text.TextWatcher
 import android.transition.ChangeBounds
 import android.transition.Transition
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.*
 import androidx.lifecycle.Observer
 import com.google.gson.Gson
@@ -41,9 +43,12 @@ import kotlin.collections.ArrayList
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.*
 import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.JsonObject
 import com.jaeger.library.StatusBarUtil
+import com.livo.nuo.databinding.BottomSheetlanguagecodeBinding
+import com.livo.nuo.lib.roundImageView.RoundedImageView
 import com.livo.nuo.manager.SessionManager
 import com.livo.nuo.netUtils.services.fpNetworkHelper
 import com.livo.nuo.utility.*
@@ -81,6 +86,14 @@ class Login_Activity : LocalizeActivity(){
      var languageModel=ArrayList<CountryCodeModel>()
     lateinit var tvApply:TextView
 
+    var bottomsheetlanguagecode : BottomSheetDialog? = null
+    var en_width=0
+    var en_height=0
+    var dn_width=0
+    var dn_height=0
+    var sv_width=0
+    var sv_height=0
+
 
     private var loginViewModel : LoginViewModel? = null
 
@@ -106,7 +119,9 @@ class Login_Activity : LocalizeActivity(){
         })
 
         rlSelectLanguage.setOnClickListener({
-            openChooseLanguagePopup()
+           // openChooseLanguagePopup()
+
+            openBottomPopup()
         })
 
         init()
@@ -201,6 +216,7 @@ class Login_Activity : LocalizeActivity(){
         when (langCode) {
             "en" -> tvSelectLanguage.text = getString(R.string.englishTitle)
             "da" -> tvSelectLanguage.text = getString(R.string.denish)
+            "sv" -> tvSelectLanguage.text = getString(R.string.swedish)
         }
 
 
@@ -523,6 +539,206 @@ class Login_Activity : LocalizeActivity(){
     protected override fun setStatusBar() {
         val mColor = resources.getColor(R.color.white)
         StatusBarUtil.setColor(this, mColor,40)
+    }
+
+
+    private fun openBottomPopup(){
+
+        bottomsheetlanguagecode = BottomSheetDialog(this)
+        var bottomSheetLanguageDialogBinding =
+            DataBindingUtil.inflate<BottomSheetlanguagecodeBinding>(
+                LayoutInflater.from(this),
+                R.layout.bottom_sheetlanguagecode,null,false
+            )
+
+        bottomsheetlanguagecode?.setContentView(bottomSheetLanguageDialogBinding!!.root)
+        Objects.requireNonNull<Window>(bottomsheetlanguagecode?.window)
+            .setBackgroundDrawableResource(android.R.color.transparent)
+
+
+        var imgDanishLang = bottomsheetlanguagecode!!.findViewById<RoundedImageView>(R.id.imgDanishLang)
+        var imgEnglishLang = bottomsheetlanguagecode!!.findViewById<RoundedImageView>(R.id.imgEnglishLang)
+        var imgDenmarkLang = bottomsheetlanguagecode!!.findViewById<RoundedImageView>(R.id.imgDenmarkLang)
+        var llCancel = bottomsheetlanguagecode!!.findViewById<LinearLayout>(R.id.llCancel)
+        var llConfirmChange = bottomsheetlanguagecode!!.findViewById<LinearLayout>(R.id.llConfirmChange)
+        // var cvEnglish=bottomsheetlanguagecode!!.findViewById<MaterialCardView>(R.id.cvEnglish)
+
+        var enval=0
+        var dnval=0
+        var svVal=0
+        var lang = MyAppPreferences.getInstance(applicationContext).getlanguage()
+
+        Handler().postDelayed({
+
+            en_width= imgEnglishLang?.width!!
+            en_height=imgEnglishLang?.height!!
+            dn_width=imgDanishLang?.width!!
+            dn_height=imgDanishLang?.height!!
+            sv_width=imgDenmarkLang?.width!!
+            sv_height=imgDenmarkLang?.height!!
+
+            if (lang.equals("en"))
+            {
+                var cw = (imgEnglishLang?.getWidth() * 15) / 100
+                var ch = (imgEnglishLang?.getHeight() * 15) / 100
+                var width = imgEnglishLang?.getWidth() + cw // ((display.getWidth()*20)/100)
+                var height = imgEnglishLang?.getHeight() + ch // ((display.getHeight()*30)/100)
+                var parms = LinearLayout.LayoutParams(width, height)
+                imgEnglishLang?.setLayoutParams(parms)
+
+                imgEnglishLang?.setBorderColor(resources.getColor(R.color.colorPrimary))
+                imgEnglishLang?.setBorderWidth(resources.getDimension(R.dimen._3sdp))
+
+                bottomSheetLanguageDialogBinding.tvEnglishLang.setTextColor(resources.getColor(R.color.livo_heading_black))
+            }
+            else if(lang.equals("da"))
+            {
+                var cw = (imgDanishLang?.getWidth() * 15) / 100
+                var ch = (imgDanishLang?.getHeight() * 15) / 100
+                var width = imgDanishLang?.getWidth() + cw // ((display.getWidth()*20)/100)
+                var height = imgDanishLang?.getHeight() + ch // ((display.getHeight()*30)/100)
+                var parms = LinearLayout.LayoutParams(width, height)
+                imgDanishLang?.setLayoutParams(parms)
+
+                imgDanishLang?.setBorderColor(resources.getColor(R.color.colorPrimary))
+                imgDanishLang?.setBorderWidth(resources.getDimension(R.dimen._3sdp))
+
+                bottomSheetLanguageDialogBinding.tvDanishLang.setTextColor(resources.getColor(R.color.livo_heading_black))
+            }
+            else if(lang.equals("sv")){
+                var cw = (imgDenmarkLang?.getWidth() * 15) / 100
+                var ch = (imgDenmarkLang?.getHeight() * 15) / 100
+                var width = imgDenmarkLang?.getWidth() + cw // ((display.getWidth()*20)/100)
+                var height = imgDenmarkLang?.getHeight() + ch // ((display.getHeight()*30)/100)
+                var parms = LinearLayout.LayoutParams(width, height)
+                imgDenmarkLang?.setLayoutParams(parms)
+
+                imgDenmarkLang?.setBorderColor(resources.getColor(R.color.colorPrimary))
+                imgDenmarkLang?.setBorderWidth(resources.getDimension(R.dimen._3sdp))
+
+                bottomSheetLanguageDialogBinding.tvDenmarkLang.setTextColor(resources.getColor(R.color.livo_heading_black))
+            }
+
+        },500)
+
+
+
+        imgDanishLang?.setOnClickListener({
+
+            lang="da"
+
+            /*val animation = AnimationUtils.loadAnimation(requireActivity(), R.anim.fade_in)
+            imgDanishLang.startAnimation(animation)*/
+
+            if (dnval==0) {
+                var cw = (imgDanishLang?.getWidth() * 15) / 100
+                var ch = (imgDanishLang?.getHeight() * 15) / 100
+                var width = imgDanishLang?.getWidth() + cw // ((display.getWidth()*20)/100)
+                var height = imgDanishLang?.getHeight() + ch // ((display.getHeight()*30)/100)
+                var parms = LinearLayout.LayoutParams(width, height)
+                imgDanishLang?.setLayoutParams(parms)
+
+                var parms1 = LinearLayout.LayoutParams(en_width, en_height)
+                imgEnglishLang?.setLayoutParams(parms1)
+
+                var parms2 = LinearLayout.LayoutParams(sv_width, sv_height)
+                imgDenmarkLang?.setLayoutParams(parms2)
+
+                dnval=1
+                enval=0
+                svVal=0
+            }
+
+            imgDanishLang?.setBorderColor(resources.getColor(R.color.colorPrimary))
+            imgDanishLang?.setBorderWidth(resources.getDimension(R.dimen._3sdp))
+            imgEnglishLang?.setBorderWidth(resources.getDimension(R.dimen._0sdp))
+            imgDenmarkLang?.setBorderWidth(resources.getDimension(R.dimen._0sdp))
+
+            bottomSheetLanguageDialogBinding.tvDanishLang.setTextColor(resources.getColor(R.color.livo_heading_black))
+            bottomSheetLanguageDialogBinding.tvDenmarkLang.setTextColor(resources.getColor(R.color.black_40_opacity))
+            bottomSheetLanguageDialogBinding.tvEnglishLang.setTextColor(resources.getColor(R.color.black_40_opacity))
+        })
+
+        imgEnglishLang?.setOnClickListener({
+            lang="en"
+            /*val animation = AnimationUtils.loadAnimation(requireActivity(), R.anim.zoom_in)
+            imgEnglishLang.startAnimation(animation)*/
+            if (enval==0) {
+                var cw = (imgEnglishLang?.getWidth() * 15) / 100
+                var ch = (imgEnglishLang?.getHeight() * 15) / 100
+                var width = imgEnglishLang?.getWidth() + cw // ((display.getWidth()*20)/100)
+                var height = imgEnglishLang?.getHeight() + ch // ((display.getHeight()*30)/100)
+                var parms = LinearLayout.LayoutParams(width, height)
+                imgEnglishLang?.setLayoutParams(parms)
+
+                var parms1 = LinearLayout.LayoutParams(dn_width, dn_height)
+                imgDanishLang?.setLayoutParams(parms1)
+
+                var parms2 = LinearLayout.LayoutParams(sv_width, sv_height)
+                imgDenmarkLang?.setLayoutParams(parms2)
+
+                dnval=0
+                enval=1
+                svVal=0
+            }
+
+            imgEnglishLang?.setBorderColor(resources.getColor(R.color.colorPrimary))
+            imgEnglishLang?.setBorderWidth(resources.getDimension(R.dimen._3sdp))
+            imgDanishLang?.setBorderWidth(resources.getDimension(R.dimen._0sdp))
+            imgDenmarkLang?.setBorderWidth(resources.getDimension(R.dimen._0sdp))
+
+            bottomSheetLanguageDialogBinding.tvDanishLang.setTextColor(resources.getColor(R.color.black_40_opacity))
+            bottomSheetLanguageDialogBinding.tvDenmarkLang.setTextColor(resources.getColor(R.color.black_40_opacity))
+            bottomSheetLanguageDialogBinding.tvEnglishLang.setTextColor(resources.getColor(R.color.livo_heading_black))
+        })
+        imgDenmarkLang?.setOnClickListener({
+            lang="sv"
+            /*val animation = AnimationUtils.loadAnimation(requireActivity(), R.anim.zoom_in)
+            imgDenmarkLang.startAnimation(animation)*/
+
+            if(svVal==0) {
+                var cw = (imgDenmarkLang?.getWidth() * 15) / 100
+                var ch = (imgDenmarkLang?.getHeight() * 15) / 100
+                var width = imgDenmarkLang?.getWidth() + cw // ((display.getWidth()*20)/100)
+                var height = imgDenmarkLang?.getHeight() + ch // ((display.getHeight()*30)/100)
+                var parms = LinearLayout.LayoutParams(width, height)
+                imgDenmarkLang?.setLayoutParams(parms)
+
+                var parms1 = LinearLayout.LayoutParams(dn_width, dn_height)
+                imgDanishLang?.setLayoutParams(parms1)
+
+                var parms2 = LinearLayout.LayoutParams(en_width, en_height)
+                imgEnglishLang?.setLayoutParams(parms2)
+
+                dnval=0
+                enval=0
+                svVal=1
+            }
+
+            imgDenmarkLang?.setBorderColor(resources.getColor(R.color.colorPrimary))
+            imgDenmarkLang?.setBorderWidth(resources.getDimension(R.dimen._3sdp))
+            imgDanishLang?.setBorderWidth(resources.getDimension(R.dimen._0sdp))
+            imgEnglishLang?.setBorderWidth(resources.getDimension(R.dimen._0sdp))
+
+            bottomSheetLanguageDialogBinding.tvDanishLang.setTextColor(resources.getColor(R.color.black_40_opacity))
+            bottomSheetLanguageDialogBinding.tvDenmarkLang.setTextColor(resources.getColor(R.color.livo_heading_black))
+            bottomSheetLanguageDialogBinding.tvEnglishLang.setTextColor(resources.getColor(R.color.black_40_opacity))
+        })
+
+        llConfirmChange?.setOnClickListener({
+
+            MyAppPreferences.getInstance(this).save_selected_lang(lang)
+            recreate()
+            bottomsheetlanguagecode?.dismiss()
+
+        })
+        llCancel?.setOnClickListener({
+            bottomsheetlanguagecode?.dismiss()
+        })
+
+        bottomsheetlanguagecode?.show()
+
+
     }
 
 }

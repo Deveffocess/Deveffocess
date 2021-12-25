@@ -48,9 +48,15 @@ object DummyData{
         secondCountryCode.country_name = currContext.getString(R.string.englishTitle)
         secondCountryCode.image = R.drawable.eng_flag
 
+        val thirdCountryCode = CountryCodeModel()
+        thirdCountryCode.id = 2
+        thirdCountryCode.language_code = "sv"
+        thirdCountryCode.country_name = currContext.getString(R.string.swedish)
+        thirdCountryCode.image = R.drawable.flag_sv
 
         countryCodeList.add(firstCountryCode)
         countryCodeList.add(secondCountryCode)
+        countryCodeList.add(thirdCountryCode)
 
         return countryCodeList
     }

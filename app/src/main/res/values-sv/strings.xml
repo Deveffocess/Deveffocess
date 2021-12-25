@@ -10,11 +10,11 @@
     <string name="enter_phone_number">Enter Phone Number</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
-    <string name="send_secure_code">Send Secure Code</string>
+    <string name="send_secure_code">Skicka säkerhetskod</string>
     <string name="search">Search</string>
     <string name="denmark">Denmark</string>
     <string name="sweden">Sweden</string>
-    <string name="swedish">Swedish</string>
+    <string name="swedish">svenska</string>
     <string name="choose_language">Choose Language</string>
     <string name="select_country_code">Select Country Code</string>
     <string name="apply">Apply</string>

@@ -80,6 +80,8 @@ class ProfileSettingActivity : LocalizeActivity() {
     lateinit var tvImage:ImageView
     lateinit var tvChange:TextView
     lateinit var tvTimer:TextView
+    lateinit var shimmerViewContainer:ShimmerFrameLayout
+    lateinit var rlMainLayout:RelativeLayout
 
 
     var firstname=""
@@ -135,8 +137,14 @@ class ProfileSettingActivity : LocalizeActivity() {
         tvImage=findViewById(R.id.tvImage)
         tvChange=findViewById(R.id.tvChange)
 
+        shimmerViewContainer=findViewById(R.id.shimmerViewContainer)
+        rlMainLayout=findViewById(R.id.rlMainLayout)
 
         tvShimmerImage=findViewById(R.id.tvShimmerImage)
+
+        rlMainLayout.visibility=View.GONE
+        shimmerViewContainer.visibility=View.VISIBLE
+        shimmerViewContainer.startShimmer()
 
 
         initViews()
@@ -333,6 +341,10 @@ class ProfileSettingActivity : LocalizeActivity() {
 
         profileViewModel?.getMutableLiveDataViewOwnProfile()
             ?.observe(currActivity as LifecycleOwner, androidx.lifecycle.Observer {
+
+                rlMainLayout.visibility=View.VISIBLE
+                shimmerViewContainer.visibility=View.GONE
+                shimmerViewContainer.stopShimmer()
 
                 var dat=it.data
                 etFirstName.setText(dat.first_name)

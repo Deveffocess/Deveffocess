@@ -1,6 +1,7 @@
 package com.livo.nuo.view.home.homefragments
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -40,6 +41,7 @@ import com.livo.nuo.lib.roundImageView.RoundedImageView
 import com.livo.nuo.manager.SessionManager
 import com.livo.nuo.utility.AndroidUtil
 import com.livo.nuo.utility.AppUtils
+import com.livo.nuo.utility.MyAppPreferences
 import com.livo.nuo.view.Splash_Screen
 import com.livo.nuo.view.profile.*
 import com.livo.nuo.viewModel.ViewModelFactory
@@ -72,6 +74,7 @@ class ProfileFragment : Fragment() {
 
     private var profileViewModel : ProfileViewModel? = null
     var bottomsheetlanguagecode : BottomSheetDialog? = null
+    lateinit var dialog:Dialog
 
     var en_width=0
     var en_height=0
@@ -190,8 +193,6 @@ class ProfileFragment : Fragment() {
         })
 
         rlRefer.setOnClickListener({
-            /*var i=Intent(currActivity,ReferralActivity::class.java)
-            startActivity(i)*/
         })
 
         rlLogout.setOnClickListener({
@@ -300,8 +301,17 @@ class ProfileFragment : Fragment() {
 
             })
 
+         profileViewModel?.getMutableLiveDataViewChangeLang()
+            ?.observe(currActivity as LifecycleOwner, androidx.lifecycle.Observer {
+
+                hideProgressBar()
+                currActivity!!.recreate()
+
+                bottomsheetlanguagecode?.dismiss()
+            })
+
         profileViewModel?.getErrorMutableLiveData()?.observe(currActivity as LifecycleOwner, androidx.lifecycle.Observer {
-            //hideProgressBar()
+            hideProgressBar()
             AppUtils.showToast(currActivity!!,R.drawable.cross,it.message,R.color.error_red,R.color.white,R.color.white)
         })
     }
@@ -331,6 +341,7 @@ class ProfileFragment : Fragment() {
         var enval=0
         var dnval=0
         var svVal=0
+        var lang = MyAppPreferences.getInstance(currActivity!!).getlanguage()
 
         Handler().postDelayed({
 
@@ -341,10 +352,55 @@ class ProfileFragment : Fragment() {
             sv_width=imgDenmarkLang?.width!!
             sv_height=imgDenmarkLang?.height!!
 
+            if (lang.equals("en"))
+            {
+                var cw = (imgEnglishLang?.getWidth() * 15) / 100
+                var ch = (imgEnglishLang?.getHeight() * 15) / 100
+                var width = imgEnglishLang?.getWidth() + cw // ((display.getWidth()*20)/100)
+                var height = imgEnglishLang?.getHeight() + ch // ((display.getHeight()*30)/100)
+                var parms = LinearLayout.LayoutParams(width, height)
+                imgEnglishLang?.setLayoutParams(parms)
+
+                imgEnglishLang?.setBorderColor(resources.getColor(R.color.colorPrimary))
+                imgEnglishLang?.setBorderWidth(resources.getDimension(R.dimen._3sdp))
+
+                bottomSheetLanguageDialogBinding.tvEnglishLang.setTextColor(requireActivity().resources.getColor(R.color.livo_heading_black))
+            }
+            else if(lang.equals("da"))
+            {
+                var cw = (imgDanishLang?.getWidth() * 15) / 100
+                var ch = (imgDanishLang?.getHeight() * 15) / 100
+                var width = imgDanishLang?.getWidth() + cw // ((display.getWidth()*20)/100)
+                var height = imgDanishLang?.getHeight() + ch // ((display.getHeight()*30)/100)
+                var parms = LinearLayout.LayoutParams(width, height)
+                imgDanishLang?.setLayoutParams(parms)
+
+                imgDanishLang?.setBorderColor(resources.getColor(R.color.colorPrimary))
+                imgDanishLang?.setBorderWidth(resources.getDimension(R.dimen._3sdp))
+
+                bottomSheetLanguageDialogBinding.tvDanishLang.setTextColor(requireActivity().resources.getColor(R.color.livo_heading_black))
+            }
+            else if(lang.equals("sv")){
+                var cw = (imgDenmarkLang?.getWidth() * 15) / 100
+                var ch = (imgDenmarkLang?.getHeight() * 15) / 100
+                var width = imgDenmarkLang?.getWidth() + cw // ((display.getWidth()*20)/100)
+                var height = imgDenmarkLang?.getHeight() + ch // ((display.getHeight()*30)/100)
+                var parms = LinearLayout.LayoutParams(width, height)
+                imgDenmarkLang?.setLayoutParams(parms)
+
+                imgDenmarkLang?.setBorderColor(resources.getColor(R.color.colorPrimary))
+                imgDenmarkLang?.setBorderWidth(resources.getDimension(R.dimen._3sdp))
+
+                bottomSheetLanguageDialogBinding.tvDenmarkLang.setTextColor(requireActivity().resources.getColor(R.color.livo_heading_black))
+            }
+
         },500)
 
 
+
         imgDanishLang?.setOnClickListener({
+
+            lang="da"
 
             /*val animation = AnimationUtils.loadAnimation(requireActivity(), R.anim.fade_in)
             imgDanishLang.startAnimation(animation)*/
@@ -379,7 +435,7 @@ class ProfileFragment : Fragment() {
         })
 
         imgEnglishLang?.setOnClickListener({
-
+            lang="en"
             /*val animation = AnimationUtils.loadAnimation(requireActivity(), R.anim.zoom_in)
             imgEnglishLang.startAnimation(animation)*/
             if (enval==0) {
@@ -411,7 +467,7 @@ class ProfileFragment : Fragment() {
             bottomSheetLanguageDialogBinding.tvEnglishLang.setTextColor(requireActivity().resources.getColor(R.color.livo_heading_black))
         })
         imgDenmarkLang?.setOnClickListener({
-
+            lang="sv"
             /*val animation = AnimationUtils.loadAnimation(requireActivity(), R.anim.zoom_in)
             imgDenmarkLang.startAnimation(animation)*/
 
@@ -446,20 +502,34 @@ class ProfileFragment : Fragment() {
 
         llConfirmChange?.setOnClickListener({
 
-            bottomSheetLanguageDialogBinding.llCancel.setBackground(requireActivity()!!.resources.getDrawable(R.drawable.grey_round_shape_45_opacity))
-            bottomSheetLanguageDialogBinding.llConfirmChange.setBackground(requireActivity().resources.getDrawable(R.drawable.blue_round_shape))
+            MyAppPreferences.getInstance(currActivity!!).save_selected_lang(lang)
+
+            showProgressBar()
+            profileViewModel?.let {
+                if (currActivity.let { ctx -> AndroidUtil.isInternetAvailable(ctx!!) } == true) {
+                    var jsonObject =  JsonObject();
+                    jsonObject.addProperty("lang", lang)
+                    it.getChangeLang(jsonObject)
+                }
+            }
 
         })
         llCancel?.setOnClickListener({
-
-            bottomSheetLanguageDialogBinding.llConfirmChange.setBackground(requireActivity().resources.getDrawable(R.drawable.blue_round_shape))
-            bottomSheetLanguageDialogBinding.llCancel.setBackground(requireActivity().resources.getDrawable(R.drawable.grey_round_shape_45_opacity))
-
+            bottomsheetlanguagecode?.dismiss()
         })
 
         bottomsheetlanguagecode?.show()
 
 
+    }
+
+
+    fun showProgressBar(){
+        dialog =  AppUtils.showProgress(currActivity!!)
+    }
+
+    fun hideProgressBar(){
+        AppUtils.hideProgress(dialog)
     }
 
 
