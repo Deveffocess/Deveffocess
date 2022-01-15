@@ -25,6 +25,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -161,7 +162,8 @@ class DropOffFragment : Fragment() , OnMapReadyCallback {
 
         currActivity=requireActivity()
 
-        val date = Date()
+
+        /*val date = Date()
         var df = SimpleDateFormat("yyyy-MM-dd")
         val c1 = Calendar.getInstance()
         val currentDate = df.format(date)
@@ -187,6 +189,7 @@ class DropOffFragment : Fragment() , OnMapReadyCallback {
             LinearLayoutManager.HORIZONTAL,false)
         var adapter = PickUpAdapter(currActivity!!,datedayList,1)
         rvDateList.adapter = adapter
+*/
 
 
         tvEnterPickUpAddress.setOnClickListener({
@@ -203,7 +206,7 @@ class DropOffFragment : Fragment() , OnMapReadyCallback {
                     }
                 })*/
 
-            val fields = listOf(Place.Field.ID, Place.Field.NAME,Place.Field.LAT_LNG)
+            val fields = listOf(Place.Field.ID, Place.Field.NAME,Place.Field.LAT_LNG,Place.Field.ADDRESS)
 
             // Start the autocomplete intent.
             val intent = Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields)
@@ -279,7 +282,7 @@ class DropOffFragment : Fragment() , OnMapReadyCallback {
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                tvSubmit.visibility = View.VISIBLE
+
                 tvSubmit.setText(currActivity!!.resources.getString(R.string.select))
                 tvSubmit.background = currActivity!!.resources.getDrawable(R.drawable.red_round_shap)
 
@@ -326,20 +329,6 @@ class DropOffFragment : Fragment() , OnMapReadyCallback {
 
         })
 
-
-
-        tvSubmit.setOnClickListener({
-            etPickupLocation.setText(tvEnterPickUpAddress.text.toString())
-            (currActivity as NewListingActivity).dropAddress = tvEnterPickUpAddress.text.toString()
-
-
-            (currActivity as NewListingActivity).dropuserCity = tvEnterPickUpAddress.text.toString()
-            (currActivity as NewListingActivity).dropmAddress = tvEnterPickUpAddress.text.toString()
-            getLocationFromAddress(currActivity,tvEnterPickUpAddress.text.toString())
-            tvSubmit.background = currActivity!!.resources.getDrawable(R.drawable.black_round_shape_less_corners)
-            tvSubmit.setText(currActivity!!.resources.getString(R.string.selected))
-
-        })
 
     }
 
@@ -461,7 +450,7 @@ class DropOffFragment : Fragment() , OnMapReadyCallback {
             val markerOptions: MarkerOptions
             try {
                 mMap!!.clear()
-                tvEnterPickUpAddress!!.setText("" + (currActivity as NewListingActivity).dropuserCity)
+                tvEnterPickUpAddress!!.setText("" + (currActivity as NewListingActivity).dropmAddress)
                 (currActivity as NewListingActivity).dropAddress = ""+(currActivity as NewListingActivity).dropmAddress
                 etPickupLocation.setText(""+(currActivity as NewListingActivity).dropmAddress)
                 markerOptions = MarkerOptions().position(coordinate)
@@ -771,16 +760,16 @@ class DropOffFragment : Fragment() , OnMapReadyCallback {
                     sb.append(address).append(" ")
                     val city = addresses[0].locality
                     if (city != null) (currActivity as NewListingActivity).dropaddressBundle!!.putString("city", city)
-                    sb.append(city).append(" ")
+                    //sb.append(city).append(" ")
                     val state = addresses[0].adminArea
                     if (state != null) (currActivity as NewListingActivity).dropaddressBundle!!.putString("state", state)
-                    sb.append(state).append(" ")
+                    //sb.append(state).append(" ")
                     val country = addresses[0].countryName
                     if (country != null) (currActivity as NewListingActivity).dropaddressBundle!!.putString("country", country)
-                    sb.append(country).append(" ")
+                    //sb.append(country).append(" ")
                     val postalCode = addresses[0].postalCode
                     if (postalCode != null) (currActivity as NewListingActivity).dropaddressBundle!!.putString("postalcode", postalCode)
-                    sb.append(postalCode).append(" ")
+                    //sb.append(postalCode).append(" ")
                     // return sb.toString();
                     (currActivity as NewListingActivity).dropaddressBundle!!.putString("fulladdress", sb.toString())
                     (currActivity as NewListingActivity).dropaddressBundle
@@ -930,7 +919,7 @@ class DropOffFragment : Fragment() , OnMapReadyCallback {
                 Activity.RESULT_OK -> {
                     data?.let {
                         val place = Autocomplete.getPlaceFromIntent(data)
-                        tvEnterPickUpAddress.setText("${place.name}")
+                        tvEnterPickUpAddress.setText("${place.address}")
 
                         val data = place.latLng.toString() // assume this is the data
 
@@ -941,6 +930,8 @@ class DropOffFragment : Fragment() , OnMapReadyCallback {
                         Log.i(TAG, "Place: $latitude")
                         (currActivity as NewListingActivity).dropmLatitude=latitude
                         (currActivity as NewListingActivity).dropmLongitude=longitude
+
+                        updateLocation()
                     }
                 }
                 AutocompleteActivity.RESULT_ERROR -> {
@@ -957,6 +948,64 @@ class DropOffFragment : Fragment() , OnMapReadyCallback {
             return
         }
         super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    fun updateLocation(){
+        etPickupLocation.setText(tvEnterPickUpAddress.text.toString())
+        (currActivity as NewListingActivity).dropAddress = tvEnterPickUpAddress.text.toString()
+
+
+        (currActivity as NewListingActivity).dropuserCity = tvEnterPickUpAddress.text.toString()
+        (currActivity as NewListingActivity).dropmAddress = tvEnterPickUpAddress.text.toString()
+        getLocationFromAddress(currActivity,tvEnterPickUpAddress.text.toString())
+        tvSubmit.background = currActivity!!.resources.getDrawable(R.drawable.black_round_shape_less_corners)
+        tvSubmit.setText(currActivity!!.resources.getString(R.string.selected))
+
+    }
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        Handler().postDelayed({
+        if (isVisibleToUser) {
+
+            val date = Date()
+            var df = SimpleDateFormat("yyyy-MM-dd")
+            val c1 = Calendar.getInstance()
+            val currentDate = df.format(date)
+
+            pref = currActivity!!.getSharedPreferences("PickUp", Context.MODE_PRIVATE)
+            var dat = pref.getString("date", "")!!
+
+            c1.add(Calendar.DAY_OF_YEAR, 30)
+            df = SimpleDateFormat("yyyy-MM-dd")
+            val resultDate = c1.time
+            val dueDate = df.format(resultDate)
+
+
+            datedayList.clear()
+            val dates = getDates(dat, dueDate)
+            for (date in dates!!) {
+                datedayList?.add(
+                    DateDayModel(
+                        date.date.toString(),
+                        date.day.toString(),
+                        SimpleDateFormat("yyyy").format(date) as String+"-"+ SimpleDateFormat("MM").format(date) as String+"-"+ SimpleDateFormat("dd").format(date) as String
+                    )
+                )
+            }
+
+            rvDateList.setHasFixedSize(true)
+            rvDateList.layoutManager = LinearLayoutManager(currActivity,
+                LinearLayoutManager.HORIZONTAL,false)
+            var adapter = PickUpAdapter(currActivity!!,datedayList,1)
+            rvDateList.adapter = adapter
+            adapter.notifyDataSetChanged()
+            rvDateList.visibility=View.VISIBLE
+
+        } else {
+            rvDateList.visibility=View.GONE
+        }
+        },2000)
     }
 
 }

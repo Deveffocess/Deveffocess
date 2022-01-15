@@ -28,6 +28,7 @@ import com.livo.nuo.models.ProductModel
 import com.livo.nuo.view.ongoing.ListingOngoingStateActivity
 import com.livo.nuo.view.ongoing.TransporterOffersActivity
 import com.livo.nuo.view.product.ProductDetailActivity
+import com.livo.nuo.view.profile.ContactAdminActivity
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -415,7 +416,8 @@ class SearchMyListingsAdapter (
         })
 
         llContactAdmin?.setOnClickListener({
-
+            var i=Intent(currAtivity, ContactAdminActivity::class.java)
+            currAtivity.startActivity(i)
         })
 
 

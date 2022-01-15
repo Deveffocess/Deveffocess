@@ -214,7 +214,7 @@ class AppUtils {
         }
 
 
-        fun hideKeyboard(activity: Activity?) {
+       public fun hideKeyboard(activity: Activity?) {
             if (activity != null && activity.currentFocus != null && activity.currentFocus!!.windowToken != null) {
                 val inputMethodManager = activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
                 try {

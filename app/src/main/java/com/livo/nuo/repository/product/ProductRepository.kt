@@ -42,6 +42,10 @@ class ProductRepository : BaseRepository() {
 
     suspend fun getSearch(jsonObject: JsonObject) = apiInterface?.getSearch(service.headers(),jsonObject)
 
+    suspend fun getAllChats() = apiInterface?.getAllChats(service.headers())
+
+    suspend fun getAllNotification(jsonObject: JsonObject) = apiInterface?.getAllNotification(service.headers(),jsonObject)
+
     suspend fun getPlacebid(jsonObject: JsonObject) = apiInterface?.getPlacebid(service.headers(),jsonObject)
 
     suspend fun getAllListings(jsonObject: JsonObject) = apiInterface?.getAllListings(service.headers(),jsonObject)

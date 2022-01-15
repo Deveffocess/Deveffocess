@@ -1,25 +1,24 @@
 package com.livo.nuo.view.notifications
 
 import android.app.Activity
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.transition.Slide
-import android.view.Gravity
-import android.view.animation.AccelerateDecelerateInterpolator
 import com.livo.nuo.R
 import android.transition.Fade
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
-import androidx.annotation.RequiresApi
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStore
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.facebook.shimmer.ShimmerFrameLayout
-import com.livo.nuo.models.BannerModel
-import com.livo.nuo.models.BannerModelDemo
-import com.livo.nuo.models.NotificationModel
-import com.livo.nuoo.view.home.adapter.MyListingAdapter
+import com.google.gson.JsonObject
+import com.livo.nuo.models.NotificationDataModel
+import com.livo.nuo.utility.AndroidUtil
+import com.livo.nuo.utility.AppUtils
+import com.livo.nuo.viewModel.ViewModelFactory
+import com.livo.nuo.viewModel.products.ProductViewModel
 
 
 class NotificationsActivity : AppCompatActivity() {
@@ -28,21 +27,11 @@ class NotificationsActivity : AppCompatActivity() {
     lateinit var rvNotifications:RecyclerView
     lateinit var shimmerViewContainer:ShimmerFrameLayout
 
-    private var notificationModelDemo = ArrayList<NotificationModel>()
+    private var currActivity : Activity = this
+    private var productViewModel : ProductViewModel? = null
 
-    var drawableArray = arrayOf<Int>(
-        R.drawable.noti_demo_guitar, R.drawable.noti_demo_blank,R.drawable.noti_demo_person,
-        R.drawable.noti_demo_headphone
-    )
 
-    var name=arrayOf<String>("", "","Reynold","Jacynthe M.")
-
-    var date=arrayOf<String>("12:39 PM", "12:39 PM","28/09/20\n05:19 PM","12/09/20\n12:39 PM")
-
-    var message=arrayOf<String>(
-    "Received +5 Offers", "Message from Livo support","Reynold updated offer on your listing",
-    "Item marked as picked up by Jacynthe M."
-    )
+    private var notificationModelDemo = ArrayList<NotificationDataModel>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,7 +41,9 @@ class NotificationsActivity : AppCompatActivity() {
         imgBack=findViewById(R.id.imgBack)
         rvNotifications=findViewById(R.id.rvNotifications)
         shimmerViewContainer=findViewById(R.id.shimmerViewContainer)
-        shimmerViewContainer.visibility=View.GONE
+        rvNotifications.visibility=View.GONE
+        shimmerViewContainer.visibility=View.VISIBLE
+        shimmerViewContainer.startShimmer()
 
         val fade = Fade()
         val decor: View = window.decorView
@@ -73,22 +64,53 @@ class NotificationsActivity : AppCompatActivity() {
     fun initViews(){
 
 
-        notificationModelDemo.clear()
-        for (i in drawableArray.indices) {
-            notificationModelDemo?.add(
-                NotificationModel(
-                    drawableArray.get(i),
-                    message.get(i),
-                    name.get(i),
-                    date .get(i),
-                )
-            )
+        currActivity?.application?.let {
+            productViewModel = ViewModelProvider(
+                ViewModelStore(),
+                ViewModelFactory(it)
+            ).get(ProductViewModel::class.java)
         }
 
-        var layoutManager = LinearLayoutManager(applicationContext, LinearLayoutManager.VERTICAL,false)
-        rvNotifications.layoutManager = layoutManager
-        var adapter = NotificationsAdapter(this@NotificationsActivity,notificationModelDemo)
-        rvNotifications.adapter = adapter
+
+        productViewModel?.let {
+            if (currActivity.let { ctx -> AndroidUtil.isInternetAvailable(ctx!!) } == true) {
+
+                var jsonObject =  JsonObject()
+                jsonObject.addProperty("page",1 )
+                it.getAllNotification(jsonObject)
+            }
+        }
+
+
+
+
+        observers()
 
     }
+
+    private fun observers() {
+
+        productViewModel?.getMutableLiveDataAllNotification()
+            ?.observe(currActivity as LifecycleOwner, androidx.lifecycle.Observer {
+
+
+                rvNotifications.visibility=View.VISIBLE
+                shimmerViewContainer.visibility=View.GONE
+                shimmerViewContainer.stopShimmer()
+
+                notificationModelDemo.clear()
+                notificationModelDemo.addAll(it.data.notifications_data)
+
+                var layoutManager = LinearLayoutManager(applicationContext, LinearLayoutManager.VERTICAL,false)
+                rvNotifications.layoutManager = layoutManager
+                var adapter = NotificationsAdapter(currActivity,notificationModelDemo)
+                rvNotifications.adapter = adapter
+
+            })
+
+        productViewModel?.getErrorMutableLiveData()?.observe(currActivity as LifecycleOwner, androidx.lifecycle.Observer {
+            AppUtils.showToast(currActivity!!,R.drawable.cross,it.message,R.color.error_red,R.color.white,R.color.white)
+        })
+    }
+
 }

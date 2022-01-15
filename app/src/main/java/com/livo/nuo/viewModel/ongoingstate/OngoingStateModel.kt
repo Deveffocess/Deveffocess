@@ -34,6 +34,7 @@ class OngoingStateModel(application: Application) :  BaseViewModel(application){
     private var mutableLiveDataTrnsCompleteListing : MutableLiveData<LoginModel> = MutableLiveData()
     private var mutableLiveDataSenderCompletesListing : MutableLiveData<LoginModel> = MutableLiveData()
     private var mutableLiveDataDeleteBid : MutableLiveData<LoginModel> = MutableLiveData()
+    private var mutableLiveDataAddChannel : MutableLiveData<LoginModel> = MutableLiveData()
 
     init {
         ongoingRepository = OngoingRepository()
@@ -72,6 +73,9 @@ class OngoingStateModel(application: Application) :  BaseViewModel(application){
     fun getMutableLiveDataDeleteBid(): MutableLiveData<LoginModel> =
         mutableLiveDataDeleteBid
 
+    fun getMutableLiveDataAddChannel(): MutableLiveData<LoginModel> =
+        mutableLiveDataAddChannel
+
 
 
 
@@ -83,6 +87,44 @@ class OngoingStateModel(application: Application) :  BaseViewModel(application){
                     val userIma  = ongoingRepository?.getDeleteBid(jsonObject)
                     userIma?.let {
                         mutableLiveDataDeleteBid.postValue(it)
+                    }
+
+                }catch (httpException : HttpException){
+                    try {
+                        val errorResponse =
+                            AppUtils.getErrorResponse(httpException.response()?.errorBody()?.string())
+                        errorResponse?.let {
+                            getErrorMutableLiveData().postValue(it)
+                        }
+                    }catch (e : Exception){
+                        val errorResponse = ErrorResponse("",0,"Please try again later , our server is having some problem",
+                            "Please try again later , our server is having some problem","")
+                        errorResponse?.let {
+                            getErrorMutableLiveData().postValue(it)
+                        }
+                    }
+
+                } catch (e : Exception){
+                    val errorResponse = ErrorResponse("",0,e.message,e.message!!,"")
+                    errorResponse.let {
+                        getErrorMutableLiveData().postValue(it)
+                    }
+                    Log.d("TAG", " get own products Exception : $e")
+
+                }
+            }
+        }
+    }
+
+
+    fun getAddChannel(jsonObject: JsonObject) {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO){
+                try {
+
+                    val userIma  = ongoingRepository?.getAddChannel(jsonObject)
+                    userIma?.let {
+                        mutableLiveDataAddChannel.postValue(it)
                     }
 
                 }catch (httpException : HttpException){

@@ -175,6 +175,16 @@ class NewListingActivity : LocalizeActivity() {
             }
         })
 
+        pref = getSharedPreferences("PickUp", Context.MODE_PRIVATE)
+        val editor1 = pref.edit()
+        editor1.clear()
+        editor1.apply()
+
+        pref = getSharedPreferences("DropOff", Context.MODE_PRIVATE)
+        val editor2 = pref.edit()
+        editor2.clear()
+        editor2.apply()
+
         tvNext.setOnClickListener({
 
 

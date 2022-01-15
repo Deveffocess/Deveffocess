@@ -2,13 +2,14 @@ package com.livo.nuo.view.home.homefragments
 
 import android.app.Activity
 import android.app.Dialog
-import android.content.Context
-import android.content.Intent
-import android.content.SharedPreferences
+import android.content.*
 import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
+import android.os.StrictMode
+import android.provider.Settings
 import android.transition.*
+import android.util.Base64
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -26,6 +27,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStore
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
@@ -39,20 +41,27 @@ import com.livo.nuo.R
 import com.livo.nuo.databinding.BottomSheetlanguagecodeBinding
 import com.livo.nuo.lib.roundImageView.RoundedImageView
 import com.livo.nuo.manager.SessionManager
+import com.livo.nuo.models.ExtraDataModel
 import com.livo.nuo.utility.AndroidUtil
 import com.livo.nuo.utility.AppUtils
 import com.livo.nuo.utility.MyAppPreferences
 import com.livo.nuo.view.Splash_Screen
+import com.livo.nuo.view.message.ChatActivity
 import com.livo.nuo.view.profile.*
 import com.livo.nuo.viewModel.ViewModelFactory
 import com.livo.nuo.viewModel.profile.ProfileViewModel
+import java.io.IOException
 import java.util.*
+import android.content.Intent
+import android.net.Uri
+
 
 class ProfileFragment : Fragment() {
 
     private var currActivity : Activity? = null
     lateinit var rlProfile : RelativeLayout
     lateinit var tvSubmit : TextView
+    lateinit var rlShare:RelativeLayout
     lateinit var tvApplicationSettings : TextView
     lateinit var imgUser:ImageView
     lateinit var tvUserName:TextView
@@ -65,16 +74,20 @@ class ProfileFragment : Fragment() {
     lateinit var rlHelpnSupport:RelativeLayout
     lateinit var rlRefer : RelativeLayout
     lateinit var rlLogout:RelativeLayout
+    lateinit var rlPayment:RelativeLayout
 
     lateinit var tvShimmerImage:ShimmerFrameLayout
     lateinit var tvShimmerName:ShimmerFrameLayout
     lateinit var tvShimmerAge:ShimmerFrameLayout
+    lateinit var tvShimmerTransporterStatus:ShimmerFrameLayout
     lateinit var shTransporterApplication:ShimmerFrameLayout
     lateinit var shTransporterApplicationLabel:ShimmerFrameLayout
 
     private var profileViewModel : ProfileViewModel? = null
     var bottomsheetlanguagecode : BottomSheetDialog? = null
     lateinit var dialog:Dialog
+
+    var extraDataModel= ExtraDataModel()
 
     var en_width=0
     var en_height=0
@@ -113,6 +126,7 @@ class ProfileFragment : Fragment() {
         tvShimmerImage=root.findViewById(R.id.tvShimmerImage)
         tvShimmerName=root.findViewById(R.id.tvShimmerName)
         tvShimmerAge=root.findViewById(R.id.tvShimmerAge)
+        tvShimmerTransporterStatus=root.findViewById(R.id.tvShimmerTransporterStatus)
         shTransporterApplication=root.findViewById(R.id.shTransporterApplication)
         shTransporterApplicationLabel=root.findViewById(R.id.shTransporterApplicationLabel)
         rllanguage=root.findViewById(R.id.rllanguage)
@@ -121,6 +135,8 @@ class ProfileFragment : Fragment() {
         rlHelpnSupport=root.findViewById(R.id.rlHelpnSupport)
         rlRefer = root.findViewById(R.id.rlRefer)
         rlLogout=root.findViewById(R.id.rlLogout)
+        rlShare=root.findViewById(R.id.rlShare)
+        rlPayment=root.findViewById(R.id.rlPayment)
 
         initViews()
 
@@ -157,6 +173,7 @@ class ProfileFragment : Fragment() {
         tvShimmerAge.startShimmer()
         tvShimmerName.visibility=View.VISIBLE
         tvShimmerAge.visibility=View.VISIBLE
+        tvShimmerTransporterStatus.visibility=View.VISIBLE
         tvUserName.visibility=View.GONE
         tvUserAge.visibility=View.GONE
         shTransporterApplication.startShimmer()
@@ -166,7 +183,8 @@ class ProfileFragment : Fragment() {
         tvTransporterApplication.visibility=View.GONE
         tvTransporterApplicationLabel.visibility=View.GONE
         tvSubmit.visibility=View.GONE
-
+        rlApplicationSettings.visibility=View.GONE
+        rlPayment.visibility=View.GONE
 
         rllanguage.setOnClickListener({
             openBottomPopup()
@@ -188,38 +206,85 @@ class ProfileFragment : Fragment() {
         })
 
         rlHelpnSupport.setOnClickListener({
-            var i=Intent(currActivity,HelpAndSupportActivity::class.java)
+            var i=Intent(currActivity,ContactAdminActivity::class.java)
             startActivity(i)
         })
 
         rlRefer.setOnClickListener({
         })
 
-        rlLogout.setOnClickListener({
-            SessionManager.clear()
-
-            var ListingFragment="ListingFragment"
-            pref = currActivity!!.getSharedPreferences(ListingFragment, Context.MODE_PRIVATE)
-            val editor = pref.edit()
-            editor.clear()
-            editor.apply()
-
-            pref = currActivity!!.getSharedPreferences("PickUp", Context.MODE_PRIVATE)
-            val editor1 = pref.edit()
-            editor1.clear()
-            editor1.apply()
-
-            pref = currActivity!!.getSharedPreferences("DropOff", Context.MODE_PRIVATE)
-            val editor2 = pref.edit()
-            editor2.clear()
-            editor2.apply()
-
-            var i=Intent(currActivity,Splash_Screen::class.java)
-            startActivity(i)
-            currActivity!!.finish()
+        tvSubmit.setOnClickListener({
+            if (tvSubmit.text.equals(resources.getString(R.string.submit_request)))
+            {
+                val intent =
+                    Intent(Intent.ACTION_VIEW, Uri.parse("https://admin.dev.livo.nu/transporterapplication"))
+                startActivity(intent)
+            }
         })
 
+        rlLogout.setOnClickListener({
+
+            showProgressBar()
+
+            var android_id = Settings.Secure.getString(currActivity!!.contentResolver,
+                Settings.Secure.ANDROID_ID)
+
+            profileViewModel?.let {
+                if (currActivity.let { ctx -> AndroidUtil.isInternetAvailable(ctx!!) } == true) {
+
+                    var jsonObject = JsonObject()
+                    jsonObject.addProperty("device_id", android_id)
+                    it.getLogout(jsonObject)
+                }
+            }
+
+
+        })
+
+        rlShare.setOnClickListener({
+
+             extraDataModel= SessionManager.getExtraDataModel()!!
+             var link=extraDataModel.data.play_store_url
+            try {
+                val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
+                StrictMode.setThreadPolicy(policy)
+
+                val share = Intent(Intent.ACTION_SEND)
+                share.type = "text/plain"
+
+                val o ="I'm enjoying the sending and receiving the goods using Livo! #Livo check the app for free on your phone $link"
+
+                share.putExtra(Intent.EXTRA_TEXT, o)
+                startActivity(Intent.createChooser(share, resources.getString(R.string.share)))
+
+            } catch (e: IOException) {
+                Log.e("error",e.toString())
+            }
+
+        })
+
+        currActivity?.let {
+            LocalBroadcastManager.getInstance(it).registerReceiver(mMessageReceiver,
+                IntentFilter("profile_fragment")
+            )
+        }
+
         observers()
+    }
+
+
+    var mMessageReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent) {
+
+
+            profileViewModel?.let {
+                if (currActivity.let { ctx -> AndroidUtil.isInternetAvailable(ctx!!) } == true) {
+                    it.getUserSettings()
+                }
+            }
+
+
+        }
     }
 
 
@@ -234,6 +299,7 @@ class ProfileFragment : Fragment() {
                 tvShimmerAge.stopShimmer()
                 tvShimmerName.visibility=View.GONE
                 tvShimmerAge.visibility=View.GONE
+                tvShimmerTransporterStatus.visibility=View.GONE
                 tvUserName.visibility=View.VISIBLE
                 tvUserAge.visibility=View.VISIBLE
                 shTransporterApplication.stopShimmer()
@@ -284,16 +350,19 @@ class ProfileFragment : Fragment() {
                 }*/
                 if (state==1)
                 {
+                    tvSubmit.visibility=View.VISIBLE
                     tvSubmit.setTextColor(Color.WHITE)
-                    tvSubmit.setBackground(currActivity!!.getDrawable(R.drawable.black_20_round_shape_5))
+                    tvSubmit.setBackground(currActivity!!.getDrawable(R.drawable.black_20_less_corner))
                 }
                 else if (state==2)
                 {
+                    tvSubmit.visibility=View.VISIBLE
                     tvSubmit.setTextColor(Color.WHITE)
-                    tvSubmit.setBackground(currActivity!!.getDrawable(R.drawable.black_20_round_shape_5))
+                    tvSubmit.setBackground(currActivity!!.getDrawable(R.drawable.black_20_less_corner))
                 }
                 else  if (state==3)
                 {
+                    tvSubmit.visibility=View.VISIBLE
                     tvSubmit.setTextColor(Color.BLACK)
                     tvSubmit.setBackground(currActivity!!.getDrawable(R.drawable.white_fill_with_black_border))
                 }
@@ -308,6 +377,41 @@ class ProfileFragment : Fragment() {
                 currActivity!!.recreate()
 
                 bottomsheetlanguagecode?.dismiss()
+            })
+
+         profileViewModel?.getMutableLiveDataViewLogout()
+            ?.observe(currActivity as LifecycleOwner, androidx.lifecycle.Observer {
+
+                hideProgressBar()
+
+                SessionManager.clear()
+
+                var ListingFragment="ListingFragment"
+                pref = currActivity!!.getSharedPreferences(ListingFragment, Context.MODE_PRIVATE)
+                val editor = pref.edit()
+                editor.clear()
+                editor.apply()
+
+                var MyListingFragment="MyListingFragment"
+                pref = currActivity!!.getSharedPreferences(MyListingFragment, Context.MODE_PRIVATE)
+                val editor3 = pref.edit()
+                editor3.clear()
+                editor3.apply()
+
+                pref = currActivity!!.getSharedPreferences("PickUp", Context.MODE_PRIVATE)
+                val editor1 = pref.edit()
+                editor1.clear()
+                editor1.apply()
+
+                pref = currActivity!!.getSharedPreferences("DropOff", Context.MODE_PRIVATE)
+                val editor2 = pref.edit()
+                editor2.clear()
+                editor2.apply()
+
+                var i=Intent(currActivity,Splash_Screen::class.java)
+                currActivity!!.startActivity(i)
+                currActivity!!.finish()
+
             })
 
         profileViewModel?.getErrorMutableLiveData()?.observe(currActivity as LifecycleOwner, androidx.lifecycle.Observer {

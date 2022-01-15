@@ -273,7 +273,7 @@ class PickupFragment : Fragment(), OnMapReadyCallback {
                     }
                 })*/
 
-            val fields = listOf(Place.Field.ID, Place.Field.NAME,Place.Field.LAT_LNG)
+            val fields = listOf(Place.Field.ID, Place.Field.NAME,Place.Field.LAT_LNG,Place.Field.ADDRESS)
 
             // Start the autocomplete intent.
             val intent = Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields)
@@ -284,18 +284,10 @@ class PickupFragment : Fragment(), OnMapReadyCallback {
 
         })
 
+        tvSubmit.visibility=View.GONE
+
         tvSubmit.setOnClickListener({
-            etPickupLocation.setText(tvEnterPickUpAddress.text.toString())
-            (currActivity as NewListingActivity).pickupAddress =
-                tvEnterPickUpAddress.text.toString()
 
-
-            (currActivity as NewListingActivity).userCity = tvEnterPickUpAddress.text.toString()
-            (currActivity as NewListingActivity).mAddress = tvEnterPickUpAddress.text.toString()
-            getLocationFromAddress(currActivity, tvEnterPickUpAddress.text.toString())
-            tvSubmit.background =
-                currActivity!!.resources.getDrawable(R.drawable.black_round_shape_less_corners)
-            tvSubmit.setText(currActivity!!.resources.getString(R.string.selected))
 
         })
 
@@ -330,7 +322,7 @@ class PickupFragment : Fragment(), OnMapReadyCallback {
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                tvSubmit.visibility = View.VISIBLE
+
                 tvSubmit.setText(currActivity!!.resources.getString(R.string.select))
                 tvSubmit.background =
                     currActivity!!.resources.getDrawable(R.drawable.blue_round_shape)
@@ -350,6 +342,20 @@ class PickupFragment : Fragment(), OnMapReadyCallback {
         })
 
 
+    }
+
+    fun updateLocation(){
+        etPickupLocation.setText(tvEnterPickUpAddress.text.toString())
+        (currActivity as NewListingActivity).pickupAddress =
+            tvEnterPickUpAddress.text.toString()
+
+
+        (currActivity as NewListingActivity).userCity = tvEnterPickUpAddress.text.toString()
+        (currActivity as NewListingActivity).mAddress = tvEnterPickUpAddress.text.toString()
+        getLocationFromAddress(currActivity, tvEnterPickUpAddress.text.toString())
+        tvSubmit.background =
+            currActivity!!.resources.getDrawable(R.drawable.black_round_shape_less_corners)
+        tvSubmit.setText(currActivity!!.resources.getString(R.string.selected))
     }
 
     private fun getLocationRequest() {
@@ -459,7 +465,7 @@ class PickupFragment : Fragment(), OnMapReadyCallback {
             val markerOptions: MarkerOptions
             try {
                 mMap!!.clear()
-                tvEnterPickUpAddress!!.setText("" + (currActivity as NewListingActivity).userCity)
+                tvEnterPickUpAddress!!.setText("" + (currActivity as NewListingActivity).mAddress)
                 (currActivity as NewListingActivity).pickupAddress =
                     "" + (currActivity as NewListingActivity).mAddress
                 etPickupLocation.setText("" + (currActivity as NewListingActivity).mAddress)
@@ -783,25 +789,25 @@ class PickupFragment : Fragment(), OnMapReadyCallback {
                         "city",
                         city
                     )
-                    sb.append(city).append(" ")
+                    //sb.append(city).append(" ")
                     val state = addresses[0].adminArea
                     if (state != null) (currActivity as NewListingActivity).addressBundle!!.putString(
                         "state",
                         state
                     )
-                    sb.append(state).append(" ")
+                   // sb.append(state).append(" ")
                     val country = addresses[0].countryName
                     if (country != null) (currActivity as NewListingActivity).addressBundle!!.putString(
                         "country",
                         country
                     )
-                    sb.append(country).append(" ")
+                   // sb.append(country).append(" ")
                     val postalCode = addresses[0].postalCode
                     if (postalCode != null) (currActivity as NewListingActivity).addressBundle!!.putString(
                         "postalcode",
                         postalCode
                     )
-                    sb.append(postalCode).append(" ")
+                    //sb.append(postalCode).append(" ")
                     // return sb.toString();
                     (currActivity as NewListingActivity).addressBundle!!.putString(
                         "fulladdress",
@@ -965,7 +971,7 @@ class PickupFragment : Fragment(), OnMapReadyCallback {
                     data?.let {
                         val place = Autocomplete.getPlaceFromIntent(data)
 
-                        tvEnterPickUpAddress.setText("${place.name}")
+                        tvEnterPickUpAddress.setText("${place.address}")
 
 
                         val data = place.latLng.toString() // assume this is the data
@@ -974,9 +980,11 @@ class PickupFragment : Fragment(), OnMapReadyCallback {
                                 .toTypedArray()
                         val latitude = tempArray[0].toDouble()
                         val longitude = tempArray[1].toDouble()
-                        Log.i(TAG, "Place: $latitude")
+                        Log.i(TAG, "Place: $latitude,$longitude")
                         (currActivity as NewListingActivity).mLatitude=latitude
                         (currActivity as NewListingActivity).mLongitude=longitude
+
+                        updateLocation()
 
                     }
                 }

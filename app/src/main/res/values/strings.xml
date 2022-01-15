@@ -57,7 +57,10 @@
     <string name="reset_all">Reset all</string>
     <string name="SORT_BY">SORT BY</string>
     <string name="FILTER">FILTER</string>
-
+    
+    <string name="incomplete_profile_warning">Incomplete Profile Warning</string>
+    <string name="your_profile_is_incomplete_an_incomplete_profile_may_prevent_you_from_creating_the_listing_or_bidding_on_listing_please_update_your_profile">Your profile is incomplete. An incomplete profile may prevent you from creating the listing or bidding on listing. Please update your profile.</string>
+    <string name="update_profile">Update Profile</string>
 
     <!-- Listing Filter -->
     <string name="nearest_pickup">Nearest Pickup</string>
@@ -95,7 +98,6 @@
     <string name="other_listings">Other Listings</string>
     <string name="show_all">Show all</string>
     <string name="show_less">Show less</string>
-
     <string name="notifications">Notifications</string>
     <string name="process">Process</string>
 
@@ -122,7 +124,6 @@
     <string name="total_amount_payable">Total Amount Payable</string>
     <string name="kindly_wait_while_we_create_listing">Kindly wait while we create listing . . .</string>
 
-    <!-- Profile -->
     <!--Profile / Transporter Appliction -->
     <string name="upload_address_proof">Upload Address Proof</string>
     <string name="address_proof">Address Proof</string>
@@ -136,6 +137,13 @@
     <string name="update_number">Update Number</string>
     <string name="address_line_2">Address Line 2</string>
     <string name="address_line_1">Address Line 1</string>
+    <string name="expect_detailed_response_within_hrs">Expect detailed response within 24-48 hrs</string>
+    <string name="we_are_open_10am_to_6pm">We are open 10am to 6pm</string>
+    <string name="facebook_messanger">Facebook Messanger</string>
+    <string name="email_us">Email Us</string>
+    <string name="call_us">Call Us</string>
+    <string name="chat_with_us">Chat With Us</string>
+    <string name="contact_support">Contact Support</string>
 
 
     <!-- Sender Listing  Activity -->
@@ -145,7 +153,6 @@
     <string name="not_interested">Not Interested</string>
     <string name="message_sender">Message Sender</string>
     <string name="pickup_message">Message Transporter</string>
-
     <string name="listing_completed_successfully">Listing Completed \n Successfully!</string>
 
     <!-- Transporter Listing Data   -->
@@ -157,6 +164,7 @@
     <string name="waiting_payment_approval">Waiting for payment approval</string>
     <string name="waiting_sender_payment">Waiting for sender to make payment</string>
     <string name="open_map">Open Map</string>
+    <string name="i_need_help_with_this_lListing">I need help with this listing</string>
     <string name="message_transpoter">Message Transpoter</string>
     <string name="payment_method">Payment Method</string>
     <string name="payment_method_capital">PAYMENT METHOD</string>
@@ -169,6 +177,11 @@
     <string name="view_all">view all</string>
     <string name="listing_picked_up">Listing Picked Up</string>
     <string name="listing_delivered">Listing Delivered</string>
+
+    <!-- Chat -->
+    <string name="request_help">Request Help</string>
+    <string name="view_listings">View listings</string>
+    <string name="completed_listings">Completed listings</string>
 
     <!-- Days -->
     <string name="sun">Sun</string>

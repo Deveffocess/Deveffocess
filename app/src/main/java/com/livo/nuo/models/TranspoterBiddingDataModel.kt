@@ -10,6 +10,10 @@ class TranspoterBiddingDataModel : Serializable {
     @Expose
     var id = 0
 
+    @SerializedName("channel_id")
+    @Expose
+    var channel_id = ""
+
     @SerializedName("bid_amount")
     @Expose
     var bid_amount = ""

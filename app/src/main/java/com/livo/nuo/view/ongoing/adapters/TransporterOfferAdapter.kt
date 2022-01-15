@@ -1,7 +1,9 @@
 package com.livo.nuo.view.ongoing.adapters
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +11,9 @@ import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStore
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -16,10 +21,16 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.facebook.shimmer.ShimmerFrameLayout
+import com.google.gson.JsonObject
 import com.livo.nuo.R
 import com.livo.nuo.models.TranspoterBiddingDataModel
+import com.livo.nuo.utility.AndroidUtil
+import com.livo.nuo.utility.AppUtils
+import com.livo.nuo.view.message.ChatActivity
 import com.livo.nuo.view.ongoing.ListingOngoingStateActivity
 import com.livo.nuo.view.ongoing.TransporterOffersActivity
+import com.livo.nuo.viewModel.ViewModelFactory
+import com.livo.nuo.viewModel.ongoingstate.OngoingStateModel
 import kotlin.collections.ArrayList
 
 class TransporterOfferAdapter(
@@ -27,7 +38,9 @@ class TransporterOfferAdapter(
     private var list: ArrayList<TranspoterBiddingDataModel>) :
     RecyclerView.Adapter<TransporterOfferAdapter.ViewHolder>() {
 
-
+    var channel_id=""
+    private var ongoingViewModel : OngoingStateModel? = null
+    private lateinit var dialog: Dialog
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
@@ -101,6 +114,30 @@ class TransporterOfferAdapter(
             currAtivity.finish()
         })
 
+        holder.rlMessage.setOnClickListener({
+            channel_id=model.channel_id
+            if(channel_id.isEmpty()) {
+
+                channel_id=model.id.toString()
+                showProgressBar()
+                ongoingViewModel?.let {
+                    if (currAtivity.let { ctx -> AndroidUtil.isInternetAvailable(ctx!!) } == true) {
+                        var jsonObject =  JsonObject();
+                        jsonObject.addProperty("offer_id", model.id)
+                        it.getAddChannel(jsonObject)
+                    }
+                }
+
+            }
+            else{
+                var i=Intent(currAtivity,ChatActivity::class.java)
+                i.putExtra("ch",channel_id)
+                i.putExtra("st","")
+                currAtivity.startActivity(i)
+            }
+        })
+
+        observers()
     }
 
     inner class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
@@ -109,6 +146,7 @@ class TransporterOfferAdapter(
         var tvPrice:TextView
         var imgProductImage: ImageView
         var rlRemove: RelativeLayout
+        var rlMessage:RelativeLayout
         var shimmerImage:ShimmerFrameLayout
         var rlTransporter:RelativeLayout
 
@@ -119,8 +157,43 @@ class TransporterOfferAdapter(
             rlRemove=ItemView.findViewById(R.id.rlRemove)
             shimmerImage=ItemView.findViewById(R.id.shimmerImage)
             rlTransporter=ItemView.findViewById(R.id.rlTransporter)
+            rlMessage=ItemView.findViewById(R.id.rlMessage)
+
+            currAtivity?.application?.let {
+                ongoingViewModel = ViewModelProvider(
+                    ViewModelStore(),
+                    ViewModelFactory(it)
+                ).get(OngoingStateModel::class.java)
+            }
+
         }
     }
 
+    fun observers(){
+        ongoingViewModel?.getMutableLiveDataAddChannel()
+            ?.observe(currAtivity as LifecycleOwner, androidx.lifecycle.Observer {
+
+                hideProgressBar()
+                channel_id= it.data.channel_id
+
+                var i=Intent(currAtivity,ChatActivity::class.java)
+                i.putExtra("ch",channel_id)
+                i.putExtra("st","")
+                currAtivity.startActivity(i)
+            })
+
+        ongoingViewModel?.getErrorMutableLiveData()?.observe(currAtivity as LifecycleOwner, androidx.lifecycle.Observer {
+            hideProgressBar()
+            AppUtils.showToast(currAtivity,R.drawable.cross,it.message,R.color.error_red,R.color.white,R.color.white)
+        })
+    }
+
+    fun showProgressBar(){
+        dialog =  AppUtils.showProgress(currAtivity)
+    }
+
+    fun hideProgressBar(){
+        AppUtils.hideProgress(dialog)
+    }
 
 }

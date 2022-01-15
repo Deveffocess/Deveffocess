@@ -127,4 +127,17 @@ class  UserModel : Serializable{
     @Expose
     var bank_account_number = ""
 
+
+    //Message
+    @SerializedName("message")
+    @Expose
+    var message = ""
+
+    @SerializedName("date")
+    @Expose
+    var date = ""
+
+    @SerializedName("time")
+    @Expose
+    var time = ""
 }

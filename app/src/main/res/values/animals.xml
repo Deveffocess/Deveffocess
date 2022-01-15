@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="first_names">
+        <item>Funky</item>
+        <item>Parrot</item>
+        <item>Happy</item>
+
+    </string-array>
+
+    <string-array name="last_names">
+        <item>Monkey</item>
+        <item>Arra</item>
+        <item>Turtle</item>
+
+    </string-array>
+
+    <string-array name="designations">
+        <item>Technical Specialist</item>
+        <item>Personal Assistant</item>
+        <item>Account Manager</item>
+
+    </string-array>
+
+    <array name="images">
+        <item>@drawable/stepper_circle</item>
+        <item>@drawable/stepper_circle</item>
+        <item>@drawable/stepper_circle</item>
+
+    </array>
+</resources>

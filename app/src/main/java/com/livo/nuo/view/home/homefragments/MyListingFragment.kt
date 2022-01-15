@@ -1,9 +1,7 @@
 package com.livo.nuo.view.home.homefragments
 
 import android.app.Activity
-import android.content.Context
-import android.content.Intent
-import android.content.SharedPreferences
+import android.content.*
 import android.graphics.Color
 import android.os.Bundle
 import android.transition.Fade
@@ -64,8 +62,8 @@ import android.view.MotionEvent
 import android.view.View.OnTouchListener
 import android.widget.Toast
 import android.view.ViewTreeObserver.OnScrollChangedListener
-
-
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import com.livo.nuo.view.home.HomeActivity
 
 
 class MyListingFragment : Fragment() {
@@ -352,9 +350,22 @@ class MyListingFragment : Fragment() {
         })
 
 
+        currActivity?.let {
+            LocalBroadcastManager.getInstance(it).registerReceiver(mMessageReceiver,
+                IntentFilter("dashboard_fragment")
+            )
+        }
+
         observers()
 
     }
+
+    var mMessageReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent) {
+            doApiCall()
+        }
+    }
+
 
     override fun onResume() {
         super.onResume()
@@ -1070,6 +1081,8 @@ class MyListingFragment : Fragment() {
                         currActivity!!.resources.getDrawable(R.drawable.white_round_shape_bottom_square)
 
                 }
+
+                (currActivity as HomeActivity).profile_Check(it.data.profile_fulfil)
 
               userType=it.data.user_type
 

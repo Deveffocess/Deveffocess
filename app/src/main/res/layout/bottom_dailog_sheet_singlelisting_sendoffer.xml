@@ -84,6 +84,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="start"
+                        android:textColor="@color/black_40_opacity"
                         android:fontFamily="@font/barlow_regular"
                         android:textSize="16dp"
                         android:text="@string/livo_fee" />
@@ -94,6 +95,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
+                        android:textColor="@color/black_40_opacity"
                         android:textSize="16dp"
                         android:fontFamily="@font/barlow_regular"
                         android:text="20.1 kr" />
@@ -112,6 +114,7 @@
                         android:layout_weight="1"
                         android:gravity="start"
                         android:textSize="16dp"
+                        android:textColor="@color/black_60_opacity"
                         android:fontFamily="@font/barlow_bold"
                         android:text="@string/total_amount" />
 
@@ -121,6 +124,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
+                        android:textColor="@color/black_60_opacity"
                         android:textSize="16dp"
                         android:fontFamily="@font/barlow_bold"
                         android:text="300 kr" />
@@ -133,6 +137,7 @@
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/barlow_regular"
                     android:textSize="14dp"
+                    android:textColor="@color/black_40_opacity"
                     android:text="@string/a_notification_will_also_be_sent_out_to_sender_to_inform_listing_price_has_been_updated" />
 
                 <LinearLayout

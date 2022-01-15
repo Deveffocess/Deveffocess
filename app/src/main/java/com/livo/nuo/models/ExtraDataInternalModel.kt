@@ -18,6 +18,26 @@ class ExtraDataInternalModel : Serializable {
     @Expose
     var minimum_listing_price = ""
 
+    @SerializedName("email")
+    @Expose
+    var email = ""
+
+    @SerializedName("phone")
+    @Expose
+    var phone = ""
+
+    @SerializedName("facebook_url")
+    @Expose
+    var facebook_url = ""
+
+    @SerializedName("app_store_url")
+    @Expose
+    var app_store_url = ""
+
+    @SerializedName("play_store_url")
+    @Expose
+    var play_store_url = ""
+
     @SerializedName("colors")
     @Expose
     var colors = ArrayList<ColorModel>()

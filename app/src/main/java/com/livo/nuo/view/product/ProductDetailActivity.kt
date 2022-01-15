@@ -3,12 +3,17 @@ package com.livo.nuo.view.product
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
+import android.os.StrictMode
+import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.transition.Transition
+import android.util.Base64
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.*
@@ -39,6 +44,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.tabs.TabLayout
 import com.livo.nuo.databinding.*
@@ -53,9 +59,14 @@ import com.livo.nuo.models.ExtraDataModel
 import com.livo.nuo.models.LoginModel
 import com.livo.nuo.utility.AndroidUtil
 import com.livo.nuo.utility.AppUtils
+import com.livo.nuo.view.home.HomeActivity
+import com.livo.nuo.view.profile.ContactAdminActivity
 import com.livo.nuo.viewModel.ViewModelFactory
 import com.livo.nuo.viewModel.products.ProductViewModel
+import java.io.ByteArrayOutputStream
+import java.io.IOException
 import java.lang.Double
+import java.net.URL
 
 
 class ProductDetailActivity : LocalizeActivity() , OnMapReadyCallback, OnCurveDrawnCallback,
@@ -123,12 +134,22 @@ class ProductDetailActivity : LocalizeActivity() , OnMapReadyCallback, OnCurveDr
     var message=""
 
     var id=""
+    var out=""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product_detail)
 
         id=intent.getStringExtra("id")!!
+
+        try{
+            val m = id.split("`").toTypedArray()
+            id=m[0]
+            out=m[1]
+
+        }
+        catch (ex:Exception){}
+        Log.e("li",id+" "+out)
 
         customSwitch=findViewById(R.id.customSwitch)
         rlShare=findViewById(R.id.rlShare)
@@ -151,8 +172,6 @@ class ProductDetailActivity : LocalizeActivity() , OnMapReadyCallback, OnCurveDr
         imgProductImage=findViewById(R.id.imgProductImage)
         tvTitle=findViewById(R.id.tvTitle)
         tvSendOffer=findViewById(R.id.tvSendOffer)
-
-
 
         shimmerImagex=findViewById(R.id.shimmerImagex)
         shimmerImagex1=findViewById(R.id.shimmerImagex1)
@@ -222,14 +241,47 @@ class ProductDetailActivity : LocalizeActivity() , OnMapReadyCallback, OnCurveDr
 
         rlShare.setOnClickListener({
 
+            var base64 = ""
+            try {
+                val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
+                StrictMode.setThreadPolicy(policy)
+
+                val share = Intent(Intent.ACTION_SEND)
+                share.type = "text/plain"
+
+                val mm = id.trim { it <= ' ' } + "`out"
+                try {
+                    val data = mm.toByteArray(charset("UTF-8"))
+                    base64 = Base64.encodeToString(data, Base64.DEFAULT)
+                } catch (e: Exception) {
+                }
+                val o ="Best Deal : Don't Delay buy today in smart price. Limited Stock available. https://L.Livo.nuo/ref=$base64"
+
+                share.putExtra(Intent.EXTRA_TEXT, o)
+                startActivity(Intent.createChooser(share, resources.getString(R.string.share)))
+
+            } catch (e: IOException) {
+                Log.e("error",e.toString())
+            }
+
         })
 
         rlReport.setOnClickListener({
-            openReportDialog()
+           // openReportDialog()
+            var i = Intent(currActivity, ContactAdminActivity::class.java)
+            startActivity(i)
         })
 
         imgBack.setOnClickListener({
-            onBackPressed()
+            if (out.equals("out"))
+            {
+                var i = Intent(currActivity, HomeActivity::class.java)
+                startActivity(i)
+                finish()
+            }
+            else{
+                finish()
+            }
         })
 
         rlDelete.setOnClickListener({
@@ -761,6 +813,7 @@ class ProductDetailActivity : LocalizeActivity() , OnMapReadyCallback, OnCurveDr
                 R.layout.bottom_dailog_sheet_singlelisting_sendoffer, null, false
             )
 
+
         bottomSheetSendOffer?.setContentView(bottomSheetSendoffer!!.root)
         Objects.requireNonNull<Window>(bottomSheetSendOffer?.window)
             .setBackgroundDrawableResource(android.R.color.transparent)
@@ -797,9 +850,7 @@ class ProductDetailActivity : LocalizeActivity() , OnMapReadyCallback, OnCurveDr
 
                 etAmount?.setBackgroundColor(resources.getColor(R.color.transparant))
                 etAmount?.requestFocus()
-                val imm: InputMethodManager =
-                    currActivity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
+
             }
             else{
                 bottomSheetSendOffer!!.dismiss()
@@ -820,13 +871,24 @@ class ProductDetailActivity : LocalizeActivity() , OnMapReadyCallback, OnCurveDr
             ) {
                 tvAdjustPrice?.text=resources.getString(R.string.cancel)
 
-                if (s.isEmpty())
-                    etAmount.setText("0")
+                if (s.equals("")){
+
+                    etAmount?.setText("")
+                    tvLivofee?.text=String.format("%.2f", 0)+" kr"
+                    tvTotalAmount?.text=s.toString()+" kr"
+                }
+
                 else{
-                    var a=(s.toString()).toDouble()
-                    var b=a*(transportfee.toDouble()/100)
-                    tvLivofee?.text="-"+String.format("%.2f", b)+" kr"
-                    tvTotalAmount?.text=String.format("%.2f", a-b).toString()+" kr"
+                    try {
+                        var a = (s.toString()).toDouble()
+                        var b = a * (transportfee.toDouble() / 100)
+                        tvLivofee?.text = "-" + String.format("%.2f", b) + " kr"
+                        tvTotalAmount?.text = String.format("%.2f", a - b).toString() + " kr"
+                    }
+                    catch (e:java.lang.Exception){
+                        tvLivofee?.text=0.toString()+" kr"
+                        tvTotalAmount?.text=0.toString()+" kr"
+                    }
                 }
             }
         })
@@ -902,5 +964,16 @@ class ProductDetailActivity : LocalizeActivity() , OnMapReadyCallback, OnCurveDr
         dialogOfferSent?.show()
     }
 
+    override fun onBackPressed() {
+        if (out.equals("out"))
+        {
+            var i = Intent(currActivity, HomeActivity::class.java)
+            startActivity(i)
+            finish()
+        }
+        else{
+            finish()
+        }
+    }
 
 }

@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
 import android.preference.PreferenceManager
+import android.provider.Settings
 import android.text.Editable
 import android.text.TextWatcher
 import android.transition.ChangeBounds
@@ -53,6 +54,7 @@ import com.livo.nuo.manager.SessionManager
 import com.livo.nuo.netUtils.services.fpNetworkHelper
 import com.livo.nuo.utility.*
 import com.livo.nuo.view.home.HomeActivity
+import com.livo.nuo.view.message.prefs.Prefs
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -141,11 +143,11 @@ class Login_Activity : LocalizeActivity(){
             ).get(LoginViewModel::class.java)
         }
 
-        loginViewModel?.let {
+       /* loginViewModel?.let {
             if (this.let { ctx -> AndroidUtil.isInternetAvailable(ctx) }) {
                 it.extraData()
             }
-        }
+        }*/
 
 
         var refreshedToken = ""
@@ -336,6 +338,10 @@ class Login_Activity : LocalizeActivity(){
 
 
         tvLogin.setOnClickListener({
+
+            var android_id = Settings.Secure.getString(this.contentResolver,
+                Settings.Secure.ANDROID_ID)
+
             var ty=tvLogin.text
             if (ty.equals(resources.getString(R.string.login)) || ty.equals(resources.getString(R.string.register)))
             {
@@ -357,6 +363,7 @@ class Login_Activity : LocalizeActivity(){
                             jsonObject.addProperty("otp", etOTP.text.toString())
                             jsonObject.addProperty("os","android")
                             jsonObject.addProperty("device_token", device_token)
+                            jsonObject.addProperty("device_id", android_id)
                             it.createSession(jsonObject)
                         }
                     }
@@ -488,6 +495,9 @@ class Login_Activity : LocalizeActivity(){
              timerc=1
              if(SessionManager.getLoginModel()!= null){
              }
+             Prefs.get().clearAllData()
+             Prefs.get().uuid(it.data.pubnub_uuid)
+
              var i=Intent(applicationContext,HomeActivity::class.java)
              startActivity(i)
              finish()

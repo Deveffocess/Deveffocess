@@ -90,21 +90,35 @@
 
                         <include
                             android:id="@+id/v1"
-                            layout="@layout/shimmer_chats_layout" />
+                            layout="@layout/shimmer_notification" />
 
-                        <include layout="@layout/shimmer_chats_layout" />
+                        <include layout="@layout/shimmer_notification" />
 
-                        <include layout="@layout/shimmer_chats_layout" />
+                        <include layout="@layout/shimmer_notification" />
 
-                        <include layout="@layout/shimmer_chats_layout" />
+                        <include layout="@layout/shimmer_notification" />
 
-                        <include layout="@layout/shimmer_chats_layout" />
+                        <include layout="@layout/shimmer_notification" />
 
-                        <include layout="@layout/shimmer_chats_layout" />
+                        <include layout="@layout/shimmer_notification" />
 
-                        <include layout="@layout/shimmer_chats_layout" />
+                        <include layout="@layout/shimmer_notification" />
 
-                        <include layout="@layout/shimmer_chats_layout" />
+                        <include layout="@layout/shimmer_notification" />
+
+                        <include layout="@layout/shimmer_notification" />
+
+                        <include layout="@layout/shimmer_notification" />
+
+                        <include layout="@layout/shimmer_notification" />
+
+                        <include layout="@layout/shimmer_notification" />
+
+                        <include layout="@layout/shimmer_notification" />
+
+                        <include layout="@layout/shimmer_notification" />
+
+                        <include layout="@layout/shimmer_notification" />
 
                     </LinearLayout>
 

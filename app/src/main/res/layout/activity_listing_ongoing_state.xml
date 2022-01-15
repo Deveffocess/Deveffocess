@@ -13,6 +13,8 @@
             android:layout_height="wrap_content"
             android:background="@color/livo_bg_color">
 
+
+
             <RelativeLayout
                 android:id="@+id/rlTopMain"
                 android:layout_width="match_parent"
@@ -184,8 +186,8 @@
 
                                     <androidx.appcompat.widget.AppCompatImageView
                                         android:id="@+id/imgCall"
-                                        android:layout_width="20dp"
-                                        android:layout_height="20dp"
+                                        android:layout_width="24dp"
+                                        android:layout_height="24dp"
                                         android:layout_alignParentEnd="true"
                                         android:layout_centerVertical="true"
                                         android:layout_marginEnd="60dp"
@@ -195,16 +197,16 @@
                                         android:id="@+id/textView28"
                                         android:layout_width="1dp"
                                         android:layout_height="wrap_content"
-                                        android:layout_toStartOf="@+id/imgMessage"
-                                        android:layout_marginEnd="18dp"
                                         android:layout_marginTop="13dp"
-                                        android:foregroundGravity="center"
-                                        android:background="@color/black_20_opacity"/>
+                                        android:layout_marginEnd="18dp"
+                                        android:layout_toStartOf="@+id/imgMessage"
+                                        android:background="@color/black_20_opacity"
+                                        android:foregroundGravity="center" />
 
                                     <androidx.appcompat.widget.AppCompatImageView
                                         android:id="@+id/imgMessage"
-                                        android:layout_width="20dp"
-                                        android:layout_height="20dp"
+                                        android:layout_width="24dp"
+                                        android:layout_height="24dp"
                                         android:layout_alignParentEnd="true"
                                         android:layout_centerVertical="true"
                                         android:layout_marginEnd="5dp"
@@ -255,8 +257,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/rlUserDataMain"
-                        android:background="@color/white"
-                        android:layout_marginTop="8dp">
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/white_less_round_shape">
 
                         <com.facebook.shimmer.ShimmerFrameLayout
                             android:id="@+id/shimmerSteps"
@@ -794,6 +796,7 @@
                                         android:layout_marginEnd="70dp"
                                         android:fontFamily="@font/barlow_semibold"
                                         android:text="@string/pending"
+                                        android:tooltipText="@string/completed_listings"
                                         android:textColor="@color/livo_black_45_opacity"
                                         android:textSize="14dp" />
 
@@ -834,7 +837,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/rlStepsMain"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="8dp"
                         android:background="@drawable/bottom_square_white_round_shape"
                         android:padding="15dp"
                         android:visibility="gone">
@@ -907,39 +910,42 @@
                            </RelativeLayout>-->
 
 
-                           <RelativeLayout
-                               android:id="@+id/rlHelp"
-                               android:layout_width="match_parent"
-                               android:layout_height="wrap_content"
-                               android:layout_margin="10dp"
-                               android:background="@drawable/red_round_shap"
-                               android:backgroundTint="@color/livo_blue"
-                               android:padding="12dp"
-                               android:visibility="gone">
+                        <RelativeLayout
+                            android:id="@+id/rlHelp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:background="@drawable/red_round_shap"
+                            android:backgroundTint="@color/livo_blue"
+                            android:padding="12dp"
+                            android:visibility="visible">
 
 
-                               <androidx.appcompat.widget.AppCompatImageView
-                                   android:id="@+id/imgArrow"
-                                   android:layout_width="20dp"
-                                   android:layout_height="20dp"
-                                   android:layout_alignParentEnd="true"
-                                   android:layout_marginEnd="15dp"
-                                   android:src="@drawable/arrow_right" />
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/imgArrow"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginEnd="15dp"
+                                android:src="@drawable/arrow_right" />
 
 
-                               <androidx.appcompat.widget.AppCompatTextView
-                                   android:id="@+id/tvNeedHelp"
-                                   android:layout_width="match_parent"
-                                   android:layout_height="wrap_content"
-                                   android:layout_marginStart="15dp"
-                                   android:fontFamily="@font/barlow_bold"
-                                   android:text="I Need Help With This Listing"
-                                   android:textColor="@color/white"
-                                   android:textSize="16dp" />
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tvNeedHelp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="15dp"
+                                android:fontFamily="@font/barlow_bold"
+                                android:text="@string/i_need_help_with_this_lListing"
+                                android:textColor="@color/white"
+                                android:textSize="16dp" />
 
-                           </RelativeLayout>
+                        </RelativeLayout>
 
-                       </RelativeLayout>
+                    </RelativeLayout>
 
                    </RelativeLayout>
 

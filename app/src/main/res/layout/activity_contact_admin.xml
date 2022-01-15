@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:id="@+id/rlMain"
+        android:background="@color/livo_bg_color"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/rlHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/top_square_bottom_round_white_shape"
+            android:padding="20dp">
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgBack"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="0dp"
+                android:src="@drawable/backward" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/barlow_bold"
+                android:text="@string/contact_support"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="18dp" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlMainEmail"
+            android:layout_below="@+id/rlHeader"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:background="@drawable/white_round_shape">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/barlow_bold"
+                android:letterSpacing="0.03"
+                android:text="@string/email"
+                android:textAlignment="viewStart"
+                android:textColor="@color/black"
+                android:textSize="18dp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvEmailDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvEmail"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/barlow_bold"
+                android:letterSpacing="0.03"
+                android:text="@string/expect_detailed_response_within_hrs"
+                android:textAlignment="viewStart"
+                android:textColor="@color/black_40_opacity"
+                android:textSize="14dp" />
+
+
+            <RelativeLayout
+                android:id="@+id/rlEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvEmailDesc"
+                android:layout_marginBottom="20dp"
+                android:layout_alignParentEnd="true"
+                >
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/btnEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/red_round_shap"
+                    android:backgroundTint="@color/black"
+                    android:fontFamily="@font/barlow_bold"
+                    android:letterSpacing="0.03"
+                    android:paddingStart="20dp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="20dp"
+                    android:paddingBottom="10dp"
+                    android:text="@string/email_us"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="14dp" />
+
+
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlMainPhone"
+            android:layout_below="@+id/rlMainEmail"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:background="@drawable/white_round_shape">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/barlow_bold"
+                android:letterSpacing="0.03"
+                android:text="@string/phone"
+                android:textAlignment="viewStart"
+                android:textColor="@color/black"
+                android:textSize="18dp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvPhoneDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvPhone"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/barlow_bold"
+                android:letterSpacing="0.03"
+                android:text="@string/we_are_open_10am_to_6pm"
+                android:textAlignment="viewStart"
+                android:textColor="@color/black_40_opacity"
+                android:textSize="14dp" />
+
+
+            <RelativeLayout
+                android:id="@+id/rlPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvPhoneDesc"
+                android:layout_marginBottom="20dp"
+                android:layout_alignParentEnd="true"
+                >
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/btnPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/red_round_shap"
+                    android:backgroundTint="@color/black"
+                    android:fontFamily="@font/barlow_bold"
+                    android:letterSpacing="0.03"
+                    android:paddingStart="20dp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="20dp"
+                    android:paddingBottom="10dp"
+                    android:text="@string/call_us"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="14dp" />
+
+
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlMainFacebook"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rlMainPhone"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/white_round_shape"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvFacebook"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/barlow_bold"
+                android:letterSpacing="0.03"
+                android:text="@string/facebook_messanger"
+                android:textAlignment="viewStart"
+                android:textColor="@color/black"
+                android:textSize="18dp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvFacebookDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvFacebook"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/barlow_bold"
+                android:letterSpacing="0.03"
+                android:text="@string/we_are_open_10am_to_6pm"
+                android:textAlignment="viewStart"
+                android:textColor="@color/black_40_opacity"
+                android:textSize="14dp" />
+
+
+            <RelativeLayout
+                android:id="@+id/rlFacebookMessanger"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvFacebookDesc"
+                android:layout_alignParentEnd="true"
+                android:layout_marginBottom="20dp">
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/btnChatWithUs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/red_round_shap"
+                    android:backgroundTint="@color/black"
+                    android:fontFamily="@font/barlow_bold"
+                    android:letterSpacing="0.03"
+                    android:paddingStart="20dp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="20dp"
+                    android:paddingBottom="10dp"
+                    android:text="@string/chat_with_us"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="14dp" />
+
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+</layout>

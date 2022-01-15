@@ -2,20 +2,28 @@ package com.livo.nuo.view.home
 
 import android.app.Activity
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.Window
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.jaeger.library.StatusBarUtil
 import com.livo.nuo.R
 import com.livo.nuo.commonadapter.AdapterCommonViewPager
+import com.livo.nuo.databinding.BottomSheetListingFilterBinding
+import com.livo.nuo.databinding.BottomSheetTakePermissionBinding
 import com.livo.nuo.utility.AppUtils
 import com.livo.nuo.utility.CheckPermission
 import com.livo.nuo.utility.LocalizeActivity
@@ -24,6 +32,8 @@ import com.livo.nuo.view.home.homefragments.MessageFragment
 import com.livo.nuo.view.home.homefragments.MyListingFragment
 import com.livo.nuo.view.home.homefragments.ProfileFragment
 import com.livo.nuo.view.listing.NewListingActivity
+import com.livo.nuo.view.profile.ProfileSettingActivity
+import java.util.*
 
 class HomeActivity : LocalizeActivity(), View.OnClickListener {
 
@@ -53,6 +63,10 @@ class HomeActivity : LocalizeActivity(), View.OnClickListener {
     lateinit var rlMessages:LinearLayout
     lateinit var rlProfile:LinearLayout
     lateinit var imgCreateListing:ImageView
+
+
+    private var bottomSheetDialog: BottomSheetDialog?=null
+    var profile_fulfill=false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,10 +101,13 @@ class HomeActivity : LocalizeActivity(), View.OnClickListener {
         }
 
         imgCreateListing.setOnClickListener({
-            showProgressBar()
-            var i=Intent(applicationContext,NewListingActivity::class.java)
-            startActivity(i)
-            hideProgressBar()
+            if (profile_fulfill) {
+                var i = Intent(applicationContext, NewListingActivity::class.java)
+                startActivity(i)
+            }
+            else{
+                openBottomPopup()
+            }
         })
 
         setUpViewPager()
@@ -285,9 +302,10 @@ class HomeActivity : LocalizeActivity(), View.OnClickListener {
     override fun onClick(p0: View?) {
         when(p0!!.id){
             R.id.rlHome ->{
-                isFifth = false
-                vv.setCurrentItem(0,true)
-                rlMain.setBackgroundColor(resources.getColor(R.color.livo_bg_color))
+
+                    isFifth = false
+                    vv.setCurrentItem(0, true)
+                    rlMain.setBackgroundColor(resources.getColor(R.color.livo_bg_color))
 
             }
             R.id.rlListing ->{
@@ -299,11 +317,11 @@ class HomeActivity : LocalizeActivity(), View.OnClickListener {
             R.id.rlCreateListing ->{
                 isFifth = false
                 //NewListingActivity.open(currActivity)
-//                binding!!.vv.setCurrentItem(2,true)
+               // binding!!.vv.setCurrentItem(2,true)
             }
             R.id.rlMessages ->{
                 isFifth = false
-               vv.setCurrentItem(2,true)
+                vv.setCurrentItem(2,true)
                 rlMain.setBackgroundColor(resources.getColor(R.color.white))
 
             }
@@ -315,6 +333,50 @@ class HomeActivity : LocalizeActivity(), View.OnClickListener {
             }
         }
     }
+
+    fun profile_Check(v:Boolean){
+        profile_fulfill=v
+
+    }
+
+    private fun openBottomPopup() {
+
+        bottomSheetDialog = BottomSheetDialog(currActivity!!)
+        var bottomSheetDashboardFilterBinding =
+            DataBindingUtil.inflate<BottomSheetTakePermissionBinding>(
+                LayoutInflater.from(currActivity),
+                R.layout.bottom_sheet_take_permission, null, false
+            )
+
+        bottomSheetDialog?.setContentView(bottomSheetDashboardFilterBinding!!.root)
+        Objects.requireNonNull<Window>(bottomSheetDialog?.window)
+            .setBackgroundDrawableResource(android.R.color.transparent)
+
+        var tvNotifications=bottomSheetDialog!!.findViewById<TextView>(R.id.tvNotifications)
+        var tvDetails=bottomSheetDialog!!.findViewById<TextView>(R.id.tvDetails)
+        var tvCancel=bottomSheetDialog!!.findViewById<TextView>(R.id.tvCancel)
+        var tvOpenSetting=bottomSheetDialog!!.findViewById<TextView>(R.id.tvOpenSetting)
+        var llCancel=bottomSheetDialog!!.findViewById<LinearLayout>(R.id.llCancel)
+        var llOpenSetting=bottomSheetDialog!!.findViewById<LinearLayout>(R.id.llOpenSetting)
+
+        tvNotifications!!.text=resources.getString(R.string.incomplete_profile_warning)
+        tvDetails!!.text=resources.getString(R.string.your_profile_is_incomplete_an_incomplete_profile_may_prevent_you_from_creating_the_listing_or_bidding_on_listing_please_update_your_profile)
+        tvCancel!!.text=resources.getString(R.string.cancel)
+        tvOpenSetting!!.text=resources.getString(R.string.update_profile)
+
+        llCancel!!.setOnClickListener({
+            bottomSheetDialog!!.dismiss()
+        })
+
+        llOpenSetting!!.setOnClickListener({
+            var i=Intent(currActivity,ProfileSettingActivity::class.java)
+            startActivity(i)
+        })
+
+
+        bottomSheetDialog?.show()
+    }
+
 
     protected override fun setStatusBar() {
 

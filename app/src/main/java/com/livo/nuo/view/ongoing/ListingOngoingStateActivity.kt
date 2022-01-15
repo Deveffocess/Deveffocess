@@ -1,36 +1,20 @@
 package com.livo.nuo.view.ongoing
 
-import android.Manifest
+import android.R.attr
 import android.app.Activity
 import android.app.Dialog
-import android.content.ContentResolver
-import android.content.ContentValues
-import android.content.Context
-import android.content.Intent
+import android.content.*
 import android.content.pm.PackageManager
 import android.graphics.*
 import android.hardware.camera2.CameraAccessException
 import android.hardware.camera2.CameraManager
 import android.net.Uri
-import android.os.Build
-import android.os.Bundle
-import android.os.Environment
-import android.os.Handler
 import android.provider.MediaStore
 import android.text.*
 import android.text.style.ForegroundColorSpan
-import android.text.style.StyleSpan
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.Window
-import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
@@ -57,11 +41,10 @@ import com.livo.nuo.utility.AndroidUtil
 import com.livo.nuo.utility.AppUtils
 import com.livo.nuo.utility.CheckPermission
 import com.livo.nuo.utility.LocalizeActivity
-import com.livo.nuo.view.listing.NewListingActivity
-import com.livo.nuo.view.listing.fragments.AddImagesFragment
+import com.livo.nuo.view.message.ChatActivity
+import com.livo.nuo.view.profile.ContactAdminActivity
 import com.livo.nuo.viewModel.ViewModelFactory
 import com.livo.nuo.viewModel.ongoingstate.OngoingStateModel
-import com.livo.nuo.viewModel.products.ProductViewModel
 import com.loopeer.shadow.ShadowView
 import com.stripe.android.PaymentConfiguration
 import com.stripe.android.paymentsheet.PaymentSheet
@@ -72,8 +55,20 @@ import okhttp3.RequestBody
 import java.io.*
 import java.lang.Exception
 import java.util.*
+import android.os.*
+import android.graphics.Bitmap
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import android.widget.RelativeLayout
+import android.R.attr.button
+import android.view.*
 
-class ListingOngoingStateActivity : LocalizeActivity() {
+import android.widget.LinearLayout
+import androidx.appcompat.widget.AppCompatTextView
+import com.tooltip.Tooltip
+
+
+class ListingOngoingStateActivity : LocalizeActivity(){
+
 
 
     private var listingPopupBinding: ListingSuccessPopupBinding? = null
@@ -110,7 +105,7 @@ class ListingOngoingStateActivity : LocalizeActivity() {
     lateinit var btnMakePayment : TextView
     lateinit var svMakePayment : ShadowView
     lateinit var slideView : SlideToActView
-    lateinit var tvStatus:TextView
+    lateinit var tvStatus: AppCompatTextView
     lateinit var imgDropoff:ImageView
     lateinit var tvStatusDrop:TextView
     lateinit var tvStatusComplete:TextView
@@ -132,6 +127,8 @@ class ListingOngoingStateActivity : LocalizeActivity() {
     lateinit var imgProductImage:ImageView
     lateinit var tvTitle:TextView
     lateinit var tvProposedAmount : TextView
+    lateinit var tvMessageTransporterdrop:TextView
+    lateinit var tvMessageTransporter:TextView
 
     lateinit var imgProductImage1:ImageView
     lateinit var preview:CameraView
@@ -143,12 +140,14 @@ class ListingOngoingStateActivity : LocalizeActivity() {
     var picturePath2=""
     lateinit var imagesDir:String
     var extension: String = ""
+    lateinit var imgMessage:ImageView
 
     private val currentFlash = Values.FLASH_AUTO
 
     lateinit var imgPickup:ImageView
 
     private lateinit var dialog: Dialog
+
 
     var flashtor=0
 
@@ -161,6 +160,8 @@ class ListingOngoingStateActivity : LocalizeActivity() {
 
     var amount=0.0
     var value=""
+    var channel_id=""
+    var accept=0
 
     var extraDataModel= ExtraDataModel()
     private var ongoingViewModel : OngoingStateModel? = null
@@ -178,17 +179,19 @@ class ListingOngoingStateActivity : LocalizeActivity() {
     var dropoffimage_url=""
     var pickupdate=""
     var dropoffdate=""
+    var status=""
 
     lateinit var stepper_0 : VerticalStepperItemView
     lateinit var stepper_1 : VerticalStepperItemView
     lateinit var stepper_2 : VerticalStepperItemView
     lateinit var stepper_3 : VerticalStepperItemView
 
-
     //payment
     lateinit var paymentSheet: PaymentSheet
     lateinit var customerConfig: PaymentSheet.CustomerConfiguration
     lateinit var paymentIntentClientSecret: String
+
+    var addr=""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -220,6 +223,10 @@ class ListingOngoingStateActivity : LocalizeActivity() {
         tvStatusComplete=findViewById(R.id.tvStatusCompleted)
         tvStatusApprove=findViewById(R.id.tvStatusApprove)
         imgCall=findViewById(R.id.imgCall)
+        imgMessage=findViewById(R.id.imgMessage)
+        tvMessageTransporterdrop=findViewById(R.id.tvMessageTransporterdrop)
+        tvMessageTransporter=findViewById(R.id.tvMessageTransporter)
+
 
         rlRatingHelp = findViewById(R.id.rlRatingHelp)
         rlHelp = findViewById(R.id.rlHelp)
@@ -240,8 +247,9 @@ class ListingOngoingStateActivity : LocalizeActivity() {
         llMessageTransporterdrop=findViewById(R.id.llMessageTransporterdrop)
         llOpenMapTakePicturedrop=findViewById(R.id.llOpenMapTakePicturedrop)
 
+
         id =intent.getIntExtra("id",0) // id send for if condition
-        Log.e("id",id.toString())
+
 
         stepper_0 = findViewById(R.id.stepper_0)
         stepper_1 = findViewById(R.id.stepper_1)
@@ -287,6 +295,7 @@ class ListingOngoingStateActivity : LocalizeActivity() {
         }
 
         paymentSheet = PaymentSheet(this, ::onPaymentSheetResult)
+
 
         viewAllStates()
 
@@ -343,15 +352,86 @@ class ListingOngoingStateActivity : LocalizeActivity() {
             startActivity(intent)
         })
 
+        rlHelp.setOnClickListener({
+
+            var i=Intent(currActivity,ContactAdminActivity::class.java)
+            startActivity(i)
+
+        })
+
+        tvMessageTransporterdrop.setOnClickListener({
+            var i=Intent(currActivity,ChatActivity::class.java)
+            i.putExtra("ch",channel_id)
+            i.putExtra("st",status)
+            currActivity.startActivity(i)
+        })
+
+        tvMessageTransporter.setOnClickListener({
+            var i=Intent(currActivity,ChatActivity::class.java)
+            i.putExtra("ch",channel_id)
+            i.putExtra("st",status)
+            currActivity.startActivity(i)
+        })
+
+        imgMessage.setOnClickListener({
+            if(channel_id.isEmpty()) {
+
+                showProgressBar()
+                ongoingViewModel?.let {
+                    if (currActivity.let { ctx -> AndroidUtil.isInternetAvailable(ctx!!) } == true) {
+                        var jsonObject =  JsonObject();
+                        jsonObject.addProperty("offer_id", id)
+
+                        it.getAddChannel(jsonObject)
+                    }
+                }
+            }
+
+            else{
+                var i=Intent(currActivity,ChatActivity::class.java)
+                i.putExtra("ch",channel_id)
+                i.putExtra("st",status)
+                currActivity.startActivity(i)
+            }
+
+        })
+
+        tvStatus.setOnClickListener({v->
+
+            var tooltip=Tooltip.Builder(v)
+                .setText(addr)
+                .setTextColor(Color.WHITE)
+                .setGravity(Gravity.TOP)
+                .setCornerRadius(8f)
+                .setBackgroundColor(resources.getColor(R.color.livo_green))
+                .setDismissOnClick(true)
+                .show()
+
+           })
+
+        currActivity?.let {
+            LocalBroadcastManager.getInstance(it).registerReceiver(mMessageReceiver,
+                IntentFilter("listing_ongoing"))
+        }
     }
 
-    override fun onResume() {
-        super.onResume()
-    }
 
-    override fun onPause() {
-       // photographer?.stopPreview()
-        super.onPause()
+    var mMessageReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent) {
+
+            val id = intent.getStringExtra("id")
+
+            ongoingViewModel?.let {
+                if (currActivity.let { ctx -> AndroidUtil.isInternetAvailable(ctx!!) } == true) {
+
+                    var jsonObject =  JsonObject();
+                    jsonObject.addProperty("offer_id", id)
+
+                    it.getViewAllState(jsonObject)
+                }
+            }
+
+        }
     }
 
 
@@ -371,6 +451,7 @@ class ListingOngoingStateActivity : LocalizeActivity() {
             pickup_longitude=it.data.pickup_longitude
             dropoff_latitude=it.data.dropoff_latitude
             dropoff_longitude=it.data.dropoff_longitude
+            channel_id=it.data.channel_id
 
             is_transpoter=it.data.is_transporter
             tvTitle.text=it.data.user_details.first_name+" "+it.data.user_details.last_name
@@ -534,6 +615,19 @@ class ListingOngoingStateActivity : LocalizeActivity() {
                     {
                         slideView.visibility = View.VISIBLE
                     }
+                    else if(sub_level==2){
+                        status="completed"
+                        rlRatingHelp.visibility = View.VISIBLE
+                        rlHelp.visibility=View.VISIBLE
+
+                        val buttonLayoutParams: RelativeLayout.LayoutParams =
+                            RelativeLayout.LayoutParams(
+                                RelativeLayout.LayoutParams.MATCH_PARENT,
+                                RelativeLayout.LayoutParams.WRAP_CONTENT
+                            )
+                        buttonLayoutParams.setMargins(0, 0, 0, 30)
+                        rlSteps.setLayoutParams(buttonLayoutParams)
+                    }
 
                     lltransporter_Acceptdecline.visibility=View.GONE
                     lltransporter_Approval.visibility=View.GONE
@@ -559,13 +653,25 @@ class ListingOngoingStateActivity : LocalizeActivity() {
                         lltransporter_Acceptdecline.visibility = View.VISIBLE
                         lltransporter_Approval.visibility = View.GONE
 
+                        imgCall.setColorFilter(getResources().getColor(R.color.black_20_opacity))
+                        imgMessage.setColorFilter(getResources().getColor(R.color.black_20_opacity))
+                        imgCall.isEnabled=false
+                        imgMessage.isEnabled=false
+
                         btnApprove.text=resources.getString(R.string.change_price)
                         tvNotIntrested.text=resources.getString(R.string.delete_offer)
 
                     }
                     if (sub_level == 1) {
+
+                        imgCall.setColorFilter(getResources().getColor(R.color.error_red_delete))
+                        imgMessage.setColorFilter(getResources().getColor(R.color.livo_green))
+
                         lltransporter_Acceptdecline.visibility = View.VISIBLE
                         lltransporter_Approval.visibility = View.GONE
+                        imgCall.isEnabled=true
+                        imgMessage.isEnabled=true
+
 
                         btnApprove.text = applicationContext.resources.getString(R.string.accept_sender)
                         tvNotIntrested.text = applicationContext.resources.getString(R.string.decline)
@@ -619,7 +725,7 @@ class ListingOngoingStateActivity : LocalizeActivity() {
 
                     var pickup_state = it.data.main_levels.pickup
                     mSteppers[1]?.title = pickup_state.title
-                    var addr:String=it.data.pickup_address
+                    addr=it.data.pickup_address
                     if (addr.length>35) {
 
                         tvStatus.text = addr.substring(0, 35) + "... view all"
@@ -717,6 +823,20 @@ class ListingOngoingStateActivity : LocalizeActivity() {
                     {
                         slideView.visibility = View.GONE
                     }
+                    else if(sub_level==2) {
+                        rlRatingHelp.visibility = View.VISIBLE
+                        rlHelp.visibility = View.VISIBLE
+                        status="completed"
+
+
+                        val buttonLayoutParams: RelativeLayout.LayoutParams =
+                            RelativeLayout.LayoutParams(
+                                RelativeLayout.LayoutParams.MATCH_PARENT,
+                                RelativeLayout.LayoutParams.WRAP_CONTENT
+                            )
+                        buttonLayoutParams.setMargins(0, 0, 0, 30)
+                        rlSteps.setLayoutParams(buttonLayoutParams)
+                    }
 
                     lltransporter_Acceptdecline.visibility=View.GONE
                     lltransporter_Approval.visibility=View.GONE
@@ -785,11 +905,23 @@ class ListingOngoingStateActivity : LocalizeActivity() {
               lltransporter_Approval.visibility = View.VISIBLE
               lltransporter_Acceptdecline.visibility=View.GONE
 
+              if(channel_id.isEmpty()) {
+                  accept=1
+                  ongoingViewModel?.let {
+                      if (currActivity.let { ctx -> AndroidUtil.isInternetAvailable(ctx!!) } == true) {
+                          var jsonObject =  JsonObject();
+                          jsonObject.addProperty("offer_id", id)
+
+                          it.getAddChannel(jsonObject)
+                      }
+                  }
+              }
+
               viewAllStates()
           })
 
         ongoingViewModel?.getMutableLiveDataTrnsAcceptApproval()?.observe(currActivity as LifecycleOwner, androidx.lifecycle.Observer {
-              hideProgressBar()
+            hideProgressBar()
 
               lltransporter_Approval.visibility = View.GONE
               lltransporter_Acceptdecline.visibility=View.VISIBLE
@@ -801,7 +933,7 @@ class ListingOngoingStateActivity : LocalizeActivity() {
           })
 
         ongoingViewModel?.getMutableLiveDataTrnsDeclineApproval()?.observe(currActivity as LifecycleOwner, androidx.lifecycle.Observer {
-              hideProgressBar()
+            hideProgressBar()
 
               lltransporter_Approval.visibility = View.VISIBLE
               lltransporter_Acceptdecline.visibility=View.GONE
@@ -813,11 +945,11 @@ class ListingOngoingStateActivity : LocalizeActivity() {
               hideProgressBar()
               showPopup()
 
-            viewAllStates()
+              viewAllStates()
           })
 
         ongoingViewModel?.getMutableLiveDataSenderCompletesListing()?.observe(currActivity as LifecycleOwner, androidx.lifecycle.Observer {
-              hideProgressBar()
+            hideProgressBar()
               showPopup()
 
             viewAllStates()
@@ -849,7 +981,6 @@ class ListingOngoingStateActivity : LocalizeActivity() {
 
                 presentPaymentSheet()
 
-
                 //viewAllStates()
             })
 
@@ -863,9 +994,6 @@ class ListingOngoingStateActivity : LocalizeActivity() {
         ongoingViewModel?.getMutableLiveDataChangePaymentStatus()
             ?.observe(currActivity as LifecycleOwner, androidx.lifecycle.Observer {
                 var code=it.code
-
-                //bottomSheetApplicationDialog?.dismiss()
-
                 hideProgressBar()
 
                 viewAllStates()
@@ -881,9 +1009,28 @@ class ListingOngoingStateActivity : LocalizeActivity() {
                 viewAllStates()
             })
 
+         ongoingViewModel?.getMutableLiveDataAddChannel()
+            ?.observe(currActivity as LifecycleOwner, androidx.lifecycle.Observer {
+
+                channel_id=it.data.channel_id
+                hideProgressBar()
+
+                if(accept==1)
+                {
+                    accept=0
+                }
+                else{
+                    Log.e("yhj",id.toString())
+                var i=Intent(currActivity, ChatActivity::class.java)
+                i.putExtra("ch",channel_id)
+                i.putExtra("st",status)
+                currActivity.startActivity(i)
+                }
+            })
+
         ongoingViewModel?.getErrorMutableLiveData()?.observe(currActivity as LifecycleOwner, androidx.lifecycle.Observer {
             hideProgressBar()
-            AppUtils.showToast(currActivity,R.drawable.cross,it.message,R.color.error_red,R.color.white,R.color.white)
+           // AppUtils.showToast(currActivity,R.drawable.cross,it.message,R.color.error_red,R.color.white,R.color.white)
         })
     }
 
@@ -1823,9 +1970,6 @@ class ListingOngoingStateActivity : LocalizeActivity() {
 
                 etAmount?.setBackgroundColor(resources.getColor(R.color.transparant))
                 etAmount?.requestFocus()
-                val imm: InputMethodManager =
-                    currActivity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
 
         })
 
@@ -1841,13 +1985,24 @@ class ListingOngoingStateActivity : LocalizeActivity() {
                 before: Int, count: Int
             ) {
 
-                if (s.isEmpty())
-                    etAmount.setText("0")
+                if (s.equals("")){
+
+                    etAmount?.setText("")
+                    tvLivofee?.text=String.format("%.2f", 0)+" kr"
+                    tvTotalAmount?.text=s.toString()+" kr"
+                }
+
                 else{
-                    var a=(s.toString()).toDouble()
-                    var b=a*(transportfee.toDouble()/100)
-                    tvLivofee?.text="-"+String.format("%.2f", b)+" kr"
-                    tvTotalAmount?.text=(a-b).toString()+" kr"
+                    try {
+                        var a = (s.toString()).toDouble()
+                        var b = a * (transportfee.toDouble() / 100)
+                        tvLivofee?.text = "-" + String.format("%.2f", b) + " kr"
+                        tvTotalAmount?.text = String.format("%.2f", a - b).toString() + " kr"
+                    }
+                    catch (e:java.lang.Exception){
+                        tvLivofee?.text=0.toString()+" kr"
+                        tvTotalAmount?.text=0.toString()+" kr"
+                    }
                 }
             }
         })
@@ -1869,6 +2024,9 @@ class ListingOngoingStateActivity : LocalizeActivity() {
         })
 
         tvAdjustPrice?.setOnClickListener({
+            val imm: InputMethodManager =
+                currActivity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
             bottomSheetSendOffer?.dismiss()
         })
 
@@ -2104,5 +2262,8 @@ class ListingOngoingStateActivity : LocalizeActivity() {
             }
         }
     }
+
+
+
 
 }

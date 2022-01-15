@@ -243,19 +243,23 @@ class PublishFragment : Fragment() {
                      var  rdropoff_date = RequestBody.create("multipart/form-data".toMediaTypeOrNull(),dat1)
 
                      var mLongitude=String.format("%.7f", (currActivity as NewListingActivity).mLongitude)
+                     mLongitude = mLongitude.replace(",", ".")
                      var mLatitude=String.format("%.7f",(currActivity as NewListingActivity).mLatitude)
+                     mLatitude = mLatitude.replace(",", ".")
 
                      var  rmLongitude = RequestBody.create("multipart/form-data".toMediaTypeOrNull(),mLongitude)
                      var  rmLatitude = RequestBody.create("multipart/form-data".toMediaTypeOrNull(),mLatitude)
-                     var  rpickupAddress = RequestBody.create("multipart/form-data".toMediaTypeOrNull(),(currActivity as NewListingActivity).userCity.toString()+","+(currActivity as NewListingActivity).userState.toString())
+                     var  rpickupAddress = RequestBody.create("multipart/form-data".toMediaTypeOrNull(),(currActivity as NewListingActivity).mAddress.toString())
                      var  raddressNote = RequestBody.create("multipart/form-data".toMediaTypeOrNull(),(currActivity as NewListingActivity).addressNote)
 
                      var dropmLongitude=String.format("%.7f", (currActivity as NewListingActivity).dropmLongitude)
+                     dropmLongitude = dropmLongitude.replace(",", ".")
                      var dropmLatitude=String.format("%.7f",(currActivity as NewListingActivity).dropmLatitude)
+                     dropmLatitude = dropmLatitude.replace(",", ".")
 
                      var  rdropmLongitude = RequestBody.create("multipart/form-data".toMediaTypeOrNull(),dropmLongitude)
                      var  rdropmLatitude = RequestBody.create("multipart/form-data".toMediaTypeOrNull(),dropmLatitude)
-                     var  rdropAddress = RequestBody.create("multipart/form-data".toMediaTypeOrNull(),(currActivity as NewListingActivity).dropuserCity.toString()+","+(currActivity as NewListingActivity).dropuserState.toString())
+                     var  rdropAddress = RequestBody.create("multipart/form-data".toMediaTypeOrNull(),(currActivity as NewListingActivity).dropmAddress.toString())
                      var  rdropAddressNote = RequestBody.create("multipart/form-data".toMediaTypeOrNull(),(currActivity as NewListingActivity).dropAddressNote)
 
                      var  rrouteDistance = RequestBody.create("multipart/form-data".toMediaTypeOrNull(),(currActivity as NewListingActivity).routeDistance.toString())
@@ -294,8 +298,8 @@ class PublishFragment : Fragment() {
                      Log.e("data","title:"+(currActivity as NewListingActivity).productTitle+" Height:"+(currActivity as NewListingActivity).height+" weight:"+
                              (currActivity as NewListingActivity).weight+" width:"+(currActivity as NewListingActivity).width+" depth"+(currActivity as NewListingActivity).depth+" price:"
                      +etEnterPrice.text.toString()+" more_people_needed"+(currActivity as NewListingActivity).isTwoPeople.toString()+" pickup_date:"+dat+" dropoff_date:"+dat1+" pickup_latitude:"+(currActivity as NewListingActivity).mLatitude.toString()+" pickup_longitude:"+(currActivity as NewListingActivity).mLongitude.toString()+" pickup_address:"+
-                             (currActivity as NewListingActivity).userCity.toString()+","+(currActivity as NewListingActivity).userState.toString()+" pickup_address_note:"+(currActivity as NewListingActivity).addressNote+" dropoff_latitude:"+(currActivity as NewListingActivity).dropmLatitude.toString()+" dropoff_longitude:"+(currActivity as NewListingActivity).dropmLongitude.toString()+" dropoff_address:"+
-                             (currActivity as NewListingActivity).dropuserCity.toString()+","+(currActivity as NewListingActivity).dropuserState.toString()+" dropoff_address_note:"+(currActivity as NewListingActivity).dropAddressNote+" distance:"+(currActivity as NewListingActivity).routeDistance.toString())
+                             (currActivity as NewListingActivity).mAddress.toString()+" pickup_address_note:"+(currActivity as NewListingActivity).addressNote+" dropoff_latitude:"+(currActivity as NewListingActivity).dropmLatitude.toString()+" dropoff_longitude:"+(currActivity as NewListingActivity).dropmLongitude.toString()+" dropoff_address:"+
+                             (currActivity as NewListingActivity).dropmAddress.toString()+" dropoff_address_note:"+(currActivity as NewListingActivity).dropAddressNote+" distance:"+(currActivity as NewListingActivity).routeDistance.toString())
 
                      productViewModel?.let {
                          if (currActivity.let { ctx -> AndroidUtil.isInternetAvailable(ctx!!) } == true) {

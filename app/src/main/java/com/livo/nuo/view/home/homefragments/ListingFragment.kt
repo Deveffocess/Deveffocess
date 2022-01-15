@@ -277,7 +277,7 @@ class ListingFragment : Fragment() {
             editor.commit()
 
             if (productList != null) {
-                productList.sortBy{ it.pickup_date }
+                productList.sortBy{ it.created_at }
             }
             adapter.filterData(productList)
             rvListing.smoothScrollToPosition(0)
@@ -292,7 +292,7 @@ class ListingFragment : Fragment() {
             editor.commit()
 
             if (productList != null) {
-                productList.sortByDescending{ it.pickup_date }
+                productList.sortByDescending{ it.created_at }
             }
             adapter.filterData(productList)
             rvListing.smoothScrollToPosition(0)

@@ -169,6 +169,10 @@
     <string name="SORT_BY">SORTER EFTER</string>
     <string name="FILTER">FILTER</string>
 
+    <string name="incomplete_profile_warning">Advarsel om ufuldstændig profil</string>
+    <string name="your_profile_is_incomplete_an_incomplete_profile_may_prevent_you_from_creating_the_listing_or_bidding_on_listing_please_update_your_profile">Din profil er ufuldstændig. En ufuldstændig profil kan forhindre dig i at oprette annoncen eller byde på annoncen. Opdater venligst din profil.</string>
+    <string name="update_profile">Opdater profil</string>
+
 
     <!-- Listing Filter -->
     <string name="nearest_pickup">Nærmeste afhentning</string>
@@ -245,6 +249,13 @@
     <string name="update_number">Opdater nummer</string>
     <string name="address_line_2">Adresselinje 2</string>
     <string name="address_line_1">Adresselinje 1</string>
+    <string name="expect_detailed_response_within_hrs">Forvent detaljeret svar inden for 24-48 timer</string>
+    <string name="we_are_open_10am_to_6pm">Vi har åbent 10.00 til 18.00</string>
+    <string name="facebook_messanger">Facebook Messanger</string>
+    <string name="email_us">Email os</string>
+    <string name="call_us">Ring til os</string>
+    <string name="chat_with_us">Chat med os</string>
+    <string name="contact_support">Kontakt support</string>
 
 
     <!-- Sender Activity -->
@@ -258,13 +269,13 @@
 
 
     <!-- Transporter Listing Data   -->
-
     <string name="accept_sender">Accept</string>
     <string name="decline">Nedgang</string>
     <string name="delete_offer">Slet tilbud</string>
     <string name="change_price">Skift pris</string>
     <string name="waiting_sender_payment">Venter på, at afsender foretager betaling</string>
     <string name="open_map">Open Map</string>
+    <string name="i_need_help_with_this_lListing">Jeg har brug for hjælp til denne liste</string>
     <string name="waiting_payment_approval">Venter på betalingsgodkendelse</string>
     <string name="message_transpoter">Besked Transportør</string>
     <string name="payment_method">Betalingsmetode</string>
@@ -279,6 +290,10 @@
     <string name="listing_picked_up">Fortegnelse afhentet</string>
     <string name="listing_delivered">Fortegnelse leveret</string>
 
+    <!-- Chat -->
+    <string name="request_help">Anmod om hjælp</string>
+    <string name="view_listings">Se fortegnelser</string>
+    <string name="completed_listings">Fuldførte lister</string>
 
     <!-- Days -->
     <string name="sun">Sol</string>

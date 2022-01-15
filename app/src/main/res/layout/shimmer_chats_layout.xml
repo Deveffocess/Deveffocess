@@ -18,8 +18,8 @@
 
             <com.livo.nuo.lib.roundImageView.RoundedImageView
                 android:id="@+id/imgProductImage"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:alpha="0.2"
                 android:src="@android:color/darker_gray"
                 app:riv_corner_radius="5dp" />
@@ -27,60 +27,60 @@
 
             <com.livo.nuo.lib.roundImageView.RoundedImageView
                 android:id="@+id/imgUserImage"
-                android:layout_toEndOf="@+id/imgProductImage"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_marginStart="15dp"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_toEndOf="@+id/imgProductImage"
                 android:alpha="0.2"
                 android:src="@android:color/darker_gray"
-                app:riv_corner_radius="15dp"/>
+                app:riv_corner_radius="20dp" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvUserName"
-                android:layout_toEndOf="@+id/imgUserImage"
-                android:text="                           "
-                android:layout_marginTop="3dp"
-                android:fontFamily="@font/barlow_bold"
-                android:textSize="14sp"
-                android:layout_marginStart="10dp"
-                android:alpha="0.2"
-                android:backgroundTint="@android:color/darker_gray"
-                android:background="@drawable/white_round_shape"
                 android:layout_width="wrap_content"
-                android:layout_height="15dp"/>
+                android:layout_height="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="3dp"
+                android:layout_toEndOf="@+id/imgUserImage"
+                android:alpha="0.2"
+                android:background="@drawable/white_round_shape"
+                android:backgroundTint="@android:color/darker_gray"
+                android:fontFamily="@font/barlow_bold"
+                android:text="                           "
+                android:textSize="14sp" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvTime"
-                android:text="            "
-                android:layout_marginTop="3dp"
-                android:layout_alignParentEnd="true"
-                android:fontFamily="@font/barlow_bold"
-                android:textSize="13sp"
-                android:alpha="0.2"
-                android:backgroundTint="@android:color/darker_gray"
-                android:background="@drawable/white_round_shape"
-                android:layout_marginStart="10dp"
-                android:textColor="@color/livo_black_45_opacity"
                 android:layout_width="wrap_content"
-                android:layout_height="15dp"/>
+                android:layout_height="20dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="3dp"
+                android:alpha="0.2"
+                android:background="@drawable/white_round_shape"
+                android:backgroundTint="@android:color/darker_gray"
+                android:fontFamily="@font/barlow_bold"
+                android:text="                  "
+                android:textColor="@color/livo_black_45_opacity"
+                android:textSize="13sp" />
 
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvLastMessage"
-                android:layout_below="@+id/imgUserImage"
-                android:layout_toEndOf="@+id/imgProductImage"
-                android:text=""
-                android:layout_marginTop="5dp"
-                android:fontFamily="@font/barlow_medium"
-                android:textStyle="normal"
-                android:textSize="13sp"
-                android:layout_marginStart="15dp"
-                android:textColor="@color/livo_black_40_opacity"
                 android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_below="@+id/imgUserImage"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_toEndOf="@+id/imgProductImage"
                 android:alpha="0.2"
-                android:backgroundTint="@android:color/darker_gray"
                 android:background="@drawable/white_round_shape"
-                android:layout_height="15dp"/>
+                android:backgroundTint="@android:color/darker_gray"
+                android:fontFamily="@font/barlow_medium"
+                android:text=""
+                android:textColor="@color/livo_black_40_opacity"
+                android:textSize="13sp"
+                android:textStyle="normal" />
 
 
         </RelativeLayout>

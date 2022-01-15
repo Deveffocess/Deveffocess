@@ -29,6 +29,7 @@ class ProfileViewModel(application: Application) :  BaseViewModel(application) {
     private var mutableLiveDataViewChangeNumChangeNumber : MutableLiveData<LoginModel> = MutableLiveData()
     private var mutableLiveDataViewEditOwnProfile : MutableLiveData<LoginModel> = MutableLiveData()
     private var mutableLiveDataViewChangeLang : MutableLiveData<LoginModel> = MutableLiveData()
+    private var mutableLiveDataLogout : MutableLiveData<LoginModel> = MutableLiveData()
 
 
     init {
@@ -52,6 +53,49 @@ class ProfileViewModel(application: Application) :  BaseViewModel(application) {
 
     fun getMutableLiveDataViewChangeLang(): MutableLiveData<LoginModel> =
         mutableLiveDataViewChangeLang
+
+    fun getMutableLiveDataViewLogout(): MutableLiveData<LoginModel> =
+        mutableLiveDataLogout
+
+
+
+    fun getLogout(jsonObject: JsonObject) {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO){
+                try {
+
+                    val userIma  = profileRepository?.getLogout(jsonObject)
+                    userIma?.let {
+                        mutableLiveDataLogout.postValue(it)
+                    }
+
+                }catch (httpException : HttpException){
+                    try {
+                        val errorResponse =
+                            AppUtils.getErrorResponse(httpException.response()?.errorBody()?.string())
+                        errorResponse?.let {
+                            getErrorMutableLiveData().postValue(it)
+                        }
+                    }catch (e : Exception){
+                        val errorResponse = ErrorResponse("",0,"Please try again later , our server is having some problem",
+                            "Please try again later , our server is having some problem","")
+                        errorResponse?.let {
+                            getErrorMutableLiveData().postValue(it)
+                        }
+                    }
+
+                } catch (e : Exception){
+                    val errorResponse = ErrorResponse("",0,e.message,e.message!!,"")
+                    errorResponse.let {
+                        getErrorMutableLiveData().postValue(it)
+                    }
+                    Log.d("TAG", " get own products Exception : $e")
+
+                }
+            }
+        }
+    }
+
 
 
     fun getUserSettings() {

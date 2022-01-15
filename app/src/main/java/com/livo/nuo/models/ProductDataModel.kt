@@ -24,6 +24,9 @@ class ProductDataModel : Serializable {
     @SerializedName("has_next")
     @Expose
     var has_next = false
+    @SerializedName("profile_fulfil")
+    @Expose
+    var profile_fulfil = false
     @SerializedName("list_data")
     @Expose
     var list_data = ArrayList<ProductModel>()

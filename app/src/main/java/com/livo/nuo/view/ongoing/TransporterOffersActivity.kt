@@ -2,6 +2,10 @@ package com.livo.nuo.view.ongoing
 
 import android.app.Activity
 import android.app.Dialog
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -11,6 +15,7 @@ import android.widget.Toast
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStore
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -100,10 +105,34 @@ class TransporterOffersActivity : LocalizeActivity() {
             finish()
         })
 
+        currActivity?.let {
+            LocalBroadcastManager.getInstance(it).registerReceiver(mMessageReceiver,
+                IntentFilter("dashboard_fragment")
+            )
+        }
+
         setAdapter()
         observers()
 
     }
+
+    var mMessageReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent) {
+
+            productViewModel?.let {
+                if (currActivity.let { ctx -> AndroidUtil.isInternetAvailable(ctx!!) } == true) {
+
+                    var jsonObject =  JsonObject();
+                    jsonObject.addProperty("list_id", id)
+                    jsonObject.addProperty("custom_page",currentpage)
+                    it.getTransportersListForProduct(jsonObject)
+                }
+            }
+
+        }
+    }
+
+
 
     private fun observers(){
         productViewModel?.getMutableLiveTranspoterListForProduct()?.observe(currActivity as LifecycleOwner, androidx.lifecycle.Observer {
@@ -111,6 +140,7 @@ class TransporterOffersActivity : LocalizeActivity() {
             transporterList.clear()
             transporterList.addAll(it.data.biddings_data)
             has_next=it.data.has_next
+
 
             if(transporterList.size > 0){
                shimmerViewContainer.visibility = View.GONE
@@ -166,9 +196,16 @@ class TransporterOffersActivity : LocalizeActivity() {
           productViewModel?.getMutableLiveDataTransportersListRemoveBid()?.observe(currActivity as LifecycleOwner, androidx.lifecycle.Observer {
             hideProgressBar()
 
-              setAdapter()
-            adapter.notifyDataSetChanged()
-            AppUtils.showToast(this,R.drawable.check,it.message,R.color.success_green,R.color.white,R.color.white)
+              productViewModel?.let {
+                  if (currActivity.let { ctx -> AndroidUtil.isInternetAvailable(ctx!!) } == true) {
+                      showProgressBar()
+                      var jsonObject =  JsonObject();
+                      jsonObject.addProperty("list_id", id)
+                      jsonObject.addProperty("custom_page",currentpage)
+                      it.getTransportersListForProduct(jsonObject)
+                  }
+              }
+           // AppUtils.showToast(this,R.drawable.check,it.message,R.color.success_green,R.color.white,R.color.white)
 
         })
 
@@ -226,7 +263,7 @@ class TransporterOffersActivity : LocalizeActivity() {
             })
 
     }
-    
+
     
 
     fun showProgressBar(){

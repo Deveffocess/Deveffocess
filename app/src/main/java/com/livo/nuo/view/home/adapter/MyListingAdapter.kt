@@ -30,9 +30,11 @@ import com.google.gson.JsonObject
 import com.livo.nuo.databinding.BottomSheetListingOngoingStatePaymentDetailBinding
 import com.livo.nuo.databinding.BottomSheetListingSuspendedBinding
 import com.livo.nuo.utility.AndroidUtil
+import com.livo.nuo.view.message.ChatActivity
 import com.livo.nuo.view.ongoing.ListingOngoingStateActivity
 import com.livo.nuo.view.ongoing.TransporterOffersActivity
 import com.livo.nuo.view.product.ProductDetailActivity
+import com.livo.nuo.view.profile.ContactAdminActivity
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -381,6 +383,15 @@ override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         currAtivity.startActivity(i)
     })
 
+    holder.rlChat.setOnClickListener({
+
+        var i=Intent(currAtivity,ChatActivity::class.java)
+        i.putExtra("ch",model.channel_id)
+        i.putExtra("st","")
+        currAtivity.startActivity(i)
+
+    })
+
 
 }
 
@@ -405,6 +416,7 @@ inner class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
     var rlTransporter:RelativeLayout
     var rlProcess:LinearLayout
     var mcvOfferCell:MaterialCardView
+    var rlChat:LinearLayout
 
     init {
         shimmerImage=ItemView.findViewById(R.id.shimmerImage)
@@ -424,6 +436,7 @@ inner class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
         mcvOfferCell=ItemView.findViewById(R.id.mcvOfferCell)
         rlTransporter=ItemView.findViewById(R.id.rlTransporter)
         rlProcess=ItemView.findViewById(R.id.rlProcess)
+        rlChat=ItemView.findViewById(R.id.rlChat)
 
     }
 }
@@ -447,7 +460,8 @@ inner class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
         })
 
         llContactAdmin?.setOnClickListener({
-
+            var i=Intent(currAtivity, ContactAdminActivity::class.java)
+            currAtivity.startActivity(i)
         })
 
 

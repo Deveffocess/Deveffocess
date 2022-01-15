@@ -150,11 +150,13 @@ dependencies {
     // Stripe Android SDK
     implementation 'com.stripe:stripe-android:19.0.0'
 
-   // implementation 'com.pubnub:pubnub-kotlin:6.3.0'
+    implementation group: 'com.pubnub', name: 'pubnub-gson', version: '4.+'
+    implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
 
     androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.1', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
+    implementation 'com.github.vihtarb:tooltip:0.1.9'
 
 }

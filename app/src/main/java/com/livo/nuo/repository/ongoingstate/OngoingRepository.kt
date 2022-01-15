@@ -37,5 +37,7 @@ class OngoingRepository : BaseRepository() {
 
     suspend fun getDeleteBid(jsonObject: JsonObject) = apiInterface?.getDeleteBid(service.headers(),jsonObject)
 
+    suspend fun getAddChannel(jsonObject: JsonObject) = apiInterface?.getAddChannel(service.headers(),jsonObject)
+
     suspend fun pickupDropoffListing(offer_id: RequestBody, state: RequestBody,image : MultipartBody.Part) = apiInterface?.pickupDropoffListing(service.headers(),offer_id,state,image)
 }

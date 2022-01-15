@@ -53,6 +53,10 @@ class ProductModel : Serializable {
     @Expose
     var approved_bid_id = 0
 
+    @SerializedName("channel_id")
+    @Expose
+    var channel_id = ""
+
     @SerializedName("user_details")
     @Expose
     var user_details = UserModel()

@@ -1,6 +1,7 @@
 package com.livo.nuo.view.notifications
 
 import android.app.Activity
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,9 +15,6 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.livo.nuo.R
-import com.livo.nuo.models.NotificationModel
-
-import com.livo.nuo.view.home.adapter.ListingAdapter
 import android.text.Spannable
 
 import android.text.style.ForegroundColorSpan
@@ -28,15 +26,17 @@ import android.text.style.StyleSpan
 import android.text.SpannableString
 
 import android.text.SpannableStringBuilder
+import android.widget.RelativeLayout
+import android.widget.Toast
 
 import androidx.appcompat.widget.AppCompatTextView
-
-
+import com.livo.nuo.models.NotificationDataModel
+import com.livo.nuo.view.ongoing.ListingOngoingStateActivity
 
 
 class NotificationsAdapter(
     private var currAtivity: Activity,
-    private var list: ArrayList<NotificationModel>
+    private var list: ArrayList<NotificationDataModel>
 ) :
     RecyclerView.Adapter<NotificationsAdapter.ViewHolder>() {
 
@@ -56,17 +56,12 @@ class NotificationsAdapter(
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.row_notifications, parent, false)
         return ViewHolder(view)
-
-
     }
-
-
 
     override fun getItemViewType(position: Int): Int {
         return if (position == list.size - 1 && isLoadingAdded) LOADING else ITEM
 
 //        return super.getItemViewType(position)
-
     }
 
     override fun getItemCount(): Int {
@@ -74,7 +69,7 @@ class NotificationsAdapter(
     }
 
 
-    fun getItem(position: Int): NotificationModel {
+    fun getItem(position: Int): NotificationDataModel {
         return list.get(position)
     }
 
@@ -83,23 +78,22 @@ class NotificationsAdapter(
         notifyDataSetChanged()
     }
 
-    fun filterData(filterList : ArrayList<NotificationModel>){
-        list = filterList
-        notifyDataSetChanged()
-    }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val model = list[position]
 
-        holder.tvUserName.text=model.message
+        holder.tvUserName.text=model.text
 
-        if (model.name.isEmpty())
-            holder.tvUserName.text=model.message
+        if (model.sub_text.isEmpty())
+            holder.tvUserName.text=model.text
         else{
-            makeTextBold(model.message,model.name,holder.tvUserName)
+            makeTextBold(model.text,model.sub_text[0],holder.tvUserName)
         }
 
-        holder.tvTime.text=model.date
+        if (model.date.isEmpty())
+        holder.tvTime.text=model.time
+        else
+            holder.tvTime.text=model.date+"\n"+model.time
 
         Glide.with(currAtivity).addDefaultRequestListener(object : RequestListener<Any> {
             override fun onLoadFailed(
@@ -133,6 +127,22 @@ class NotificationsAdapter(
             .load(model.image).placeholder(currAtivity.getDrawable(R.drawable.grey_round_shape)).
             error(currAtivity.getDrawable(R.drawable.grey_round_shape)).
             into(holder.imgUserImage)
+
+        holder.rlMain.setOnClickListener({
+            var nCode=model.nCode
+
+            if (nCode==1)
+            {
+                var i=Intent(currAtivity,ListingOngoingStateActivity::class.java)
+                i.putExtra("id",model.request_id)
+                currAtivity.startActivity(i)
+                currAtivity.finish()
+            }
+            else if (nCode==3)
+            {
+
+            }
+        })
     }
 
     inner class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
@@ -141,12 +151,14 @@ class NotificationsAdapter(
         var imgUserImage: ImageView
         var tvUserName: TextView
         var tvTime: TextView
+        var rlMain:RelativeLayout
 
         init {
 
             tvUserName = ItemView.findViewById(R.id.tvUserName)
             imgUserImage=ItemView.findViewById(R.id.imgUserImage)
             tvTime=ItemView.findViewById(R.id.tvTime)
+            rlMain=ItemView.findViewById(R.id.rlMain)
         }
     }
 

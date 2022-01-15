@@ -64,6 +64,12 @@ interface ApiInterface {
     @Body jsonObject: JsonObject
   ): LoginModel?
 
+  @POST("all_notifications")
+  suspend fun getAllNotification(
+    @HeaderMap headers: Map<String, String>,
+    @Body jsonObject: JsonObject
+  ): LoginModel?
+
   @POST("change_bid_price")
   suspend fun getChangeBidPrice(
     @HeaderMap headers: Map<String, String>,
@@ -125,6 +131,12 @@ interface ApiInterface {
     @Body jsonObject: JsonObject
   ): LoginModel?
 
+  @POST("add_channel")
+  suspend fun getAddChannel(
+    @HeaderMap headers: Map<String, String>,
+    @Body jsonObject: JsonObject
+  ): LoginModel?
+
   @POST("sender_completes_listing")
   suspend fun getSenderCompletesListing(
     @HeaderMap headers: Map<String, String>,
@@ -141,6 +153,12 @@ interface ApiInterface {
   @GET("user_settings")
   suspend fun getUserSettings(
     @HeaderMap headers: Map<String, String>,
+  ): LoginModel?
+
+  @POST("logout")
+  suspend fun getLogout(
+    @HeaderMap headers: Map<String, String>,
+    @Body jsonObject: JsonObject
   ): LoginModel?
 
   @GET("view_own_profile")
@@ -165,6 +183,13 @@ interface ApiInterface {
     @HeaderMap headers: Map<String, String>,
     @Body jsonObject: JsonObject
   ): LoginModel?
+
+
+  @GET("get_all_chats")
+  suspend fun getAllChats(
+    @HeaderMap headers: Map<String, String>,
+  ): LoginModel?
+
 
 
   @Multipart

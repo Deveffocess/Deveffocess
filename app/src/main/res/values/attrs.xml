@@ -62,6 +62,12 @@
     </declare-styleable>
 
 
+    <declare-styleable name="EmptyView">
+        <attr name="evTitle" format="reference" />
+        <attr name="evMessage" format="reference" />
+    </declare-styleable>
+
+
     <attr name="step_normal_color" format="color"/>
     <attr name="step_activated_color" format="color"/>
     <attr name="step_done_icon" format="reference"/>

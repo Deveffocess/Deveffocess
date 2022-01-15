@@ -19,6 +19,9 @@ class DataModel :Serializable{
     @SerializedName("timeout")
     @Expose
     var timeout = ""
+    @SerializedName("pubnub_uuid")
+    @Expose
+    var pubnub_uuid = ""
     @SerializedName("language")
     @Expose
     var language = ""
@@ -109,6 +112,7 @@ class DataModel :Serializable{
     @SerializedName("current_page")
     @Expose
     var current_page = 0
+
 
     @SerializedName("total_pages")
     @Expose
@@ -252,4 +256,20 @@ class DataModel :Serializable{
     @SerializedName("others_listings")
     @Expose
     var others_listings = ArrayList<ProductDataModel>()
+
+    //notification
+
+    @SerializedName("notifications_data")
+    @Expose
+    var notifications_data = ArrayList<NotificationDataModel>()
+
+    //Message
+    @SerializedName("current")
+    @Expose
+    var current = ArrayList<ChatMessageModel>()
+
+    @SerializedName("completed")
+    @Expose
+    var completed = ArrayList<ChatMessageModel>()
+
 }

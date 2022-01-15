@@ -43,10 +43,21 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".view.search.activity.SearchMyListingActivity"
+            android:name=".view.profile.ContactAdminActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".view.message.ChatActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".view.search.activity.SearchMyListingActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".view.profile.ReferralActivity"
             android:exported="false"
@@ -132,7 +143,23 @@
             android:name=".view.Splash_Screen"
             android:configChanges="uiMode"
             android:exported="true"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" >
+
+            <intent-filter android:label="Livo">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- Accepts URIs that begin with "http://www.example.com/gizmos” -->
+                <data
+                    android:host="L.Livo.nuo"
+                    android:pathPrefix="/ref"
+                    android:scheme="https"
+                    tools:ignore="AppLinkUrlError" />
+                <!-- note that the leading "/" is required for pathPrefix -->
+            </intent-filter>
+
+        </activity>
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -145,7 +172,7 @@
         </activity>
 
         <service
-            android:name="com.google.firebase.messaging.FirebaseMessagingService"
+            android:name=".notification.FcmReceiver"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

@@ -10,9 +10,9 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
-import com.google.firebase.messaging.FirebaseMessaging
 import com.livo.nuo.manager.SharedPreferenceFactory
 import com.livo.nuo.manager.SharedPreferenceManager
+import com.livo.nuo.view.message.prefs.Prefs
 import java.security.MessageDigest
 
 
@@ -30,7 +30,12 @@ class MyApplication : Application() , LifecycleObserver {
         printHashKey(instance)
         initializeSharedPreference()
 
+        Prefs.initialize(this)
     }
+
+
+
+
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
     private fun onAppBackgrounded() {
@@ -77,6 +82,15 @@ class MyApplication : Application() , LifecycleObserver {
         }
 
         private var activityVisible = false
+
+        @JvmStatic
+        @Synchronized
+        fun get(): MyApplication {
+            if (instance == null) {
+                instance = MyApplication()
+            }
+            return instance
+        }
     }
     }
 

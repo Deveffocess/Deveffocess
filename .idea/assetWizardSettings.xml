@@ -18,7 +18,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/arrow_back/baseline_arrow_back_24.xml" />
+                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialiconsoutlined/message/outline_message_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -28,8 +28,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="2f2d2d" />
-                            <entry key="outputName" value="backword_black" />
+                            <entry key="color" value="00c853" />
+                            <entry key="outputName" value="icon_messagegreen" />
                             <entry key="sourceFile" value="E:\Livo" />
                           </map>
                         </option>

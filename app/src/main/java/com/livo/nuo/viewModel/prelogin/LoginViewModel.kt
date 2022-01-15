@@ -28,8 +28,6 @@ import java.lang.Exception
     private var mutableLiveDataExtraDataModel:MutableLiveData<ExtraDataModel> = MutableLiveData()
 
 
-
-
     init {
         loginRepository = LoginRepository()
     }

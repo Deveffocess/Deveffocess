@@ -285,10 +285,10 @@
                     android:id="@+id/rlProfileOptions"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="5dp"
                     android:layout_below="@+id/rlTransporter"
+                    android:layout_marginStart="5dp"
                     android:layout_marginTop="7dp"
+                    android:layout_marginEnd="5dp"
                     android:background="@drawable/white_bottom_square_shape"
                     android:padding="15dp">
 
@@ -461,8 +461,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/rlStripeSetup"
-                        android:visibility="gone"
-                        android:layout_marginTop="25dp">
+                        android:layout_marginTop="25dp"
+                        android:visibility="gone">
 
                         <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/imgRefer"
@@ -537,7 +537,6 @@
                             android:textSize="16dp" />
 
                     </RelativeLayout>
-
 
 
                     <RelativeLayout
