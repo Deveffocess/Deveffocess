@@ -43,7 +43,7 @@
                     android:textSize="16dp" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvShowAll"
+                    android:id="@+id/tvResetAll"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
