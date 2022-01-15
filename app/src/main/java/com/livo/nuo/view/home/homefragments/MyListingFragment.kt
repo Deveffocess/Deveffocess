@@ -570,47 +570,9 @@ class MyListingFragment : Fragment() {
         var filter_pref =pref.getString("filter","")
         var user_type=pref.getString("user_type","")
         var my_bids=pref.getString("my_bids","")
-        var editor = pref.edit()
+        val editor = pref.edit()
 
-        bottomSheetDashboardFilterBinding.tvResetAll.setOnClickListener({
 
-            editor.putString("page", 1.toString())
-            editor.putString("sort_by", "title")
-            editor.putString("sort_type", "asc")
-
-            filterarray.remove(JsonPrimitive("Published"))
-            filterarray.remove(JsonPrimitive("Expired"))
-            filterarray.remove(JsonPrimitive("Completed"))
-            filterarray.remove(JsonPrimitive("Suspended"))
-            filterarray.remove(JsonPrimitive("Ongoing"))
-
-            filterarray.add("Ongoing")
-            editor.putString("filter",filterarray.toString())
-            editor.putString("my_bids", "false")
-            editor.commit()
-
-            Log.e("arr",filterarray.toString())
-
-            bottomSheetDashboardFilterBinding.tvDataModified.setBackground(currActivity!!.getDrawable( R.drawable.grey_round_shape_45_opacity))
-            bottomSheetDashboardFilterBinding.ivDataModified.setImageDrawable(resources.getDrawable(R.drawable.ic_baseline_arrow_upward_24))
-            bottomSheetDashboardFilterBinding.tvAlphabetically.setBackground(currActivity!!.getDrawable( R.drawable.blue_round_shape_45_opacity))
-            bottomSheetDashboardFilterBinding.ivAlphabatically.setImageDrawable(resources.getDrawable(R.drawable.ic_baseline_arrow_upward_24))
-            bottomSheetDashboardFilterBinding.ivAlphabatically.visibility=View.VISIBLE
-            bottomSheetDashboardFilterBinding.ivDataModified.visibility=View.GONE
-
-            bottomSheetDashboardFilterBinding.tvPublished.setBackground(currActivity!!.getDrawable( R.drawable.grey_round_shape_45_opacity))
-            bottomSheetDashboardFilterBinding.tvOngoing.setBackground(currActivity!!.getDrawable( R.drawable.blue_round_shape_45_opacity))
-            bottomSheetDashboardFilterBinding.tvCompleted.setBackground(currActivity!!.getDrawable( R.drawable.grey_round_shape_45_opacity))
-            bottomSheetDashboardFilterBinding.tvSuspended.setBackground(currActivity!!.getDrawable(R.drawable.grey_round_shape_45_opacity))
-            bottomSheetDashboardFilterBinding.tvCompleted.setBackground(currActivity!!.getDrawable(R.drawable.grey_round_shape_45_opacity))
-
-            bottomSheetDashboardFilterBinding.tvShowonlyMyoffer.setBackground(currActivity!!.getDrawable( R.drawable.grey_round_shape_45_opacity))
-            bottomSheetDashboardFilterBinding.tvCompletedTransporter.setBackground(currActivity!!.getDrawable(R.drawable.grey_round_shape_45_opacity))
-            bottomSheetDashboardFilterBinding.tvSuspendedTransporter.setBackground(currActivity!!.getDrawable(R.drawable.grey_round_shape_45_opacity))
-            bottomSheetDashboardFilterBinding.tvOngoingTranspoter.setBackground(currActivity!!.getDrawable(R.drawable.blue_round_shape_45_opacity))
-
-            doApiCall()
-        })
 
         if(filter_pref?.contains("Published") == true) {
             bottomSheetDashboardFilterBinding.tvPublished.setBackground(currActivity!!.getDrawable(R.drawable.blue_round_shape_45_opacity))
