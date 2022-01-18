@@ -13,8 +13,6 @@
             android:layout_height="wrap_content"
             android:background="@color/livo_bg_color">
 
-
-
             <RelativeLayout
                 android:id="@+id/rlTopMain"
                 android:layout_width="match_parent"
@@ -163,9 +161,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:background="@drawable/white_round_shape"
-                            android:paddingStart="15dp"
+                            android:paddingStart="20dp"
                             android:paddingTop="15dp"
-                            android:paddingEnd="15dp"
+                            android:paddingEnd="20dp"
                             android:paddingBottom="15dp"
                             android:visibility="visible">
 
@@ -278,9 +276,9 @@
                             android:id="@+id/rlSteps"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
                             android:layout_marginBottom="90dp"
                             android:background="@drawable/white_bottom_square_shape"
-                            android:padding="10dp"
                             android:paddingTop="30dp"
                             android:visibility="visible">
 
@@ -796,9 +794,9 @@
                                         android:layout_marginEnd="70dp"
                                         android:fontFamily="@font/barlow_semibold"
                                         android:text="@string/pending"
-                                        android:tooltipText="@string/completed_listings"
                                         android:textColor="@color/livo_black_45_opacity"
-                                        android:textSize="14dp" />
+                                        android:textSize="14dp"
+                                        android:tooltipText="@string/completed_listings" />
 
 
                                     <com.livo.nuo.lib.roundImageView.RoundedImageView

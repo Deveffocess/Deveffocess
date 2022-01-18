@@ -24,6 +24,9 @@ class ProductDataModel : Serializable {
     @SerializedName("has_next")
     @Expose
     var has_next = false
+    @SerializedName("unread_msg")
+    @Expose
+    var unread_msg = false
     @SerializedName("profile_fulfil")
     @Expose
     var profile_fulfil = false

@@ -493,6 +493,11 @@ class ListingOngoingStateActivity : LocalizeActivity(){
                         llMake_payment.visibility = View.GONE
                     }
 
+                    val buttonLayoutParams: RelativeLayout.LayoutParams =
+                        RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.WRAP_CONTENT)
+                    buttonLayoutParams.setMargins(0, 0, 0, 30)
+                    rlSteps.setLayoutParams(buttonLayoutParams)
+
                 }
 
                 else if(current_level==1)
@@ -522,6 +527,11 @@ class ListingOngoingStateActivity : LocalizeActivity(){
                     /*mSteppers[2]?.state = VerticalStepperItemView.STATE_NORMAL
                     mSteppers[3]?.state = VerticalStepperItemView.STATE_NORMAL*/
                     stepper_1.lineColor=resources.getColor(R.color.livo_black_5_opacity)
+
+                    val buttonLayoutParams: RelativeLayout.LayoutParams =
+                        RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.WRAP_CONTENT)
+                    buttonLayoutParams.setMargins(0, 0, 0, 30)
+                    rlSteps.setLayoutParams(buttonLayoutParams)
                 }
 
                 else if(current_level==2)
@@ -566,6 +576,11 @@ class ListingOngoingStateActivity : LocalizeActivity(){
                     mSteppers[2]?.state = VerticalStepperItemView.STATE_SELECTED
                    // mSteppers[3]?.state = VerticalStepperItemView.STATE_NORMAL
                     stepper_2.lineColor=resources.getColor(R.color.livo_black_5_opacity)
+
+                    val buttonLayoutParams: RelativeLayout.LayoutParams =
+                        RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.WRAP_CONTENT)
+                    buttonLayoutParams.setMargins(0, 0, 0, 30)
+                    rlSteps.setLayoutParams(buttonLayoutParams)
                 }
                 else if(current_level==3)
                 {
@@ -610,10 +625,20 @@ class ListingOngoingStateActivity : LocalizeActivity(){
                     if (sub_level==0)
                     {
                         slideView.visibility = View.VISIBLE
+
+                        val buttonLayoutParams: RelativeLayout.LayoutParams =
+                            RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.WRAP_CONTENT)
+                        buttonLayoutParams.setMargins(0, 0, 0, 180)
+                        rlSteps.setLayoutParams(buttonLayoutParams)
                     }
                     else if(sub_level==1)
                     {
                         slideView.visibility = View.VISIBLE
+
+                        val buttonLayoutParams: RelativeLayout.LayoutParams =
+                            RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.WRAP_CONTENT)
+                        buttonLayoutParams.setMargins(0, 0, 0, 180)
+                        rlSteps.setLayoutParams(buttonLayoutParams)
                     }
                     else if(sub_level==2){
                         status="completed"
@@ -685,6 +710,11 @@ class ListingOngoingStateActivity : LocalizeActivity(){
                         lltransporter_Acceptdecline.visibility = View.GONE
                         lltransporter_Approval.visibility = View.VISIBLE
                     }
+
+                    val buttonLayoutParams: RelativeLayout.LayoutParams =
+                        RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.WRAP_CONTENT)
+                    buttonLayoutParams.setMargins(0, 0, 0, 30)
+                    rlSteps.setLayoutParams(buttonLayoutParams)
                 }
 
                 else if(current_level==1)
@@ -714,6 +744,11 @@ class ListingOngoingStateActivity : LocalizeActivity(){
                     /*mSteppers[2]?.state = VerticalStepperItemView.STATE_NORMAL
                     mSteppers[3]?.state = VerticalStepperItemView.STATE_NORMAL*/
                     stepper_1.lineColor=resources.getColor(R.color.livo_black_5_opacity)
+
+                    val buttonLayoutParams: RelativeLayout.LayoutParams =
+                        RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.WRAP_CONTENT)
+                    buttonLayoutParams.setMargins(0, 0, 0, 30)
+                    rlSteps.setLayoutParams(buttonLayoutParams)
 
                 }
 
@@ -772,6 +807,11 @@ class ListingOngoingStateActivity : LocalizeActivity(){
                     // mSteppers[3]?.state = VerticalStepperItemView.STATE_NORMAL
                     stepper_2.lineColor=resources.getColor(R.color.livo_black_5_opacity)
 
+                    val buttonLayoutParams: RelativeLayout.LayoutParams =
+                        RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.WRAP_CONTENT)
+                    buttonLayoutParams.setMargins(0, 0, 0, 30)
+                    rlSteps.setLayoutParams(buttonLayoutParams)
+
                 }
 
                 else if(current_level==3)
@@ -817,11 +857,21 @@ class ListingOngoingStateActivity : LocalizeActivity(){
                     if (sub_level==0)
                     {
                         slideView.visibility = View.VISIBLE
+
+                        val buttonLayoutParams: RelativeLayout.LayoutParams =
+                            RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.WRAP_CONTENT)
+                        buttonLayoutParams.setMargins(0, 0, 0, 180)
+                        rlSteps.setLayoutParams(buttonLayoutParams)
                     }
 
                     else if (sub_level==1)
                     {
                         slideView.visibility = View.GONE
+
+                        val buttonLayoutParams: RelativeLayout.LayoutParams =
+                            RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.WRAP_CONTENT)
+                        buttonLayoutParams.setMargins(0, 0, 0, 30)
+                        rlSteps.setLayoutParams(buttonLayoutParams)
                     }
                     else if(sub_level==2) {
                         rlRatingHelp.visibility = View.VISIBLE

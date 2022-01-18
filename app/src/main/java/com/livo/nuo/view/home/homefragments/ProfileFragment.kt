@@ -76,6 +76,9 @@ class ProfileFragment : Fragment() {
     lateinit var rlLogout:RelativeLayout
     lateinit var rlPayment:RelativeLayout
 
+    lateinit var rlUserImage:MaterialCardView
+    lateinit var rlTopView:RelativeLayout
+
     lateinit var tvShimmerImage:ShimmerFrameLayout
     lateinit var tvShimmerName:ShimmerFrameLayout
     lateinit var tvShimmerAge:ShimmerFrameLayout
@@ -137,6 +140,8 @@ class ProfileFragment : Fragment() {
         rlLogout=root.findViewById(R.id.rlLogout)
         rlShare=root.findViewById(R.id.rlShare)
         rlPayment=root.findViewById(R.id.rlPayment)
+        rlUserImage=root.findViewById(R.id.rlUserImage)
+        rlTopView=root.findViewById(R.id.rlTopView)
 
         initViews()
 
@@ -292,6 +297,9 @@ class ProfileFragment : Fragment() {
 
         profileViewModel?.getMutableLiveDataUserSettings()
             ?.observe(currActivity as LifecycleOwner, androidx.lifecycle.Observer {
+
+
+
                 tvUserName.text=it.data.first_name+" "+it.data.last_name
                 tvUserAge.text=it.data.age+" "+resources.getString(R.string.years_old)
 
@@ -343,11 +351,7 @@ class ProfileFragment : Fragment() {
                 tvTransporterApplicationLabel.text=it.data.transporter_application.subtitle
                 tvSubmit.text=it.data.transporter_application.button_text
                 var state=it.data.transporter_application.state
-               /* if (state==0)
-                {
-                    tvSubmit.setTextColor(Color.BLACK)
-                    tvSubmit.setBackground(currActivity!!.getDrawable(R.drawable.white_fill_with_black_border))
-                }*/
+
                 if (state==1)
                 {
                     tvSubmit.visibility=View.VISIBLE
@@ -367,6 +371,19 @@ class ProfileFragment : Fragment() {
                     tvSubmit.setBackground(currActivity!!.getDrawable(R.drawable.white_fill_with_black_border))
                 }
 
+                var nm=it.data.first_name
+                if (nm.equals(""))
+                {
+                    tvUserName.visibility=View.GONE
+                    tvUserAge.visibility=View.GONE
+                    imgUser.visibility=View.GONE
+                    rlUserImage.visibility=View.GONE
+
+                    val buttonLayoutParams: RelativeLayout.LayoutParams =
+                        RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,430)
+                    buttonLayoutParams.setMargins(15, 0, 15, 10)
+                    rlTopView.setLayoutParams(buttonLayoutParams)
+                }
 
             })
 

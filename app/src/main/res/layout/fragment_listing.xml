@@ -24,7 +24,7 @@
                 android:layout_height="40dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
-                android:layout_toStartOf="@+id/imgNotification"
+                android:layout_toStartOf="@+id/rlNotification"
                 android:background="@drawable/white_fill_black_10_border"
                 android:padding="10dp"
                 android:transitionName="shared_element_container">
@@ -52,16 +52,32 @@
 
             </RelativeLayout>
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imgNotification"
-                android:layout_width="27dp"
-                android:layout_height="27dp"
+            <RelativeLayout
+                android:layout_width="30dp"
                 android:layout_marginStart="19dp"
-                android:layout_marginTop="17dp"
+                android:layout_marginTop="15dp"
+                android:id="@+id/rlNotification"
                 android:layout_marginEnd="17dp"
                 android:layout_toStartOf="@+id/imgFilter"
-                android:src="@drawable/notification_bell"
-                android:transitionName="fade" />
+                android:layout_height="32dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgNotification"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:layout_alignParentBottom="true"
+                    android:src="@drawable/notification_bell"
+                    android:transitionName="fade" />
+
+                <ImageView
+                    android:id="@+id/imgNotificationDot"
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    android:visibility="gone"
+                    android:layout_alignParentEnd="true"
+                    app:srcCompat="@drawable/red_date_shape" />
+
+            </RelativeLayout>
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imgFilter"

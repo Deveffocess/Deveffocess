@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.transition.Fade
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -29,14 +30,18 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.gson.JsonObject
 import com.livo.nuo.R
 import com.livo.nuo.databinding.BottomSheetListingFilterBinding
+import com.livo.nuo.models.DateDayModel
 import com.livo.nuo.models.ProductDataModel
 import com.livo.nuo.utility.AndroidUtil
 import com.livo.nuo.utility.AppUtils
+import com.livo.nuo.utility.MyAppSession
 import com.livo.nuo.view.home.adapter.ListingAdapter
+import com.livo.nuo.view.listing.adapter.PickUpAdapter
 import com.livo.nuo.view.search.SearchActivity
 import com.livo.nuo.view.notifications.NotificationsActivity
 import com.livo.nuo.viewModel.ViewModelFactory
 import com.livo.nuo.viewModel.products.ProductViewModel
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -54,6 +59,7 @@ class ListingFragment : Fragment() {
     lateinit var rvListing:RecyclerView
 
     lateinit var imgNotification:ImageView
+    lateinit var imgNotificationDot:ImageView
 
     var ListingFragment="ListingFragment"
     lateinit var pref: SharedPreferences
@@ -77,6 +83,7 @@ class ListingFragment : Fragment() {
         rvListing=root.findViewById(R.id.rvListing)
         rlSearch=root.findViewById(R.id.rlSearch)
         imgNotification=root.findViewById(R.id.imgNotification)
+        imgNotificationDot=root.findViewById(R.id.imgNotificationDot)
 
 
         imgFilter.setOnClickListener({
@@ -158,7 +165,28 @@ class ListingFragment : Fragment() {
         setAdapter()
         observers()
 
+
+
         super.onResume()
+
+
+    }
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        Handler().postDelayed({
+            if (isVisibleToUser) {
+                if(MyAppSession.notiIcon)
+                {
+                    imgNotificationDot.visibility=View.VISIBLE
+                }
+                else{
+                    imgNotificationDot.visibility=View.GONE
+                }
+
+            } else {
+            }
+        },2000)
     }
 
 

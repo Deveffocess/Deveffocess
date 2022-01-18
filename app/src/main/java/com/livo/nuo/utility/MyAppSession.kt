@@ -39,6 +39,8 @@ class MyAppSession {
         var depth = ""
         var isTwoPeople = false
 
+        var notiIcon=false
+
         var Withdrawn = "Withdrawn"
         var userToken = ""
         var deviceId = ""

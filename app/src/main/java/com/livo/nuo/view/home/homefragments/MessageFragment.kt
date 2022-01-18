@@ -1,6 +1,7 @@
 package com.livo.nuo.view.home.homefragments
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.transition.Fade
@@ -27,6 +28,7 @@ import com.livo.nuo.models.ChatMessageModel
 import com.livo.nuo.models.ProductDataModel
 import com.livo.nuo.utility.AndroidUtil
 import com.livo.nuo.utility.AppUtils
+import com.livo.nuo.utility.MyAppSession
 import com.livo.nuo.view.home.adapter.ListingAdapter
 import com.livo.nuo.view.home.adapter.MessageCurrentAdapter
 import com.livo.nuo.view.message.prefs.Prefs
@@ -58,6 +60,8 @@ class MessageFragment : Fragment() {
     lateinit var rlSearch:RelativeLayout
     lateinit var rvCompletedMessageList:RecyclerView
     lateinit var llMainLayout:LinearLayout
+    lateinit var llDataNotFound:LinearLayout
+    lateinit var imgNotificationDot:ImageView
     lateinit var shimmerViewContainer:ShimmerFrameLayout
 
     private var chatmessageList = ArrayList<ChatMessageModel>()
@@ -80,7 +84,9 @@ class MessageFragment : Fragment() {
         rvCompletedMessageList=root.findViewById(R.id.rvCompletedMessageList)
         rlSearch=root.findViewById(R.id.rlSearch)
         llMainLayout=root.findViewById(R.id.llMainLayout)
+        llDataNotFound=root.findViewById(R.id.llDataNotFound)
         shimmerViewContainer=root.findViewById(R.id.shimmerViewContainer)
+        imgNotificationDot=root.findViewById(R.id.imgNotificationDot)
 
         initViews()
         return root
@@ -147,6 +153,14 @@ class MessageFragment : Fragment() {
             }
         }
 
+        if(MyAppSession.notiIcon)
+        {
+            imgNotificationDot.visibility=View.VISIBLE
+        }
+        else{
+            imgNotificationDot.visibility=View.GONE
+        }
+
         super.onResume()
     }
 
@@ -157,6 +171,7 @@ class MessageFragment : Fragment() {
 
                 shimmerViewContainer.visibility=View.GONE
                 shimmerViewContainer.stopShimmer()
+                llDataNotFound.visibility=View.GONE
                 llMainLayout.visibility=View.VISIBLE
 
                 chatmessageList.clear()
@@ -182,7 +197,13 @@ class MessageFragment : Fragment() {
 
         productViewModel?.getErrorMutableLiveData()?.observe(currActivity as LifecycleOwner, androidx.lifecycle.Observer {
             //hideProgressBar()
-            AppUtils.showToast(currActivity!!,R.drawable.cross,it.message,R.color.error_red,R.color.white,R.color.white)
+
+            shimmerViewContainer.visibility=View.GONE
+            shimmerViewContainer.stopShimmer()
+            llDataNotFound.visibility=View.VISIBLE
+            llMainLayout.visibility=View.GONE
+
+           // AppUtils.showToast(currActivity!!,R.drawable.cross,it.message,R.color.error_red,R.color.white,R.color.white)
         })
     }
 

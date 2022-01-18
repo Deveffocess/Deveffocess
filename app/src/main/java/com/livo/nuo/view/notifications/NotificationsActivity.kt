@@ -1,6 +1,7 @@
 package com.livo.nuo.view.notifications
 
 import android.app.Activity
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.livo.nuo.R
@@ -17,6 +18,7 @@ import com.google.gson.JsonObject
 import com.livo.nuo.models.NotificationDataModel
 import com.livo.nuo.utility.AndroidUtil
 import com.livo.nuo.utility.AppUtils
+import com.livo.nuo.utility.MyAppSession
 import com.livo.nuo.viewModel.ViewModelFactory
 import com.livo.nuo.viewModel.products.ProductViewModel
 
@@ -71,6 +73,12 @@ class NotificationsActivity : AppCompatActivity() {
             ).get(ProductViewModel::class.java)
         }
 
+        productViewModel?.let {
+            if (currActivity.let { ctx -> AndroidUtil.isInternetAvailable(ctx!!) } == true) {
+
+                it.getMarkNotification()
+            }
+        }
 
         productViewModel?.let {
             if (currActivity.let { ctx -> AndroidUtil.isInternetAvailable(ctx!!) } == true) {
@@ -80,8 +88,6 @@ class NotificationsActivity : AppCompatActivity() {
                 it.getAllNotification(jsonObject)
             }
         }
-
-
 
 
         observers()
@@ -105,6 +111,13 @@ class NotificationsActivity : AppCompatActivity() {
                 rvNotifications.layoutManager = layoutManager
                 var adapter = NotificationsAdapter(currActivity,notificationModelDemo)
                 rvNotifications.adapter = adapter
+
+            })
+
+        productViewModel?.getMutableLiveMarkNotification()
+            ?.observe(currActivity as LifecycleOwner, androidx.lifecycle.Observer {
+
+                MyAppSession.notiIcon=false
 
             })
 

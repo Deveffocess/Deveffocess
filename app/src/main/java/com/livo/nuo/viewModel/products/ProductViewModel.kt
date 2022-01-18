@@ -31,8 +31,8 @@ import java.lang.Exception
     private var mutableLiveDataAddProduct : MutableLiveData<ImageModel> = MutableLiveData()
     private var mutableLiveDataMonthDateList : MutableLiveData<DateListModel> = MutableLiveData()
     private var mutableLiveDataEstimatedPrice : MutableLiveData<EstimatedPriceModel> = MutableLiveData()
-    private var mutableLiveDataGetPickUpAmount : MutableLiveData<DiscountModel> = MutableLiveData()
-    private var mutableLiveDataBanners : MutableLiveData<BannerListModel> = MutableLiveData()*/
+    private var mutableLiveDataGetPickUpAmount : MutableLiveData<DiscountModel> = MutableLiveData()*/
+    private var mutableLiveDataMarkNotification : MutableLiveData<LoginModel> = MutableLiveData()
     private var mutableLiveDataOwnProducts : MutableLiveData<ProductListModel> = MutableLiveData()
     private var mutableLiveDataProductsData : MutableLiveData<ProductListModel> = MutableLiveData()
     private var mutableLiveDataAllListings : MutableLiveData<ListingAllModel> = MutableLiveData()
@@ -52,6 +52,9 @@ import java.lang.Exception
         productRepository = ProductRepository()
     }
 
+
+     fun getMutableLiveMarkNotification(): MutableLiveData<LoginModel> =
+         mutableLiveDataMarkNotification
 
      fun getMutableLiveDataSearch(): MutableLiveData<LoginModel> =
          mutableLiveDataSearch
@@ -90,6 +93,43 @@ import java.lang.Exception
          mutableLiveDataAllChat
 
 
+
+
+     fun getMarkNotification() {
+         viewModelScope.launch {
+             withContext(Dispatchers.IO){
+                 try {
+                     val userImage  = productRepository?.getMarkNotification()
+                     userImage?.let {
+                         mutableLiveDataSearch.postValue(it)
+                     }
+
+                 }catch (httpException : HttpException){
+                     try {
+                         val errorResponse =
+                             AppUtils.getErrorResponse(httpException.response()?.errorBody()?.string())
+                         errorResponse?.let {
+                             getErrorMutableLiveData().postValue(it)
+                         }
+                     }catch (e : Exception){
+                         val errorResponse = ErrorResponse("",0,"Please try again later , our server is having some problem",
+                             "Please try again later , our server is having some problem","")
+                         errorResponse?.let {
+                             getErrorMutableLiveData().postValue(it)
+                         }
+                     }
+
+                 } catch (e : Exception){
+                     val errorResponse = ErrorResponse("",0,e.message,e.message!!,"")
+                     errorResponse.let {
+                         getErrorMutableLiveData().postValue(it)
+                     }
+                     Log.d("TAG", " banners Exception : $e")
+
+                 }
+             }
+         }
+     }
 
 
     fun getSearch(jsonObject: JsonObject) {

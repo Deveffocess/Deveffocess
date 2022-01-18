@@ -190,6 +190,11 @@ interface ApiInterface {
     @HeaderMap headers: Map<String, String>,
   ): LoginModel?
 
+  @POST("mark_notifications")
+  suspend fun getMarkNotification(
+    @HeaderMap headers: Map<String, String>,
+  ): LoginModel?
+
 
 
   @Multipart

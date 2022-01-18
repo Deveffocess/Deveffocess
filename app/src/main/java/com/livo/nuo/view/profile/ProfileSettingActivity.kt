@@ -322,7 +322,6 @@ class ProfileSettingActivity : LocalizeActivity() {
             dat.show()
         })
 
-
         observers()
     }
 
@@ -414,11 +413,17 @@ class ProfileSettingActivity : LocalizeActivity() {
                     tvBusiness.background = applicationContext.resources.getDrawable(R.drawable.white_fill_black_10_border)
                     tvBusiness.setTextColor(applicationContext.resources.getColor(R.color.livo_black_45_opacity))
                 }
-                else{
+                else if(user_type.equals("Company")){
                     usertype="Company"
                     tvBusiness.background = applicationContext.resources.getDrawable(R.drawable.black_round_shape)
                     tvBusiness.setTextColor(applicationContext.resources.getColor(R.color.white))
 
+                    tvIndividual.background =applicationContext.resources.getDrawable(R.drawable.white_fill_black_10_border)
+                    tvIndividual.setTextColor(applicationContext.resources.getColor(R.color.livo_black_45_opacity))
+                }
+                else{
+                    tvBusiness.background = applicationContext.resources.getDrawable(R.drawable.white_fill_black_10_border)
+                    tvBusiness.setTextColor(applicationContext.resources.getColor(R.color.livo_black_45_opacity))
                     tvIndividual.background =applicationContext.resources.getDrawable(R.drawable.white_fill_black_10_border)
                     tvIndividual.setTextColor(applicationContext.resources.getColor(R.color.livo_black_45_opacity))
                 }
@@ -447,7 +452,7 @@ class ProfileSettingActivity : LocalizeActivity() {
                     tvOther.background =applicationContext.resources.getDrawable(R.drawable.white_fill_black_10_border)
                     tvOther.setTextColor(applicationContext.resources.getColor(R.color.livo_black_45_opacity))
                 }
-                else{
+                else if (gender.equals("Other")){
                     maingender="Other"
                     tvOther.background = applicationContext.resources.getDrawable(R.drawable.black_round_shape)
                     tvOther.setTextColor(applicationContext.resources.getColor(R.color.white))
@@ -457,6 +462,16 @@ class ProfileSettingActivity : LocalizeActivity() {
 
                     tvMale.background =applicationContext.resources.getDrawable(R.drawable.white_fill_black_10_border)
                     tvMale.setTextColor(applicationContext.resources.getColor(R.color.livo_black_45_opacity))
+                }
+                else{
+                    tvFemale.background =applicationContext.resources.getDrawable(R.drawable.white_fill_black_10_border)
+                    tvFemale.setTextColor(applicationContext.resources.getColor(R.color.livo_black_45_opacity))
+
+                    tvMale.background =applicationContext.resources.getDrawable(R.drawable.white_fill_black_10_border)
+                    tvMale.setTextColor(applicationContext.resources.getColor(R.color.livo_black_45_opacity))
+
+                    tvOther.background =applicationContext.resources.getDrawable(R.drawable.white_fill_black_10_border)
+                    tvOther.setTextColor(applicationContext.resources.getColor(R.color.livo_black_45_opacity))
                 }
 
 
@@ -605,7 +620,6 @@ class ProfileSettingActivity : LocalizeActivity() {
                             fos.close()
                         }
 
-
                         imagepath= imagesDir+"/img1.jpeg"
 
                     }
@@ -632,7 +646,6 @@ class ProfileSettingActivity : LocalizeActivity() {
                         }
                     else if (lengthbmp<160){
                         AppUtils.showToast(currActivity!!,R.drawable.cross,"Select image upto 150 kb",R.color.error_red,R.color.white,R.color.white)
-
                     }
                 }, 1000)
                 }
@@ -680,8 +693,6 @@ class ProfileSettingActivity : LocalizeActivity() {
         etNum3= bottomsheetlanguagecode!!.findViewById(R.id.etNum3)!!
         etNum4= bottomsheetlanguagecode!!.findViewById(R.id.etNum4)!!
         tvTimer=bottomsheetlanguagecode!!.findViewById(R.id.tvTimer)!!
-
-
 
         etNum1.addTextChangedListener(GenericTextWatcher(etNum1, etNum2))
         etNum2.addTextChangedListener(GenericTextWatcher(etNum2, etNum3))

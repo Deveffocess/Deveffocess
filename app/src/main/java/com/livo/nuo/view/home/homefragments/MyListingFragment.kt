@@ -27,9 +27,6 @@ import com.livo.nuo.models.BannerModel
 import com.livo.nuo.models.BannerModelDemo
 import com.livo.nuo.models.ProductModel
 import com.livo.nuo.recyclerview_refresh.RecyclerRefreshLayout
-import com.livo.nuo.utility.AndroidUtil
-import com.livo.nuo.utility.DensityUtil
-import com.livo.nuo.utility.MaterialRefreshView
 import com.livo.nuo.viewModel.ViewModelFactory
 import com.livo.nuo.viewModel.products.ProductViewModel
 import com.nostra13.universalimageloader.cache.disc.naming.HashCodeFileNameGenerator
@@ -47,7 +44,6 @@ import com.livo.nuoo.view.home.adapter.MyListingAdapter
 import android.widget.*
 import com.google.gson.JsonObject
 import com.google.gson.JsonPrimitive
-import com.livo.nuo.utility.AppUtils
 import android.util.DisplayMetrics
 import com.livo.nuo.view.notifications.NotificationsActivity
 import androidx.core.app.ActivityOptionsCompat
@@ -63,6 +59,7 @@ import android.view.View.OnTouchListener
 import android.widget.Toast
 import android.view.ViewTreeObserver.OnScrollChangedListener
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import com.livo.nuo.utility.*
 import com.livo.nuo.view.home.HomeActivity
 
 
@@ -94,11 +91,14 @@ class MyListingFragment : Fragment() {
     lateinit var rlMM:RelativeLayout
     lateinit var rlSearch:RelativeLayout
 
+    lateinit var imgNotificationDot:ImageView
+
     var userType=""
     var pageNumber=0
     var height=0
     var width=0
     var has_next=false
+    var unread_msg=false
     var numberingpage=0
 
     var MyListingFragment="MyListingFragment"
@@ -136,6 +136,7 @@ class MyListingFragment : Fragment() {
         nsMainScroll=root.findViewById(R.id.nsMainScroll)
         rlMM=root.findViewById(R.id.rlMM)
         progressbar=root.findViewById(R.id.progressbar)
+        imgNotificationDot=root.findViewById(R.id.imgNotificationDot)
         rlNoDataFound.visibility = View.GONE
 
         initViews()
@@ -349,7 +350,6 @@ class MyListingFragment : Fragment() {
             startActivity(i)
         })
 
-
         currActivity?.let {
             LocalBroadcastManager.getInstance(it).registerReceiver(mMessageReceiver,
                 IntentFilter("dashboard_fragment")
@@ -399,7 +399,6 @@ class MyListingFragment : Fragment() {
                 it.getUserListings(jsonObject)
 
             }
-
         }
 
     }
@@ -593,6 +592,42 @@ class MyListingFragment : Fragment() {
             bottomSheetDashboardFilterBinding.tvOngoing.setBackground(currActivity!!.getDrawable(R.drawable.blue_round_shape_45_opacity))
         }
 
+
+        bottomSheetDashboardFilterBinding.tvResetAll.setOnClickListener({
+
+            editor.putString("page", 1.toString())
+            editor.putString("sort_by", "title")
+            editor.putString("sort_type", "asc")
+            filterarray.remove(JsonPrimitive("Published"))
+            filterarray.remove(JsonPrimitive("Expired"))
+            filterarray.remove(JsonPrimitive("Completed"))
+            filterarray.remove(JsonPrimitive("Suspended"))
+            filterarray.remove(JsonPrimitive("Ongoing"))
+            filterarray.add("Ongoing")
+            editor.putString("filter",filterarray.toString())
+            editor.putString("my_bids", "false")
+            editor.commit()
+
+            Log.e("arr",filterarray.toString())
+            bottomSheetDashboardFilterBinding.tvDataModified.setBackground(currActivity!!.getDrawable( R.drawable.grey_round_shape_45_opacity))
+            bottomSheetDashboardFilterBinding.ivDataModified.setImageDrawable(resources.getDrawable(R.drawable.ic_baseline_arrow_upward_24))
+            bottomSheetDashboardFilterBinding.tvAlphabetically.setBackground(currActivity!!.getDrawable( R.drawable.blue_round_shape_45_opacity))
+            bottomSheetDashboardFilterBinding.ivAlphabatically.setImageDrawable(resources.getDrawable(R.drawable.ic_baseline_arrow_upward_24))
+
+            bottomSheetDashboardFilterBinding.tvPublished.setBackground(currActivity!!.getDrawable( R.drawable.grey_round_shape_45_opacity))
+            bottomSheetDashboardFilterBinding.tvOngoing.setBackground(currActivity!!.getDrawable( R.drawable.blue_round_shape_45_opacity))
+            bottomSheetDashboardFilterBinding.tvCompleted.setBackground(currActivity!!.getDrawable( R.drawable.grey_round_shape_45_opacity))
+            bottomSheetDashboardFilterBinding.tvSuspended.setBackground(currActivity!!.getDrawable(R.drawable.grey_round_shape_45_opacity))
+            bottomSheetDashboardFilterBinding.tvCompleted.setBackground(currActivity!!.getDrawable(R.drawable.grey_round_shape_45_opacity))
+
+            bottomSheetDashboardFilterBinding.tvShowonlyMyoffer.setBackground(currActivity!!.getDrawable( R.drawable.grey_round_shape_45_opacity))
+            bottomSheetDashboardFilterBinding.tvCompletedTransporter.setBackground(currActivity!!.getDrawable(R.drawable.grey_round_shape_45_opacity))
+            bottomSheetDashboardFilterBinding.tvSuspendedTransporter.setBackground(currActivity!!.getDrawable(R.drawable.grey_round_shape_45_opacity))
+            bottomSheetDashboardFilterBinding.tvOngoingTranspoter.setBackground(currActivity!!.getDrawable(R.drawable.blue_round_shape_45_opacity))
+
+            doApiCall()
+
+        })
 
         if(userType.equals("sender"))
         {
@@ -935,8 +970,6 @@ class MyListingFragment : Fragment() {
                 bottomSheetDashboardFilterBinding.tvOngoing.setBackground(currActivity!!.getDrawable(R.drawable.blue_round_shape_45_opacity))
             }
 
-
-
             editor.putString("user_type","sender")
             editor.putString("my_bids", "false")
             editor.commit()
@@ -974,8 +1007,6 @@ class MyListingFragment : Fragment() {
             if (filter_pref?.contains("Ongoing")== true) {
                 bottomSheetDashboardFilterBinding.tvOngoingTranspoter.setBackground(currActivity!!.getDrawable(R.drawable.blue_round_shape_45_opacity))
             }
-
-
 
             if(filter_pref?.contains("Published") == true)
                 filterarray.remove(JsonPrimitive("Published"))
@@ -1057,6 +1088,17 @@ class MyListingFragment : Fragment() {
                 progressbar.visibility=View.VISIBLE
                 else
                     progressbar.visibility=View.GONE
+
+                unread_msg=it.data.unread_msg
+                if(unread_msg){
+                    MyAppSession.notiIcon=true
+                    imgNotificationDot.visibility=View.VISIBLE
+                    }
+                else{
+                    MyAppSession.notiIcon=false
+                    imgNotificationDot.visibility=View.GONE
+                }
+
                 Log.e("ha",has_next.toString())
                // currentPage = it.data.current_page
                 totalPage = it.data.current_page

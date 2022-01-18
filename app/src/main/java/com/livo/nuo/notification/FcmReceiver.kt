@@ -30,6 +30,9 @@ class FcmReceiver : FirebaseMessagingService() {
                     val intent = Intent("listing_ongoing")
                     intent.putExtra("id", datarequest_id)
                     LocalBroadcastManager.getInstance(this).sendBroadcast(intent)
+
+                    val inte = Intent("dashboard_fragment")
+                    LocalBroadcastManager.getInstance(this).sendBroadcast(inte)
                 }
             }
 
