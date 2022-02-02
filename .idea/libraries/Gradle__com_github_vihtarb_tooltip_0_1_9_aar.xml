@@ -4,6 +4,9 @@
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/bee03f1ca08afa0f1dc6f28eb642a5c0/transformed/jetified-tooltip-0.1.9/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/bee03f1ca08afa0f1dc6f28eb642a5c0/transformed/jetified-tooltip-0.1.9/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/bee03f1ca08afa0f1dc6f28eb642a5c0/transformed/jetified-tooltip-0.1.9/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/f76855e6f8987a1835f9b832aa54491b/transformed/jetified-tooltip-0.1.9/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/f76855e6f8987a1835f9b832aa54491b/transformed/jetified-tooltip-0.1.9/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/f76855e6f8987a1835f9b832aa54491b/transformed/jetified-tooltip-0.1.9/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.vihtarb/tooltip/0.1.9/13ce9c62e1b83978cd6c7065b72965cdeb523c3b/tooltip-0.1.9-javadoc.jar!/" />

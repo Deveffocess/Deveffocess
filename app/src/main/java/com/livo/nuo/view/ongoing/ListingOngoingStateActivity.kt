@@ -592,7 +592,8 @@ class ListingOngoingStateActivity : LocalizeActivity(){
                     var sub_level = it.data.main_levels.pickup.sub_level
 
                     mSteppers[1]?.title = pickup_state.title
-                    tvStatus.text = pickup_state.sub_title
+
+                    addr=it.data.pickup_address
 
                     if (sub_level==0)
                     {
@@ -636,12 +637,16 @@ class ListingOngoingStateActivity : LocalizeActivity(){
 
                     pickupimage_url=pickup_state.image
                     pickupdate=pickup_state.sub_title
+                    tvStatus.text = pickup_state.sub_title
+                    addr=""
 
                     var dropoff_state = it.data.main_levels.dropoff
                     mSteppers[2]?.title = dropoff_state.title
                     mSteppers[2]?.summary = dropoff_state.sub_title
 
                     var sub_level = it.data.main_levels.dropoff.sub_level
+
+                    dropaddr=it.data.dropoff_address
 
                     if (sub_level==0)
                     {
@@ -1227,8 +1232,6 @@ class ListingOngoingStateActivity : LocalizeActivity(){
                     ongoingViewModel?.let {
                         if (currActivity.let { ctx -> AndroidUtil.isInternetAvailable(ctx!!) } == true) {
 
-                            var jsonObject =  JsonObject();
-                            jsonObject.addProperty("offer_id", id)
 
                             it.getTrnsAcceptApproval(jsonObject)
                         }

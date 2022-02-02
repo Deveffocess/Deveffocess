@@ -158,6 +158,7 @@ class DropOffFragment : Fragment() , OnMapReadyCallback {
 
 
 
+
         return root
     }
 
@@ -981,6 +982,19 @@ class DropOffFragment : Fragment() , OnMapReadyCallback {
 
             val input = SimpleDateFormat("yyyy-MM-dd")
             val output = SimpleDateFormat("dd/MM/yyyy")
+            try {
+                var oneWayTripDate = input.parse(dat) // parse input
+                 // format output
+                tvPickupDate.text=resources.getString(R.string.pickup_date)+" : "+output.format(oneWayTripDate)
+                tvPickupDate.visibility=View.VISIBLE
+            } catch (e: ParseException) {
+                e.printStackTrace()
+            }
+
+
+
+            val input = SimpleDateFormat("yyyy-MM-dd")
+            val output = SimpleDateFormat("yy/dd/MM")
             try {
                 var oneWayTripDate = input.parse(dat) // parse input
                  // format output

@@ -682,6 +682,27 @@ class ProfileSettingActivity : LocalizeActivity() {
 
                         }
 
+                            Handler().postDelayed({
+
+                                Glide.with(currActivity!!).load(imagepath)
+                                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                                    .skipMemoryCache(true).into(imgUser)
+
+                            },500)
+                        }
+                        else {
+                            imagepath = getRealPathFromURI(imageUri)
+
+                            Handler().postDelayed({
+
+                                Glide.with(currActivity!!).load(imageUri)
+                                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                                    .skipMemoryCache(true).into(imgUser)
+
+                            },500)
+
+                        }
+
                     }
                         else if(lengthbmp<1024 && lengthbmp>160)
                     {

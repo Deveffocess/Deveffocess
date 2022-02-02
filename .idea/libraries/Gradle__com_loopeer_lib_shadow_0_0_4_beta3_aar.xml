@@ -4,6 +4,9 @@
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/64ac49cd8e412c7b48a732cf9f5a3e4d/transformed/jetified-shadow-0.0.4-beta3/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/64ac49cd8e412c7b48a732cf9f5a3e4d/transformed/jetified-shadow-0.0.4-beta3/AndroidManifest.xml" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/64ac49cd8e412c7b48a732cf9f5a3e4d/transformed/jetified-shadow-0.0.4-beta3/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/761f260c3537efddf429b9a0d269a138/transformed/jetified-shadow-0.0.4-beta3/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/761f260c3537efddf429b9a0d269a138/transformed/jetified-shadow-0.0.4-beta3/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/761f260c3537efddf429b9a0d269a138/transformed/jetified-shadow-0.0.4-beta3/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

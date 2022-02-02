@@ -59,11 +59,8 @@ import android.view.View.OnTouchListener
 import android.widget.Toast
 import android.view.ViewTreeObserver.OnScrollChangedListener
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
-import com.livo.nuo.databinding.BottomSheetTakePermissionBinding
 import com.livo.nuo.utility.*
-import com.livo.nuo.view.Splash_Screen
 import com.livo.nuo.view.home.HomeActivity
-import com.livo.nuo.view.profile.ProfileSettingActivity
 
 
 class MyListingFragment : Fragment() {
@@ -94,7 +91,6 @@ class MyListingFragment : Fragment() {
     lateinit var rlMM:RelativeLayout
     lateinit var rlSearch:RelativeLayout
 
-    private var bottomSheetDialog: BottomSheetDialog?=null
     lateinit var imgNotificationDot:ImageView
 
     var userType=""
@@ -104,7 +100,6 @@ class MyListingFragment : Fragment() {
     var has_next=false
     var unread_msg=false
     var numberingpage=0
-    var profile_fulfil=false
 
     var MyListingFragment="MyListingFragment"
 
@@ -193,7 +188,7 @@ class MyListingFragment : Fragment() {
 
 
         fillViewPager()
-       // initImageLoader()
+        initImageLoader()
 
      /*   nsMainScroll.setOnTouchListener(OnTouchListener { v, event ->
             if (event.action == MotionEvent.ACTION_UP) {
@@ -351,13 +346,8 @@ class MyListingFragment : Fragment() {
         }
 
         tvMakeListing.setOnClickListener({
-            if(profile_fulfil) {
-                var i = Intent(currActivity, NewListingActivity::class.java)
-                startActivity(i)
-            }
-            else{
-                openBottomPopupCompleteProfile()
-            }
+            var i=Intent(currActivity,NewListingActivity::class.java)
+            startActivity(i)
         })
 
         currActivity?.let {
@@ -381,25 +371,6 @@ class MyListingFragment : Fragment() {
         super.onResume()
         numberingpage=1
         currentPage=1
-
-        if(MyAppSession.dashboard_publish)
-        {
-            if(filterarray.contains(JsonPrimitive("Published")))
-            {
-
-            }
-            else{
-                filterarray.add("Published")
-                pref = currActivity!!.getSharedPreferences(MyListingFragment, Context.MODE_PRIVATE)
-                val editor = pref.edit()
-                editor.putString("user_type", "sender")
-                editor.putString("filter",filterarray.toString())
-                editor.commit()
-            }
-
-            MyAppSession.dashboard_publish=false
-        }
-
         doApiCall()
     }
 
@@ -444,7 +415,7 @@ class MyListingFragment : Fragment() {
         viewpager1.setClipToPadding(false)
         viewpager1.setPageMargin(24)
         viewpager1.setPadding(40, 0, 40, 0)
-        viewpager1.setOffscreenPageLimit(4)
+        viewpager1.setOffscreenPageLimit(3)
         viewpager1.setPageTransformer(false, CustPagerTransformer(currActivity!!))
         viewpager1.adapter = object : PagerAdapter() {
 
@@ -460,9 +431,9 @@ class MyListingFragment : Fragment() {
                 val itemView = LayoutInflater.from(currActivity).inflate(R.layout.fragment_common,container,false)
                 var img_slider=itemView.findViewById<ImageView>(R.id.img_slider)
                 var shimmerImagex=itemView.findViewById<ShimmerFrameLayout>(R.id.shimmerImagex)
-                /*img_slider.setOnClickListener{
+                img_slider.setOnClickListener{
                     openPopupToDiscard()
-                }*/
+                }
                 shimmerImagex.visibility = View.VISIBLE
 //                holder.itemView.imgProductImagex.visibility = View.INVISIBLE
                 shimmerImagex.startShimmer()
@@ -647,8 +618,7 @@ class MyListingFragment : Fragment() {
             bottomSheetDashboardFilterBinding.tvOngoing.setBackground(currActivity!!.getDrawable( R.drawable.blue_round_shape_45_opacity))
             bottomSheetDashboardFilterBinding.tvCompleted.setBackground(currActivity!!.getDrawable( R.drawable.grey_round_shape_45_opacity))
             bottomSheetDashboardFilterBinding.tvSuspended.setBackground(currActivity!!.getDrawable(R.drawable.grey_round_shape_45_opacity))
-            bottomSheetDashboardFilterBinding.tvExpired.setBackground(currActivity!!.getDrawable(R.drawable.grey_round_shape_45_opacity))
-
+            bottomSheetDashboardFilterBinding.tvCompleted.setBackground(currActivity!!.getDrawable(R.drawable.grey_round_shape_45_opacity))
 
             bottomSheetDashboardFilterBinding.tvShowonlyMyoffer.setBackground(currActivity!!.getDrawable( R.drawable.grey_round_shape_45_opacity))
             bottomSheetDashboardFilterBinding.tvCompletedTransporter.setBackground(currActivity!!.getDrawable(R.drawable.grey_round_shape_45_opacity))
@@ -987,38 +957,17 @@ class MyListingFragment : Fragment() {
             if(filter_pref?.contains("Published") == true) {
                 bottomSheetDashboardFilterBinding.tvPublished.setBackground(currActivity!!.getDrawable(R.drawable.blue_round_shape_45_opacity))
             }
-            else{
-                bottomSheetDashboardFilterBinding.tvPublished.setBackground(currActivity!!.getDrawable(R.drawable.grey_round_shape_45_opacity))
-            }
             if (filter_pref?.contains("Expired")== true) {
                 bottomSheetDashboardFilterBinding.tvExpired.setBackground(currActivity!!.getDrawable(R.drawable.blue_round_shape_45_opacity))
-            }
-            else{
-                bottomSheetDashboardFilterBinding.tvExpired.setBackground(currActivity!!.getDrawable(R.drawable.grey_round_shape_45_opacity))
             }
             if (filter_pref?.contains("Completed")== true) {
                 bottomSheetDashboardFilterBinding.tvCompleted.setBackground(currActivity!!.getDrawable(R.drawable.blue_round_shape_45_opacity))
             }
-            else{
-                bottomSheetDashboardFilterBinding.tvCompleted.setBackground(currActivity!!.getDrawable(R.drawable.grey_round_shape_45_opacity))
-            }
             if (filter_pref?.contains("Suspended")== true){
                 bottomSheetDashboardFilterBinding.tvSuspended.setBackground(currActivity!!.getDrawable(R.drawable.blue_round_shape_45_opacity))
             }
-            else{
-                bottomSheetDashboardFilterBinding.tvSuspended.setBackground(currActivity!!.getDrawable(R.drawable.grey_round_shape_45_opacity))
-            }
             if (filter_pref?.contains("Ongoing")== true) {
                 bottomSheetDashboardFilterBinding.tvOngoing.setBackground(currActivity!!.getDrawable(R.drawable.blue_round_shape_45_opacity))
-            }
-            else{
-                bottomSheetDashboardFilterBinding.tvOngoing.setBackground(currActivity!!.getDrawable(R.drawable.grey_round_shape_45_opacity))
-            }
-
-            if (filterarray.size()==0)
-            {
-                bottomSheetDashboardFilterBinding.tvOngoing.setBackground(currActivity!!.getDrawable(R.drawable.blue_round_shape_45_opacity))
-                filterarray.add("Ongoing")
             }
 
             editor.putString("user_type","sender")
@@ -1052,48 +1001,17 @@ class MyListingFragment : Fragment() {
             if (filter_pref?.contains("Completed")== true) {
                 bottomSheetDashboardFilterBinding.tvCompletedTransporter.setBackground(currActivity!!.getDrawable(R.drawable.blue_round_shape_45_opacity))
             }
-            else{
-                bottomSheetDashboardFilterBinding.tvCompletedTransporter.setBackground(currActivity!!.getDrawable(R.drawable.grey_round_shape_45_opacity))
-            }
             if (filter_pref?.contains("Suspended")== true){
                 bottomSheetDashboardFilterBinding.tvSuspendedTransporter.setBackground(currActivity!!.getDrawable(R.drawable.blue_round_shape_45_opacity))
             }
-            else{
-                bottomSheetDashboardFilterBinding.tvSuspendedTransporter.setBackground(currActivity!!.getDrawable(R.drawable.grey_round_shape_45_opacity))
-            }
             if (filter_pref?.contains("Ongoing")== true) {
                 bottomSheetDashboardFilterBinding.tvOngoingTranspoter.setBackground(currActivity!!.getDrawable(R.drawable.blue_round_shape_45_opacity))
-            }
-            else{
-                bottomSheetDashboardFilterBinding.tvOngoingTranspoter.setBackground(currActivity!!.getDrawable(R.drawable.grey_round_shape_45_opacity))
             }
 
             if(filter_pref?.contains("Published") == true)
                 filterarray.remove(JsonPrimitive("Published"))
             if (filter_pref?.contains("Expired")== true)
                 filterarray.remove(JsonPrimitive("Expired"))
-
-            if (filterarray.size()==0)
-            {
-                if(my_bids!="true") {
-                    bottomSheetDashboardFilterBinding.tvOngoingTranspoter.setBackground(
-                        currActivity!!.getDrawable(
-                            R.drawable.blue_round_shape_45_opacity
-                        )
-                    )
-                    filterarray.add("Ongoing")
-                }
-            }
-            else{
-                if(my_bids!="true") {
-                    bottomSheetDashboardFilterBinding.tvOngoingTranspoter.setBackground(
-                        currActivity!!.getDrawable(
-                            R.drawable.blue_round_shape_45_opacity
-                        )
-                    )
-                    filterarray.add("Ongoing")
-                }
-            }
 
             editor.putString("filter",filterarray.toString())
             editor.putString("user_type","transporter")
@@ -1206,11 +1124,9 @@ class MyListingFragment : Fragment() {
 
                 }
 
-                profile_fulfil=it.data.profile_fulfil
                 (currActivity as HomeActivity).profile_Check(it.data.profile_fulfil)
 
               userType=it.data.user_type
-                MyAppSession.userType=it.data.user_type
 
                 setAdapter()
                 adapter.notifyDataSetChanged()
@@ -1218,38 +1134,6 @@ class MyListingFragment : Fragment() {
 
         productViewModel?.getErrorMutableLiveData()?.observe(currActivity as LifecycleOwner, androidx.lifecycle.Observer {
             //hideProgressBar()
-            if (it.code.toString().equals("401"))
-            {
-                SessionManager.clear()
-
-                var ListingFragment="ListingFragment"
-                pref = currActivity!!.getSharedPreferences(ListingFragment, Context.MODE_PRIVATE)
-                val editor = pref.edit()
-                editor.clear()
-                editor.apply()
-
-                var MyListingFragment="MyListingFragment"
-                pref = currActivity!!.getSharedPreferences(MyListingFragment, Context.MODE_PRIVATE)
-                val editor3 = pref.edit()
-                editor3.clear()
-                editor3.apply()
-
-                pref = currActivity!!.getSharedPreferences("PickUp", Context.MODE_PRIVATE)
-                val editor1 = pref.edit()
-                editor1.clear()
-                editor1.apply()
-
-                pref = currActivity!!.getSharedPreferences("DropOff", Context.MODE_PRIVATE)
-                val editor2 = pref.edit()
-                editor2.clear()
-                editor2.apply()
-
-                var i=Intent(currActivity, Splash_Screen::class.java)
-                currActivity!!.startActivity(i)
-                currActivity!!.finish()
-
-            }
-            else
             AppUtils.showToast(currActivity!!,R.drawable.cross,it.message,R.color.error_red,R.color.white,R.color.white)
         })
     }
@@ -1296,44 +1180,5 @@ class MyListingFragment : Fragment() {
 
         }
 
-
-    fun openBottomPopupCompleteProfile() {
-
-        bottomSheetDialog = BottomSheetDialog(currActivity!!)
-        var bottomSheetDashboardFilterBinding =
-            DataBindingUtil.inflate<BottomSheetTakePermissionBinding>(
-                LayoutInflater.from(currActivity),
-                R.layout.bottom_sheet_take_permission, null, false
-            )
-
-        bottomSheetDialog?.setContentView(bottomSheetDashboardFilterBinding!!.root)
-        Objects.requireNonNull<Window>(bottomSheetDialog?.window)
-            .setBackgroundDrawableResource(android.R.color.transparent)
-
-        var tvNotifications=bottomSheetDialog!!.findViewById<TextView>(R.id.tvNotifications)
-        var tvDetails=bottomSheetDialog!!.findViewById<TextView>(R.id.tvDetails)
-        var tvCancel=bottomSheetDialog!!.findViewById<TextView>(R.id.tvCancel)
-        var tvOpenSetting=bottomSheetDialog!!.findViewById<TextView>(R.id.tvOpenSetting)
-        var llCancel=bottomSheetDialog!!.findViewById<LinearLayout>(R.id.llCancel)
-        var llOpenSetting=bottomSheetDialog!!.findViewById<LinearLayout>(R.id.llOpenSetting)
-
-        tvNotifications!!.text=resources.getString(R.string.incomplete_profile_warning)
-        tvDetails!!.text=resources.getString(R.string.your_profile_is_incomplete_an_incomplete_profile_may_prevent_you_from_creating_the_listing_or_bidding_on_listing_please_update_your_profile)
-        tvCancel!!.text=resources.getString(R.string.cancel)
-        tvOpenSetting!!.text=resources.getString(R.string.update_profile)
-
-        llCancel!!.setOnClickListener({
-            bottomSheetDialog!!.dismiss()
-        })
-
-        llOpenSetting!!.setOnClickListener({
-            var i=Intent(currActivity, ProfileSettingActivity::class.java)
-            startActivity(i)
-            bottomSheetDialog!!.dismiss()
-        })
-
-
-        bottomSheetDialog?.show()
-    }
 
 }

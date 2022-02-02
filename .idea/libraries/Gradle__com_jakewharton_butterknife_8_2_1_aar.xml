@@ -9,6 +9,9 @@
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/a616efaaef2a93684ecaa535215db067/transformed/jetified-butterknife-8.2.1/res" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/a616efaaef2a93684ecaa535215db067/transformed/jetified-butterknife-8.2.1/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/a616efaaef2a93684ecaa535215db067/transformed/jetified-butterknife-8.2.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/532fc9539b0683a55536457edd80a65a/transformed/jetified-butterknife-8.2.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/532fc9539b0683a55536457edd80a65a/transformed/jetified-butterknife-8.2.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/532fc9539b0683a55536457edd80a65a/transformed/jetified-butterknife-8.2.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jakewharton/butterknife/8.2.1/a0a9c95e9156b17153fd18b1a1508e8594d45b2/butterknife-8.2.1-javadoc.jar!/" />
