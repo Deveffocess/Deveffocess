@@ -50,9 +50,6 @@ import com.google.android.libraries.places.widget.AutocompleteActivity
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
-import com.kusu.PlaceSearchActivity
-import com.kusu.PlaceSearchWidget
-import com.kusu.SearchResult
 import com.livo.nuo.R
 import com.livo.nuo.lib.rating_bar.BaseRatingBar.TAG
 import com.livo.nuo.models.DateDayModel
@@ -218,22 +215,24 @@ class PickupFragment : Fragment(), OnMapReadyCallback {
                 )
             }
 
-            // Try to obtain the map from the SupportMapFragment.
+
             override fun onLocationResult(locationResult: LocationResult) {
                 Log.d(TAG, "onLocationResult: $locationResult")
-                if (locationResult == null) {
-                    return
-                }
-                when (doAfterLocationSwitchedOn) {
-                    1 -> startParsingAddressToShow()
-                    2 ->                         //on click of imgCurrent
-                        showCurrentLocationOnMap(false)
-                    3 ->                         //on Click of Direction Tool
-                        showCurrentLocationOnMap(true)
-                }
+                if(checkAndRequestPermissions()) {
+                    if (locationResult == null) {
+                        return
+                    }
+                    when (doAfterLocationSwitchedOn) {
+                        1 -> startParsingAddressToShow()
+                        2 ->                         //on click of imgCurrent
+                            showCurrentLocationOnMap(false)
+                        3 ->                         //on Click of Direction Tool
+                            showCurrentLocationOnMap(true)
+                    }
 
-                //Location fetched, update listener can be removed
-                fusedLocationProviderClient?.removeLocationUpdates(locationCallback)
+                    //Location fetched, update listener can be removed
+                    fusedLocationProviderClient?.removeLocationUpdates(locationCallback)
+                }
             }
         }
 
@@ -279,8 +278,6 @@ class PickupFragment : Fragment(), OnMapReadyCallback {
             val intent = Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields)
                 .build(currActivity!!)
             startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE)
-
-
 
         })
 
@@ -396,7 +393,7 @@ class PickupFragment : Fragment(), OnMapReadyCallback {
         //Do tasks for which permission was granted by user in onRequestPermission()
         if (!currActivity!!.isFinishing && mLocationPermissionGranted) {
             // perform action required b4 asking permission
-            mLocationPermissionGranted = false
+            //mLocationPermissionGranted = false
             when (doAfterPermissionProvided) {
                 1 -> startParsingAddressToShow()
                 2 -> showCurrentLocationOnMap(false)
@@ -573,9 +570,26 @@ class PickupFragment : Fragment(), OnMapReadyCallback {
 
     private fun showCurrentLocationOnMap(isDirectionClicked: Boolean) {
         if (checkAndRequestPermissions()) {
-            @SuppressLint("MissingPermission") val lastLocation =
-                fusedLocationProviderClient!!.lastLocation
-            lastLocation.addOnSuccessListener(
+             var lastLocation =
+                 if (ActivityCompat.checkSelfPermission(
+                         currActivity!!,
+                         Manifest.permission.ACCESS_FINE_LOCATION
+                     ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                         currActivity!!,
+                         Manifest.permission.ACCESS_COARSE_LOCATION
+                     ) != PackageManager.PERMISSION_GRANTED
+                 ) {
+
+                     // here to request the missing permissions, and then overriding
+                     //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                     //                                          int[] grantResults)
+                     // to handle the case where the user grants the permission. See the documentation
+                     // for ActivityCompat#requestPermissions for more details.
+                     return
+                 }
+            else{}
+                 fusedLocationProviderClient!!.
+                 lastLocation.addOnSuccessListener(
                 currActivity!!
             ) { location ->
                 if (location != null) {
@@ -608,14 +622,14 @@ class PickupFragment : Fragment(), OnMapReadyCallback {
 //                    ).show()
                 }
             }
-            lastLocation.addOnFailureListener { //If perm provided then gps not enabled
+          //  lastLocation.addOnFailureListener { //If perm provided then gps not enabled
                 //                getSettingsLocation();
 //                Toast.makeText(
 //                    currActivity!!,
 //                    "Location Not Availabe",
 //                    Toast.LENGTH_SHORT
 //                ).show()
-            }
+          //  }
         }
     }
 
@@ -654,7 +668,7 @@ class PickupFragment : Fragment(), OnMapReadyCallback {
             return false
         }
 
-        //getSettingsLocation();
+       // getSettingsLocation();
         return true
     }
 

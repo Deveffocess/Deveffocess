@@ -40,6 +40,7 @@ import android.os.Environment
 
 import android.os.Build
 import com.livo.nuo.utility.AppUtils
+import com.livo.nuo.utility.CheckPermission
 import java.io.*
 
 
@@ -273,9 +274,19 @@ class NewListingActivity : LocalizeActivity() {
 
 
     override fun onResume() {
-
         super.onResume()
+        requestPermission()
     }
+
+    private fun requestPermission(){
+        if(CheckPermission.checkCameraPermission(currActivity!!)){
+//            AppUtils.showToast(currActivity,R.drawable.check,"permission given",R.color.error_red,R.color.white,R.color.white)
+        }else{
+            CheckPermission.requestCameraPermission(currActivity!!,123)
+        }
+
+    }
+
 
     fun setUpViewPager() {
         val adapter = AdapterCommonViewPager(currActivity,supportFragmentManager,
@@ -539,11 +550,12 @@ class NewListingActivity : LocalizeActivity() {
                     val imageInByte: ByteArray = stream.toByteArray()
                     val lengthbmp = imageInByte.size.toLong()/1024
 
+                        var imageUri:Uri?=null
                     if (lengthbmp>(1024))
                     // mSelectedImagePath = getRealPathFromURI(resultUri)
                     {
-                        val nh = (bitmapOrg!!.height * (900.0 / bitmapOrg!!.width)).toInt()
-                        var scaled = Bitmap.createScaledBitmap(bitmapOrg!!, 900, nh, true)
+                        val nh = (bitmapOrg!!.height * (700.0 / bitmapOrg!!.width)).toInt()
+                        var scaled = Bitmap.createScaledBitmap(bitmapOrg!!, 700, nh, true)
 
                         val w = scaled.width
                         val h = scaled.height
@@ -565,7 +577,7 @@ class NewListingActivity : LocalizeActivity() {
                                 MediaStore.MediaColumns.RELATIVE_PATH,
                                 "DCIM/Pics"
                             )
-                            val imageUri =
+                            imageUri =
                                 resolver.insert(Images.Media.EXTERNAL_CONTENT_URI, contentValues)
                             resolver.openOutputStream(imageUri!!)
                         } else {
@@ -589,10 +601,27 @@ class NewListingActivity : LocalizeActivity() {
                             fos.close()
                         }
 
-                       // Toast.makeText(applicationContext, lengthbmp.toString()+" "+(bitmapdata.size.toLong()/1024).toString(), Toast.LENGTH_SHORT).show()
-                        (imageFragment as AddImagesFragment).galleryClick(0,imagesDir+"/img1.jpeg")
-                        Log.e("file",imagesDir+"/img1.jpeg")
-                        selectedImageModelPaths.add(0, imagesDir+"/img1.jpeg")
+
+                        if (imageUri==null) {
+                            (imageFragment as AddImagesFragment).galleryClick(
+                                0,
+                                imagesDir + "/img1.jpeg"
+                            )
+                            Log.e("file", imagesDir + "/img1.jpeg")
+                            selectedImageModelPaths.add(0, imagesDir + "/img1.jpeg")
+
+                        }
+                        else{
+                            var imagepath = getRealPathFromURI(imageUri)
+
+                            (imageFragment as AddImagesFragment).galleryClick(
+                                0,
+                                imagepath
+                            )
+                            Log.e("file", imagesDir + "/img1.jpeg")
+                            selectedImageModelPaths.add(0, imagepath)
+
+                        }
                         tvNext.visibility = View.VISIBLE
 
                     }
@@ -659,11 +688,12 @@ class NewListingActivity : LocalizeActivity() {
                         val imageInByte: ByteArray = stream.toByteArray()
                         val lengthbmp = imageInByte.size.toLong()/1024
 
+                        var imageUri: Uri?=null
                         if (lengthbmp>(1024))
                         // mSelectedImagePath = getRealPathFromURI(resultUri)
                         {
-                            val nh = (bitmapOrg!!.height * (900.0 / bitmapOrg!!.width)).toInt()
-                            var scaled = Bitmap.createScaledBitmap(bitmapOrg!!, 900, nh, true)
+                            val nh = (bitmapOrg!!.height * (700.0 / bitmapOrg!!.width)).toInt()
+                            var scaled = Bitmap.createScaledBitmap(bitmapOrg!!, 700, nh, true)
 
                             val w = scaled.width
                             val h = scaled.height
@@ -687,7 +717,7 @@ class NewListingActivity : LocalizeActivity() {
                                     MediaStore.MediaColumns.RELATIVE_PATH,
                                     "DCIM/Pics"
                                 )
-                                val imageUri =
+                                imageUri =
                                     resolver.insert(Images.Media.EXTERNAL_CONTENT_URI, contentValues)
                                 resolver.openOutputStream(imageUri!!)
                             } else {
@@ -711,10 +741,23 @@ class NewListingActivity : LocalizeActivity() {
                                 fos.close()
                             }
 
-                           // Toast.makeText(applicationContext, lengthbmp.toString()+" "+(bitmapdata.size.toLong()/1024).toString(), Toast.LENGTH_SHORT).show()
-                            (imageFragment as AddImagesFragment).galleryClick(1,imagesDir+"/img2.jpeg")
-                            Log.e("file",imagesDir+"/img2.jpeg")
-                            selectedImageModelPaths.add(1, imagesDir+"/img2.jpeg")
+                            if (imageUri==null) {
+                                (imageFragment as AddImagesFragment).galleryClick(
+                                    1,
+                                    imagesDir + "/img2.jpeg"
+                                )
+                                Log.e("file", imagesDir + "/img2.jpeg")
+                                selectedImageModelPaths.add(1, imagesDir + "/img2.jpeg")
+                            }
+                            else{
+                                var imagepath = getRealPathFromURI(imageUri)
+                                (imageFragment as AddImagesFragment).galleryClick(
+                                    1,
+                                    imagepath
+                                )
+
+                                selectedImageModelPaths.add(1, imagepath)
+                            }
                             tvNext.visibility = View.VISIBLE
 
                         }
@@ -784,11 +827,12 @@ class NewListingActivity : LocalizeActivity() {
                         val imageInByte: ByteArray = stream.toByteArray()
                         val lengthbmp = imageInByte.size.toLong()/1024
 
+                        var imageUri:Uri?=null
                         if (lengthbmp>(1024))
                         // mSelectedImagePath = getRealPathFromURI(resultUri)
                         {
-                            val nh = (bitmapOrg!!.height * (900.0 / bitmapOrg!!.width)).toInt()
-                            var scaled = Bitmap.createScaledBitmap(bitmapOrg!!, 900, nh, true)
+                            val nh = (bitmapOrg!!.height * (700.0 / bitmapOrg!!.width)).toInt()
+                            var scaled = Bitmap.createScaledBitmap(bitmapOrg!!, 700, nh, true)
 
                             val w = scaled.width
                             val h = scaled.height
@@ -812,7 +856,7 @@ class NewListingActivity : LocalizeActivity() {
                                     MediaStore.MediaColumns.RELATIVE_PATH,
                                     "DCIM/Pics"
                                 )
-                                val imageUri =
+                                imageUri =
                                     resolver.insert(Images.Media.EXTERNAL_CONTENT_URI, contentValues)
                                 resolver.openOutputStream(imageUri!!)
                             } else {
@@ -836,10 +880,27 @@ class NewListingActivity : LocalizeActivity() {
                                 fos.close()
                             }
 
-                           // Toast.makeText(applicationContext, lengthbmp.toString()+" "+(bitmapdata.size.toLong()/1024).toString(), Toast.LENGTH_SHORT).show()
-                            (imageFragment as AddImagesFragment).galleryClick(2,imagesDir+"/img3.jpeg")
-                            Log.e("file",imagesDir+"/img3.jpeg")
-                            selectedImageModelPaths.add(2, imagesDir+"/img3.jpeg")
+
+                            if (imageUri==null) {
+                                (imageFragment as AddImagesFragment).galleryClick(
+                                    2,
+                                    imagesDir + "/img3.jpeg"
+                                )
+                                Log.e("file", imagesDir + "/img3.jpeg")
+                                selectedImageModelPaths.add(2, imagesDir + "/img3.jpeg")
+                            }
+                            else{
+                                var imagepath = getRealPathFromURI(imageUri)
+
+                                (imageFragment as AddImagesFragment).galleryClick(
+                                    2,
+                                    imagepath
+                                )
+
+                                selectedImageModelPaths.add(2, imagepath)
+                            }
+
+
                             tvNext.visibility = View.VISIBLE
 
                         }

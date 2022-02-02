@@ -29,6 +29,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:textSize="16dp"
+                android:fontFamily="@font/barlow_regular"
                 android:background="@drawable/white_fill_black_stroke_shape"
                 android:textColor="@color/black"
                 android:padding="10dp"

@@ -33,7 +33,7 @@
     <string name="refer_amp_earn"><![CDATA[Henvis og tjen]]></string>
     <string name="first_name">Fornavn *</string>
     <string name="last_name">Efternavn *</string>
-    <string name="email">E-mail *</string>
+    <string name="email">E-mail</string>
     <string name="date_of_birth_dd_mm_yy">Fødselsdato: DD / MM / ÅÅÅÅ *</string>
     <string name="i_am">Jeg er</string>
     <string name="female">Kvinde</string>
@@ -128,14 +128,15 @@
     <string name="details">Details</string>
     <string name="report">Report</string>
     <string name="_2_people_needed">2 PERSONER NØDVENDIG</string>
-    <string name="pick_up_from">Pick-Up From</string>
-    <string name="drop_off_at">Drop-Off At</string>
+    <string name="pick_up_from">Afhentning fra</string>
+    <string name="drop_off_at">Aflevering kl</string>
 
 
     <!-- Dashboard -->
     <string name="home">Hjem</string>
     <string name="listing">Notering</string>
     <string name="chats">Chats</string>
+    <string name="messages">Beskeder</string>
     <string name="profile">Profil</string>
     <string name="chat">Snak</string>
     <string name="message">Besked</string>
@@ -155,7 +156,7 @@
 
 
     <!-- MyListing Filter -->
-    <string name="data_modified">Data ændret</string>
+    <string name="data_modified">Dato ændret</string>
     <string name="alphabetically">Alfabetisk</string>
     <string name="published">Udgivet</string>
     <string name="ongoing">Igangværende</string>
@@ -192,6 +193,8 @@
     <string name="cancel">Afbestille</string>
     <string name="update_offer">Opdater tilbud</string>
     <string name="delete_now">Slet nu</string>
+    <string name="submit_transporter_application">Indsend transportøransøgning</string>
+    <string name="seems_like_you_are_not_approved_transporter_yet_you_can_submit_an_application_on_Livo_to_become_an_transporter.">Det ser ud til, at du ikke er godkendt transportør endnu. Du kan indsende en ansøgning på Livo om at blive transportør.</string>
     <string name="a_notification_will_also_be_sent_out_to_sender_to_inform_listing_price_has_been_updated">En meddelelse vil også blive sendt ud til afsender for at informere om, at noteringsprisen er blevet opdateret</string>
 
     <!-- Report -->
@@ -224,6 +227,11 @@
     <string name="total_amount">Total beløb</string>
     <string name="save">Gemme</string>
     <string name="adjust_price">Juster pris</string>
+    <string name="please_enter_valid_email_address">Indtast venligst en gyldig e-mailadresse</string>
+    <string name="minimum_listing_price_should_be">Minimum noteringspris bør være </string>
+    <string name="something_went_wrong">Noget gik galt</string>
+    <string name="swipe_to_send_complete_request">Stryg for at sende en komplet anmodning</string>
+    <string name="confirm_change">Bekræft ændring</string>
 
     <!-- Add Image Fragment -->
     <string name="discard_image">Vil du kassere billedet?</string>
@@ -259,17 +267,17 @@
 
 
     <!-- Sender Activity -->
-    <string name="approve_transporter">Approve</string>
+    <string name="approve_transporter">Godkende</string>
     <string name="make_payment">Foretag betaling</string>
     <string name="waiting_Transporter_approval">Venter på transportørgodkendelse</string>
     <string name="not_interested">Ikke interesseret</string>
     <string name="listing_completed_successfully">Fortegnelse afsluttet \n Succesfuldt!</string>
-    <string name="message_sender">Message Sender</string>
-    <string name="pickup_message">Message Transporter</string>
+    <string name="message_sender">Besked afsender</string>
+    <string name="pickup_message">Besked Transporter</string>
 
 
     <!-- Transporter Listing Data   -->
-    <string name="accept_sender">Accept</string>
+    <string name="accept_sender">Acceptere</string>
     <string name="decline">Nedgang</string>
     <string name="delete_offer">Slet tilbud</string>
     <string name="change_price">Skift pris</string>
@@ -325,6 +333,7 @@
     <string name="new_offers_on_my_listing">Nye tilbud på min fortegnelse</string>
     <string name="app">App</string>
     <string name="notifications_">MEDDELELSER</string>
+    <string name="no_data_found">Ingen data fundet</string>
 
 
 

@@ -14,6 +14,7 @@
         android:layout_height="match_parent"
         android:background="@color/white"
         android:orientation="vertical"
+        android:layout_marginTop="10dp"
         android:paddingStart="20dp"
         android:paddingEnd="20dp">
 
@@ -60,7 +61,7 @@
             android:maxLength="60"
             android:maxLines="1"
             android:paddingTop="5dp"
-            android:paddingBottom="5dp"
+            android:paddingBottom="10dp"
             android:textColor="@color/black"
             android:textColorHint="@color/black"
             app:backgroundTint="@color/grey_300"

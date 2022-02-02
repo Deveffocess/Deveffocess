@@ -51,7 +51,7 @@
                 android:fontFamily="@font/barlow_bold"
                 android:text="11:30 PM"
                 android:textColor="@color/black_20_opacity"
-                android:textSize="13sp" />
+                android:textSize="13dp" />
 
 
         </RelativeLayout>

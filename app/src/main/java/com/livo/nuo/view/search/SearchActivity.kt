@@ -65,6 +65,8 @@ class SearchActivity : LocalizeActivity() {
     lateinit var llMyOffers:LinearLayout
     lateinit var llOtherListings:LinearLayout
 
+    lateinit var rlNoDataFound:RelativeLayout
+
     lateinit var shimmerViewContainer:ShimmerFrameLayout
     lateinit var llmainLayout:LinearLayout
 
@@ -94,6 +96,8 @@ class SearchActivity : LocalizeActivity() {
         rlSearch=findViewById(R.id.rlSearch)
         shimmerViewContainer=findViewById(R.id.shimmerViewContainer)
         llmainLayout=findViewById(R.id.llmainLayout)
+
+        rlNoDataFound=findViewById(R.id.rlNoDataFound)
 
         llMyListings.visibility=View.GONE
         llMyOffers.visibility=View.GONE
@@ -242,10 +246,17 @@ class SearchActivity : LocalizeActivity() {
                 rvOtherListing.adapter = adapter2
                 adapter2.notifyDataSetChanged()
 
+                rlNoDataFound.visibility=View.GONE
+
             })
 
         productViewModel?.getErrorMutableLiveData()?.observe(currActivity as LifecycleOwner, androidx.lifecycle.Observer {
             hideProgressBar()
+
+            rlNoDataFound.visibility=View.VISIBLE
+            shimmerViewContainer.visibility=View.GONE
+            shimmerViewContainer.stopShimmer()
+
             AppUtils.showToast(currActivity!!,R.drawable.cross,it.message,R.color.error_red,R.color.white,R.color.white)
         })
     }

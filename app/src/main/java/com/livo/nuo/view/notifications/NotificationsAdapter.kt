@@ -133,10 +133,10 @@ class NotificationsAdapter(
 
             if (nCode==1)
             {
-                var i=Intent(currAtivity,ListingOngoingStateActivity::class.java)
+                /*var i=Intent(currAtivity,ListingOngoingStateActivity::class.java)
                 i.putExtra("id",model.request_id)
                 currAtivity.startActivity(i)
-                currAtivity.finish()
+                currAtivity.finish()*/
             }
             else if (nCode==3)
             {

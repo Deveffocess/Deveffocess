@@ -48,7 +48,10 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import java.io.ByteArrayOutputStream
 import java.io.FileOutputStream
 import android.R.attr.angle
+import android.content.res.Configuration
 import android.media.ExifInterface
+import android.os.Build
+import android.widget.Toast
 import java.util.Collections.rotate
 
 
@@ -208,8 +211,6 @@ class AddImagesFragment : Fragment() {
                     (currActivity as NewListingActivity).slotNo = 3
                 }
                 //(currActivity as NewListingActivity).slotNo = 0
-
-
 
                 if(CheckPermission.checkCameraPermission(currActivity!!)){
 
@@ -536,26 +537,35 @@ class AddImagesFragment : Fragment() {
 
                 var bitmapImage = BitmapFactory.decodeFile(filePath)
 
-
-                val nh = (bitmapImage.height * (800.0 / bitmapImage.width)).toInt()
-                var scaled = Bitmap.createScaledBitmap(bitmapImage, 800, nh, true)
+                val nh = (bitmapImage.height * (900.0 / bitmapImage.width)).toInt()
+                var scaled = Bitmap.createScaledBitmap(bitmapImage, 900, nh, true)
 
                 var hh=bitmapImage.height.toDouble()
                 var ww=bitmapImage.width.toDouble()
+                //Toast.makeText(currActivity,hh.toString()+ ww.toString(),Toast.LENGTH_SHORT).show()
                 var tt:Double=(hh/ww)
 
                 val w = scaled.width
                 val h = scaled.height
                 val mtx = Matrix()
 
-                if(tt==1.0)
-                    mtx.postRotate(90.0F)
-                else if (tt>1.4)
-                    mtx.postRotate(90.0F)
-                else
-                    mtx.postRotate(0.0F)
 
-                Log.e("imap",tt.toString()+" "+hh.toString()+" "+ww.toString())
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    if (tt == 1.0)
+                        mtx.postRotate(0.0F)
+                    else if (tt > 1.4)
+                        mtx.postRotate(90.0F)
+                    else
+                        mtx.postRotate(0.0F)
+                }
+                else{
+                    if (tt == 1.0)
+                        mtx.postRotate(90.0F)
+                    else if (tt > 1.4)
+                        mtx.postRotate(90.0F)
+                    else
+                        mtx.postRotate(0.0F)
+                }
 
                 scaled = Bitmap.createBitmap(scaled, 0, 0, w, h, mtx, true)
 
@@ -576,9 +586,8 @@ class AddImagesFragment : Fragment() {
 
                         var bitmapImage = BitmapFactory.decodeFile(filePath)
 
-                        val nh = (bitmapImage.height * (900.0 / bitmapImage.width)).toInt()
-                        var scaled = Bitmap.createScaledBitmap(bitmapImage, 900, nh, true)
-
+                        val nh = (bitmapImage.height * (800.0 / bitmapImage.width)).toInt()
+                        var scaled = Bitmap.createScaledBitmap(bitmapImage, 800, nh, true)
 
                         val w = scaled.width
                         val h = scaled.height
@@ -668,12 +677,22 @@ class AddImagesFragment : Fragment() {
                 val h = scaled.height
                 val mtx = Matrix()
 
-                if(tt==1.0)
-                    mtx.postRotate(90.0F)
-                else if (tt>1.4)
-                    mtx.postRotate(90.0F)
-                else
-                    mtx.postRotate(0.0F)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    if (tt == 1.0)
+                        mtx.postRotate(0.0F)
+                    else if (tt > 1.4)
+                        mtx.postRotate(90.0F)
+                    else
+                        mtx.postRotate(0.0F)
+                }
+                else{
+                    if (tt == 1.0)
+                        mtx.postRotate(90.0F)
+                    else if (tt > 1.4)
+                        mtx.postRotate(90.0F)
+                    else
+                        mtx.postRotate(0.0F)
+                }
 
                 scaled = Bitmap.createBitmap(scaled, 0, 0, w, h, mtx, true)
 
@@ -787,12 +806,26 @@ class AddImagesFragment : Fragment() {
                 val h = scaled.height
                 val mtx = Matrix()
 
-                if(tt==1.0)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    if (tt == 1.0)
+                        mtx.postRotate(0.0F)
+                    else if (tt > 1.4)
+                        mtx.postRotate(90.0F)
+                    else
+                        mtx.postRotate(0.0F)
+                }
+                else{
+                    if (tt == 1.0)
+                        mtx.postRotate(90.0F)
+                    else if (tt > 1.4)
+                        mtx.postRotate(90.0F)
+                    else
+                        mtx.postRotate(0.0F)
+                }
+
+                /*if(hh<=3000.0)
                     mtx.postRotate(90.0F)
-                else if (tt>1.4)
-                    mtx.postRotate(90.0F)
-                else
-                    mtx.postRotate(0.0F)
+                else*/
 
                 scaled = Bitmap.createBitmap(scaled, 0, 0, w, h, mtx, true)
 

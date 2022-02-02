@@ -36,16 +36,15 @@
                         android:id="@+id/shimmerImage"
                         android:layout_width="match_parent"
                         android:layout_height="320dp"
-                        android:layout_centerVertical="true"
-                        >
+                        android:layout_centerVertical="true">
 
                         <com.livo.nuo.lib.roundImageView.RoundedImageView
                             android:id="@+id/imgshimmerImage"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            app:riv_corner_radius="10dp"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/grey_round_shape"/>
+                            android:src="@drawable/grey_round_shape"
+                            app:riv_corner_radius="10dp" />
 
                     </com.facebook.shimmer.ShimmerFrameLayout>
 

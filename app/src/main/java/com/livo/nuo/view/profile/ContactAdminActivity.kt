@@ -44,17 +44,24 @@ class ContactAdminActivity : LocalizeActivity() {
         })
 
         btnPhone.setOnClickListener({
-            val intent = Intent(Intent.ACTION_CALL, Uri.parse("tel:${extraDataModel.data.phone}"))
+            val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:${extraDataModel.data.phone}"))
             startActivity(intent)
         })
 
         btnEmail.setOnClickListener({
-            val intent = Intent(Intent.ACTION_SEND)
+          /*  val intent = Intent(Intent.ACTION_SEND)
             intent.type = "plain/text"
-            intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(extraDataModel.data.email))
-            intent.putExtra(Intent.EXTRA_SUBJECT, "Livo")
+            intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(extraDataModel.data.email))*/
+
+            val email_intent = Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", extraDataModel.data.email, null))
+            email_intent.putExtra(Intent.EXTRA_SUBJECT, "Livo")
+            email_intent.putExtra(Intent.EXTRA_TEXT, "")
+
+            startActivity(Intent.createChooser(email_intent, "Send email..."))
+
+            /*intent.putExtra(Intent.EXTRA_SUBJECT, "Livo")
             intent.putExtra(Intent.EXTRA_TEXT, "")
-            startActivity(Intent.createChooser(intent, ""))
+            startActivity(Intent.createChooser(intent, ""))*/
         })
 
 

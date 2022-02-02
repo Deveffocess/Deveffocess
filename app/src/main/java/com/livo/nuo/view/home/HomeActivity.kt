@@ -1,9 +1,12 @@
 package com.livo.nuo.view.home
 
+import android.Manifest
 import android.app.Activity
+import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,32 +17,46 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
+import com.google.android.libraries.places.widget.Autocomplete
+import com.google.android.libraries.places.widget.AutocompleteActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.jaeger.library.StatusBarUtil
 import com.livo.nuo.R
 import com.livo.nuo.commonadapter.AdapterCommonViewPager
 import com.livo.nuo.databinding.BottomSheetListingFilterBinding
 import com.livo.nuo.databinding.BottomSheetTakePermissionBinding
+import com.livo.nuo.lib.rating_bar.BaseRatingBar
 import com.livo.nuo.utility.AppUtils
 import com.livo.nuo.utility.CheckPermission
 import com.livo.nuo.utility.LocalizeActivity
+import com.livo.nuo.utility.MyAppSession
 import com.livo.nuo.view.home.homefragments.ListingFragment
 import com.livo.nuo.view.home.homefragments.MessageFragment
 import com.livo.nuo.view.home.homefragments.MyListingFragment
 import com.livo.nuo.view.home.homefragments.ProfileFragment
 import com.livo.nuo.view.listing.NewListingActivity
+import com.livo.nuo.view.listing.fragments.PickupFragment
 import com.livo.nuo.view.profile.ProfileSettingActivity
 import java.util.*
+import android.content.DialogInterface
+
+import android.location.LocationManager
+import android.provider.Settings
+
 
 class HomeActivity : LocalizeActivity(), View.OnClickListener {
 
     companion object {
         lateinit var fa: HomeActivity
     }
+
+    val REQUEST_CHECK_SETTINGS = 2
+    val REQUEST_ID_MULTIPLE_PERMISSIONS = 2
 
     private lateinit var dialog: Dialog
 
@@ -101,7 +118,7 @@ class HomeActivity : LocalizeActivity(), View.OnClickListener {
         }
 
         imgCreateListing.setOnClickListener({
-            if (profile_fulfill) {
+            if (MyAppSession.profile_fulfill) {
                 var i = Intent(applicationContext, NewListingActivity::class.java)
                 startActivity(i)
             }
@@ -113,6 +130,9 @@ class HomeActivity : LocalizeActivity(), View.OnClickListener {
         setUpViewPager()
         setListner()
         requestPermission()
+
+       /* if(checkAndRequestPermissions())
+            statusCheck()*/
     }
 
     private fun requestPermission(){
@@ -336,6 +356,7 @@ class HomeActivity : LocalizeActivity(), View.OnClickListener {
 
     fun profile_Check(v:Boolean){
         profile_fulfill=v
+        MyAppSession.profile_fulfill=v
 
     }
 
@@ -371,6 +392,7 @@ class HomeActivity : LocalizeActivity(), View.OnClickListener {
         llOpenSetting!!.setOnClickListener({
             var i=Intent(currActivity,ProfileSettingActivity::class.java)
             startActivity(i)
+            bottomSheetDialog!!.dismiss()
         })
 
 
@@ -383,6 +405,58 @@ class HomeActivity : LocalizeActivity(), View.OnClickListener {
         val mColor = resources.getColor(R.color.colorPrimary)
         StatusBarUtil.setLightMode(currActivity)
     }
+
+    private fun checkAndRequestPermissions(): Boolean {
+        val locationPermission = ContextCompat.checkSelfPermission(
+            currActivity!!,
+            Manifest.permission.ACCESS_FINE_LOCATION
+        )
+        val coarsePermision = ContextCompat.checkSelfPermission(
+            currActivity!!,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+        )
+        val listPermissionsNeeded: MutableList<String> =
+            ArrayList()
+        if (locationPermission != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.ACCESS_FINE_LOCATION)
+        }
+        if (coarsePermision != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.ACCESS_COARSE_LOCATION)
+        }
+        if (!listPermissionsNeeded.isEmpty()) {
+            ActivityCompat.requestPermissions(
+                currActivity!!,
+                listPermissionsNeeded.toTypedArray(),
+               REQUEST_ID_MULTIPLE_PERMISSIONS
+            )
+            return false
+        }
+
+        //getSettingsLocation();
+        return true
+    }
+
+    fun statusCheck() {
+        val manager = getSystemService(LOCATION_SERVICE) as LocationManager
+        if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            //buildAlertMessageNoGps()
+
+            startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
+        }
+    }
+
+  /*  private fun buildAlertMessageNoGps() {
+        val builder: AlertDialog.Builder = Builder(this)
+        builder.setMessage("Your GPS seems to be disabled, do you want to enable it?")
+            .setCancelable(false)
+            .setPositiveButton("Yes",
+                DialogInterface.OnClickListener { dialog, id -> startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)) })
+            .setNegativeButton("No",
+                DialogInterface.OnClickListener { dialog, id -> dialog.cancel() })
+        val alert: AlertDialog = builder.create()
+        alert.show()
+    }*/
+
 
     fun loadAgain(){
         setUpViewPager()

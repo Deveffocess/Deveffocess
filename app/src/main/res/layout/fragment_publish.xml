@@ -114,6 +114,7 @@
                             android:layout_toEndOf="@+id/textView13"
                             android:fontFamily="@font/barlow_regular"
                             android:text="@string/recommended_amount_is_calculated_based_on_your_listing_size_not_travel_distance"
+                            android:textColor="@color/black_60_opacity"
                             android:textSize="14dp" />
                     </RelativeLayout>
 
@@ -170,7 +171,7 @@
                                     android:background="@null"
                                     android:fontFamily="@font/barlow_bold"
                                     android:hint="0"
-                                    android:inputType="number"
+                                    android:inputType="numberDecimal"
                                     android:letterSpacing="0.02"
                                     android:maxLines="1"
                                     android:textColor="@color/black"
@@ -225,6 +226,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:textSize="14dp"
+                            android:textColor="@color/black_40_opacity"
                             android:fontFamily="@font/barlow_regular"
                             android:text="@string/listing_amount" />
 
@@ -234,6 +236,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
+                            android:textColor="@color/black_40_opacity"
                             android:fontFamily="@font/barlow_regular"
                             android:text="0 kr" />
                     </LinearLayout>
@@ -250,6 +253,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:textSize="14dp"
+                            android:textColor="@color/black_40_opacity"
                             android:fontFamily="@font/barlow_regular"
                             android:text="@string/livo_fee"
                             />
@@ -260,6 +264,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
+                            android:textColor="@color/black_40_opacity"
                             android:fontFamily="@font/barlow_regular"
                             android:text="0 kr" />
                     </LinearLayout>
@@ -276,6 +281,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:textSize="14dp"
+                            android:textColor="@color/black_60_opacity"
                             android:fontFamily="@font/barlow_bold"
                             android:text="@string/total_amount_payable" />
 
@@ -285,6 +291,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
+                            android:textColor="@color/black_60_opacity"
                             android:fontFamily="@font/barlow_bold"
                             android:text="0 kr" />
                     </LinearLayout>

@@ -39,6 +39,7 @@ class TransporterOfferAdapter(
     RecyclerView.Adapter<TransporterOfferAdapter.ViewHolder>() {
 
     var channel_id=""
+    var pubnub_uuid=""
     private var ongoingViewModel : OngoingStateModel? = null
     private lateinit var dialog: Dialog
 
@@ -114,10 +115,11 @@ class TransporterOfferAdapter(
             currAtivity.finish()
         })
 
+
         holder.rlMessage.setOnClickListener({
             channel_id=model.channel_id
             if(channel_id.isEmpty()) {
-
+                pubnub_uuid=model.transporter.pubnub_uuid
                 channel_id=model.id.toString()
                 showProgressBar()
                 ongoingViewModel?.let {
@@ -133,6 +135,7 @@ class TransporterOfferAdapter(
                 var i=Intent(currAtivity,ChatActivity::class.java)
                 i.putExtra("ch",channel_id)
                 i.putExtra("st","")
+                i.putExtra("ruuid",pubnub_uuid)
                 currAtivity.startActivity(i)
             }
         })
@@ -179,6 +182,7 @@ class TransporterOfferAdapter(
                 var i=Intent(currAtivity,ChatActivity::class.java)
                 i.putExtra("ch",channel_id)
                 i.putExtra("st","")
+                i.putExtra("ruuid",pubnub_uuid)
                 currAtivity.startActivity(i)
             })
 

@@ -105,7 +105,7 @@ class OngoingStateModel(application: Application) :  BaseViewModel(application){
                     }
 
                 } catch (e : Exception){
-                    val errorResponse = ErrorResponse("",0,e.message,e.message!!,"")
+                    val errorResponse = ErrorResponse("",0,"Something went wrong","Something went wrong","")
                     errorResponse.let {
                         getErrorMutableLiveData().postValue(it)
                     }
@@ -143,7 +143,7 @@ class OngoingStateModel(application: Application) :  BaseViewModel(application){
                     }
 
                 } catch (e : Exception){
-                    val errorResponse = ErrorResponse("",0,e.message,e.message!!,"")
+                    val errorResponse = ErrorResponse("",0,"Something went wrong","Something went wrong","")
                     errorResponse.let {
                         getErrorMutableLiveData().postValue(it)
                     }
@@ -181,7 +181,7 @@ class OngoingStateModel(application: Application) :  BaseViewModel(application){
                     }
 
                 } catch (e : Exception){
-                    val errorResponse = ErrorResponse("",0,e.message,e.message!!,"")
+                    val errorResponse = ErrorResponse("",0,"Something went wrong","Something went wrong","")
                     errorResponse.let {
                         getErrorMutableLiveData().postValue(it)
                     }
@@ -219,7 +219,7 @@ class OngoingStateModel(application: Application) :  BaseViewModel(application){
                     }
 
                 } catch (e : Exception){
-                    val errorResponse = ErrorResponse("",0,e.message,e.message!!,"")
+                    val errorResponse = ErrorResponse("",0,"Something went wrong","Something went wrong","")
                     errorResponse.let {
                         getErrorMutableLiveData().postValue(it)
                     }
@@ -256,7 +256,7 @@ class OngoingStateModel(application: Application) :  BaseViewModel(application){
                     }
 
                 } catch (e : Exception){
-                    val errorResponse = ErrorResponse("",0,e.message,e.message!!,"")
+                    val errorResponse = ErrorResponse("",0,"Something went wrong","Something went wrong","")
                     errorResponse.let {
                         getErrorMutableLiveData().postValue(it)
                     }
@@ -294,7 +294,7 @@ class OngoingStateModel(application: Application) :  BaseViewModel(application){
                     }
 
                 } catch (e : Exception){
-                    val errorResponse = ErrorResponse("",0,e.message,e.message!!,"")
+                    val errorResponse = ErrorResponse("",0,"Something went wrong","Something went wrong","")
                     errorResponse.let {
                         getErrorMutableLiveData().postValue(it)
                     }
@@ -332,7 +332,7 @@ class OngoingStateModel(application: Application) :  BaseViewModel(application){
                     }
 
                 } catch (e : Exception){
-                    val errorResponse = ErrorResponse("",0,e.message,e.message!!,"")
+                    val errorResponse = ErrorResponse("",0,"Something went wrong","Something went wrong","")
                     errorResponse.let {
                         getErrorMutableLiveData().postValue(it)
                     }
@@ -370,7 +370,7 @@ class OngoingStateModel(application: Application) :  BaseViewModel(application){
                     }
 
                 } catch (e : Exception){
-                    val errorResponse = ErrorResponse("",0,e.message,e.message!!,"")
+                    val errorResponse = ErrorResponse("",0,"Something went wrong","Something went wrong","")
                     errorResponse.let {
                         getErrorMutableLiveData().postValue(it)
                     }
@@ -408,7 +408,7 @@ class OngoingStateModel(application: Application) :  BaseViewModel(application){
                     }
 
                 } catch (e : Exception){
-                    val errorResponse = ErrorResponse("",0,e.message,e.message!!,"")
+                    val errorResponse = ErrorResponse("",0,"Something went wrong","Something went wrong","")
                     errorResponse.let {
                         getErrorMutableLiveData().postValue(it)
                     }
@@ -446,7 +446,7 @@ class OngoingStateModel(application: Application) :  BaseViewModel(application){
                     }
 
                 } catch (e : Exception){
-                    val errorResponse = ErrorResponse("",0,e.message,e.message!!,"")
+                    val errorResponse = ErrorResponse("",0,"Something went wrong","Something went wrong","")
                     errorResponse.let {
                         getErrorMutableLiveData().postValue(it)
                     }
@@ -484,7 +484,7 @@ class OngoingStateModel(application: Application) :  BaseViewModel(application){
                     }
 
                 } catch (e : Exception){
-                    val errorResponse = ErrorResponse("",0,e.message,e.message!!,"")
+                    val errorResponse = ErrorResponse("",0,"Something went wrong","Something went wrong","")
                     errorResponse.let {
                         getErrorMutableLiveData().postValue(it)
                     }
@@ -523,7 +523,7 @@ class OngoingStateModel(application: Application) :  BaseViewModel(application){
                     }
 
                 } catch (e : Exception){
-                    val errorResponse = ErrorResponse("",0,e.message,e.message!!,"")
+                    val errorResponse = ErrorResponse("",0,"Something went wrong","Something went wrong","")
                     errorResponse.let {
                         getErrorMutableLiveData().postValue(it)
                     }

@@ -78,6 +78,9 @@ class  UserModel : Serializable{
     @SerializedName("last_name")
     @Expose
     var last_name = ""
+    @SerializedName("pubnub_uuid")
+    @Expose
+    var pubnub_uuid = ""
     @SerializedName("dob")
     @Expose
     var dob = ""

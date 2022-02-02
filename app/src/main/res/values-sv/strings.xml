@@ -26,6 +26,7 @@
     <string name="home">Hem</string>
     <string name="listing">Lista</string>
     <string name="chats">Chattar</string>
+    <string name="messages">Meddelanden</string>
     <string name="profile">Profil</string>
     <string name="chat">Chatt</string>
     <string name="message">Meddelande</string>
@@ -44,7 +45,7 @@
 
 
     <!-- MyListing Filter -->
-    <string name="data_modified">Data har ändrats</string>
+    <string name="data_modified">Datum har ändrats</string>
     <string name="alphabetically">Alfabetiskt</string>
     <string name="published">Publicerad</string>
     <string name="ongoing">Pågående</string>
@@ -82,6 +83,8 @@
     <string name="cancel">Annullera</string>
     <string name="update_offer">Uppdatera erbjudandet</string>
     <string name="delete_now">Radera nu</string>
+    <string name="submit_transporter_application">Skicka in ansökan om transportör</string>
+    <string name="seems_like_you_are_not_approved_transporter_yet_you_can_submit_an_application_on_Livo_to_become_an_transporter.">Verkar som att du inte är godkänd transportör ännu. Du kan skicka in en ansökan på Livo för att bli transportör.</string>
     <string name="a_notification_will_also_be_sent_out_to_sender_to_inform_listing_price_has_been_updated">Ett meddelande kommer också att skickas ut till avsändaren för att informera om att noteringspriset har uppdaterats</string>
 
     <!-- Report -->
@@ -113,6 +116,10 @@
     <string name="applang">Change Language / skift språk / Ändra språk </string>
     <string name="total_amount">Totala summan</string>
     <string name="adjust_price">justera pris</string>
+    <string name="please_enter_valid_email_address">Vänligen ange en giltig e-postadress</string>
+    <string name="minimum_listing_price_should_be">Lägsta noteringspris bör vara </string>
+    <string name="something_went_wrong">Något gick fel</string>
+    <string name="swipe_to_send_complete_request">Svep för att skicka fullständig begäran</string>
 
 
     <!-- Add Image Fragment -->
@@ -125,8 +132,8 @@
     <string name="livo_fee">Livo avgift</string>
     <string name="total_amount_payable">Totalt belopp som ska betalas</string>
     <string name="kindly_wait_while_we_create_listing">Vänta medan vi skapar listor. . .</string>
+    <string name="confirm_change">Bekräfta ändring</string>
 
-    <!-- Profile -->
     <!--Profile / Transporter Appliction -->
     <string name="upload_address_proof">Ladda upp adressbevis</string>
     <string name="address_proof">Adressbevis</string>
@@ -216,6 +223,7 @@
     <string name="new_offers_on_my_listing">Nya erbjudanden på min annons</string>
     <string name="app">App</string>
     <string name="notifications_">MEDDELANDEN</string>
+    <string name="no_data_found">Ingen information hittad</string>
 
     <string name="enter_pickup_address">Ange hämtningsadress</string>
     <string name="enter_dropoff_address">Ange avlämningsadress</string>
@@ -240,7 +248,7 @@
     <string name="refer_amp_earn"><![CDATA[Hänvisa & tjäna]]></string>
     <string name="first_name">Förnamn *</string>
     <string name="last_name">Efternamn *</string>
-    <string name="email">E-post *</string>
+    <string name="email">E-post</string>
     <string name="date_of_birth_dd_mm_yy">Födelsedatum : DD/MM/ÅÅÅÅ *</string>
     <string name="i_am">jag är</string>
     <string name="female">Kvinna</string>

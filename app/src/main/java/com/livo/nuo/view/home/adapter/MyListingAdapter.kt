@@ -2,6 +2,7 @@ package com.livo.nuoo.view.home.adapter
 
 import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -377,6 +378,12 @@ override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
     })
 
+    holder.rlCall.setOnClickListener({
+        var phone=model.user_details.country_code+model.user_details.phone_number
+        val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:$phone"))
+        currAtivity!!.startActivity(intent)
+    })
+
     holder.rlTransporter.setOnClickListener({
         var i=Intent(currAtivity, ProductDetailActivity::class.java)
         i.putExtra("id",model.id.toString())
@@ -388,6 +395,7 @@ override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var i=Intent(currAtivity,ChatActivity::class.java)
         i.putExtra("ch",model.channel_id)
         i.putExtra("st","")
+        i.putExtra("ruuid",model.user_details.pubnub_uuid)
         currAtivity.startActivity(i)
 
     })
@@ -417,6 +425,7 @@ inner class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
     var rlProcess:LinearLayout
     var mcvOfferCell:MaterialCardView
     var rlChat:LinearLayout
+    var rlCall:LinearLayout
 
     init {
         shimmerImage=ItemView.findViewById(R.id.shimmerImage)
@@ -437,6 +446,7 @@ inner class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
         rlTransporter=ItemView.findViewById(R.id.rlTransporter)
         rlProcess=ItemView.findViewById(R.id.rlProcess)
         rlChat=ItemView.findViewById(R.id.rlChat)
+        rlCall=ItemView.findViewById(R.id.rlCall)
 
     }
 }

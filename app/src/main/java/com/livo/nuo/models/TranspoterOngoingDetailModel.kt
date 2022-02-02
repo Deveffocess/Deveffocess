@@ -21,4 +21,8 @@ class TranspoterOngoingDetailModel : Serializable {
     @SerializedName("profile_image")
     @Expose
     var profile_image = ""
+
+    @SerializedName("pubnub_uuid")
+    @Expose
+    var pubnub_uuid = ""
 }

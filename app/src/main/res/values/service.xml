@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="BASE_URL" translatable="false">https://api.dev.livo.nu/api/</string>
+    <string name="BASE_URL" translatable="false">https://api.dev.livo.nu/api/</string> <!--https://api.dev.livo.nu/api/-->
 </resources>

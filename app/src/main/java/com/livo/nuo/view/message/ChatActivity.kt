@@ -1,5 +1,6 @@
 package com.livo.nuo.view.message
 
+import android.app.Activity
 import android.content.Intent
 import android.content.IntentFilter
 import android.net.ConnectivityManager
@@ -11,26 +12,39 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import com.livo.nuo.R
 import com.pubnub.api.PNConfiguration
 import com.pubnub.api.PubNub
 
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStore
+import com.google.gson.JsonObject
+import com.livo.nuo.utility.AndroidUtil
+import com.livo.nuo.utility.AppUtils
 import com.livo.nuo.view.message.fragments.ChatFragment
 import com.livo.nuo.view.message.prefs.Prefs
 import com.livo.nuo.view.message.services.NetworkReceiver
 import com.livo.nuo.view.message.util.ParentActivityImpl
 import com.livo.nuo.view.ongoing.ListingOngoingStateActivity
 import com.livo.nuo.view.profile.ContactAdminActivity
+import com.livo.nuo.viewModel.ViewModelFactory
+import com.livo.nuo.viewModel.profile.ProfileViewModel
 import com.pubnub.api.enums.PNLogVerbosity
 import com.pubnub.api.enums.PNReconnectionPolicy
+import org.json.JSONObject
 
 
 class ChatActivity : ParentActivity() , ParentActivityImpl {
 
     // The BroadcastReceiver that tracks network connectivity changes.
     private var mNetworkReceiver = NetworkReceiver()
+
+    private var currActivity : Activity? = this
+    private var profileViewModel : ProfileViewModel? = null
 
     // tag::INIT-1.1[]
     private var mPubNub : PubNub? = null
@@ -39,6 +53,7 @@ class ChatActivity : ParentActivity() , ParentActivityImpl {
     // end::INIT-1.1[]
     var channel = "098765"
     var completed=""
+    var rceiver_uuid=""
 
     //Prefs.get().uuid()
     private var mChatFragment: ChatFragment? = null
@@ -47,10 +62,9 @@ class ChatActivity : ParentActivity() , ParentActivityImpl {
     lateinit var mToolbar:Toolbar
     lateinit var imgBack:ImageView
     lateinit var tvRequestHelp:TextView
-    lateinit var tvViewListings:TextView
 
     lateinit var view2:View
-    lateinit var view3:View
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,9 +74,7 @@ class ChatActivity : ParentActivity() , ParentActivityImpl {
         mFragmentContainer=findViewById(R.id.container)
         imgBack=findViewById(R.id.imgBack)
         tvRequestHelp=findViewById(R.id.tvRequestHelp)
-        tvViewListings=findViewById(R.id.tvViewListings)
         view2=findViewById(R.id.view2)
-        view3=findViewById(R.id.view3)
 
         //Imp Set UUId
         //Prefs.get().clearAllData()
@@ -70,8 +82,9 @@ class ChatActivity : ParentActivity() , ParentActivityImpl {
 
         channel=intent.getStringExtra("ch")!!
         completed=intent.getStringExtra("st")!!
+        rceiver_uuid=intent.getStringExtra("ruuid")!!
 
-        //Log.e("uuid",completed)
+        Log.e("uuid",rceiver_uuid)
 
         setSupportActionBar(mToolbar)
         initializePubNub()
@@ -80,6 +93,7 @@ class ChatActivity : ParentActivity() , ParentActivityImpl {
         initReceiver()
 
         initViews()
+        observers()
 
     }
 
@@ -92,13 +106,20 @@ class ChatActivity : ParentActivity() , ParentActivityImpl {
 
     fun initViews(){
 
+        currActivity?.application?.let {
+            profileViewModel = ViewModelProvider(
+                ViewModelStore(),
+                ViewModelFactory(it)
+            ).get(ProfileViewModel::class.java)
+        }
+
+
         if (completed.isNotEmpty())
         {
             tvRequestHelp.visibility=View.GONE
-            tvViewListings.visibility=View.GONE
             view2.visibility=View.VISIBLE
-            view3.visibility=View.VISIBLE
         }
+
 
         imgBack.setOnClickListener({
             finish()
@@ -109,11 +130,7 @@ class ChatActivity : ParentActivity() , ParentActivityImpl {
             startActivity(i)
             finish()
         })
-        tvViewListings.setOnClickListener({
-           /* var i=Intent(applicationContext,ListingOngoingStateActivity::class.java)
-            startActivity(i)
-            finish()*/
-        })
+
     }
 
     private fun initializePubNub() {
@@ -195,4 +212,34 @@ class ChatActivity : ParentActivity() , ParentActivityImpl {
         // end::ignore[]
     }
 
+    fun sendChatNotification(msg:String){
+
+        var json_data: JSONObject = JSONObject(msg)
+        //Toast.makeText(applicationContext,json_data.getString("text"),Toast.LENGTH_SHORT).show()
+        var message=json_data.getString("text")
+
+        profileViewModel?.let {
+            if (currActivity.let { ctx -> AndroidUtil.isInternetAvailable(ctx!!) } == true) {
+
+                var jsonObject = JsonObject()
+                jsonObject.addProperty("message", message)
+                jsonObject.addProperty("reciever_uuid", rceiver_uuid)
+                jsonObject.addProperty("channel_id", channel)
+                it.getSendChatNotification(jsonObject)
+            }
+        }
+    }
+
+    fun observers()
+    {
+        profileViewModel?.getMutableLiveDataViewSendChatNotification()
+            ?.observe(currActivity as LifecycleOwner, androidx.lifecycle.Observer {
+                //Toast.makeText(applicationContext,it.message,Toast.LENGTH_SHORT).show()
+            })
+
+        profileViewModel?.getErrorMutableLiveData()?.observe(currActivity as LifecycleOwner, androidx.lifecycle.Observer {
+
+            AppUtils.showToast(currActivity!!,R.drawable.cross,it.message,R.color.error_red,R.color.white,R.color.white)
+        })
+    }
 }

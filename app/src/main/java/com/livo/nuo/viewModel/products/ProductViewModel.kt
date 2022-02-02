@@ -120,7 +120,7 @@ import java.lang.Exception
                      }
 
                  } catch (e : Exception){
-                     val errorResponse = ErrorResponse("",0,e.message,e.message!!,"")
+                     val errorResponse = ErrorResponse("",0,"Something went wrong","Something went wrong","")
                      errorResponse.let {
                          getErrorMutableLiveData().postValue(it)
                      }
@@ -157,7 +157,7 @@ import java.lang.Exception
                     }
 
                 } catch (e : Exception){
-                    val errorResponse = ErrorResponse("",0,e.message,e.message!!,"")
+                    val errorResponse = ErrorResponse("",0,"Something went wrong","Something went wrong","")
                     errorResponse.let {
                         getErrorMutableLiveData().postValue(it)
                     }
@@ -194,7 +194,7 @@ import java.lang.Exception
                      }
 
                  } catch (e : Exception){
-                     val errorResponse = ErrorResponse("",0,e.message,e.message!!,"")
+                     val errorResponse = ErrorResponse("",0,"Something went wrong","Something went wrong","")
                      errorResponse.let {
                          getErrorMutableLiveData().postValue(it)
                      }
@@ -231,7 +231,7 @@ import java.lang.Exception
                      }
 
                  } catch (e : Exception){
-                     val errorResponse = ErrorResponse("",0,e.message,e.message!!,"")
+                     val errorResponse = ErrorResponse("",0,"Something went wrong","Something went wrong","")
                      errorResponse.let {
                          getErrorMutableLiveData().postValue(it)
                      }
@@ -270,7 +270,7 @@ import java.lang.Exception
                      }
 
                  } catch (e : Exception){
-                     val errorResponse = ErrorResponse("",0,e.message,e.message!!,"")
+                     val errorResponse = ErrorResponse("",0,"Something went wrong","Something went wrong","")
                      errorResponse.let {
                          getErrorMutableLiveData().postValue(it)
                      }
@@ -307,7 +307,7 @@ import java.lang.Exception
                      }
 
                  } catch (e : Exception){
-                     val errorResponse = ErrorResponse("",0,e.message,e.message!!,"")
+                     val errorResponse = ErrorResponse("",0,"Something went wrong","Something went wrong","")
                      errorResponse.let {
                          getErrorMutableLiveData().postValue(it)
                      }
@@ -347,7 +347,7 @@ import java.lang.Exception
                     }
 
                 } catch (e : Exception){
-                    val errorResponse = ErrorResponse("",0,e.message,e.message!!,"")
+                    val errorResponse = ErrorResponse("",0,"Something went wrong","Something went wrong","")
                     errorResponse.let {
                         getErrorMutableLiveData().postValue(it)
                     }
@@ -385,7 +385,7 @@ import java.lang.Exception
                      }
 
                  } catch (e : Exception){
-                     val errorResponse = ErrorResponse("",0,e.message,e.message!!,"")
+                     val errorResponse = ErrorResponse("",0,"Something went wrong","Something went wrong","")
                      errorResponse.let {
                          getErrorMutableLiveData().postValue(it)
                      }
@@ -431,7 +431,7 @@ import java.lang.Exception
                     }
 
                 } catch (e : Exception){
-                    val errorResponse = ErrorResponse("",0,e.message,e.message!!,"")
+                    val errorResponse = ErrorResponse("",0,"Something went wrong","Something went wrong","")
                     errorResponse.let {
                         getErrorMutableLiveData().postValue(it)
                     }
@@ -468,7 +468,7 @@ import java.lang.Exception
                     }
 
                 } catch (e : Exception){
-                    val errorResponse = ErrorResponse("",0,e.message,e.message!!,"")
+                    val errorResponse = ErrorResponse("",0,"Something went wrong","Something went wrong","")
                     errorResponse.let {
                         getErrorMutableLiveData().postValue(it)
                     }
@@ -505,7 +505,7 @@ import java.lang.Exception
                      }
 
                  } catch (e : Exception){
-                     val errorResponse = ErrorResponse("",0,e.message,e.message!!,"")
+                     val errorResponse = ErrorResponse("",0,"Something went wrong","Something went wrong","")
                      errorResponse.let {
                          getErrorMutableLiveData().postValue(it)
                      }
@@ -542,7 +542,7 @@ import java.lang.Exception
                     }
 
                 } catch (e : Exception){
-                    val errorResponse = ErrorResponse("",0,e.message,e.message!!,"")
+                    val errorResponse = ErrorResponse("",0,"Something went wrong","Something went wrong","")
                     errorResponse.let {
                         getErrorMutableLiveData().postValue(it)
                     }
@@ -577,7 +577,7 @@ import java.lang.Exception
                     }
 
                 } catch (e : Exception){
-                    val errorResponse = ErrorResponse("",0,e.message,e.message!!,"")
+                    val errorResponse = ErrorResponse("",0,"Something went wrong","Something went wrong","")
                     errorResponse.let {
                         getErrorMutableLiveData().postValue(it)
                     }
@@ -612,7 +612,7 @@ import java.lang.Exception
                     }
 
                 } catch (e : Exception){
-                    val errorResponse = ErrorResponse("",0,e.message,e.message!!,"")
+                    val errorResponse = ErrorResponse("",0,"Something went wrong","Something went wrong","")
                     errorResponse.let {
                         getErrorMutableLiveData().postValue(it)
                     }
@@ -647,7 +647,7 @@ import java.lang.Exception
                     }
 
                 } catch (e : Exception){
-                    val errorResponse = ErrorResponse("",0,e.message,e.message!!,"")
+                    val errorResponse = ErrorResponse("",0,"Something went wrong","Something went wrong","")
                     errorResponse.let {
                         getErrorMutableLiveData().postValue(it)
                     }
@@ -681,7 +681,7 @@ import java.lang.Exception
                     }
 
                 } catch (e : Exception){
-                    val errorResponse = ErrorResponse("",0,e.message,e.message!!,"")
+                    val errorResponse = ErrorResponse("",0,"Something went wrong","Something went wrong","")
                     errorResponse.let {
                         getErrorMutableLiveData().postValue(it)
                     }
@@ -716,7 +716,7 @@ import java.lang.Exception
                     }
 
                 } catch (e : Exception){
-                    val errorResponse = ErrorResponse("",0,e.message,e.message!!,"")
+                    val errorResponse = ErrorResponse("",0,"Something went wrong","Something went wrong","")
                     errorResponse.let {
                         getErrorMutableLiveData().postValue(it)
                     }
@@ -751,7 +751,7 @@ import java.lang.Exception
                     }
 
                 } catch (e : Exception){
-                    val errorResponse = ErrorResponse("",0,e.message,e.message!!,"")
+                    val errorResponse = ErrorResponse("",0,"Something went wrong","Something went wrong","")
                     errorResponse.let {
                         getErrorMutableLiveData().postValue(it)
                     }
@@ -786,7 +786,7 @@ import java.lang.Exception
                     }
 
                 } catch (e : Exception){
-                    val errorResponse = ErrorResponse("",0,e.message,e.message!!,"")
+                    val errorResponse = ErrorResponse("",0,"Something went wrong","Something went wrong","")
                     errorResponse.let {
                         getErrorMutableLiveData().postValue(it)
                     }
@@ -821,7 +821,7 @@ import java.lang.Exception
                     }
 
                 } catch (e : Exception){
-                    val errorResponse = ErrorResponse("",0,e.message,e.message!!,"")
+                    val errorResponse = ErrorResponse("",0,"Something went wrong","Something went wrong","")
                     errorResponse.let {
                         getErrorMutableLiveData().postValue(it)
                     }
@@ -858,7 +858,7 @@ import java.lang.Exception
                     }
 
                 } catch (e : Exception){
-                    val errorResponse = ErrorResponse("",0,e.message,e.message!!,"")
+                    val errorResponse = ErrorResponse("",0,"Something went wrong","Something went wrong","")
                     errorResponse.let {
                         getErrorMutableLiveData().postValue(it)
                     }
@@ -893,7 +893,7 @@ import java.lang.Exception
                     }
 
                 } catch (e : Exception){
-                    val errorResponse = ErrorResponse("",0,e.message,e.message!!,"")
+                    val errorResponse = ErrorResponse("",0,"Something went wrong","Something went wrong","")
                     errorResponse.let {
                         getErrorMutableLiveData().postValue(it)
                     }
@@ -928,7 +928,7 @@ import java.lang.Exception
                     }
 
                 } catch (e : Exception){
-                    val errorResponse = ErrorResponse("",0,e.message,e.message!!,"")
+                    val errorResponse = ErrorResponse("",0,"Something went wrong","Something went wrong","")
                     errorResponse.let {
                         getErrorMutableLiveData().postValue(it)
                     }

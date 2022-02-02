@@ -38,6 +38,10 @@ class ExtraDataInternalModel : Serializable {
     @Expose
     var play_store_url = ""
 
+    @SerializedName("faq_url")
+    @Expose
+    var faq_url = FaqModels()
+
     @SerializedName("colors")
     @Expose
     var colors = ArrayList<ColorModel>()

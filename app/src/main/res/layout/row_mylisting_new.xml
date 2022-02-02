@@ -85,7 +85,7 @@
             app:cardCornerRadius="8dp"
             app:cardElevation="0dp"
             app:strokeColor="#888"
-            app:strokeWidth="2dp">
+            app:strokeWidth="2.3dp">
 
             <RelativeLayout
                 android:id="@+id/rlReievedOffer"

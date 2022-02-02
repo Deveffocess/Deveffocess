@@ -192,6 +192,9 @@ class ListingOngoingStateActivity : LocalizeActivity(){
     lateinit var paymentIntentClientSecret: String
 
     var addr=""
+    var dropaddr=""
+    var list_id=0
+    var pubnub_uuid=""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -348,7 +351,7 @@ class ListingOngoingStateActivity : LocalizeActivity(){
         }
 
         imgCall.setOnClickListener({
-            val intent = Intent(Intent.ACTION_CALL, Uri.parse("tel:$phone"))
+            val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:$phone"))
             startActivity(intent)
         })
 
@@ -363,6 +366,7 @@ class ListingOngoingStateActivity : LocalizeActivity(){
             var i=Intent(currActivity,ChatActivity::class.java)
             i.putExtra("ch",channel_id)
             i.putExtra("st",status)
+            i.putExtra("ruuid",pubnub_uuid)
             currActivity.startActivity(i)
         })
 
@@ -370,6 +374,7 @@ class ListingOngoingStateActivity : LocalizeActivity(){
             var i=Intent(currActivity,ChatActivity::class.java)
             i.putExtra("ch",channel_id)
             i.putExtra("st",status)
+            i.putExtra("ruuid",pubnub_uuid)
             currActivity.startActivity(i)
         })
 
@@ -391,23 +396,97 @@ class ListingOngoingStateActivity : LocalizeActivity(){
                 var i=Intent(currActivity,ChatActivity::class.java)
                 i.putExtra("ch",channel_id)
                 i.putExtra("st",status)
+                i.putExtra("ruuid",pubnub_uuid)
                 currActivity.startActivity(i)
             }
 
         })
-
+        var cci=0
         tvStatus.setOnClickListener({v->
+            if (!addr.isEmpty()) {
+                if (cci==0) {
 
-            var tooltip=Tooltip.Builder(v)
-                .setText(addr)
-                .setTextColor(Color.WHITE)
-                .setGravity(Gravity.TOP)
-                .setCornerRadius(8f)
-                .setBackgroundColor(resources.getColor(R.color.livo_green))
-                .setDismissOnClick(true)
-                .show()
+                    var tooltip = Tooltip.Builder(v)
+                        .setText(addr)
+                        .setTextColor(Color.WHITE)
+                        .setGravity(Gravity.TOP)
+                        .setCornerRadius(8f)
+                        .setBackgroundColor(resources.getColor(R.color.livo_green))
+                        .setDismissOnClick(true)
+                        .setOnDismissListener({
+                           cci=0
+                        })
+                        .show()
 
+                    cci=1
+                }
+               }
            })
+
+        var ccd=0
+        tvStatusDrop.setOnClickListener({v->
+            if (!dropaddr.isEmpty()) {
+                if (ccd==0) {
+
+                    var tooltip = Tooltip.Builder(v)
+                        .setText(dropaddr)
+                        .setTextColor(Color.WHITE)
+                        .setGravity(Gravity.TOP)
+                        .setCornerRadius(8f)
+                        .setBackgroundColor(resources.getColor(R.color.livo_green))
+                        .setDismissOnClick(true)
+                        .setOnDismissListener({
+                            ccd=0
+                        })
+                        .show()
+
+                    ccd=1
+                }
+            }
+        })
+
+        tvNotIntrested.setOnClickListener({
+
+            if(tvNotIntrested.text.equals(resources.getString(R.string.decline)))
+            {
+                ongoingViewModel?.let {
+                    if (currActivity.let { ctx -> AndroidUtil.isInternetAvailable(ctx!!) } == true) {
+
+                        var jsonObject =  JsonObject();
+                        jsonObject.addProperty("offer_id", id)
+
+                        it.getTrnsDeclineApproval(jsonObject)
+                    }
+                }
+
+                showProgressBar()
+            }
+            else if (tvNotIntrested.text.equals(resources.getString(R.string.not_interested)))
+            {
+                var i = Intent(currActivity, TransporterOffersActivity::class.java)
+                i.putExtra("id", list_id)
+                startActivity(i)
+                finish()
+            }
+            else{
+
+                ongoingViewModel?.let {
+
+                    showProgressBar()
+
+                    if (currActivity.let { ctx -> AndroidUtil.isInternetAvailable(ctx!!) } == true) {
+
+                        var jsonObject =  JsonObject();
+                        jsonObject.addProperty("offer_id", id)
+                        it.getDeleteBid(jsonObject)
+                    }
+                }
+
+
+            }
+
+        })
+
 
         currActivity?.let {
             LocalBroadcastManager.getInstance(it).registerReceiver(mMessageReceiver,
@@ -452,6 +531,9 @@ class ListingOngoingStateActivity : LocalizeActivity(){
             dropoff_latitude=it.data.dropoff_latitude
             dropoff_longitude=it.data.dropoff_longitude
             channel_id=it.data.channel_id
+
+            list_id=it.data.list_id
+            pubnub_uuid=it.data.user_details.pubnub_uuid
 
             is_transpoter=it.data.is_transporter
             tvTitle.text=it.data.user_details.first_name+" "+it.data.user_details.last_name
@@ -628,7 +710,7 @@ class ListingOngoingStateActivity : LocalizeActivity(){
 
                         val buttonLayoutParams: RelativeLayout.LayoutParams =
                             RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.WRAP_CONTENT)
-                        buttonLayoutParams.setMargins(0, 0, 0, 180)
+                        buttonLayoutParams.setMargins(0, 0, 0, 280)
                         rlSteps.setLayoutParams(buttonLayoutParams)
                     }
                     else if(sub_level==1)
@@ -637,7 +719,7 @@ class ListingOngoingStateActivity : LocalizeActivity(){
 
                         val buttonLayoutParams: RelativeLayout.LayoutParams =
                             RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.WRAP_CONTENT)
-                        buttonLayoutParams.setMargins(0, 0, 0, 180)
+                        buttonLayoutParams.setMargins(0, 0, 0, 280)
                         rlSteps.setLayoutParams(buttonLayoutParams)
                     }
                     else if(sub_level==2){
@@ -678,10 +760,11 @@ class ListingOngoingStateActivity : LocalizeActivity(){
                         lltransporter_Acceptdecline.visibility = View.VISIBLE
                         lltransporter_Approval.visibility = View.GONE
 
+                        if (channel_id.isEmpty()){
                         imgCall.setColorFilter(getResources().getColor(R.color.black_20_opacity))
                         imgMessage.setColorFilter(getResources().getColor(R.color.black_20_opacity))
                         imgCall.isEnabled=false
-                        imgMessage.isEnabled=false
+                        imgMessage.isEnabled=false}
 
                         btnApprove.text=resources.getString(R.string.change_price)
                         tvNotIntrested.text=resources.getString(R.string.delete_offer)
@@ -727,10 +810,25 @@ class ListingOngoingStateActivity : LocalizeActivity(){
                     var sub_level = it.data.main_levels.pickup.sub_level
 
                     mSteppers[1]?.title = pickup_state.title
-                    tvStatus.text = pickup_state.sub_title
+
+                    addr=it.data.pickup_address
 
                     if (sub_level==0)
                     {
+                        if (addr.length>35) {
+
+                            tvStatus.text = addr.substring(0, 35) + "... view all"
+                            var spannable = SpannableStringBuilder(tvStatus.text)
+                            spannable.setSpan(
+                                ForegroundColorSpan(resources.getColor(R.color.livo_blue)),
+                                /* start index */ 39, /* end index */ 47,
+                                Spannable.SPAN_EXCLUSIVE_INCLUSIVE)
+                            tvStatus.text=spannable
+                        }
+                        else {
+                            tvStatus.text = addr
+                        }
+
                         llMessageTransporter.visibility=View.GONE
                         llOpenMapTakePicture.visibility=View.VISIBLE
                     }
@@ -760,20 +858,7 @@ class ListingOngoingStateActivity : LocalizeActivity(){
 
                     var pickup_state = it.data.main_levels.pickup
                     mSteppers[1]?.title = pickup_state.title
-                    addr=it.data.pickup_address
-                    if (addr.length>35) {
 
-                        tvStatus.text = addr.substring(0, 35) + "... view all"
-                        var spannable = SpannableStringBuilder(tvStatus.text)
-                        spannable.setSpan(
-                            ForegroundColorSpan(resources.getColor(R.color.livo_blue)),
-                            /* start index */ 39, /* end index */ 47,
-                            Spannable.SPAN_EXCLUSIVE_INCLUSIVE)
-                        tvStatus.text=spannable
-                    }
-                    else {
-                        tvStatus.text = addr
-                    }
                     llMessageTransporter.visibility=View.GONE
                     llOpenMapTakePicture.visibility=View.GONE
 
@@ -784,6 +869,8 @@ class ListingOngoingStateActivity : LocalizeActivity(){
 
                     pickupimage_url=pickup_state.image
                     pickupdate=pickup_state.sub_title
+                    tvStatus.text = pickup_state.sub_title
+                    addr=""
 
                     var dropoff_state = it.data.main_levels.dropoff
                     mSteppers[2]?.title = dropoff_state.title
@@ -791,8 +878,24 @@ class ListingOngoingStateActivity : LocalizeActivity(){
 
                     var sub_level = it.data.main_levels.dropoff.sub_level
 
+                    dropaddr=it.data.dropoff_address
+
                     if (sub_level==0)
                     {
+                        if (dropaddr.length>35) {
+
+                            tvStatusDrop.text = dropaddr.substring(0, 35) + "... view all"
+                            var spannable = SpannableStringBuilder(tvStatusDrop.text)
+                            spannable.setSpan(
+                                ForegroundColorSpan(resources.getColor(R.color.livo_blue)),
+                                /* start index */ 39, /* end index */ 47,
+                                Spannable.SPAN_EXCLUSIVE_INCLUSIVE)
+                            tvStatusDrop.text=spannable
+                        }
+                        else {
+                            tvStatusDrop.text = dropaddr
+                        }
+
                         llMessageTransporterdrop.visibility=View.GONE
                         llOpenMapTakePicturedrop.visibility=View.VISIBLE
                     }
@@ -828,6 +931,8 @@ class ListingOngoingStateActivity : LocalizeActivity(){
                     mSteppers[2]?.title = dropoff_state.title
                     tvStatusDrop.text = dropoff_state.sub_title
 
+                    dropaddr=""
+
                     llMessageTransporter.visibility=View.GONE
                     llOpenMapTakePicture.visibility=View.GONE
                     llMessageTransporterdrop.visibility=View.GONE
@@ -860,7 +965,7 @@ class ListingOngoingStateActivity : LocalizeActivity(){
 
                         val buttonLayoutParams: RelativeLayout.LayoutParams =
                             RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.WRAP_CONTENT)
-                        buttonLayoutParams.setMargins(0, 0, 0, 180)
+                        buttonLayoutParams.setMargins(0, 0, 0, 280)
                         rlSteps.setLayoutParams(buttonLayoutParams)
                     }
 
@@ -876,6 +981,7 @@ class ListingOngoingStateActivity : LocalizeActivity(){
                     else if(sub_level==2) {
                         rlRatingHelp.visibility = View.VISIBLE
                         rlHelp.visibility = View.VISIBLE
+                        slideView.visibility = View.GONE
                         status="completed"
 
 
@@ -938,7 +1044,7 @@ class ListingOngoingStateActivity : LocalizeActivity(){
                 .load(it.data.user_details.profile_image).placeholder(currActivity.getDrawable(R.drawable.grey_round_shape))
                 .error(currActivity.getDrawable(R.drawable.grey_round_shape)).into(imgProductImage)
 
-            phone=it.data.user_details.phone_number
+            phone=it.data.user_details.country_code+it.data.user_details.phone_number
 
 
             oprations()
@@ -1074,13 +1180,14 @@ class ListingOngoingStateActivity : LocalizeActivity(){
                 var i=Intent(currActivity, ChatActivity::class.java)
                 i.putExtra("ch",channel_id)
                 i.putExtra("st",status)
+                i.putExtra("ruuid",pubnub_uuid)
                 currActivity.startActivity(i)
                 }
             })
 
         ongoingViewModel?.getErrorMutableLiveData()?.observe(currActivity as LifecycleOwner, androidx.lifecycle.Observer {
             hideProgressBar()
-           // AppUtils.showToast(currActivity,R.drawable.cross,it.message,R.color.error_red,R.color.white,R.color.white)
+            AppUtils.showToast(currActivity,R.drawable.cross,it.message,R.color.error_red,R.color.white,R.color.white)
         })
     }
 
@@ -1136,40 +1243,8 @@ class ListingOngoingStateActivity : LocalizeActivity(){
 
             })
 
-            tvNotIntrested.setOnClickListener({
-
-                if(tvNotIntrested.text.equals(resources.getString(R.string.decline)))
-                {
-                    ongoingViewModel?.let {
-                        if (currActivity.let { ctx -> AndroidUtil.isInternetAvailable(ctx!!) } == true) {
-
-                            var jsonObject =  JsonObject();
-                            jsonObject.addProperty("offer_id", id)
-
-                            it.getTrnsDeclineApproval(jsonObject)
-                        }
-                    }
-
-                    showProgressBar()
-                }
-                else{
-
-                    ongoingViewModel?.let {
-
-                        showProgressBar()
-
-                        if (currActivity.let { ctx -> AndroidUtil.isInternetAvailable(ctx!!) } == true) {
-
-                            var jsonObject =  JsonObject();
-                            jsonObject.addProperty("offer_id", id)
-                            it.getDeleteBid(jsonObject)
-                        }
-                    }
 
 
-                }
-
-            })
 
 
             tvTakePicture.setOnClickListener({
@@ -1678,6 +1753,7 @@ class ListingOngoingStateActivity : LocalizeActivity(){
                         val imageInByte: ByteArray = stream.toByteArray()
                         val lengthbmp = imageInByte.size.toLong()/1024
 
+                        var imageUri:Uri?=null
                         if (lengthbmp>(1024))
                         // mSelectedImagePath = getRealPathFromURI(resultUri)
                         {
@@ -1704,7 +1780,7 @@ class ListingOngoingStateActivity : LocalizeActivity(){
                                     MediaStore.MediaColumns.RELATIVE_PATH,
                                     "DCIM/Pics"
                                 )
-                                val imageUri =
+                                 imageUri =
                                     resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
                                 resolver.openOutputStream(imageUri!!)
                             } else {
@@ -1731,11 +1807,29 @@ class ListingOngoingStateActivity : LocalizeActivity(){
                             preview.visibility=View.GONE
                             imgProductImage1.visibility=View.VISIBLE
 
-                                Glide.with(currActivity!!).load(imagesDir+"/img1.jpeg")
-                                    .diskCacheStrategy(DiskCacheStrategy.NONE)
-                                    .skipMemoryCache(true).into(imgProductImage1)
+                            if (imageUri==null){
+                                picturePath1= imagesDir+"/img1.jpeg"
 
-                            picturePath1=imagesDir+"/img1.jpeg"
+                                Handler().postDelayed({
+
+                                    Glide.with(currActivity!!).load(imageUri)
+                                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+                                        .skipMemoryCache(true).into(imgProductImage1)
+
+                                },200)
+                            }
+                            else {
+                                picturePath1 = getRealPathFromURI(imageUri)
+
+                                Handler().postDelayed({
+
+                                    Glide.with(currActivity!!).load(imageUri)
+                                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+                                        .skipMemoryCache(true).into(imgProductImage1)
+
+                                },200)
+
+                            }
                         }
                         else if(lengthbmp<1024 && lengthbmp>160)
                         {
@@ -1804,6 +1898,7 @@ class ListingOngoingStateActivity : LocalizeActivity(){
                         val imageInByte: ByteArray = stream.toByteArray()
                         val lengthbmp = imageInByte.size.toLong()/1024
 
+                        var imageUri :Uri?=null
                         if (lengthbmp>(1024))
                         // mSelectedImagePath = getRealPathFromURI(resultUri)
                         {
@@ -1832,7 +1927,7 @@ class ListingOngoingStateActivity : LocalizeActivity(){
                                     MediaStore.MediaColumns.RELATIVE_PATH,
                                     "DCIM/Pics"
                                 )
-                                val imageUri =
+                                 imageUri =
                                     resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
                                 resolver.openOutputStream(imageUri!!)
                             } else {
@@ -1859,12 +1954,29 @@ class ListingOngoingStateActivity : LocalizeActivity(){
                             preview.visibility=View.GONE
                             imgProductImage1.visibility=View.VISIBLE
 
-                            Glide.with(currActivity!!).load(imagesDir+"/img2.jpeg")
-                                .diskCacheStrategy(DiskCacheStrategy.NONE)
-                                .skipMemoryCache(true).into(imgProductImage1)
+                            if (imageUri==null){
+                                picturePath2= imagesDir+"/img2.jpeg"
 
-                            picturePath2=imagesDir+"/img2.jpeg"
+                                Handler().postDelayed({
 
+                                    Glide.with(currActivity!!).load(picturePath2)
+                                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+                                        .skipMemoryCache(true).into(imgProductImage1)
+
+                                },200)
+                            }
+                            else {
+                                picturePath2 = getRealPathFromURI(imageUri)
+
+                                Handler().postDelayed({
+
+                                    Glide.with(currActivity!!).load(imageUri)
+                                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+                                        .skipMemoryCache(true).into(imgProductImage1)
+
+                                },200)
+
+                            }
 
                         }
                         else if(lengthbmp<1024 && lengthbmp>160)
@@ -1949,13 +2061,14 @@ class ListingOngoingStateActivity : LocalizeActivity(){
         var tvLivoFee=bottomSheetApplicationDialog!!.findViewById<TextView>(R.id.tvLivoFee)
         var tvTotalAmount=bottomSheetApplicationDialog!!.findViewById<TextView>(R.id.tvTotalAmount)
 
-        tvPrice?.text=amount.toString()+" KR"
+
         var tax=extraDataModel.data.sender_commission
         var a = amount
         var b = a * (tax.toDouble() / 100)
         tvLivoFee?.text = String.format("%.2f", b) + " kr"
         tvAmount?.text = String.format("%.2f", a) + " kr"
         tvTotalAmount?.text = String.format("%.2f", a+b)+" kr"
+        tvPrice?.text=String.format("%.2f", a)+" KR"
 
         btnCompleteTransaction?.setOnClickListener({
 
@@ -2035,11 +2148,15 @@ class ListingOngoingStateActivity : LocalizeActivity(){
                 before: Int, count: Int
             ) {
 
-                if (s.equals("")){
+                if (s.isEmpty()){
 
-                    etAmount?.setText("")
-                    tvLivofee?.text=String.format("%.2f", 0)+" kr"
-                    tvTotalAmount?.text=s.toString()+" kr"
+                    try {
+                        tvLivofee?.text = String.format("%.2f", 0) + " kr"
+                        tvTotalAmount?.text = String.format("%.2f", 0) + " kr"
+                    }
+                    catch (ex:Exception){
+                        etAmount?.setText(" ")
+                    }
                 }
 
                 else{
@@ -2049,7 +2166,7 @@ class ListingOngoingStateActivity : LocalizeActivity(){
                         tvLivofee?.text = "-" + String.format("%.2f", b) + " kr"
                         tvTotalAmount?.text = String.format("%.2f", a - b).toString() + " kr"
                     }
-                    catch (e:java.lang.Exception){
+                    catch (e:Exception){
                         tvLivofee?.text=0.toString()+" kr"
                         tvTotalAmount?.text=0.toString()+" kr"
                     }
@@ -2172,7 +2289,7 @@ class ListingOngoingStateActivity : LocalizeActivity(){
         //dialogReferral?.getWindow()!!.getAttributes().windowAnimations = R.style.animationdialog;
 
         val window: Window? = dialogPopImage?.window
-        window!!.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT)
+        window!!.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT)
 
         var tvName=dialogPopImage?.findViewById<TextView>(R.id.tvName)
         var tvDetail=dialogPopImage?.findViewById<TextView>(R.id.tvDetail)

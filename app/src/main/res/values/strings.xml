@@ -26,6 +26,7 @@
     <string name="home">Home</string>
     <string name="listing">Listing</string>
     <string name="chats">Chats</string>
+    <string name="messages">Messages</string>
     <string name="profile">Profile</string>
     <string name="chat">Chat</string>
     <string name="message">Message</string>
@@ -44,7 +45,7 @@
 
 
     <!-- MyListing Filter -->
-    <string name="data_modified">Data Modified</string>
+    <string name="data_modified">Date Modified</string>
     <string name="alphabetically">Alphabetically</string>
     <string name="published">Published</string>
     <string name="ongoing">Ongoing</string>
@@ -57,7 +58,7 @@
     <string name="reset_all">Reset all</string>
     <string name="SORT_BY">SORT BY</string>
     <string name="FILTER">FILTER</string>
-    
+
     <string name="incomplete_profile_warning">Incomplete Profile Warning</string>
     <string name="your_profile_is_incomplete_an_incomplete_profile_may_prevent_you_from_creating_the_listing_or_bidding_on_listing_please_update_your_profile">Your profile is incomplete. An incomplete profile may prevent you from creating the listing or bidding on listing. Please update your profile.</string>
     <string name="update_profile">Update Profile</string>
@@ -81,6 +82,8 @@
     <string name="cancel">Cancel</string>
     <string name="update_offer">Update Offer</string>
     <string name="delete_now">Delete Now</string>
+    <string name="submit_transporter_application">Submit Transporter Application</string>
+    <string name="seems_like_you_are_not_approved_transporter_yet_you_can_submit_an_application_on_Livo_to_become_an_transporter.">Seems like you are not approved transporter yet. You can submit an application on Livo to become an transporter.</string>
     <string name="a_notification_will_also_be_sent_out_to_sender_to_inform_listing_price_has_been_updated">A notification will also be sent out to sender to inform listing price has been updated</string>
 
     <!-- Report -->
@@ -111,7 +114,11 @@
     <string name="applang">Change Language / skift sprog / Ändra språk </string>
     <string name="total_amount">Total Amount</string>
     <string name="adjust_price">Adjust Price</string>
-
+    <string name="please_enter_valid_email_address">Please enter valid email address</string>
+    <string name="minimum_listing_price_should_be">Minimum listing price should be </string>
+   <string name="something_went_wrong">Something went wrong</string>
+    <string name="swipe_to_send_complete_request">Swipe to send complete request</string>
+    <string name="confirm_change">Confirm Change</string>
 
     <!-- Add Image Fragment -->
     <string name="discard_image">Discard Image?</string>
@@ -156,7 +163,6 @@
     <string name="listing_completed_successfully">Listing Completed \n Successfully!</string>
 
     <!-- Transporter Listing Data   -->
-
     <string name="accept_sender">Accept</string>
     <string name="decline">Decline</string>
     <string name="delete_offer">Delete Offer</string>
@@ -213,6 +219,7 @@
     <string name="new_offers_on_my_listing">New Offers On My Listing</string>
     <string name="app">App</string>
     <string name="notifications_">NOTIFICATIONS</string>
+    <string name="no_data_found">No Data Found</string>
 
     <string name="enter_pickup_address">Enter pick-up address</string>
     <string name="enter_dropoff_address">Enter drop-off address</string>
@@ -237,7 +244,7 @@
     <string name="refer_amp_earn"><![CDATA[Refer & Earn]]></string>
     <string name="first_name">First Name *</string>
     <string name="last_name">Last Name *</string>
-    <string name="email">Email *</string>
+    <string name="email">Email</string>
     <string name="date_of_birth_dd_mm_yy">Date Of Birth : DD/MM/YYYY *</string>
     <string name="i_am">I am</string>
     <string name="female">Female</string>

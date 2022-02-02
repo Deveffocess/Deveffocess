@@ -161,6 +161,12 @@ interface ApiInterface {
     @Body jsonObject: JsonObject
   ): LoginModel?
 
+  @POST("send_chat_notification")
+  suspend fun getSendChatNotification(
+    @HeaderMap headers: Map<String, String>,
+    @Body jsonObject: JsonObject
+  ): LoginModel?
+
   @GET("view_own_profile")
   suspend fun getViewOwnProfile(
     @HeaderMap headers: Map<String, String>,

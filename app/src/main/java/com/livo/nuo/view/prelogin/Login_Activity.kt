@@ -150,6 +150,12 @@ class Login_Activity : LocalizeActivity(){
         }*/
 
 
+        tvLogin.isEnabled = false
+        tvLogin.background =
+            this@Login_Activity.resources.getDrawable(R.drawable.button_grey_ripple_effect)
+        svLoginRegister.shadowColor =
+            this@Login_Activity.resources.getColor(R.color.grey_100)
+
         var refreshedToken = ""
 
 
@@ -302,7 +308,7 @@ class Login_Activity : LocalizeActivity(){
                 override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                     var phone = p0!!.toString()
 
-                    if (countryCode == "+45" || countryCode == "+46") {
+                    if (countryCode == "+45") {
                         if (phone.length == 8) {
                             tvLogin.isEnabled = true
                             tvLogin.background =
@@ -317,7 +323,24 @@ class Login_Activity : LocalizeActivity(){
                                 this@Login_Activity.resources.getColor(R.color.grey_100)
                         }
 
-                    } else if (countryCode == "+91") {
+                    }
+                    else if ( countryCode == "+46") {
+                        if (phone.length == 9) {
+                            tvLogin.isEnabled = true
+                            tvLogin.background =
+                                this@Login_Activity.resources.getDrawable(R.drawable.button_red_rippel_effect)
+                            svLoginRegister.shadowColor =
+                                this@Login_Activity.resources.getColor(R.color.livo_light_red)
+                        } else {
+                            tvLogin.isEnabled = false
+                            tvLogin.background =
+                                this@Login_Activity.resources.getDrawable(R.drawable.button_grey_ripple_effect)
+                            svLoginRegister.shadowColor =
+                                this@Login_Activity.resources.getColor(R.color.grey_100)
+                        }
+
+                    }
+                    else if (countryCode == "+91") {
                         if (phone.length == 10) {
                             tvLogin.isEnabled = true
                             tvLogin.background =
@@ -418,7 +441,7 @@ class Login_Activity : LocalizeActivity(){
         //etPhone.setText("")
         var phone:String=etPhone.text.toString()
 
-        if (countryCode=="+45" || countryCode=="+46") {
+        if (countryCode=="+45" ) {
 
             if (phone.length==8)
             {
@@ -431,7 +454,23 @@ class Login_Activity : LocalizeActivity(){
                     this.resources.getDrawable(R.drawable.button_grey_ripple_effect)
                 svLoginRegister.shadowColor = this.resources.getColor(R.color.grey_100)
             }
-        }else if(countryCode == "+91"){
+
+        }
+        else if (countryCode=="+46") {
+
+            if (phone.length == 9) {
+                tvLogin.isEnabled = true
+                tvLogin.background = this.resources.getDrawable(R.drawable.button_red_rippel_effect)
+                svLoginRegister.shadowColor = this.resources.getColor(R.color.livo_light_red)
+            } else {
+                tvLogin.isEnabled = false
+                tvLogin.background =
+                    this.resources.getDrawable(R.drawable.button_grey_ripple_effect)
+                svLoginRegister.shadowColor = this.resources.getColor(R.color.grey_100)
+            }
+
+        }
+        else if(countryCode == "+91"){
             if(phone.length == 10){
                 tvLogin.isEnabled = true
                 tvLogin.background = this.resources.getDrawable(R.drawable.button_red_rippel_effect)

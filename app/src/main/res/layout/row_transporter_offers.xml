@@ -57,7 +57,6 @@
                 android:layout_marginStart="4dp"
                 android:fontFamily="@font/barlow_bold"
                 android:letterSpacing="0.02"
-                android:maxLength="9"
                 android:text="Title"
                 android:textColor="@color/black"
                 android:textSize="16dp" />

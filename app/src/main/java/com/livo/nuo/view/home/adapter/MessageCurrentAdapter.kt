@@ -145,6 +145,7 @@ class MessageCurrentAdapter (
             var i=Intent(currAtivity,ChatActivity::class.java)
             i.putExtra("ch",model.channel_id)
             i.putExtra("st",status)
+            i.putExtra("ruuid",model.user_data.pubnub_uuid)
             currAtivity.startActivity(i)
         })
 

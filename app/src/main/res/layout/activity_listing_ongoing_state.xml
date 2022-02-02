@@ -447,6 +447,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="5dp"
+                                        android:layout_marginEnd="70dp"
                                         android:fontFamily="@font/barlow_semibold"
                                         android:text="@string/pending"
                                         android:textColor="@color/livo_black_45_opacity"
@@ -971,7 +972,7 @@
                 app:slider_height="55dp"
                 app:slider_icon="@drawable/arrow_right"
                 app:slider_icon_color="@color/white"
-                app:text="Swipe to send complete request"
+                app:text="@string/swipe_to_send_complete_request"
                 app:text_appearance="@style/TextAppearance.MaterialCompat.Body3" />
 
         </RelativeLayout>

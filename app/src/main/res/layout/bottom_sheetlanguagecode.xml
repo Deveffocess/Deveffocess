@@ -119,6 +119,7 @@
                             android:layout_height="match_parent"
                             android:fontFamily="@font/barlow_bold"
                             android:text="English(UK)"
+                            android:textColor="@color/black_40_opacity"
                             android:layout_weight="1"
                             android:textAlignment="center" />
 
@@ -128,6 +129,7 @@
                             android:layout_height="match_parent"
                             android:fontFamily="@font/barlow_bold"
                             android:text="Dansk"
+                            android:textColor="@color/black_40_opacity"
                             android:layout_weight="1"
                             android:textAlignment="center"
                             app:riv_corner_radius="10dp" />
@@ -139,6 +141,7 @@
                         android:layout_weight="1"
                         android:fontFamily="@font/barlow_bold"
                         android:text="Svenska"
+                        android:textColor="@color/black_40_opacity"
                         android:textAlignment="center"
                         app:riv_corner_radius="10dp" />
 
@@ -196,7 +199,7 @@
                             android:layout_marginTop="1dp"
                             android:layout_marginBottom="1dp"
                             android:fontFamily="@font/barlow_bold"
-                            android:text="Confirm Change"
+                            android:text="@string/confirm_change"
                             android:textAlignment="center"
                             android:textColor="@color/white"
                             android:textSize="16dp" />

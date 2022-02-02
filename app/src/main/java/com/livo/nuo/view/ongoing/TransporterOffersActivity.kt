@@ -34,9 +34,6 @@ import com.livo.nuo.utility.LocalizeActivity
 import com.livo.nuo.view.ongoing.adapters.TransporterOfferAdapter
 import com.livo.nuo.viewModel.ViewModelFactory
 import com.livo.nuo.viewModel.products.ProductViewModel
-import com.squareup.picasso.MemoryPolicy
-import com.squareup.picasso.NetworkPolicy
-import com.squareup.picasso.Picasso
 
 class TransporterOffersActivity : LocalizeActivity() {
 

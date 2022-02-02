@@ -43,10 +43,15 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
+            android:name=".view.webView.TransportApplication"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".view.profile.ContactAdminActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".view.message.ChatActivity"
             android:exported="false"
@@ -93,7 +98,7 @@
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustPan" />
+             />
         <activity
             android:name=".view.product.ProductDetailActivity"
             android:exported="false"
@@ -143,8 +148,7 @@
             android:name=".view.Splash_Screen"
             android:configChanges="uiMode"
             android:exported="true"
-            android:theme="@style/AppTheme.NoActionBar" >
-
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter android:label="Livo">
                 <action android:name="android.intent.action.VIEW" />
 
@@ -158,7 +162,6 @@
                     tools:ignore="AppLinkUrlError" />
                 <!-- note that the leading "/" is required for pathPrefix -->
             </intent-filter>
-
         </activity>
         <activity
             android:name=".MainActivity"

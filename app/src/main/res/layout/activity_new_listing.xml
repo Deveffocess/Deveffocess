@@ -22,17 +22,17 @@
                 android:id="@+id/imgBack"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
+                android:tint="@color/black"
                 android:layout_centerVertical="true"
                 android:src="@drawable/backward" />
 
             <RelativeLayout
                 android:id="@+id/rlCenterLayout"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginEnd="20dp"
-                android:animateLayoutChanges="true"
-                android:layout_toStartOf="@+id/imgCross">
+                android:gravity="center"
+                android:animateLayoutChanges="true">
 
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -95,12 +95,11 @@
 
             <RelativeLayout
                 android:id="@+id/rlCenterLayoutImage"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginEnd="20dp"
+                android:gravity="center"
                 android:animateLayoutChanges="true"
-                android:layout_toStartOf="@+id/imgCross"
                 android:visibility="gone">
 
 
@@ -168,12 +167,11 @@
 
             <RelativeLayout
                 android:id="@+id/rlCenterLayoutPickup"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginEnd="20dp"
+                android:gravity="center"
                 android:animateLayoutChanges="true"
-                android:layout_toStartOf="@+id/imgCross"
                 android:visibility="gone">
 
 
@@ -237,12 +235,11 @@
 
             <RelativeLayout
                 android:id="@+id/rlCenterLayoutDropOff"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginEnd="20dp"
+                android:gravity="center"
                 android:animateLayoutChanges="true"
-                android:layout_toStartOf="@+id/imgCross"
                 android:visibility="gone">
 
 
@@ -307,12 +304,11 @@
 
             <RelativeLayout
                 android:id="@+id/rlCenterLayoutPublish"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginEnd="20dp"
+               android:gravity="center"
                 android:animateLayoutChanges="true"
-                android:layout_toStartOf="@+id/imgCross"
                 android:visibility="gone">
 
                 <androidx.appcompat.widget.AppCompatImageView

@@ -89,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/rlSearchMain"
                 android:layout_marginStart="0dp"
-                android:layout_marginTop="7dp"
+                android:layout_marginTop="0dp"
                 android:layout_marginEnd="0dp">
 
 
@@ -222,7 +222,6 @@
                     </androidx.recyclerview.widget.RecyclerView>
 
 
-
                     <LinearLayout
                         android:id="@+id/llOtherListings"
                         android:layout_width="match_parent"
@@ -278,6 +277,26 @@
                     </androidx.recyclerview.widget.RecyclerView>
 
                 </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rlNoDataFound"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="@font/barlow_regular"
+                        android:text="@string/no_data_found"
+                        android:gravity="center"
+                        android:layout_marginTop="20dp"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black_40_opacity"
+                        android:textSize="18dp" />
+                </RelativeLayout>
 
                 <com.facebook.shimmer.ShimmerFrameLayout
                     android:id="@+id/shimmerViewContainer"

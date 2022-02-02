@@ -21,15 +21,15 @@ object DummyData{
         secondCountryCode.country_name = currContext.getString(R.string.sweden)
         secondCountryCode.image = R.drawable.swden
 
-        val thirdCountryCode = CountryCodeModel()
+       /* val thirdCountryCode = CountryCodeModel()
         thirdCountryCode.country_code = "+91"
         thirdCountryCode.country_name = currContext.getString(R.string.india)
-        thirdCountryCode.image = R.drawable.india
+        thirdCountryCode.image = R.drawable.india*/
 
 
         countryCodeList.add(firstCountryCode)
         countryCodeList.add(secondCountryCode)
-        countryCodeList.add(thirdCountryCode)
+        //countryCodeList.add(thirdCountryCode)
 
         return countryCodeList
     }

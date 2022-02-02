@@ -150,6 +150,10 @@ class DataModel :Serializable{
     @Expose
     var channel_id = ""
 
+    @SerializedName("list_id")
+    @Expose
+    var list_id = 0
+
     @SerializedName("current_level")
     @Expose
     var current_level = 0

@@ -64,6 +64,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="start"
                         android:fontFamily="@font/barlow_regular"
+                        android:textColor="@color/black_60_opacity"
                         android:textSize="16dp"
                         android:layout_marginTop="10dp"
                         android:text="@string/Your_listing_was_suspended_by_Livo_admin_Please_contact_admin_to_know_further_details" />

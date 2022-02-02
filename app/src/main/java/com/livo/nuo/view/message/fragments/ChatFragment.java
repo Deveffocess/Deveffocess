@@ -21,6 +21,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.livo.nuo.BuildConfig;
 import com.livo.nuo.R;
 import com.livo.nuo.utility.AppUtils;
+import com.livo.nuo.view.message.ChatActivity;
 import com.livo.nuo.view.message.adapters.ChatAdapter;
 import com.livo.nuo.view.message.pubnub.History;
 import com.livo.nuo.view.message.services.ConnectivityListener;
@@ -249,13 +250,13 @@ public class ChatFragment extends ParentFragment implements MessageComposer.List
                 loadAdapter();
                 handleNewMessage(message);
 
-
                 if (typeing_off_count==1){}
                 else {
                     typeing_off_count = 1;
                     sendSignal("typing_off");
                 }
                 });
+
             }
 
             @Override
@@ -352,8 +353,11 @@ public class ChatFragment extends ParentFragment implements MessageComposer.List
                 if (mEmptyView.getVisibility() == View.VISIBLE) {
                     mEmptyView.setVisibility(View.GONE);
                 }
+
                 mChatAdapter.update(mMessages);
                 scrollChatToBottom();
+
+                ((ChatActivity)getActivity()).sendChatNotification(message.getMessage().toString());
             });
         }
     }
@@ -546,11 +550,9 @@ public class ChatFragment extends ParentFragment implements MessageComposer.List
 
     public void loadAdapter()
     {
-
             mMessages.remove(mMessages.size()-1);
             mChatAdapter.removeAt(mMessages.size());
            // mChatAdapter.update(mMessages);
             scrollChatToBottom();
-
     }
 }

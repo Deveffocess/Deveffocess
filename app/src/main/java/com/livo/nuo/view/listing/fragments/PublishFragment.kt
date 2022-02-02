@@ -76,6 +76,8 @@ class PublishFragment : Fragment() {
     var price5=""
     var price6=""
 
+    var min_cat_value=""
+
     var extraDataModel=ExtraDataModel()
     private var productViewModel : ProductViewModel? = null
     var priceArray=ArrayList<ExtraDataRecommendedPriceModel>()
@@ -142,6 +144,8 @@ class PublishFragment : Fragment() {
 
         priceArray=(extraDataModel.data.recommended_price)
 
+        min_cat_value=extraDataModel.data.minimum_listing_price
+
         tvLivofee.text=resources.getString(R.string.livo_fee)+ " ("+transportfee+"%)"
 
         var a=0.0
@@ -160,15 +164,15 @@ class PublishFragment : Fragment() {
                 if (s.equals("")) {
                     etEnterPrice.setText("")
                     tvLivefeevalue.text=String.format("%.2f", 0)+" kr"
-                    tvAmountPayable.text=(0).toString()+" kr"
-                    tvLivoamountvalue.text=s.toString()+" kr"
+                    tvAmountPayable.text=String.format("%.2f", 0)+" kr"
+                    tvLivoamountvalue.text=String.format("%.2f", 0)+" kr"
                 }
                 else {
                   try {
                       a = (s.toString()).toDouble()
                       var b = a * (transportfee.toDouble() / 100)
                       tvLivefeevalue.text = String.format("%.2f", b) + " kr"
-                      tvAmountPayable.text = (a + b).toString() + " kr"
+                      tvAmountPayable.text = String.format("%.2f", a+b) + " kr"
                       tvLivoamountvalue.text = s.toString() + " kr"
                       final_tot=a+b
                   }
@@ -218,99 +222,209 @@ class PublishFragment : Fragment() {
                 slideView.resetSlider()
                 slideView.innerColor=resources.getColor(R.color.black)
                 slideView.visibility = View.GONE
+                var pr=etEnterPrice.text.toString()
+                var ce=pr.toDouble()
+                var min=min_cat_value.toDouble()
+                if (ce<min)
+                {
+                    AppUtils.showToast(currActivity!!,R.drawable.cross, resources.getString(R.string.minimum_listing_price_should_be)+ min_cat_value,R.color.error_red,R.color.white,R.color.white)
+                    slideView.visibility = View.VISIBLE
+                }
+                 else {
+                    showUploadPopup()
 
-                 showUploadPopup()
+                    Handler().postDelayed({
 
-                 Handler().postDelayed({
+                        var rTitle = RequestBody.create(
+                            "multipart/form-data".toMediaTypeOrNull(),
+                            (currActivity as NewListingActivity).productTitle
+                        )
 
-                     var  rTitle = RequestBody.create("multipart/form-data".toMediaTypeOrNull(),(currActivity as NewListingActivity).productTitle)
+                        var rHeight = RequestBody.create(
+                            "multipart/form-data".toMediaTypeOrNull(),
+                            (currActivity as NewListingActivity).height
+                        )
+                        var rweight = RequestBody.create(
+                            "multipart/form-data".toMediaTypeOrNull(),
+                            (currActivity as NewListingActivity).weight
+                        )
+                        var rwidth = RequestBody.create(
+                            "multipart/form-data".toMediaTypeOrNull(),
+                            (currActivity as NewListingActivity).width
+                        )
+                        var rdepth = RequestBody.create(
+                            "multipart/form-data".toMediaTypeOrNull(),
+                            (currActivity as NewListingActivity).depth
+                        )
+                        var rprice = RequestBody.create(
+                            "multipart/form-data".toMediaTypeOrNull(),
+                            etEnterPrice.text.toString()
+                        )
+                        var rmorePeople = RequestBody.create(
+                            "multipart/form-data".toMediaTypeOrNull(),
+                            (currActivity as NewListingActivity).isTwoPeople.toString()
+                        )
 
-                     var  rHeight = RequestBody.create("multipart/form-data".toMediaTypeOrNull(),(currActivity as NewListingActivity).height)
-                     var  rweight = RequestBody.create("multipart/form-data".toMediaTypeOrNull(),(currActivity as NewListingActivity).weight)
-                     var  rwidth = RequestBody.create("multipart/form-data".toMediaTypeOrNull(),(currActivity as NewListingActivity).width)
-                     var  rdepth = RequestBody.create("multipart/form-data".toMediaTypeOrNull(),(currActivity as NewListingActivity).depth)
-                     var  rprice = RequestBody.create("multipart/form-data".toMediaTypeOrNull(),etEnterPrice.text.toString())
-                     var  rmorePeople = RequestBody.create("multipart/form-data".toMediaTypeOrNull(),(currActivity as NewListingActivity).isTwoPeople.toString())
+                        pref = currActivity!!.getSharedPreferences("PickUp", Context.MODE_PRIVATE)
+                        var dat = pref.getString("date", "")!!
 
-                     pref = currActivity!!.getSharedPreferences("PickUp", Context.MODE_PRIVATE)
-                     var dat = pref.getString("date", "")!!
+                        var rpickup_date =
+                            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), dat)
 
-                     var  rpickup_date = RequestBody.create("multipart/form-data".toMediaTypeOrNull(),dat)
+                        pref = currActivity!!.getSharedPreferences("DropOff", Context.MODE_PRIVATE)
+                        var dat1 = pref.getString("date", "")!!
 
-                     pref = currActivity!!.getSharedPreferences("DropOff", Context.MODE_PRIVATE)
-                     var dat1 = pref.getString("date", "")!!
+                        var rdropoff_date =
+                            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), dat1)
 
-                     var  rdropoff_date = RequestBody.create("multipart/form-data".toMediaTypeOrNull(),dat1)
+                        var mLongitude =
+                            String.format("%.7f", (currActivity as NewListingActivity).mLongitude)
+                        mLongitude = mLongitude.replace(",", ".")
+                        var mLatitude =
+                            String.format("%.7f", (currActivity as NewListingActivity).mLatitude)
+                        mLatitude = mLatitude.replace(",", ".")
 
-                     var mLongitude=String.format("%.7f", (currActivity as NewListingActivity).mLongitude)
-                     mLongitude = mLongitude.replace(",", ".")
-                     var mLatitude=String.format("%.7f",(currActivity as NewListingActivity).mLatitude)
-                     mLatitude = mLatitude.replace(",", ".")
+                        var rmLongitude = RequestBody.create(
+                            "multipart/form-data".toMediaTypeOrNull(),
+                            mLongitude
+                        )
+                        var rmLatitude =
+                            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), mLatitude)
+                        var rpickupAddress = RequestBody.create(
+                            "multipart/form-data".toMediaTypeOrNull(),
+                            (currActivity as NewListingActivity).mAddress.toString()
+                        )
+                        var raddressNote = RequestBody.create(
+                            "multipart/form-data".toMediaTypeOrNull(),
+                            (currActivity as NewListingActivity).addressNote
+                        )
 
-                     var  rmLongitude = RequestBody.create("multipart/form-data".toMediaTypeOrNull(),mLongitude)
-                     var  rmLatitude = RequestBody.create("multipart/form-data".toMediaTypeOrNull(),mLatitude)
-                     var  rpickupAddress = RequestBody.create("multipart/form-data".toMediaTypeOrNull(),(currActivity as NewListingActivity).mAddress.toString())
-                     var  raddressNote = RequestBody.create("multipart/form-data".toMediaTypeOrNull(),(currActivity as NewListingActivity).addressNote)
+                        var dropmLongitude = String.format(
+                            "%.7f",
+                            (currActivity as NewListingActivity).dropmLongitude
+                        )
+                        dropmLongitude = dropmLongitude.replace(",", ".")
+                        var dropmLatitude = String.format(
+                            "%.7f",
+                            (currActivity as NewListingActivity).dropmLatitude
+                        )
+                        dropmLatitude = dropmLatitude.replace(",", ".")
 
-                     var dropmLongitude=String.format("%.7f", (currActivity as NewListingActivity).dropmLongitude)
-                     dropmLongitude = dropmLongitude.replace(",", ".")
-                     var dropmLatitude=String.format("%.7f",(currActivity as NewListingActivity).dropmLatitude)
-                     dropmLatitude = dropmLatitude.replace(",", ".")
+                        var rdropmLongitude = RequestBody.create(
+                            "multipart/form-data".toMediaTypeOrNull(),
+                            dropmLongitude
+                        )
+                        var rdropmLatitude = RequestBody.create(
+                            "multipart/form-data".toMediaTypeOrNull(),
+                            dropmLatitude
+                        )
+                        var rdropAddress = RequestBody.create(
+                            "multipart/form-data".toMediaTypeOrNull(),
+                            (currActivity as NewListingActivity).dropmAddress.toString()
+                        )
+                        var rdropAddressNote = RequestBody.create(
+                            "multipart/form-data".toMediaTypeOrNull(),
+                            (currActivity as NewListingActivity).dropAddressNote
+                        )
 
-                     var  rdropmLongitude = RequestBody.create("multipart/form-data".toMediaTypeOrNull(),dropmLongitude)
-                     var  rdropmLatitude = RequestBody.create("multipart/form-data".toMediaTypeOrNull(),dropmLatitude)
-                     var  rdropAddress = RequestBody.create("multipart/form-data".toMediaTypeOrNull(),(currActivity as NewListingActivity).dropmAddress.toString())
-                     var  rdropAddressNote = RequestBody.create("multipart/form-data".toMediaTypeOrNull(),(currActivity as NewListingActivity).dropAddressNote)
+                        var rrouteDistance = RequestBody.create(
+                            "multipart/form-data".toMediaTypeOrNull(),
+                            (currActivity as NewListingActivity).routeDistance.toString()
+                        )
 
-                     var  rrouteDistance = RequestBody.create("multipart/form-data".toMediaTypeOrNull(),(currActivity as NewListingActivity).routeDistance.toString())
+                        var image1: MultipartBody.Part? = null
+                        var image2: MultipartBody.Part? = null
+                        var image3: MultipartBody.Part? = null
+                        val parts: Array<MultipartBody.Part?> =
+                            arrayOfNulls<MultipartBody.Part>((currActivity as NewListingActivity).selectedImageModelPaths.size)
+                        for (i in 0 until (currActivity as NewListingActivity).selectedImageModelPaths.size) {
+                            if ((currActivity as NewListingActivity).selectedImageModelPaths[i] != "") {
 
-                     var image1: MultipartBody.Part? =null
-                     var image2: MultipartBody.Part? =null
-                     var image3: MultipartBody.Part? =null
-                     val parts: Array<MultipartBody.Part?> =
-                         arrayOfNulls<MultipartBody.Part>((currActivity as NewListingActivity).selectedImageModelPaths.size)
-                     for (i in 0 until (currActivity as NewListingActivity).selectedImageModelPaths.size) {
-                         if((currActivity as NewListingActivity).selectedImageModelPaths[i] != ""){
+                                val mFile =
+                                    File(Uri.parse((currActivity as NewListingActivity).selectedImageModelPaths[i]).path)
+                                val requestFile = RequestBody.create(
+                                    "multipart/form-data".toMediaTypeOrNull(),
+                                    mFile
+                                )
+                                parts[i] = MultipartBody.Part.createFormData(
+                                    "images[$i]",
+                                    mFile.name,
+                                    requestFile
+                                )
 
-                             val mFile = File(Uri.parse((currActivity as NewListingActivity).selectedImageModelPaths[i]).path)
-                             val requestFile =RequestBody.create("multipart/form-data".toMediaTypeOrNull(), mFile)
-                             parts[i] =MultipartBody.Part.createFormData("images[$i]", mFile.name, requestFile)
+                                if (i == 0)
+                                    image1 = MultipartBody.Part.createFormData(
+                                        "images[0]",
+                                        mFile.name,
+                                        requestFile
+                                    )
+                                if (i == 1)
+                                    image2 = MultipartBody.Part.createFormData(
+                                        "images[1]",
+                                        mFile.name,
+                                        requestFile
+                                    )
+                                if (i == 2)
+                                    image3 = MultipartBody.Part.createFormData(
+                                        "images[2]",
+                                        mFile.name,
+                                        requestFile
+                                    )
 
-                             if (i==0)
-                                 image1 = MultipartBody.Part.createFormData("images[0]", mFile.name, requestFile)
-                             if (i==1)
-                                 image2 = MultipartBody.Part.createFormData("images[1]", mFile.name, requestFile)
-                             if (i==2)
-                                 image3 = MultipartBody.Part.createFormData("images[2]", mFile.name, requestFile)
+                                Log.e(
+                                    "pf",
+                                    image1.toString() + " " + image2.toString() + mFile.name
+                                )
+                            }
+                        }
 
-                             Log.e("pf",image1.toString()+" "+image2.toString()+ mFile.name )
-                         }
-                     }
-
-                     if (image1 ==null)
-                         image1 = MultipartBody.Part.createFormData("images[0]", "")
-                     if (image2 ==null)
-                         image2 = MultipartBody.Part.createFormData("images[1]", "")
-                     if (image3==null)
-                         image3 = MultipartBody.Part.createFormData("images[2]", "")
+                        if (image1 == null)
+                            image1 = MultipartBody.Part.createFormData("images[0]", "")
+                        if (image2 == null)
+                            image2 = MultipartBody.Part.createFormData("images[1]", "")
+                        if (image3 == null)
+                            image3 = MultipartBody.Part.createFormData("images[2]", "")
 
 
-                     Log.e("data","title:"+(currActivity as NewListingActivity).productTitle+" Height:"+(currActivity as NewListingActivity).height+" weight:"+
-                             (currActivity as NewListingActivity).weight+" width:"+(currActivity as NewListingActivity).width+" depth"+(currActivity as NewListingActivity).depth+" price:"
-                     +etEnterPrice.text.toString()+" more_people_needed"+(currActivity as NewListingActivity).isTwoPeople.toString()+" pickup_date:"+dat+" dropoff_date:"+dat1+" pickup_latitude:"+(currActivity as NewListingActivity).mLatitude.toString()+" pickup_longitude:"+(currActivity as NewListingActivity).mLongitude.toString()+" pickup_address:"+
-                             (currActivity as NewListingActivity).mAddress.toString()+" pickup_address_note:"+(currActivity as NewListingActivity).addressNote+" dropoff_latitude:"+(currActivity as NewListingActivity).dropmLatitude.toString()+" dropoff_longitude:"+(currActivity as NewListingActivity).dropmLongitude.toString()+" dropoff_address:"+
-                             (currActivity as NewListingActivity).dropmAddress.toString()+" dropoff_address_note:"+(currActivity as NewListingActivity).dropAddressNote+" distance:"+(currActivity as NewListingActivity).routeDistance.toString())
+                        Log.e(
+                            "data",
+                            "title:" + (currActivity as NewListingActivity).productTitle + " Height:" + (currActivity as NewListingActivity).height + " weight:" +
+                                    (currActivity as NewListingActivity).weight + " width:" + (currActivity as NewListingActivity).width + " depth" + (currActivity as NewListingActivity).depth + " price:"
+                                    + etEnterPrice.text.toString() + " more_people_needed" + (currActivity as NewListingActivity).isTwoPeople.toString() + " pickup_date:" + dat + " dropoff_date:" + dat1 + " pickup_latitude:" + (currActivity as NewListingActivity).mLatitude.toString() + " pickup_longitude:" + (currActivity as NewListingActivity).mLongitude.toString() + " pickup_address:" +
+                                    (currActivity as NewListingActivity).mAddress.toString() + " pickup_address_note:" + (currActivity as NewListingActivity).addressNote + " dropoff_latitude:" + (currActivity as NewListingActivity).dropmLatitude.toString() + " dropoff_longitude:" + (currActivity as NewListingActivity).dropmLongitude.toString() + " dropoff_address:" +
+                                    (currActivity as NewListingActivity).dropmAddress.toString() + " dropoff_address_note:" + (currActivity as NewListingActivity).dropAddressNote + " distance:" + (currActivity as NewListingActivity).routeDistance.toString()
+                        )
 
-                     productViewModel?.let {
-                         if (currActivity.let { ctx -> AndroidUtil.isInternetAvailable(ctx!!) } == true) {
+                        productViewModel?.let {
+                            if (currActivity.let { ctx -> AndroidUtil.isInternetAvailable(ctx!!) } == true) {
 
-                             it.createListing(rTitle,rHeight,rwidth,rdepth,rweight,rprice,rmorePeople,rpickup_date,rdropoff_date,
-                                 rmLongitude,rmLatitude,rpickupAddress,raddressNote,rdropmLongitude,rdropmLatitude, rdropAddress,
-                                 rdropAddressNote ,rrouteDistance,image1,image2,image3)
+                                it.createListing(
+                                    rTitle,
+                                    rHeight,
+                                    rwidth,
+                                    rdepth,
+                                    rweight,
+                                    rprice,
+                                    rmorePeople,
+                                    rpickup_date,
+                                    rdropoff_date,
+                                    rmLongitude,
+                                    rmLatitude,
+                                    rpickupAddress,
+                                    raddressNote,
+                                    rdropmLongitude,
+                                    rdropmLatitude,
+                                    rdropAddress,
+                                    rdropAddressNote,
+                                    rrouteDistance,
+                                    image1,
+                                    image2,
+                                    image3
+                                )
 
-                         }
-                     }
-                   /*  val fdelete = File(file_dj_path)
+                            }
+                        }
+                        /*  val fdelete = File(file_dj_path)
                      if (fdelete.exists()) {
                          if (fdelete.delete()) {
                              System.out.println("file Deleted :$file_dj_path")
@@ -320,8 +434,8 @@ class PublishFragment : Fragment() {
                      }*/
 
 
-                 }, 100)
-
+                    }, 100)
+                }
             }
 
             override fun onSlideResetAnimationStarted(view: SlideToActView) {
@@ -351,6 +465,8 @@ class PublishFragment : Fragment() {
             ?.observe(currActivity as LifecycleOwner, androidx.lifecycle.Observer {
                 Log.e("result",it.message)
 
+                MyAppSession.dashboard_publish=true
+
                 dialogUpload?.dismiss()
                 showPopup()
             })
@@ -359,6 +475,7 @@ class PublishFragment : Fragment() {
             //hideProgressBar()
             dialogUpload?.dismiss()
             AppUtils.showToast(currActivity!!,R.drawable.cross,it.message+it.code,R.color.error_red,R.color.white,R.color.white)
+            slideView.visibility = View.VISIBLE
         })
     }
 
@@ -392,6 +509,10 @@ class PublishFragment : Fragment() {
             tvAmt.text=price5
         }
         else if (tot>size5.toDouble() && tot<=size6.toDouble()){
+            tvAmt.text=price6
+            etEnterPrice.setText(price6)
+        }
+        else{
             tvAmt.text=price6
             etEnterPrice.setText(price6)
         }
@@ -440,7 +561,7 @@ class PublishFragment : Fragment() {
 
            currActivity!!.finish()
 
-        },5000)
+        },3000)
 
         dialogReferral?.setCancelable(false)
         dialogReferral?.show()

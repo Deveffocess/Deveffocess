@@ -23,6 +23,8 @@ class ProfileRepository : BaseRepository() {
 
     suspend fun getchangeNumSendOtp(jsonObject: JsonObject) = apiInterface?.getchangeNumSendOtp(service.headers(),jsonObject)
 
+    suspend fun getSendChatNotification(jsonObject: JsonObject) = apiInterface?.getSendChatNotification(service.headers(),jsonObject)
+
     suspend fun getChangeLang(jsonObject: JsonObject) = apiInterface?.getChangeLang(service.headers(),jsonObject)
 
     suspend fun getLogout(jsonObject: JsonObject) = apiInterface?.getLogout(service.headers(),jsonObject)

@@ -30,6 +30,7 @@ class ProfileViewModel(application: Application) :  BaseViewModel(application) {
     private var mutableLiveDataViewEditOwnProfile : MutableLiveData<LoginModel> = MutableLiveData()
     private var mutableLiveDataViewChangeLang : MutableLiveData<LoginModel> = MutableLiveData()
     private var mutableLiveDataLogout : MutableLiveData<LoginModel> = MutableLiveData()
+    private var mutableLiveDataViewSendChatNotification : MutableLiveData<LoginModel> = MutableLiveData()
 
 
     init {
@@ -57,6 +58,47 @@ class ProfileViewModel(application: Application) :  BaseViewModel(application) {
     fun getMutableLiveDataViewLogout(): MutableLiveData<LoginModel> =
         mutableLiveDataLogout
 
+    fun getMutableLiveDataViewSendChatNotification(): MutableLiveData<LoginModel> =
+        mutableLiveDataViewSendChatNotification
+
+
+
+    fun getSendChatNotification(jsonObject: JsonObject) {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO){
+                try {
+
+                    val userIma  = profileRepository?.getSendChatNotification(jsonObject)
+                    userIma?.let {
+                        mutableLiveDataViewSendChatNotification.postValue(it)
+                    }
+
+                }catch (httpException : HttpException){
+                    try {
+                        val errorResponse =
+                            AppUtils.getErrorResponse(httpException.response()?.errorBody()?.string())
+                        errorResponse?.let {
+                            getErrorMutableLiveData().postValue(it)
+                        }
+                    }catch (e : Exception){
+                        val errorResponse = ErrorResponse("",0,"Please try again later , our server is having some problem",
+                            "Please try again later , our server is having some problem","")
+                        errorResponse?.let {
+                            getErrorMutableLiveData().postValue(it)
+                        }
+                    }
+
+                } catch (e : Exception){
+                    val errorResponse = ErrorResponse("",0,"Something went wrong","Something went wrong","")
+                    errorResponse.let {
+                        getErrorMutableLiveData().postValue(it)
+                    }
+                    Log.d("TAG", " get own products Exception : $e")
+
+                }
+            }
+        }
+    }
 
 
     fun getLogout(jsonObject: JsonObject) {
@@ -85,7 +127,7 @@ class ProfileViewModel(application: Application) :  BaseViewModel(application) {
                     }
 
                 } catch (e : Exception){
-                    val errorResponse = ErrorResponse("",0,e.message,e.message!!,"")
+                    val errorResponse = ErrorResponse("",0,"Something went wrong","Something went wrong","")
                     errorResponse.let {
                         getErrorMutableLiveData().postValue(it)
                     }
@@ -124,7 +166,7 @@ class ProfileViewModel(application: Application) :  BaseViewModel(application) {
                     }
 
                 } catch (e : Exception){
-                    val errorResponse = ErrorResponse("",0,e.message,e.message!!,"")
+                    val errorResponse = ErrorResponse("",0,"Something went wrong","Something went wrong","")
                     errorResponse.let {
                         getErrorMutableLiveData().postValue(it)
                     }
@@ -163,7 +205,7 @@ class ProfileViewModel(application: Application) :  BaseViewModel(application) {
                     }
 
                 } catch (e : Exception){
-                    val errorResponse = ErrorResponse("",0,e.message,e.message!!,"")
+                    val errorResponse = ErrorResponse("",0,"Something went wrong","Something went wrong","")
                     errorResponse.let {
                         getErrorMutableLiveData().postValue(it)
                     }
@@ -202,7 +244,7 @@ class ProfileViewModel(application: Application) :  BaseViewModel(application) {
                     }
 
                 } catch (e : Exception){
-                    val errorResponse = ErrorResponse("",0,e.message,e.message!!,"")
+                    val errorResponse = ErrorResponse("",0,"Something went wrong","Something went wrong","")
                     errorResponse.let {
                         getErrorMutableLiveData().postValue(it)
                     }
@@ -239,7 +281,7 @@ class ProfileViewModel(application: Application) :  BaseViewModel(application) {
                     }
 
                 } catch (e : Exception){
-                    val errorResponse = ErrorResponse("",0,e.message,e.message!!,"")
+                    val errorResponse = ErrorResponse("",0,"Something went wrong","Something went wrong","")
                     errorResponse.let {
                         getErrorMutableLiveData().postValue(it)
                     }
@@ -277,7 +319,7 @@ class ProfileViewModel(application: Application) :  BaseViewModel(application) {
                     }
 
                 } catch (e : Exception){
-                    val errorResponse = ErrorResponse("",0,e.message,e.message!!,"")
+                    val errorResponse = ErrorResponse("",0,"Something went wrong","Something went wrong","")
                     errorResponse.let {
                         getErrorMutableLiveData().postValue(it)
                     }
@@ -317,7 +359,7 @@ class ProfileViewModel(application: Application) :  BaseViewModel(application) {
                     }
 
                 } catch (e : Exception){
-                    val errorResponse = ErrorResponse("",0,e.message,e.message!!,"")
+                    val errorResponse = ErrorResponse("",0,"Something went wrong","Something went wrong","")
                     errorResponse.let {
                         getErrorMutableLiveData().postValue(it)
                     }

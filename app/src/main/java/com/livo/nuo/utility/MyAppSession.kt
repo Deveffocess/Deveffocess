@@ -40,6 +40,9 @@ class MyAppSession {
         var isTwoPeople = false
 
         var notiIcon=false
+        var userType=""
+        var profile_fulfill=false
+        var dashboard_publish=false
 
         var Withdrawn = "Withdrawn"
         var userToken = ""

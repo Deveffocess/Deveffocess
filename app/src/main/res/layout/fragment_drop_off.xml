@@ -138,7 +138,7 @@
                         android:id="@+id/tvProductNameLabel"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/barlow_bold"
+                        android:fontFamily="@font/barlow_regular"
                         android:text="@string/drop_off_location"
                         android:textColor="@color/livo_black_30_opacity"
                         android:textSize="15dp" />
@@ -171,7 +171,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:fontFamily="@font/barlow_bold"
+                            android:fontFamily="@font/barlow_regular"
                             android:text="@string/address_note"
                             android:textColor="@color/livo_black_30_opacity"
                             android:textSize="15dp" />
@@ -212,16 +212,34 @@
                         android:background="@color/livo_black_10_opacity" />
 
 
-                    <TextView
-                        android:id="@+id/tvPickUpDateLabel"
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:fontFamily="@font/barlow_bold"
-                        android:letterSpacing="0.03"
-                        android:text="@string/drop_off_date"
-                        android:textColor="@color/livo_black_30_opacity"
-                        android:textSize="15dp" />
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/tvPickUpDateLabel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:fontFamily="@font/barlow_regular"
+                            android:text="@string/drop_off_date"
+                            android:textColor="@color/livo_black_30_opacity"
+                            android:textSize="15dp" />
+
+                        <TextView
+                            android:id="@+id/tvPickupDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginTop="15dp"
+                            android:fontFamily="@font/barlow_regular"
+                            android:text="TextView"
+                            android:textColor="@color/livo_black_30_opacity"
+                            android:textSize="15dp" />
+
+                    </RelativeLayout>
+
+
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvDateList"

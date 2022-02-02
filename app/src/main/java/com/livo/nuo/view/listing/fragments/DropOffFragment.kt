@@ -95,6 +95,7 @@ class DropOffFragment : Fragment() , OnMapReadyCallback {
     lateinit var tvSubmit:TextView
     lateinit var etAddressNote:EditText
     lateinit var tvCharacterCount:TextView
+    lateinit var tvPickupDate:TextView
     lateinit var pref:SharedPreferences
 
     private val AUTOCOMPLETE_REQUEST_CODE = 62
@@ -125,6 +126,7 @@ class DropOffFragment : Fragment() , OnMapReadyCallback {
         rvDateList=root.findViewById(R.id.rvDateList)
         tvSubmit=root.findViewById(R.id.tvSubmit)
         etAddressNote=root.findViewById(R.id.etAddressNote)
+        tvPickupDate=root.findViewById(R.id.tvPickupDate)
         tvCharacterCount=root.findViewById(R.id.tvCharacterCount)
 
         ininViews()
@@ -152,6 +154,7 @@ class DropOffFragment : Fragment() , OnMapReadyCallback {
                 Log.i(TAG, "An error occurred: $status")
             }
         })
+
 
 
 
@@ -976,6 +979,19 @@ class DropOffFragment : Fragment() , OnMapReadyCallback {
             pref = currActivity!!.getSharedPreferences("PickUp", Context.MODE_PRIVATE)
             var dat = pref.getString("date", "")!!
 
+            val input = SimpleDateFormat("yyyy-MM-dd")
+            val output = SimpleDateFormat("dd/MM/yyyy")
+            try {
+                var oneWayTripDate = input.parse(dat) // parse input
+                 // format output
+                tvPickupDate.text=resources.getString(R.string.pickup_date)+" : "+output.format(oneWayTripDate)
+                tvPickupDate.visibility=View.VISIBLE
+            } catch (e: ParseException) {
+                e.printStackTrace()
+            }
+
+
+
             c1.add(Calendar.DAY_OF_YEAR, 30)
             df = SimpleDateFormat("yyyy-MM-dd")
             val resultDate = c1.time
@@ -1002,8 +1018,11 @@ class DropOffFragment : Fragment() , OnMapReadyCallback {
             adapter.notifyDataSetChanged()
             rvDateList.visibility=View.VISIBLE
 
+
+
         } else {
             rvDateList.visibility=View.GONE
+            tvPickupDate.visibility=View.GONE
         }
         },2000)
     }

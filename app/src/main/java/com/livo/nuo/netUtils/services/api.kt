@@ -12,8 +12,8 @@ class api {
 
 
         var retrofit: Retrofit? = null
-        val BASE_URL = "https://api.dev.livo.nu/api/"
-
+        val BASE_URL ="https://api.livo.nu/api/"
+            //"https://api.dev.livo.nu/api/"
 
         fun getRetrofitInstance(): Retrofit? {
             if (retrofit == null) {

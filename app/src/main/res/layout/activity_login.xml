@@ -69,7 +69,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/barlow_bold"
                         android:letterSpacing="0.03"
-                        android:text="@string/enter_secure_code"
+                        android:text="@string/enter_phone_number"
                         android:textColor="@color/livo_grey"
                         android:textSize="12.8dp" />
 
@@ -174,7 +174,7 @@
                         android:background="@null"
                         android:fontFamily="@font/barlow_semibold"
                         android:hint=""
-                        android:inputType="number"
+                        android:inputType="numberPassword"
                         android:maxLength="4"
                         android:maxLines="1"
                         android:paddingTop="5dp"

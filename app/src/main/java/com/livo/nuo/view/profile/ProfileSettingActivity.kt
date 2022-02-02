@@ -5,6 +5,7 @@ import android.app.DatePickerDialog
 import android.app.Dialog
 import android.content.ContentResolver
 import android.content.ContentValues
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -17,16 +18,16 @@ import android.text.Editable
 import android.text.InputType
 import android.text.TextWatcher
 import android.util.Log
-import android.view.KeyEvent
-import android.view.LayoutInflater
-import android.view.View
-import android.view.Window
+import android.util.Patterns
+import android.view.*
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStore
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -37,16 +38,21 @@ import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.gson.JsonObject
 import com.jaeger.library.StatusBarUtil
+import com.livo.nuo.DummyData
 import com.livo.nuo.R
 import com.livo.nuo.databinding.BottomSheetOtpCodeProfileBinding
 import com.livo.nuo.databinding.BottomSheetlanguagecodeBinding
 import com.livo.nuo.lib.roundImageView.RoundedImageView
 import com.livo.nuo.manager.SessionManager
+import com.livo.nuo.models.CountryCodeModel
 import com.livo.nuo.utility.AndroidUtil
 import com.livo.nuo.utility.AppUtils
+import com.livo.nuo.utility.CheckPermission
 import com.livo.nuo.utility.LocalizeActivity
 import com.livo.nuo.view.Splash_Screen
 import com.livo.nuo.view.home.HomeActivity.Companion.fa
+import com.livo.nuo.view.prelogin.adapter.CountryCodeAdapter
+import com.livo.nuo.view.profile.adapter.CountryCodeAdapterProfile
 import com.livo.nuo.viewModel.ViewModelFactory
 import com.livo.nuo.viewModel.profile.ProfileViewModel
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -101,6 +107,9 @@ class ProfileSettingActivity : LocalizeActivity() {
     var timerc=0
     var calandercounter=0
 
+    private var countryCodeList = ArrayList<CountryCodeModel>()
+    lateinit var countryCodeAdapter:CountryCodeAdapterProfile
+    var countryCode="+45"
 
     lateinit var etNum1:EditText
     lateinit var etNum2:EditText
@@ -148,9 +157,27 @@ class ProfileSettingActivity : LocalizeActivity() {
 
 
         initViews()
+        requestPermission()
+    }
+
+    private fun requestPermission(){
+        if(CheckPermission.checkCameraPermission(currActivity!!)){
+//            AppUtils.showToast(currActivity,R.drawable.check,"permission given",R.color.error_red,R.color.white,R.color.white)
+        }else{
+            CheckPermission.requestCameraPermission(currActivity!!,123)
+        }
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        requestPermission()
     }
 
     fun initViews(){
+
+        countryCodeList = DummyData.getCountryList(this)
+
         currActivity?.application?.let {
             profileViewModel = ViewModelProvider(
                 ViewModelStore(),
@@ -240,15 +267,16 @@ class ProfileSettingActivity : LocalizeActivity() {
             tvBusiness.setTextColor(applicationContext.resources.getColor(R.color.livo_black_45_opacity))
         })
 
+
         tvSubmit.setOnClickListener({
 
             firstname=etFirstName.text.toString()
             lastname=etLastName.text.toString()
             email=etEmail.text.toString()
 
-            Log.e("da",maingender+" "+usertype+" "+imagepath+" "+dob+" "+email)
-
-            showProgressBar()
+            if (!email.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches())
+            {
+                showProgressBar()
 
             profileViewModel?.let {
                 if (currActivity.let { ctx -> AndroidUtil.isInternetAvailable(ctx!!) } == true) {
@@ -274,6 +302,13 @@ class ProfileSettingActivity : LocalizeActivity() {
                     it.setEditOwnProfile(fname,lname,nemail,ndob,ngender,nusertype,image1)
                 }
             }
+
+                }
+            else
+            {
+                AppUtils.showToast(currActivity!!,R.drawable.cross,resources.getString(R.string.please_enter_valid_email_address),R.color.error_red,R.color.white,R.color.white)
+            }
+
 
         })
 
@@ -320,6 +355,10 @@ class ProfileSettingActivity : LocalizeActivity() {
             var upperLimit = myCalendar.timeInMillis
             dat.datePicker.setMaxDate(upperLimit)
             dat.show()
+        })
+
+        tvDialCode.setOnClickListener({
+            openFullWidthPopup()
         })
 
         observers()
@@ -529,7 +568,7 @@ class ProfileSettingActivity : LocalizeActivity() {
                     if (resultUri.toString().contains("jpg") || resultUri.toString()
                             .contains("jpeg")
                     ) {
-                        extension = ".jpg"
+                        extension = ".jpeg"
                     } else if (resultUri.toString().contains("png")) {
                         extension = ".png"
                     }
@@ -541,7 +580,7 @@ class ProfileSettingActivity : LocalizeActivity() {
 
                     imagesDir = Environment.getExternalStoragePublicDirectory(
                         Environment.DIRECTORY_DCIM
-                    ).toString() + File.separator + "Pics"+File.separator+"img1.jpg"
+                    ).toString() + File.separator + "Pics"+File.separator+"img1.jpeg"
 
                     val mFile =
                         File(imagesDir)
@@ -551,20 +590,25 @@ class ProfileSettingActivity : LocalizeActivity() {
                         }
                     }
 
+                    tvShimmerImage.visibility = View.GONE
+                    imgUser.visibility = View.VISIBLE
+                    tvShimmerImage.stopShimmer()
+
                     val options = BitmapFactory.Options()
                     options.inPreferredConfig = Bitmap.Config.ARGB_8888
                     var bitmapOrg = BitmapFactory.decodeStream(FileInputStream(picturePath), null, options)
-                    Handler().postDelayed({
+
                     val stream = ByteArrayOutputStream()
-                    bitmapOrg?.compress(Bitmap.CompressFormat.JPEG, 100, stream)
+                    bitmapOrg?.compress(Bitmap.CompressFormat.JPEG, 90, stream)
                     val imageInByte: ByteArray = stream.toByteArray()
                     val lengthbmp = imageInByte.size.toLong()/1024
 
+                    var imageUri:Uri?=null
                     if (lengthbmp>(1024))
                     // mSelectedImagePath = getRealPathFromURI(resultUri)
                     {
-                        val nh = (bitmapOrg!!.height * (900.0 / bitmapOrg!!.width)).toInt()
-                        var scaled = Bitmap.createScaledBitmap(bitmapOrg!!, 900, nh, true)
+                        val nh = (bitmapOrg!!.height * (700.0 / bitmapOrg!!.width)).toInt()
+                        var scaled = Bitmap.createScaledBitmap(bitmapOrg!!, 700, nh, true)
 
                         val w = scaled.width
                         val h = scaled.height
@@ -574,9 +618,10 @@ class ProfileSettingActivity : LocalizeActivity() {
 
 
                         var bos = ByteArrayOutputStream()
-                        scaled.compress(Bitmap.CompressFormat.JPEG, 100, bos)
+                        scaled.compress(Bitmap.CompressFormat.JPEG, 90, bos)
                         val bitmapdata: ByteArray = bos.toByteArray()
                         val fos: OutputStream?
+
 
                         fos = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                             val resolver: ContentResolver = applicationContext.getContentResolver()
@@ -585,11 +630,12 @@ class ProfileSettingActivity : LocalizeActivity() {
                             contentValues.put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
                             contentValues.put(
                                 MediaStore.MediaColumns.RELATIVE_PATH,
-                                "DCIM/Pics"
+                                Environment.DIRECTORY_DCIM+"/Pics"
                             )
-                            val imageUri =
-                                resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
+                            imageUri = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
                             resolver.openOutputStream(imageUri!!)
+
+
                         } else {
                             imagesDir = Environment.getExternalStoragePublicDirectory(
                                 Environment.DIRECTORY_DCIM
@@ -598,21 +644,13 @@ class ProfileSettingActivity : LocalizeActivity() {
                             if (!file.exists()) {
                                 file.mkdir()
                             }
-                            val image = File(imagesDir, "img1" + ".jpeg")
-
-                            tvShimmerImage.visibility = View.GONE
-                            imgUser.visibility = View.VISIBLE
-                            tvShimmerImage.stopShimmer()
-
-                            Glide.with(currActivity!!).load(imagesDir+"/img1.jpeg")
-                                .diskCacheStrategy(DiskCacheStrategy.NONE)
-                                .skipMemoryCache(true).into(imgUser)
+                            val image = File(imagesDir, "img1.jpeg")
 
                             FileOutputStream(image)
                         }
 
 
-                        scaled.compress(Bitmap.CompressFormat.JPEG, 100, fos)
+                        scaled.compress(Bitmap.CompressFormat.JPEG, 90, fos)
                         if (fos != null) {
                             fos.flush()
                         }
@@ -620,7 +658,29 @@ class ProfileSettingActivity : LocalizeActivity() {
                             fos.close()
                         }
 
-                        imagepath= imagesDir+"/img1.jpeg"
+                        if (imageUri==null){
+                            imagepath= imagesDir+"/img1.jpeg"
+
+                            Handler().postDelayed({
+
+                                Glide.with(currActivity!!).load(imagepath)
+                                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                                    .skipMemoryCache(true).into(imgUser)
+
+                            },500)
+                        }
+                        else {
+                            imagepath = getRealPathFromURI(imageUri)
+
+                            Handler().postDelayed({
+
+                                Glide.with(currActivity!!).load(imageUri)
+                                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                                    .skipMemoryCache(true).into(imgUser)
+
+                            },500)
+
+                        }
 
                     }
                         else if(lengthbmp<1024 && lengthbmp>160)
@@ -635,9 +695,9 @@ class ProfileSettingActivity : LocalizeActivity() {
 
                         imagepath=picturePath
 
-                        tvShimmerImage.visibility = View.GONE
+                       /* tvShimmerImage.visibility = View.GONE
                         imgUser.visibility = View.VISIBLE
-                        tvShimmerImage.stopShimmer()
+                        tvShimmerImage.stopShimmer()*/
 
                         Glide.with(currActivity!!).load(filePath)
                             .diskCacheStrategy(DiskCacheStrategy.NONE)
@@ -647,7 +707,7 @@ class ProfileSettingActivity : LocalizeActivity() {
                     else if (lengthbmp<160){
                         AppUtils.showToast(currActivity!!,R.drawable.cross,"Select image upto 150 kb",R.color.error_red,R.color.white,R.color.white)
                     }
-                }, 1000)
+
                 }
 
             }
@@ -840,6 +900,84 @@ class ProfileSettingActivity : LocalizeActivity() {
         }
     }
 
+    private fun openFullWidthPopup(){
+
+        dialog = Dialog(currActivity as Context)
+        val customLayout = layoutInflater.inflate(R.layout.dialog_country_code_selection, null)
+        dialog.setContentView(customLayout!!)
+        Objects.requireNonNull<Window>(dialog.getWindow())
+            .setBackgroundDrawableResource(android.R.color.transparent)
+        val window: Window? = dialog.window
+        window!!.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT)
+
+        var img_cross=customLayout.findViewById<ImageView>(R.id.imgCross)
+        var rlCountyCode=customLayout.findViewById<RecyclerView>(R.id.rlCountryCode)
+        var etSponseeLabel=customLayout.findViewById<EditText>(R.id.etSponseeLabel)
+
+
+        // recycler view setup with adapter
+        rlCountyCode.setHasFixedSize(true)
+        rlCountyCode.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false )
+
+        countryCodeAdapter = CountryCodeAdapterProfile(this, countryCodeList)
+        rlCountyCode.adapter = countryCodeAdapter
+        countryCodeAdapter.notifyDataSetChanged()
+
+
+        etSponseeLabel.addTextChangedListener(object :
+            TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {
+
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                val handler = Handler().postDelayed({
+                    filterCategories(p0.toString())
+                }, 100)
+
+            }
+        })
+
+        img_cross.setOnClickListener({
+            dialog.dismiss()
+        })
+
+        dialog.show()
+    }
+
+    fun filterCategories(name: String){
+        val filteredCategories = ArrayList<CountryCodeModel>()
+        for(search in countryCodeList){
+            val searchData = search.country_name
+            if(searchData.toLowerCase().contains(name.toLowerCase())){
+                filteredCategories.add(search)
+            }
+        }
+        countryCodeAdapter.filterData(filteredCategories)
+    }
+
+    fun setSelectedCountryCode(model: CountryCodeModel) {
+        tvDialCode.text=model.country_code
+        countryCode=model.country_code
+        //etPhone.setText("")
+        var phone:String=etPhone.text.toString()
+
+        if (countryCode=="+45" || countryCode=="+46") {
+
+            if (phone.length==8)
+            {
+
+            } else {
+
+            }
+        }
+
+        dialog.dismiss()
+    }
 
     override fun setStatusBar() {
         val mColor = resources.getColor(R.color.white)

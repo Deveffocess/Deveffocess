@@ -59,8 +59,10 @@ import com.livo.nuo.models.ExtraDataModel
 import com.livo.nuo.models.LoginModel
 import com.livo.nuo.utility.AndroidUtil
 import com.livo.nuo.utility.AppUtils
+import com.livo.nuo.utility.MyAppSession
 import com.livo.nuo.view.home.HomeActivity
 import com.livo.nuo.view.profile.ContactAdminActivity
+import com.livo.nuo.view.webView.TransportApplication
 import com.livo.nuo.viewModel.ViewModelFactory
 import com.livo.nuo.viewModel.products.ProductViewModel
 import java.io.ByteArrayOutputStream
@@ -289,7 +291,15 @@ class ProductDetailActivity : LocalizeActivity() , OnMapReadyCallback, OnCurveDr
         })
 
         tvSendOffer.setOnClickListener({
-            openBottomPopupSendOffer()
+
+            var usertype=MyAppSession.userType
+            if (usertype.equals("sender"))
+            {
+                openBottomPopupSubmitApplication()
+            }
+            else {
+                openBottomPopupSendOffer()
+            }
         })
 
 
@@ -574,6 +584,7 @@ class ProductDetailActivity : LocalizeActivity() , OnMapReadyCallback, OnCurveDr
                     currActivity.resources.getDrawable(R.drawable.black_40_round_shape_5)
             }
         }
+
         reportBinding!!.tvSuspiciousUser.setOnClickListener{
             feedback_id = 4
 
@@ -587,6 +598,7 @@ class ProductDetailActivity : LocalizeActivity() , OnMapReadyCallback, OnCurveDr
                     currActivity.resources.getDrawable(R.drawable.black_40_round_shape_5)
             }
         }
+
         reportBinding!!.tvNotMatch.setOnClickListener{
             feedback_id = 5
 
@@ -863,7 +875,9 @@ class ProductDetailActivity : LocalizeActivity() , OnMapReadyCallback, OnCurveDr
             override fun beforeTextChanged(
                 s: CharSequence, start: Int,
                 count: Int, after: Int
-            ) { }
+            ) {
+
+            }
 
             override fun onTextChanged(
                 s: CharSequence, start: Int,
@@ -871,11 +885,16 @@ class ProductDetailActivity : LocalizeActivity() , OnMapReadyCallback, OnCurveDr
             ) {
                 tvAdjustPrice?.text=resources.getString(R.string.cancel)
 
-                if (s.equals("")){
+                if (s.isEmpty()){
 
-                    etAmount?.setText("")
-                    tvLivofee?.text=String.format("%.2f", 0)+" kr"
-                    tvTotalAmount?.text=s.toString()+" kr"
+                    //etAmount?.setText("")
+                        try {
+                            tvLivofee?.text = String.format("%.2f", 0) + " kr"
+                            tvTotalAmount?.text = String.format("%.2f", 0) + " kr"
+                        }
+                        catch (ex:Exception){
+                            etAmount?.setText(" ")
+                        }
                 }
 
                 else{
@@ -883,7 +902,7 @@ class ProductDetailActivity : LocalizeActivity() , OnMapReadyCallback, OnCurveDr
                         var a = (s.toString()).toDouble()
                         var b = a * (transportfee.toDouble() / 100)
                         tvLivofee?.text = "-" + String.format("%.2f", b) + " kr"
-                        tvTotalAmount?.text = String.format("%.2f", a - b).toString() + " kr"
+                        tvTotalAmount?.text = String.format("%.2f", a - b) + " kr"
                     }
                     catch (e:java.lang.Exception){
                         tvLivofee?.text=0.toString()+" kr"
@@ -963,6 +982,43 @@ class ProductDetailActivity : LocalizeActivity() , OnMapReadyCallback, OnCurveDr
         dialogOfferSent?.setCancelable(true)
         dialogOfferSent?.show()
     }
+
+    private fun openBottomPopupSubmitApplication() {
+
+        bottomSheetDeleteError = BottomSheetDialog(currActivity!!)
+        var bottomSheetDashboardFilterBinding =
+            DataBindingUtil.inflate<BottomSheetSenderSendOfferBinding>(
+                LayoutInflater.from(currActivity),
+                R.layout.bottom_sheet_sender_send_offer, null, false
+            )
+
+        bottomSheetDeleteError?.setContentView(bottomSheetDashboardFilterBinding!!.root)
+        Objects.requireNonNull<Window>(bottomSheetDeleteError?.window)
+            .setBackgroundDrawableResource(android.R.color.transparent)
+
+        var llCancel=bottomSheetDeleteError!!.findViewById<LinearLayout>(R.id.llCancel)
+        var tvCancel=bottomSheetDeleteError!!.findViewById<TextView>(R.id.tvCancel)
+        var llSubmitRequest=bottomSheetDeleteError!!.findViewById<LinearLayout>(R.id.llSubmitRequest)
+
+
+        llCancel?.setOnClickListener({
+            bottomSheetDeleteError?.dismiss()
+        })
+        tvCancel?.setOnClickListener({
+            bottomSheetDeleteError?.dismiss()
+        })
+
+        llSubmitRequest?.setOnClickListener({
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://admin.dev.livo.nu/transporterapplication"))
+            startActivity(intent)
+
+            bottomSheetDeleteError?.dismiss()
+        })
+
+        bottomSheetDeleteError?.show()
+    }
+
+
 
     override fun onBackPressed() {
         if (out.equals("out"))

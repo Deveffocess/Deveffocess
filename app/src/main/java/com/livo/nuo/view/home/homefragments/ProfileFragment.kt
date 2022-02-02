@@ -17,10 +17,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.view.animation.AnimationUtils
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.RelativeLayout
-import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.core.view.isInvisible
 import androidx.databinding.DataBindingUtil
@@ -54,6 +50,10 @@ import java.io.IOException
 import java.util.*
 import android.content.Intent
 import android.net.Uri
+import android.widget.*
+import com.livo.nuo.databinding.BottomSheetTakePermissionBinding
+import com.livo.nuo.utility.MyAppSession
+import com.livo.nuo.view.webView.TransportApplication
 
 
 class ProfileFragment : Fragment() {
@@ -75,6 +75,8 @@ class ProfileFragment : Fragment() {
     lateinit var rlRefer : RelativeLayout
     lateinit var rlLogout:RelativeLayout
     lateinit var rlPayment:RelativeLayout
+
+    private var bottomSheetDialog: BottomSheetDialog?=null
 
     lateinit var rlUserImage:MaterialCardView
     lateinit var rlTopView:RelativeLayout
@@ -168,12 +170,6 @@ class ProfileFragment : Fragment() {
         }
 
 
-        profileViewModel?.let {
-            if (currActivity.let { ctx -> AndroidUtil.isInternetAvailable(ctx!!) } == true) {
-                it.getUserSettings()
-            }
-        }
-
         tvShimmerName.startShimmer()
         tvShimmerAge.startShimmer()
         tvShimmerName.visibility=View.VISIBLE
@@ -206,8 +202,21 @@ class ProfileFragment : Fragment() {
         })
 
         rlFAQ.setOnClickListener({
-            var i=Intent(currActivity,FAQActivity::class.java)
-            startActivity(i)
+            var langCode= MyAppPreferences.getInstance(currActivity!!).getlanguage()
+
+            var extraDataModel:ExtraDataModel= SessionManager.getExtraDataModel()!!
+            var ur=""
+            if (langCode.equals("en"))
+             ur=extraDataModel.data.faq_url.en
+            else if (langCode.equals("da"))
+                ur=extraDataModel.data.faq_url.da
+            else
+                ur=extraDataModel.data.faq_url.sv
+
+            val intent =Intent(currActivity, TransportApplication::class.java)
+            intent.putExtra("url",ur)
+            startActivity(intent)
+
         })
 
         rlHelpnSupport.setOnClickListener({
@@ -219,11 +228,20 @@ class ProfileFragment : Fragment() {
         })
 
         tvSubmit.setOnClickListener({
-            if (tvSubmit.text.equals(resources.getString(R.string.submit_request)))
-            {
-                val intent =
-                    Intent(Intent.ACTION_VIEW, Uri.parse("https://admin.dev.livo.nu/transporterapplication"))
+
+            if(MyAppSession.profile_fulfill) {
+                if (tvSubmit.text.equals(resources.getString(R.string.submit_request))) {
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://admin.livo.nu/transporterapplication"))
                 startActivity(intent)
+
+                  /*  val intent =
+                        Intent(currActivity, TransportApplication::class.java)
+                    intent.putExtra("url", "https://admin.dev.livo.nu/transporterapplication")
+                    startActivity(intent)*/
+                }
+            }
+            else{
+                openBottomPopupProfile()
             }
         })
 
@@ -293,12 +311,21 @@ class ProfileFragment : Fragment() {
     }
 
 
+    override fun onResume() {
+        super.onResume()
+
+         profileViewModel?.let {
+            if (currActivity.let { ctx -> AndroidUtil.isInternetAvailable(ctx!!) } == true) {
+                it.getUserSettings()
+            }
+        }
+    }
+
+
     private fun observers() {
 
         profileViewModel?.getMutableLiveDataUserSettings()
             ?.observe(currActivity as LifecycleOwner, androidx.lifecycle.Observer {
-
-
 
                 tvUserName.text=it.data.first_name+" "+it.data.last_name
                 tvUserAge.text=it.data.age+" "+resources.getString(R.string.years_old)
@@ -346,6 +373,7 @@ class ProfileFragment : Fragment() {
                     .load(it.data.profile_image).placeholder(currActivity!!.getDrawable(R.drawable.grey_round_shape))
                     .error(currActivity!!.getDrawable(R.drawable.grey_round_shape)).into(imgUser)
 
+                MyAppSession.profile_fulfill=true
 
                 tvTransporterApplication.text=it.data.transporter_application.title
                 tvTransporterApplicationLabel.text=it.data.transporter_application.subtitle
@@ -374,6 +402,7 @@ class ProfileFragment : Fragment() {
                 var nm=it.data.first_name
                 if (nm.equals(""))
                 {
+                    MyAppSession.profile_fulfill=false
                     tvUserName.visibility=View.GONE
                     tvUserAge.visibility=View.GONE
                     imgUser.visibility=View.GONE
@@ -381,7 +410,19 @@ class ProfileFragment : Fragment() {
 
                     val buttonLayoutParams: RelativeLayout.LayoutParams =
                         RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,430)
-                    buttonLayoutParams.setMargins(15, 0, 15, 10)
+                    buttonLayoutParams.setMargins(15, 0, 15, 8)
+                    rlTopView.setLayoutParams(buttonLayoutParams)
+                }
+                else{
+                    MyAppSession.profile_fulfill=true
+                    tvUserName.visibility=View.VISIBLE
+                    tvUserAge.visibility=View.VISIBLE
+                    imgUser.visibility=View.VISIBLE
+                    rlUserImage.visibility=View.VISIBLE
+
+                    val buttonLayoutParams: RelativeLayout.LayoutParams =
+                        RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.WRAP_CONTENT)
+                    buttonLayoutParams.setMargins(15, 0, 15, 8)
                     rlTopView.setLayoutParams(buttonLayoutParams)
                 }
 
@@ -653,6 +694,45 @@ class ProfileFragment : Fragment() {
         AppUtils.hideProgress(dialog)
     }
 
+
+    private fun openBottomPopupProfile() {
+
+        bottomSheetDialog = BottomSheetDialog(currActivity!!)
+        var bottomSheetDashboardFilterBinding =
+            DataBindingUtil.inflate<BottomSheetTakePermissionBinding>(
+                LayoutInflater.from(currActivity),
+                R.layout.bottom_sheet_take_permission, null, false
+            )
+
+        bottomSheetDialog?.setContentView(bottomSheetDashboardFilterBinding!!.root)
+        Objects.requireNonNull<Window>(bottomSheetDialog?.window)
+            .setBackgroundDrawableResource(android.R.color.transparent)
+
+        var tvNotifications=bottomSheetDialog!!.findViewById<TextView>(R.id.tvNotifications)
+        var tvDetails=bottomSheetDialog!!.findViewById<TextView>(R.id.tvDetails)
+        var tvCancel=bottomSheetDialog!!.findViewById<TextView>(R.id.tvCancel)
+        var tvOpenSetting=bottomSheetDialog!!.findViewById<TextView>(R.id.tvOpenSetting)
+        var llCancel=bottomSheetDialog!!.findViewById<LinearLayout>(R.id.llCancel)
+        var llOpenSetting=bottomSheetDialog!!.findViewById<LinearLayout>(R.id.llOpenSetting)
+
+        tvNotifications!!.text=resources.getString(R.string.incomplete_profile_warning)
+        tvDetails!!.text=resources.getString(R.string.your_profile_is_incomplete_an_incomplete_profile_may_prevent_you_from_creating_the_listing_or_bidding_on_listing_please_update_your_profile)
+        tvCancel!!.text=resources.getString(R.string.cancel)
+        tvOpenSetting!!.text=resources.getString(R.string.update_profile)
+
+        llCancel!!.setOnClickListener({
+            bottomSheetDialog!!.dismiss()
+        })
+
+        llOpenSetting!!.setOnClickListener({
+            var i=Intent(currActivity,ProfileSettingActivity::class.java)
+            startActivity(i)
+            bottomSheetDialog!!.dismiss()
+        })
+
+
+        bottomSheetDialog?.show()
+    }
 
 
 

@@ -6,8 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.livo.nuo.R
 import android.transition.Fade
+import android.util.Log
 import android.view.View
+import android.widget.AbsListView
 import android.widget.ImageView
+import android.widget.RelativeLayout
+import androidx.core.widget.NestedScrollView
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStore
@@ -31,7 +35,12 @@ class NotificationsActivity : AppCompatActivity() {
 
     private var currActivity : Activity = this
     private var productViewModel : ProductViewModel? = null
+    lateinit var rlNoDataFound:RelativeLayout
+    lateinit var nsMainScroll:NestedScrollView
 
+    var currentPage=1
+    var has_next=false
+    var count=0
 
     private var notificationModelDemo = ArrayList<NotificationDataModel>()
 
@@ -43,6 +52,8 @@ class NotificationsActivity : AppCompatActivity() {
         imgBack=findViewById(R.id.imgBack)
         rvNotifications=findViewById(R.id.rvNotifications)
         shimmerViewContainer=findViewById(R.id.shimmerViewContainer)
+        rlNoDataFound=findViewById(R.id.rlNoDataFound)
+        nsMainScroll=findViewById(R.id.nsMainScroll)
         rvNotifications.visibility=View.GONE
         shimmerViewContainer.visibility=View.VISIBLE
         shimmerViewContainer.startShimmer()
@@ -84,14 +95,43 @@ class NotificationsActivity : AppCompatActivity() {
             if (currActivity.let { ctx -> AndroidUtil.isInternetAvailable(ctx!!) } == true) {
 
                 var jsonObject =  JsonObject()
-                jsonObject.addProperty("page",1 )
+                jsonObject.addProperty("page",currentPage.toString() )
                 it.getAllNotification(jsonObject)
             }
         }
 
+        nsMainScroll.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+            if (scrollY > oldScrollY) {
+                val view = nsMainScroll.getChildAt(nsMainScroll.getChildCount() - 1) as View
+
+                val diff: Int = view.bottom - (nsMainScroll.getHeight() + nsMainScroll
+                    .getScrollY())
+
+                if (diff == 0) {
+
+                    if (has_next) {
+                        currentPage++
+                        doApiCall()
+                    }  else{}
+                }
+                Log.i("TAG", "Scroll DOWN")
+            }
+            if (scrollY < oldScrollY) {
+                Log.i("TAG", "Scroll UP")
+            }
+            if (scrollY == 0) {
+                Log.i("TAG", "TOP SCROLL")
+            }
+            if (scrollY == v.measuredHeight - v.getChildAt(0).measuredHeight) {
+                Log.i("TAG", "BOTTOM SCROLL")
+            }
+        })
+
+
+
 
         observers()
-
+       // setAdapter()
     }
 
     private fun observers() {
@@ -104,13 +144,28 @@ class NotificationsActivity : AppCompatActivity() {
                 shimmerViewContainer.visibility=View.GONE
                 shimmerViewContainer.stopShimmer()
 
-                notificationModelDemo.clear()
-                notificationModelDemo.addAll(it.data.notifications_data)
+                has_next=it.data.has_next
 
-                var layoutManager = LinearLayoutManager(applicationContext, LinearLayoutManager.VERTICAL,false)
-                rvNotifications.layoutManager = layoutManager
-                var adapter = NotificationsAdapter(currActivity,notificationModelDemo)
-                rvNotifications.adapter = adapter
+                if (currentPage==1)
+                    notificationModelDemo.clear()
+
+               notificationModelDemo.addAll(it.data.notifications_data)
+
+                setAdapter()
+
+               /* if (has_next) {
+                    currentPage++
+                    notificationModelDemo.addAll(it.data.notifications_data)
+                }
+                else{
+                    if (count==0)
+                    {
+                        count=1
+                        currentPage++
+                        notificationModelDemo.addAll(it.data.notifications_data)
+                    }
+                }*/
+
 
             })
 
@@ -122,8 +177,36 @@ class NotificationsActivity : AppCompatActivity() {
             })
 
         productViewModel?.getErrorMutableLiveData()?.observe(currActivity as LifecycleOwner, androidx.lifecycle.Observer {
+
+            rvNotifications.visibility=View.GONE
+            shimmerViewContainer.visibility=View.GONE
+            shimmerViewContainer.stopShimmer()
+            rlNoDataFound.visibility=View.VISIBLE
+
             AppUtils.showToast(currActivity!!,R.drawable.cross,it.message,R.color.error_red,R.color.white,R.color.white)
         })
+    }
+
+    fun setAdapter(){
+
+        var layoutManager = LinearLayoutManager(applicationContext, LinearLayoutManager.VERTICAL,false)
+        rvNotifications.layoutManager = layoutManager
+        var adapter = NotificationsAdapter(currActivity,notificationModelDemo)
+        rvNotifications.adapter = adapter
+        rvNotifications.setHasFixedSize(true)
+
+    }
+
+
+    fun doApiCall(){
+        productViewModel?.let {
+            if (currActivity.let { ctx -> AndroidUtil.isInternetAvailable(ctx!!) } == true) {
+
+                var jsonObject =  JsonObject()
+                jsonObject.addProperty("page",currentPage.toString() )
+                it.getAllNotification(jsonObject)
+            }
+        }
     }
 
 }
