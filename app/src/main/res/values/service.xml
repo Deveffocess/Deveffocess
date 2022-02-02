@@ -2,5 +2,5 @@
 <resources>
     <string name="BASE_URL" translatable="false">https://api.dev.livo.nu/api/</string> <!--https://api.dev.livo.nu/api/-->
     <string name="BASE_URLs" translatable="false">https://api.dev.livo.nu/api/</string> <!--TESTING GIT HUB-->
-    <string name="BASE_URLss" translatable="false">https://api.dev.livo.nu/api/</string> <!--TESTING GIT HUB-->
+
 </resources>
